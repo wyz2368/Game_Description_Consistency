@@ -1,5 +1,5 @@
 import numpy as np
-
+from itertools import product
 
 def get_relationship(x, y):
     """
@@ -32,24 +32,36 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
         True if the games are order-preserving equivalent, False otherwise.
     """
     num_players = len(payoff_matrix_g)
+    num_opponents = num_players - 1
 
     for player in range(num_players):
+        print("Player:", player)
+
         num_strategies = payoff_matrix_g[player].shape[0]
-        num_opponent_strategies = payoff_matrix_g[player].shape[1]
+        print("Number of strategies:", num_strategies)
+        
+        num_opponent_strategies = [payoff_matrix_g[player].shape[i+1] for i in range(num_opponents)]
+        opponent_strategy_profiles = product(*(range(n) for n in num_opponent_strategies))
+        print("Number of opponents:", num_opponents)
+        print("Opponent strategy sizes:", num_opponent_strategies)
 
         for s_i in range(num_strategies):
-            for s_i_prime in range(num_strategies):
-                if s_i == s_i_prime:
-                    continue
+            for s_i_prime in range(s_i + 1, num_strategies):
 
-                for s_minus_i in range(num_opponent_strategies):
+                print("Strategy pair:", s_i, s_i_prime)
+
+                for s_minus_i in opponent_strategy_profiles:
                     # Payoffs in game G
-                    u_g = payoff_matrix_g[player][s_i, s_minus_i]
-                    u_g_prime = payoff_matrix_g[player][s_i_prime, s_minus_i]
+                    u_g = payoff_matrix_g[player][(s_i,) + s_minus_i]
+                    print("Payoffs in game G:", u_g)
+                    u_g_prime = payoff_matrix_g[player][(s_i_prime,) + s_minus_i]
+                    print("Payoffs in game G:", u_g_prime)
 
                     # Payoffs in game G'
-                    u_g_dash = payoff_matrix_g_prime[player][s_i, s_minus_i]
-                    u_g_prime_dash = payoff_matrix_g_prime[player][s_i_prime, s_minus_i]
+                    u_g_dash = payoff_matrix_g_prime[player][(s_i,) + s_minus_i]
+                    print("Payoffs in game G':", u_g_dash)
+                    u_g_prime_dash = payoff_matrix_g_prime[player][(s_i_prime,) + s_minus_i]
+                    print("Payoffs in game G':", u_g_prime_dash)
 
                     # Compare relationships
                     relation_g = get_relationship(u_g, u_g_prime)

@@ -223,7 +223,7 @@ class EFGParser:
 if __name__ == "__main__":
     # efg_path = "./efg/matching_pennies.efg"
     # efg_path = "./efg/montyhal.efg"
-    efg_path = "./efg/poker.efg"
+    efg_path = "/Users/samuel/Desktop/GameInterpreter/EFG/Setting D/GPT-4o/Imperfect Information Games/Bach or Stravinsky/Correct/1.efg"
 
     # Parse and print the game tree
     parser = EFGParser()
