@@ -4,12 +4,10 @@ import re
 from dataclasses import dataclass
 from enum import Enum
 
-
 class NodeType(Enum):
     CHANCE = 'c'
     PLAYER = 'p'
     TERMINAL = 't'
-
 
 @dataclass
 class Node:
@@ -24,6 +22,8 @@ class Node:
     outcome_number: Optional[int] = None
     outcome_name: str = ""
     probs: Optional[Dict[str, float]] = None
+    level: int = 0  # New attribute for level
+    checked: bool = False  # New attribute to track checked nodes
 
 
     def __post_init__(self):
@@ -31,6 +31,7 @@ class Node:
             self.children = {}
 
     def add_child(self, action: str, child: 'Node'):
+        child.parent = self
         self.children[action] = child
 
 
@@ -49,6 +50,7 @@ class GameTree:
             print(f"Players: {', '.join(self.players)}\n")
 
         indent = "  " * depth
+        print(f"{indent}[Level {node.level}] \n", end="")
         if node.node_type == NodeType.TERMINAL:
             print(f"{indent}Terminal {node.outcome_number}: {node.label} (Payoffs: {node.payoffs})")
         elif node.node_type == NodeType.CHANCE:
@@ -147,8 +149,11 @@ class EFGParser:
 
         elif node_type == NodeType.PLAYER:
             # Format: p "" player_number info_set_number "(info_set_label)" { actions } 0
-            pattern = r'p\s+"(.*?)"\s+(\d+)\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s*)+)\}\s+(\d+)'
+            # pattern = r'p\s+"(.*?)"\s+(\d+)\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s*)+)\}\s+(\d+)'
+            # pattern = r'p\s+"([^"]*)"\s+(\d+)\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s*)+)\s*\}\s+(\d+)'
+            pattern = r'p\s+"([^"]*)"\s+(\d+)\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s*)+)\s*\}\s+(\d+)'
             match = re.search(pattern, line)
+
 
             if not match:
                 raise ValueError("The line should match player.")
@@ -158,7 +163,9 @@ class EFGParser:
             player = int(match.group(2))
             information_set = int(match.group(3))
             information_set_label = match.group(4)
-            actions = match.group(5).strip().replace('"', '').split()
+            actions_str = match.group(5)
+            actions = re.findall(r'"([^"]+)"', actions_str)
+            # actions = match.group(5).strip().replace('"', '').split()
 
             return Node(
                 node_type=node_type,
@@ -183,6 +190,7 @@ class EFGParser:
             # print("action:", action)
             if self.current_line < len(self.lines):
                 child = self.parse_node(self.lines[self.current_line])
+                # child.level = self.current_level + 1
                 self.current_line += 1
                 # Link node to parents.
                 node.add_child(action, child)
@@ -217,16 +225,27 @@ class EFGParser:
             self.build_tree(self.game.root)
 
         return self.game
+    
+    def to_efg(self, node: Optional[Node] = None, depth: int = 0):
+        if node is None:
+            node = self.game.root
 
+        if node.node_type == NodeType.TERMINAL:
+            payoffs_str = ' '.join(map(str, node.payoffs))
+            return f't "{node.label}" {node.outcome_number} "{node.outcome_name}" {{ {payoffs_str} }}'
 
+        elif node.node_type == NodeType.CHANCE:
+            actions_probs = ' '.join([f'"{a}" {p}' for a, p in node.probs.items()])
+            node_str = f'c "{node.label}" {node.information_set} "{node.information_set_label}" {{ {actions_probs} }} 0'
+        else:
+            actions_str = ' '.join([f'"{a}"' for a in node.actions])
+            node_str = f'p "{node.label}" {node.player} {node.information_set} "{node.information_set_label}" {{ {actions_str} }} 0'
 
-if __name__ == "__main__":
-    # efg_path = "./efg/matching_pennies.efg"
-    # efg_path = "./efg/montyhal.efg"
-    efg_path = "/Users/samuel/Desktop/GameInterpreter/EFG/Setting D/GPT-4o/Imperfect Information Games/Bach or Stravinsky/Correct/1.efg"
+        children_str = '\n'.join(self.to_efg(child, depth + 1) for child in node.children.values())
+        return f'{node_str}\n{children_str}'
 
-    # Parse and print the game tree
-    parser = EFGParser()
-    game = parser.parse_file(efg_path)
-    game.print_tree()
-
+    def save_to_efg(self, output_file: str):
+        num_players = len(self.game.players)
+        with open(output_file, 'w') as f:
+            f.write(f'EFG {num_players} R "{self.game.title}" {{ ' + ' '.join(f'"{p}"' for p in self.game.players) + ' }\n')
+            f.write(self.to_efg())

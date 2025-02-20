@@ -1,7 +1,23 @@
 import itertools
 import numpy as np
 
-def compute_better_response_beliefs(payoff_matrix, strategy, alternative_strategy):
+def sample_beliefs(payoff_matrix, num_points=100):
+    opponent_shape = payoff_matrix.shape[1:]
+    num_opponent_strategies = np.prod(opponent_shape)
+    
+    linspace_values = np.linspace(0, 1, num_points)
+    # print(linspace_values)
+    partitions = []
+
+    # Generate all possible ways to pick (n-1) breakpoints from linspace
+    for dividers in itertools.combinations_with_replacement(linspace_values, num_opponent_strategies - 1):
+        scaled_dividers = [0] + list(dividers) + [1]
+        partition = np.diff(scaled_dividers)
+        partitions.append(partition)
+
+    return np.array(partitions)
+
+def compute_better_response_beliefs(payoff_matrix, strategy, alternative_strategy, belief_array):
     """
     Compute the set of beliefs for a given player, a strategy, and an alternative strategy.
 
@@ -13,21 +29,19 @@ def compute_better_response_beliefs(payoff_matrix, strategy, alternative_strateg
     Returns:
         A set of beliefs (probability distributions) where the player strictly prefers the given strategy over the alternative.
     """
-    num_opponent_strategies = payoff_matrix.shape[1]
-    beliefs = []
 
-    for belief in itertools.product(np.linspace(0, 1, 100), repeat=num_opponent_strategies):
-        if not np.isclose(sum(belief), 1):
-            continue  # Skip invalid probability distributions
+
+    beliefs = set()
+    for belief in belief_array:
+
         belief = np.array(belief)
 
-        payoff_diff = (
-            belief @ (payoff_matrix[strategy, :] - payoff_matrix[alternative_strategy, :])
-        )
-        if payoff_diff > 0:  # Strictly prefers strategy to the alternative
-            beliefs.append(tuple(belief))
+        payoff_diff = belief @ (payoff_matrix[strategy].flatten() - payoff_matrix[alternative_strategy].flatten())
+        # print(payoff_diff)
 
-    return set(beliefs)
+        if payoff_diff > 0:  # Strictly prefers strategy to the alternative
+            beliefs.add(tuple(belief))
+    return beliefs
 
 def check_better_response_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
     """
@@ -42,38 +56,21 @@ def check_better_response_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
     """
     num_players = len(payoff_matrix_g)
     for player in range(num_players):
-        strategies = range(payoff_matrix_g[player].shape[0])
+        num_strategies = payoff_matrix_g[player].shape[0]
 
-        for strategy in strategies:
-            for alternative_strategy in strategies:
-                if strategy == alternative_strategy:
-                    continue
+        for strategy in range(num_strategies):
+            for alternative_strategy in range(strategy + 1, num_strategies):
+
+                belief_array = sample_beliefs(payoff_matrix_g[player])
 
                 beliefs_g = compute_better_response_beliefs(
-                    payoff_matrix_g[player], strategy, alternative_strategy
+                    payoff_matrix_g[player], strategy, alternative_strategy, belief_array
                 )
                 beliefs_g_prime = compute_better_response_beliefs(
-                    payoff_matrix_g_prime[player], strategy, alternative_strategy
+                    payoff_matrix_g_prime[player], strategy, alternative_strategy, belief_array
                 )
 
                 if beliefs_g != beliefs_g_prime:
                     return False  # Found a discrepancy in beliefs
 
     return True
-
-# Example usage
-if __name__ == "__main__":
-    # Payoff matrices for a 2-player game (row player and column player)
-    # Each player has 2 strategies
-    payoff_matrix_g = [
-        np.array([[3, 0], [5, 1]]),  # Payoffs for player 1
-        np.array([[2, 4], [0, 6]])   # Payoffs for player 2
-    ]
-
-    payoff_matrix_g_prime = [
-        np.array([[3, 0], [5, 1]]),  # Payoffs for player 1 (same as G)
-        np.array([[2, 4], [0, 6]])   # Payoffs for player 2 (same as G)
-    ]
-
-    print("Are the games better-response equivalent?")
-    print(check_better_response_equivalence(payoff_matrix_g, payoff_matrix_g_prime))

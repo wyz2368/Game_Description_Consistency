@@ -35,33 +35,33 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
     num_opponents = num_players - 1
 
     for player in range(num_players):
-        print("Player:", player)
+        # print("Player:", player)
 
         num_strategies = payoff_matrix_g[player].shape[0]
-        print("Number of strategies:", num_strategies)
+        # print("Number of strategies:", num_strategies)
         
         num_opponent_strategies = [payoff_matrix_g[player].shape[i+1] for i in range(num_opponents)]
         opponent_strategy_profiles = product(*(range(n) for n in num_opponent_strategies))
-        print("Number of opponents:", num_opponents)
-        print("Opponent strategy sizes:", num_opponent_strategies)
+        # print("Number of opponents:", num_opponents)
+        # print("Opponent strategy sizes:", num_opponent_strategies)
 
         for s_i in range(num_strategies):
             for s_i_prime in range(s_i + 1, num_strategies):
 
-                print("Strategy pair:", s_i, s_i_prime)
+                # print("Strategy pair:", s_i, s_i_prime)
 
                 for s_minus_i in opponent_strategy_profiles:
                     # Payoffs in game G
                     u_g = payoff_matrix_g[player][(s_i,) + s_minus_i]
-                    print("Payoffs in game G:", u_g)
+                    # print("Payoffs in game G:", u_g)
                     u_g_prime = payoff_matrix_g[player][(s_i_prime,) + s_minus_i]
-                    print("Payoffs in game G:", u_g_prime)
+                    # print("Payoffs in game G:", u_g_prime)
 
                     # Payoffs in game G'
                     u_g_dash = payoff_matrix_g_prime[player][(s_i,) + s_minus_i]
-                    print("Payoffs in game G':", u_g_dash)
+                    # print("Payoffs in game G':", u_g_dash)
                     u_g_prime_dash = payoff_matrix_g_prime[player][(s_i_prime,) + s_minus_i]
-                    print("Payoffs in game G':", u_g_prime_dash)
+                    # print("Payoffs in game G':", u_g_prime_dash)
 
                     # Compare relationships
                     relation_g = get_relationship(u_g, u_g_prime)
@@ -71,21 +71,3 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
                         return False  # Relation mismatch found
 
     return True
-
-
-# Example usage
-if __name__ == "__main__":
-    # Payoff matrices for a 2-player game (row player and column player)
-    # Each player has 2 strategies
-    payoff_matrix_g = [
-        np.array([[3, 0], [5, 1]]),  # Payoffs for player 1
-        np.array([[2, 4], [0, 6]])  # Payoffs for player 2
-    ]
-
-    payoff_matrix_g_prime = [
-        np.array([[6, 0], [10, 2]]),  # Payoffs for player 1
-        np.array([[8, 12], [1, 15]])  # Payoffs for player 2
-    ]
-
-    print("Are the games order-preserving equivalent?")
-    print(check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime))

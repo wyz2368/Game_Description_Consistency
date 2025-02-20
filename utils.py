@@ -1,7 +1,6 @@
 import pygambit as gbt
 import numpy as np
 
-
 # Convert EFG to NFG to payoff matrix
 def get_payoff_matrix(efg_file_path):
     efg = gbt.Game.read_game(efg_file_path)

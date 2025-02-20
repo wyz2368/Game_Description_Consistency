@@ -1,0 +1,8 @@
+EFG 2 R "Bach or Stravinsky?" { "Alexis" "Beverley" } ""
+p "" 1 1 "" { "A" "B" } 0
+p "" 2 1 "" { "C" "D" } 0
+t "" 1 "Both choose Bach" { 2, 1 }
+t "" 2 "Alexis Bach, Beverley Stravinsky" { 2, 2 }
+p "" 2 1 "" { "C" "D" } 0
+t "" 3 "Alexis Stravinsky, Beverley Bach" { 3, 3 }
+t "" 4 "Both choose Stravinsky" { 1, 2 }
