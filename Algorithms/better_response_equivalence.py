@@ -4,6 +4,7 @@ import numpy as np
 def sample_beliefs(payoff_matrix, num_points=100):
     opponent_shape = payoff_matrix.shape[1:]
     num_opponent_strategies = np.prod(opponent_shape)
+    print(num_opponent_strategies)
     
     linspace_values = np.linspace(0, 1, num_points)
     # print(linspace_values)

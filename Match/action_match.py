@@ -65,12 +65,16 @@ def get_unique_actions_by_level_llm(
             unique_actions_original.append((node.actions, node.player, level, node.information_set))  # Store one representative action
             modified_actions = original_actions  # Default to the same actions
 
-            ref_actions_for_level = [actions for actions, player, lvl, info_set in ref_actions if lvl == level]
+            ref_actions_for_level = [actions for actions, p, lvl, info in ref_actions 
+                         if lvl == level and p == node.player and info == node.information_set]
+
             # print(ref_actions_for_level)
 
             # unique_actions.append((node.actions, node.player, level))  # Store one representative action
 
             if ref_actions_for_level:
+                print(ref_actions_for_level[0])
+                print(original_actions)
                 prompt = (f"Given the following reference game actions from a game tree: {ref_actions_for_level[0]}. "
                           f"Modify the following generated game actions: {original_actions} to be consistent with the reference game actions, "
                           f"without changing the order of the actions. Provide the modified actions as a Python list. Only output the python list please.")
@@ -92,21 +96,20 @@ def get_unique_actions_by_level_llm(
 def update_nodes_with_modified_actions(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     if node.node_type == NodeType.PLAYER:
         for modified_actions, player, lvl, info_set in modified_actions_list:
-            if lvl == level:
+            if lvl == level and player == node.player and info_set == node.information_set:
                 node.actions = modified_actions
                 new_children = {}
                 old_children = list(node.children.values())
-                
+                # Ensure a one-to-one mapping: zip may drop extra children if lengths differ.
                 for action, child in zip(modified_actions, old_children):
                     new_children[action] = child
-                
                 node.children = new_children
+                # Found a matching tuple for this node; update done.
                 break
 
-    # Recursively update children at the next level
+    # Recursively update children at the next level.
     for child in node.children.values():
         update_nodes_with_modified_actions(child, modified_actions_list, level + 1)
-
 
 def match_actions(ref_node: Node, gen_node: Node):
     # Get unique actions by level from the reference game tree
@@ -114,6 +117,9 @@ def match_actions(ref_node: Node, gen_node: Node):
 
     # Get unique actions by level from the generated game tree
     gen_unique_actions_original, gen_unique_actions_modified = get_unique_actions_by_level_llm(gen_node, ref_unique_actions)
+    print(ref_unique_actions)
+    print(gen_unique_actions_original)
+    print(gen_unique_actions_modified)
 
     # Update the generated game tree with the modified actions
     update_nodes_with_modified_actions(gen_node, gen_unique_actions_modified)
