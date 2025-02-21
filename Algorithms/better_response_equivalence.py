@@ -2,6 +2,15 @@ import itertools
 import numpy as np
 
 def sample_beliefs(payoff_matrix, num_points=100):
+    """_summary_
+
+    Args:
+        payoff_matrix (_type_): _description_
+        num_points (int, optional): _description_. Defaults to 100.
+
+    Returns:
+        _type_: _description_
+    """
     opponent_shape = payoff_matrix.shape[1:]
     num_opponent_strategies = np.prod(opponent_shape)
     print(num_opponent_strategies)

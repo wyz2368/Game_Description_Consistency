@@ -57,6 +57,22 @@ def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tu
 def get_unique_actions_by_level_partial_tree(
     node: Node
 ) -> List[Tuple[List[str], List[str], int, int]]:
+    """Retrieve unique actions from a given node in a partial game tree.
+    
+    This function processes a node and its children to collect unique actions that are marked as checked. 
+    It specifically looks for player nodes and records their actions along with relevant information such as 
+    the player, level, and information set.
+    
+    Args:
+        node (Node): The node from which to collect unique actions. It should be marked as checked.
+    
+    Returns:
+        List[Tuple[List[str], List[str], int, int]]: A list of tuples, each containing:
+            - A list of actions (List[str]): The actions available at the node.
+            - A list of players (List[str]): The players associated with the actions.
+            - An integer representing the level of the node (int).
+            - An integer representing the information set ID (int).
+    """
 
     unique_actions = []
 
@@ -76,6 +92,21 @@ def get_unique_actions_by_level_partial_tree(
     return unique_actions
 
 def get_player_per_level(node_list):
+    """Get a mapping of players to their corresponding levels from a list of nodes.
+    
+    Args:
+        node_list (list of tuples): A list where each tuple contains the following elements:
+            - actions: The actions taken (not used in this function).
+            - player: The player associated with the node.
+            - level: The level associated with the node.
+            - info_set: Additional information (not used in this function).
+    
+    Returns:
+        dict: A dictionary mapping levels to their corresponding players.
+    
+    Raises:
+        ValueError: If conflicting players are found for the same level.
+    """
     level_player_map = {}
     for actions, player, level, info_set in node_list:
         if level not in level_player_map:
@@ -86,6 +117,20 @@ def get_player_per_level(node_list):
     return level_player_map
 
 def reorder_generated_game(reference_node, generated_node):
+    """Reorder the players in the generated game to match the reference game.
+    
+    This function takes two game structures, a reference game and a generated game, and reorders the players in the generated game to align with the player order of the reference game. It ensures that the generated game reflects the same player sequence and structure as defined in the reference game.
+    
+    Args:
+        reference_node: The root node of the reference game structure.
+        generated_node: The root node of the generated game structure.
+    
+    Returns:
+        list: A list of reordered nodes representing the players in the generated game, structured to match the reference game.
+    
+    Raises:
+        ValueError: If a player in the reference game is missing from the generated game nodes.
+    """
     """Reorder the players in the generated game to match the reference game."""
     # Step 1: Get player order per level from reference game
     reference_nodes = get_unique_actions_by_level_partial_tree(reference_node)
@@ -122,11 +167,43 @@ def reorder_generated_game(reference_node, generated_node):
     return reordered_nodes
 
 def assign_all_levels(node: Node, level: int = 0):
+    """Assigns levels to a tree structure starting from the given node.
+    
+    This function recursively assigns a level to each node in a tree, where the 
+    level of the root node is specified by the `level` parameter. Each child node 
+    is assigned a level that is one greater than its parent's level.
+    
+    Args:
+        node (Node): The root node from which to start assigning levels.
+        level (int, optional): The level to assign to the root node. Defaults to 0.
+    
+    Returns:
+        None: This function modifies the `level` attribute of the nodes in place.
+    """
     node.level = level
     for child in node.children.values():
         assign_all_levels(child, level + 1)
 
 def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
+    """Filters simultaneous moves in a game tree by comparing two nodes and their children.
+    
+    This function examines the reference node (`ref_node`) and the generated node (`gen_node`) to identify
+    and filter out branches of the game tree that represent simultaneous moves. It checks for information sets,
+    terminal nodes, and recursively processes child nodes to determine the structure of the game tree.
+    
+    Args:
+        ref_node (Node): The reference node in the game tree to compare against.
+        gen_node (Node): The generated node in the game tree to compare with the reference node.
+        tree: The game tree structure that contains the nodes.
+    
+    Returns:
+        None: The function modifies the nodes in place and does not return a value.
+    
+    Notes:
+        - The function prints debugging information about the nodes and paths during execution.
+        - It assumes that the nodes have attributes such as `children`, `checked`, `actions`, and `information_set`.
+        - The function is designed to handle cases where both nodes have a single information set and no terminal nodes.
+    """
     ref_info_sets = {child.information_set for child in ref_node.children.values() if child.information_set is not None}
     gen_info_sets = {child.information_set for child in gen_node.children.values() if child.information_set is not None}
 
@@ -278,6 +355,16 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
 
 
 def switch_order(ref_node: Node, gen_node: Node, tree):
+    """Switches the order of two nodes in a tree structure and filters simultaneous moves.
+    
+    Args:
+        ref_node (Node): The reference node whose order is to be switched.
+        gen_node (Node): The general node whose order is to be switched.
+        tree: The tree structure containing the nodes.
+    
+    Returns:
+        None: This function modifies the tree in place and does not return a value.
+    """
 
     assign_all_levels(ref_node)
     assign_all_levels(gen_node)

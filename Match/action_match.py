@@ -7,6 +7,19 @@ import ast
 client = genai.Client(api_key="") # Add your API key here
 
 def extract_python_code(response):
+    """Extracts Python code from a given response string.
+    
+    This function searches for Python code enclosed within triple backticks in the input string. 
+    It returns the first code block as a Python list if it can be evaluated; otherwise, it returns 
+    the raw code block as a string. If no code blocks are found, an empty list is returned.
+    
+    Args:
+        response (str): The input string containing potential Python code blocks.
+    
+    Returns:
+        list or str: The first extracted Python code block as a list if it can be evaluated, 
+                     otherwise as a string. Returns an empty list if no code blocks are found.
+    """
     # Regular expression to find Python code within triple backticks
     code_blocks = re.findall(r'```python(.*?)```', response, re.DOTALL)
     
@@ -28,6 +41,20 @@ def get_unique_actions_by_level(
     node: Node, 
     level: int = 0, 
 ) -> List[Tuple[List[str], List[str], int, int]]:
+    """Retrieve unique actions from a given node and its children at a specified level.
+    
+    Args:
+        node (Node): The node from which to retrieve unique actions.
+        level (int, optional): The current level in the node hierarchy. Defaults to 0.
+    
+    Returns:
+        List[Tuple[List[str], List[str], int, int]]: A list of unique actions represented as tuples,
+        where each tuple contains:
+            - A list of actions (List[str]): The actions associated with the node.
+            - A list of players (List[str]): The players associated with the actions.
+            - An integer representing the current level (int).
+            - An integer representing the information set (int).
+    """
 
     unique_actions = []
 
@@ -49,6 +76,18 @@ def get_unique_actions_by_level_llm(
     ref_actions: List[Tuple[List[str], int, int]], 
     level: int = 0
 ) -> List[Tuple[List[str], List[str], int, int]]:
+    """Retrieve unique actions from a game tree node at a specified level, modifying them based on reference actions using a language model.
+    
+    Args:
+        node (Node): The current node in the game tree from which to retrieve actions.
+        ref_actions (List[Tuple[List[str], int, int]]): A list of reference actions, each represented as a tuple containing a list of actions, a player identifier, and a level.
+        level (int, optional): The current level in the game tree. Defaults to 0.
+    
+    Returns:
+        List[Tuple[List[str], List[str], int, int]]: A tuple containing two lists:
+            - unique_actions_original: A list of unique original actions collected from the node and its children.
+            - unique_actions_modified: A list of modified actions that are consistent with the reference actions.
+    """
     
 
     unique_actions_original = []
@@ -94,6 +133,21 @@ def get_unique_actions_by_level_llm(
     return unique_actions_original, unique_actions_modified
 
 def update_nodes_with_modified_actions(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
+    """Update the actions of a node and its children based on a list of modified actions.
+    
+    This function traverses a tree of nodes, updating the actions of nodes of type PLAYER that match
+    the specified level, player, and information set with the corresponding modified actions from the
+    provided list. It also recursively updates the children of the node.
+    
+    Args:
+        node (Node): The node to be updated.
+        modified_actions_list (List[Tuple[List[str], int, int, int]]): A list of tuples where each tuple
+            contains a list of modified actions, a player identifier, a level, and an information set.
+        level (int, optional): The current level in the tree. Defaults to 0.
+    
+    Returns:
+        None: This function modifies the node in place and does not return a value.
+    """
     if node.node_type == NodeType.PLAYER:
         for modified_actions, player, lvl, info_set in modified_actions_list:
             if lvl == level and player == node.player and info_set == node.information_set:
@@ -112,6 +166,17 @@ def update_nodes_with_modified_actions(node: Node, modified_actions_list: List[T
         update_nodes_with_modified_actions(child, modified_actions_list, level + 1)
 
 def match_actions(ref_node: Node, gen_node: Node):
+    """Match actions between a reference game tree and a generated game tree.
+    
+    This function retrieves unique actions from both the reference and generated game trees, compares them, and updates the generated game tree with modified actions based on the reference.
+    
+    Args:
+        ref_node (Node): The root node of the reference game tree.
+        gen_node (Node): The root node of the generated game tree.
+    
+    Returns:
+        Node: The updated generated game tree with modified actions.
+    """
     # Get unique actions by level from the reference game tree
     ref_unique_actions = get_unique_actions_by_level(ref_node)
 
