@@ -13,22 +13,22 @@ def check_equivalence(reference_game, generated_game):
     print("Best-response equivalence:")
     print(check_best_response_equivalence(reference_game, generated_game))
 
-gen_efg_path = "Test_EFG/Gen_EFG/output_gen.efg"
-ref_efg_path = "Test_EFG/Ref_EFG/output_ref.efg"
-# gen_efg_path = "Test_EFG/Gen_EFG/multiple_sim_gen.efg"
-# ref_efg_path = "Test_EFG/Ref_EFG/multiple_sim.efg"
+gen_efg_path = "Test_EFG/Gen/4.efg"
+ref_efg_path = "Test_EFG/Ref/4.efg"
 
 parser = EFGParser()
 
 ref_game = parser.parse_file(ref_efg_path)
 gen_game = parser.parse_file(gen_efg_path)
 
-gen_game.print_tree()
+# gen_game.print_tree()
 
-switch_order(ref_game.root, gen_game.root)
+switch_order(ref_game.root, gen_game.root, gen_game)
 # match_actions(ref_game.root, gen_game.root)
 
 gen_game.print_tree()
+
+parser.save_to_efg("Test_EFG/Switch/output4.efg")
 
 # reference_game = get_payoff_matrix(ref_efg_path)
 # print(reference_game)

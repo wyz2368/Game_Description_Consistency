@@ -3,7 +3,7 @@ from collections import defaultdict
 
 from dataclasses import dataclass
 from enum import Enum
-
+from copy import deepcopy
 
 from functools import reduce
 from operator import mul
@@ -30,9 +30,21 @@ def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tu
                 node.checked = True
                 new_children = {}
                 old_children = list(node.children.values())
+
+                if len(modified_actions) != len(old_children):
+                    temp_children = list(node.children.values())[0]
+                    for action in modified_actions:
+                        new_children[action] = deepcopy(temp_children)
+                else:
+                    # print("Modified Actions")
+                    for action, child in zip(modified_actions, old_children):
+                        # print(action)
+                        new_children[action] = child
                 
-                for action, child in zip(modified_actions, old_children):
-                    new_children[action] = child
+                
+                # temp_children = list(node.children.values())[0]
+                # for action in modified_actions:
+                #     new_children[action] = temp_children
                 
                 node.children = new_children
                 break
@@ -114,16 +126,23 @@ def assign_all_levels(node: Node, level: int = 0):
     for child in node.children.values():
         assign_all_levels(child, level + 1)
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
     ref_info_sets = {child.information_set for child in ref_node.children.values() if child.information_set is not None}
     gen_info_sets = {child.information_set for child in gen_node.children.values() if child.information_set is not None}
+
+    ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in ref_node.children.values())
+    gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in gen_node.children.values())
 
     start_filter = False
     start_node_ref = None
     start_node_gen = None
     level_diff = 0
+    
+    print(gen_node.player)
+    print(gen_info_sets)
+    print(gen_has_terminal)
 
-    if len(ref_info_sets) == 1 and len(gen_info_sets) == 1:
+    if len(ref_info_sets) == 1 and len(gen_info_sets) == 1 and not ref_has_terminal and not gen_has_terminal:
         start_filter = True
         start_node_ref = ref_node
         start_node_gen = gen_node
@@ -139,6 +158,12 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
             for r_node, g_node in zip(nodes_to_check, gen_nodes_to_check):
                 ref_info_sets = {child.information_set for child in r_node.children.values() if child.information_set is not None}
                 gen_info_sets = {child.information_set for child in g_node.children.values() if child.information_set is not None}
+
+                ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in r_node.children.values())
+                gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in g_node.children.values())
+                
+                if ref_has_terminal or gen_has_terminal:
+                    continue  # Skip this branch if a terminal node is found
 
                 if len(ref_info_sets) != 1 or len(gen_info_sets) != 1:
                     continue
@@ -194,20 +219,20 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
                 collect_paths(child, [action])
 
         # Debugging output
-        # for p, c in children_paths.items():
-        #     print(f"Path: {p}")
-        #     print(f"Node: {c}")
+        for p, c in children_paths.items():
+            print(f"Path: {p}")
+            print(f"Node: {c}")
         
-
+        print(start_node_gen.actions)
         new_gen = reorder_generated_game(start_node_ref, start_node_gen)
         print(new_gen)
         
         
         update_nodes_with_switching_order(start_node_gen, new_gen, level=start_node_gen.level)
 
-        # start_node_gen
+        # tree.print_tree()
 
-        final_nodes_with_paths = {}
+        # final_nodes_with_paths = {}
 
         def collect_paths_new(node, path):
             """Recursively collect paths for all children of the given node."""
@@ -218,17 +243,30 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
                 if child.checked:
                     collect_paths_new(child, path + [action])
                 else:
-                    final_nodes_with_paths[tuple(sorted(path + [action]))] = node
+                    # print(action)
+                    # final_nodes_with_paths[tuple(sorted(path + [action]))] = node
                     final_path = tuple(sorted(path + [action]))
+                    print(f"Final Path: {final_path}")
                     for original_path, original_node in children_paths.items():
                         if final_path == original_path:
+                            # print("Original Node", original_node)
+                            # print(node)
                             node.children[action] = original_node
 
         # Start collecting final nodes from each action of the start node
-        for action in start_node_gen.actions:
-            if action in start_node_gen.children:
-                child = start_node_gen.children[action]
-                collect_paths_new(child, [action])
+        # for action in start_node_gen.actions:
+        #     print(action)
+        #     if action in start_node_gen.children:
+        #         # print("action")
+        #         child = start_node_gen.children[action]
+        #         collect_paths_new(child, [action])
+
+        for action, child in start_node_gen.children.items():
+            collect_paths_new(child, [action])  
+        
+        # for path, node in final_nodes_with_paths.items():
+        #     print(f"Path: {path}")
+        #     print(f"Node: {node}")
 
     if start_filter:
         print(f"Simultaneous move game starts at node {start_node_ref.label} and lasts for {level_diff} levels")
@@ -236,14 +274,14 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
 
     for ref_child, gen_child in zip(ref_node.children.values(), gen_node.children.values()):
         if not getattr(ref_child, 'checked', False) and not getattr(gen_child, 'checked', False):
-            filter_simultaneous_moves(ref_child, gen_child)
+            filter_simultaneous_moves(ref_child, gen_child, tree)
 
 
-def switch_order(ref_node: Node, gen_node: Node):
+def switch_order(ref_node: Node, gen_node: Node, tree):
 
     assign_all_levels(ref_node)
     assign_all_levels(gen_node)
 
     # tree.print_tree()
 
-    filter_simultaneous_moves(ref_node, gen_node)
+    filter_simultaneous_moves(ref_node, gen_node, tree)

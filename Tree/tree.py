@@ -231,7 +231,7 @@ class EFGParser:
             node = self.game.root
 
         if node.node_type == NodeType.TERMINAL:
-            payoffs_str = ' '.join(map(str, node.payoffs))
+            payoffs_str = ', '.join(map(str, node.payoffs))
             return f't "{node.label}" {node.outcome_number} "{node.outcome_name}" {{ {payoffs_str} }}'
 
         elif node.node_type == NodeType.CHANCE:
@@ -245,7 +245,6 @@ class EFGParser:
         return f'{node_str}\n{children_str}'
 
     def save_to_efg(self, output_file: str):
-        num_players = len(self.game.players)
         with open(output_file, 'w') as f:
-            f.write(f'EFG {num_players} R "{self.game.title}" {{ ' + ' '.join(f'"{p}"' for p in self.game.players) + ' }\n')
+            f.write(f'EFG 2 R "{self.game.title}" {{ ' + ' '.join(f'"{p}"' for p in self.game.players) + ' }\n')
             f.write(self.to_efg())
