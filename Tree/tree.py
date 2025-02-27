@@ -24,6 +24,7 @@ class Node:
     probs: Optional[Dict[str, float]] = None
     level: int = 0  # New attribute for level
     checked: bool = False  # New attribute to track checked nodes
+    parent_action: Optional[str] = None  # New parent action reference
 
 
     def __post_init__(self):

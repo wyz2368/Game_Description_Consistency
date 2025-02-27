@@ -11,15 +11,15 @@ outcome_6 = g.add_outcome([1, 1, 1], label="")
 outcome_7 = g.add_outcome([2, 2, 2], label="")
 outcome_8 = g.add_outcome([3, 3, 3], label="")
 
-g.append_move(g.root, "Alice", ["A", "B"])
-g.append_move(g.root.children[0], "Bob", ['C', 'D'])
-g.append_move(g.root.children[1], "Alice", ["E", "F"])
+g.append_move(g.root, "Alice", ["Bakery", "Act"])
+g.append_move(g.root.children[1], "Cindy", ["G", "H"])
+g.append_move(g.root.children[0], "Bob", ["Q", "Z"])
 
-g.append_move(g.root.children[0].children[0], "Cindy", ["G", "H"])
-g.append_move(g.root.children[0].children[1], "Cindy", ["G", "H"])
+g.append_move(g.root.children[1].children[0], "Bob", ['C', 'D'])
+g.append_move(g.root.children[1].children[1], "Bob", ['C', 'D'])
 
-g.append_move(g.root.children[1].children[0], "Cindy", ["G", "H"])
-g.append_move(g.root.children[1].children[1], "Cindy", ["G", "H"])
+g.append_move(g.root.children[0].children[0], "Cindy", ["E", "F"])
+g.append_move(g.root.children[0].children[1], "Cindy", ["E", "F"])
 
 g.set_outcome(g.root.children[0].children[0].children[0], outcome_1)
 g.set_outcome(g.root.children[0].children[0].children[1], outcome_2)
@@ -37,5 +37,5 @@ g.set_infoset(g.root.children[0].children[0], g.root.children[0].children[1].inf
 # Save the EFG
 efg = g.write(format='native')
 
-with open("many_sim_gen.efg", "w") as file:
+with open("new.efg", "w") as file:
     file.write(efg)

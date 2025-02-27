@@ -4,11 +4,13 @@ from collections import defaultdict
 from dataclasses import dataclass
 from enum import Enum
 from copy import deepcopy
+from collections import deque
 
 from functools import reduce
 from operator import mul
 
 from Tree import Node, NodeType
+from .action_match import get_current_level_actions, get_current_level_actions_llm, update_current_nodes
 
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
@@ -184,174 +186,239 @@ def assign_all_levels(node: Node, level: int = 0):
     for child in node.children.values():
         assign_all_levels(child, level + 1)
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
-    """Filters simultaneous moves in a game tree by comparing two nodes and their children.
-    
-    This function examines the reference node (`ref_node`) and the generated node (`gen_node`) to identify
-    and filter out branches of the game tree that represent simultaneous moves. It checks for information sets,
-    terminal nodes, and recursively processes child nodes to determine the structure of the game tree.
-    
+def mark_simultaneous_move_children(start_node):
+    """Marks nodes and their children in a game tree that represent simultaneous moves.
+    This function traverses the game tree starting from the given `start_node`, marking nodes that are part of simultaneous move scenarios. It filters out terminal nodes and ensures that only valid simultaneous move nodes are processed. If a node is determined to be part of a simultaneous move, it and all its children are marked as checked.
     Args:
-        ref_node (Node): The reference node in the game tree to compare against.
-        gen_node (Node): The generated node in the game tree to compare with the reference node.
-        tree: The game tree structure that contains the nodes.
+        start_node (Node): The starting node of the game tree from which to begin marking simultaneous move nodes.
+    Returns:
+        None: The function modifies the nodes in place, marking them as checked.
+    """
+    nodes_to_check = [start_node]
+    
+    while nodes_to_check:
+        next_level_nodes = []
+
+        for node in nodes_to_check:
+            # **Filter out terminal nodes**
+            if any(child.node_type == NodeType.TERMINAL for child in node.children.values()):
+                continue  # Skip processing terminal branches
+
+            # **Ensure the node belongs to a simultaneous move**
+            info_sets = {child.information_set for child in node.children.values() if child.information_set is not None}
+            players = {child.player for child in node.children.values() if child.node_type == NodeType.PLAYER}
+
+            if len(info_sets) != 1 or len(players) != 1:
+                continue  # Skip if not a valid simultaneous move
+
+            # **Mark current node and its children**
+            node.checked = True
+            for child in node.children.values():
+                child.checked = True
+                next_level_nodes.append(child)
+
+        nodes_to_check = next_level_nodes  # Move to the next level
+
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
+    """Filters simultaneous moves between a reference game node and a generated game node within a game tree.
+    This function traverses the game tree, comparing nodes from the reference game with those from the generated game. It identifies simultaneous moves and ensures that the generated nodes conform to the structure and rules defined by the reference nodes. If discrepancies are found, appropriate errors are raised.
+    Args:
+        ref_node (Node): The reference game node to compare against.
+        gen_node (Node): The generated game node to be filtered.
+        tree: The game tree containing the nodes.
+    
+    Raises:
+        ValueError: If a matching reference node cannot be found for a generated node, or if the reference node does not meet the simultaneous move condition.
     
     Returns:
-        None: The function modifies the nodes in place and does not return a value.
-    
-    Notes:
-        - The function prints debugging information about the nodes and paths during execution.
-        - It assumes that the nodes have attributes such as `children`, `checked`, `actions`, and `information_set`.
-        - The function is designed to handle cases where both nodes have a single information set and no terminal nodes.
+        None: The function modifies the generated game node in place based on the reference game node.
     """
-    ref_info_sets = {child.information_set for child in ref_node.children.values() if child.information_set is not None}
-    gen_info_sets = {child.information_set for child in gen_node.children.values() if child.information_set is not None}
-
-    ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in ref_node.children.values())
-    gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in gen_node.children.values())
-
-    start_filter = False
-    start_node_ref = None
-    start_node_gen = None
-    level_diff = 0
     
-    print(gen_node.player)
-    print(gen_info_sets)
-    print(gen_has_terminal)
+    queue_ref = deque([ref_node])  # Queue for reference game nodes
+    queue_gen = deque([gen_node])  # Queue for generated game nodes
 
-    if len(ref_info_sets) == 1 and len(gen_info_sets) == 1 and not ref_has_terminal and not gen_has_terminal:
-        start_filter = True
-        start_node_ref = ref_node
-        start_node_gen = gen_node
-
-        current_level = ref_node.level
-        nodes_to_check = [ref_node]
-        gen_nodes_to_check = [gen_node]
+    while queue_gen:
         
-        while nodes_to_check and gen_nodes_to_check:
-            next_level_nodes = []
-            next_level_gen_nodes = []
+        level_size_ref = len(queue_ref)  # Number of nodes at this level in ref game
+        level_size_gen = len(queue_gen)  # Number of nodes at this level in gen game
 
-            for r_node, g_node in zip(nodes_to_check, gen_nodes_to_check):
-                ref_info_sets = {child.information_set for child in r_node.children.values() if child.information_set is not None}
-                gen_info_sets = {child.information_set for child in g_node.children.values() if child.information_set is not None}
-
-                ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in r_node.children.values())
-                gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in g_node.children.values())
-                
-                if ref_has_terminal or gen_has_terminal:
-                    continue  # Skip this branch if a terminal node is found
-
-                if len(ref_info_sets) != 1 or len(gen_info_sets) != 1:
-                    continue
-
-                if not r_node.children or not g_node.children:
-                    continue
-
-                # Mark the current nodes as checked
-                r_node.checked = True
-                g_node.checked = True
-
-                # Mark all children as checked
-                for child in r_node.children.values():
-                    child.checked = True
-                    next_level_nodes.append(child)
-                for child in g_node.children.values():
-                    child.checked = True
-                    next_level_gen_nodes.append(child)
-                
-                ## Store the path for each children
-                
-
-            nodes_to_check = next_level_nodes
-            gen_nodes_to_check = next_level_gen_nodes
-            level_diff += 1
+        ref_nodes_list = []  # Store all reference nodes for this level
         
-        # Switch the final nodes of children.
-        
-        children_paths = {}
 
-        def collect_paths(node, path):
-            """Recursively collect paths for all children of the given node."""
-            if not node.checked:
-                return
+        # **Step 1: Pop all reference nodes for this level first**
+        for _ in range(level_size_ref):
+            ref_nodes_list.append(queue_ref.popleft())
+        
+        ref_nodes_list_temp = []
+        
+        
+        gen_nodes_list = []
+        for _ in range(level_size_gen):
+            if not ref_nodes_list:
+                break  # No more reference nodes to match
+
+            # r_node = queue_ref.popleft()
+            g_node = queue_gen.popleft()
             
-            # If leaf node or next nodes aren't checked, store the path
-            if not node.children:
-                children_paths[tuple(path)] = node
-                return
+
+            # print(r_node.parent_action)
+            # print(g_node.parent_action)
+
+            if g_node.checked:
+                print("Already checked")
+                gen_nodes_list.append(g_node)
+                match = False
+                for r_node in ref_nodes_list:
+                    # print(r_node.parent_action)
+                    if r_node.parent_action == g_node.parent_action:
+                        print("Matched")
+                        ref_nodes_list_temp.append(r_node)
+                        ref_nodes_list.remove(r_node)
+                        match = True
+                        break
+                if not match:
+                    raise ValueError(f"No matching reference node found for g_node: {g_node.label} with parent action {g_node.parent_action}")
+                continue
+
+            gen_info_sets = {child.information_set for child in g_node.children.values() if child.information_set is not None}
+            gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in g_node.children.values())
+            gen_players = {child.player for child in g_node.children.values() if child.node_type == NodeType.PLAYER}
+
+            if not (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal):
+                gen_nodes_list.append(g_node)
+                match = False
+                for r_node in ref_nodes_list:
+                    if r_node.parent_action == g_node.parent_action:
+                        ref_nodes_list_temp.append(r_node)
+                        ref_nodes_list.remove(r_node)
+                        match = True
+                        break
+                if not match:
+                    raise ValueError(f"No matching reference node found for g_node: {g_node.label} with parent action {g_node.parent_action}")
+                continue  # Skip this g_node if it doesn't satisfy the condition
+
+            print("Simultaneous move detected for g_node")
+
+            matched_ref_node = None
+
+            for r_node in ref_nodes_list:
+                if r_node.parent_action == g_node.parent_action:
+                    matched_ref_node = r_node
+                    ref_nodes_list.remove(r_node)
+                    ref_nodes_list_temp.append(r_node)
+                    break  # Stop searching after the first match
+
+            # **Raise an error if no matching r_node is found**
+            if not matched_ref_node:
+                raise ValueError(f"No matching reference node found for g_node: {g_node.label} with parent action {g_node.parent_action}")
+
+            print(f"Matched ref_node: {matched_ref_node.label}, Parent Action: {matched_ref_node.parent_action}")
+
+            # **Step 5: Verify that matched_ref_node also meets the simultaneous move condition**
+            ref_info_sets = {child.information_set for child in matched_ref_node.children.values() if child.information_set is not None}
+            ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in matched_ref_node.children.values())
+            ref_players = {child.player for child in matched_ref_node.children.values() if child.node_type == NodeType.PLAYER}
+
+            if not (len(ref_info_sets) == 1 and len(ref_players) == 1 and not ref_has_terminal):
+                raise ValueError(f"Reference node {matched_ref_node.label} does not meet the simultaneous move condition")
             
-            for action, child in node.children.items():
-                if child.checked:
-                    collect_paths(child, path + [action])
-                else:
-                    children_paths[tuple(sorted(path + [action]))] = child
+            nodes_to_check = [matched_ref_node]
+            gen_nodes_to_check = [g_node]
+            while nodes_to_check or gen_nodes_to_check:
+                next_level_nodes = []
+                next_level_gen_nodes = []
 
-        
-        
-        # Start collecting paths from each action of the start node
-        for action in start_node_gen.actions:
-            if action in start_node_gen.children:
-                child = start_node_gen.children[action]
-                collect_paths(child, [action])
-
-        # Debugging output
-        for p, c in children_paths.items():
-            print(f"Path: {p}")
-            print(f"Node: {c}")
-        
-        print(start_node_gen.actions)
-        new_gen = reorder_generated_game(start_node_ref, start_node_gen)
-        print(new_gen)
-        
-        
-        update_nodes_with_switching_order(start_node_gen, new_gen, level=start_node_gen.level)
-
-        # tree.print_tree()
-
-        # final_nodes_with_paths = {}
-
-        def collect_paths_new(node, path):
-            """Recursively collect paths for all children of the given node."""
-            if not node.checked:
-                return
+                # **Mark children of ref_node and gen_node separately**
+                for node in nodes_to_check:
+                    mark_simultaneous_move_children(node)
+                    for child in node.children.values():
+                        next_level_nodes.append(child)
+                
+                for node in gen_nodes_to_check:
+                    mark_simultaneous_move_children(node)
+                    for child in node.children.values():
+                        next_level_gen_nodes.append(child)
             
-            for action, child in node.children.items():
-                if child.checked:
-                    collect_paths_new(child, path + [action])
-                else:
-                    # print(action)
-                    # final_nodes_with_paths[tuple(sorted(path + [action]))] = node
-                    final_path = tuple(sorted(path + [action]))
-                    print(f"Final Path: {final_path}")
-                    for original_path, original_node in children_paths.items():
-                        if final_path == original_path:
-                            # print("Original Node", original_node)
-                            # print(node)
-                            node.children[action] = original_node
+                nodes_to_check = next_level_nodes
+                gen_nodes_to_check = next_level_gen_nodes
+            
+            children_paths = {}
 
-        # Start collecting final nodes from each action of the start node
-        # for action in start_node_gen.actions:
-        #     print(action)
-        #     if action in start_node_gen.children:
-        #         # print("action")
-        #         child = start_node_gen.children[action]
-        #         collect_paths_new(child, [action])
+            def collect_paths(node, path):
+                """Recursively collect paths for all children of the given node."""
+                if not node.checked:
+                    return
+                
+                # If leaf node or next nodes aren't checked, store the path
+                if not node.children:
+                    children_paths[tuple(path)] = node
+                    return
+                
+                for action, child in node.children.items():
+                    if child.checked:
+                        collect_paths(child, path + [action])
+                    else:
+                        children_paths[tuple(sorted(path + [action]))] = child
 
-        for action, child in start_node_gen.children.items():
-            collect_paths_new(child, [action])  
-        
-        # for path, node in final_nodes_with_paths.items():
-        #     print(f"Path: {path}")
-        #     print(f"Node: {node}")
+            
+            
+            # Start collecting paths from each action of the start node
+            for action in g_node.actions:
+                if action in g_node.children:
+                    child = g_node.children[action]
+                    collect_paths(child, [action])
+            
+            new_gen = reorder_generated_game(matched_ref_node, g_node)
+            print(new_gen)
+            update_nodes_with_switching_order(g_node, new_gen, level=g_node.level)
 
-    if start_filter:
-        print(f"Simultaneous move game starts at node {start_node_ref.label} and lasts for {level_diff} levels")
-        return
 
-    for ref_child, gen_child in zip(ref_node.children.values(), gen_node.children.values()):
-        if not getattr(ref_child, 'checked', False) and not getattr(gen_child, 'checked', False):
-            filter_simultaneous_moves(ref_child, gen_child, tree)
+            def collect_paths_new(node, path):
+                """Recursively collect paths for all children of the given node."""
+                if not node.checked:
+                    return
+                
+                for action, child in node.children.items():
+                    if child.checked:
+                        collect_paths_new(child, path + [action])
+                    else:
+                        # print(action)
+                        # final_nodes_with_paths[tuple(sorted(path + [action]))] = node
+                        final_path = tuple(sorted(path + [action]))
+                        for original_path, original_node in children_paths.items():
+                            if final_path == original_path:
+                                # print("Original Node", original_node)
+                                # print(node)
+                                node.children[action] = original_node
+                
+            for action, child in g_node.children.items():
+                collect_paths_new(child, [action])
+            
+            gen_nodes_list.append(g_node)
+              
+            
+        for g_node, r_node  in zip(gen_nodes_list,ref_nodes_list_temp):
+
+            if len(r_node.children.values()) != len(g_node.children.values()):
+                raise ValueError(f"Number of children do not match for {r_node.label} and {g_node.label}")
+
+            level = r_node.level
+            ref_actions = get_current_level_actions(r_node,level)
+            # gen_actions = get_current_level_actions(g_node)
+            level = g_node.level
+            original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level)     
+
+            update_current_nodes(g_node, modified_list)
+
+            for action, child in r_node.children.items():
+                child.parent_action = action
+            
+            for action, child in g_node.children.items():
+                child.parent_action = action
+
+            for ref_child, gen_child in zip(r_node.children.values(), g_node.children.values()):
+                queue_ref.append(ref_child)
+                queue_gen.append(gen_child)
 
 
 def switch_order(ref_node: Node, gen_node: Node, tree):
