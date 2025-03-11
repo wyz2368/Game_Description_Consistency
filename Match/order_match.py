@@ -287,14 +287,24 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
             if not (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal):
                 gen_nodes_list.append(g_node)
                 match = False
+                rmn = None
                 for r_node in ref_nodes_list:
                     if r_node.parent_action == g_node.parent_action:
                         ref_nodes_list_temp.append(r_node)
                         ref_nodes_list.remove(r_node)
                         match = True
+                        rmn = r_node
                         break
                 if not match:
-                    raise ValueError(f"No matching reference node found for g_node: {g_node.label} with parent action {g_node.parent_action}")
+                    raise ValueError(f"No matching reference node found for g_node with parent action")
+                else:
+                    ref_info_sets = {child.information_set for child in rmn.children.values() if child.information_set is not None}
+                    ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in rmn.children.values())
+                    ref_players = {child.player for child in rmn.children.values() if child.node_type == NodeType.PLAYER}
+                    ref_terminal = rmn.node_type == NodeType.TERMINAL
+                    if len(ref_info_sets) == 1 and len(ref_players) == 1 and not ref_has_terminal and not ref_terminal:
+                        raise ValueError(f"Reference node does not meet the simultaneous move condition")
+
                 continue  # Skip this g_node if it doesn't satisfy the condition
 
             print("Simultaneous move detected for g_node")
@@ -369,7 +379,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
                     collect_paths(child, [action])
             
             new_gen = reorder_generated_game(matched_ref_node, g_node)
-            print(new_gen)
+            # print(new_gen)
             update_nodes_with_switching_order(g_node, new_gen, level=g_node.level)
 
 
@@ -400,13 +410,16 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
         for g_node, r_node  in zip(gen_nodes_list,ref_nodes_list_temp):
 
             if len(r_node.children.values()) != len(g_node.children.values()):
-                raise ValueError(f"Number of children do not match for {r_node.label} and {g_node.label}")
+                raise ValueError(f"Number of children do not match")
+            
+            if r_node.node_type != g_node.node_type:
+                raise ValueError(f"Node types do not match")
 
             level = r_node.level
             ref_actions = get_current_level_actions(r_node,level)
             # gen_actions = get_current_level_actions(g_node)
             level = g_node.level
-            original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level)     
+            original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level) 
 
             update_current_nodes(g_node, modified_list)
 
