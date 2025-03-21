@@ -48,6 +48,21 @@ def match_palyer_name_llm(gen_game, ref_game):
     # print(player_check)
     
     # f"However, if you think the name in generated game doesn't have a matched name in reference game, return Only an empty list."
+    prompt_check_valid = (f"You are given two lists of players\\"
+                          f"Generated Game Players: {gen_players}"
+                          f"Reference Game Players: {ref_players}"
+                          f"The players may have different names and orders. Check if they represent the same set of players."
+                          f"Output ONLY True if they match and False otherwise.")
+    
+    response_check = client.models.generate_content(
+                    model="gemini-2.0-flash",
+                    contents=[prompt_check_valid])
+    
+    print(response_check.text)
+
+    if response_check.text.strip() == "False":
+        raise ValueError("The players in the generated game do not match the players in the reference game.")
+
     prompt = (f"Given the following reference game players from a game tree: {ref_players}. "
               f"Modify the following generated game players: {gen_players} to be consistent with the reference game players, "
               f"without changing the order of the players. Provide the modified players as a Python list. Only output the python list please.")

@@ -237,6 +237,8 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
     queue_ref = deque([ref_node])  # Queue for reference game nodes
     queue_gen = deque([gen_node])  # Queue for generated game nodes
 
+    
+
     while queue_gen:
         
         level_size_ref = len(queue_ref)  # Number of nodes at this level in ref game
@@ -248,6 +250,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
         # **Step 1: Pop all reference nodes for this level first**
         for _ in range(level_size_ref):
             ref_nodes_list.append(queue_ref.popleft())
+
         
         ref_nodes_list_temp = []
         
@@ -285,6 +288,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
             gen_players = {child.player for child in g_node.children.values() if child.node_type == NodeType.PLAYER}
 
             if not (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal):
+                # print(g_node)
                 gen_nodes_list.append(g_node)
                 match = False
                 rmn = None
@@ -296,6 +300,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
                         rmn = r_node
                         break
                 if not match:
+                    # print(g_node.parent_action)
                     raise ValueError(f"No matching reference node found for g_node with parent action")
                 else:
                     ref_info_sets = {child.information_set for child in rmn.children.values() if child.information_set is not None}
@@ -405,9 +410,10 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
                 collect_paths_new(child, [action])
             
             gen_nodes_list.append(g_node)
+            # print("Gen Nodes List", gen_nodes_list)
               
             
-        for g_node, r_node  in zip(gen_nodes_list,ref_nodes_list_temp):
+        for g_node, r_node in zip(gen_nodes_list,ref_nodes_list_temp):
 
             if len(r_node.children.values()) != len(g_node.children.values()):
                 raise ValueError(f"Number of children do not match")
@@ -420,19 +426,28 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
             # gen_actions = get_current_level_actions(g_node)
             level = g_node.level
             original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level) 
-
-            update_current_nodes(g_node, modified_list)
-
+            # print("Original List", original_list)
+            # print("Modified List", modified_list)
+            
+            print(queue_gen)
+            update_current_nodes(g_node, modified_list, ref_actions)
+            print(queue_gen)
+            
             for action, child in r_node.children.items():
                 child.parent_action = action
             
             for action, child in g_node.children.items():
+                # print(action)
                 child.parent_action = action
 
             for ref_child, gen_child in zip(r_node.children.values(), g_node.children.values()):
-                queue_ref.append(ref_child)
-                queue_gen.append(gen_child)
+                # print(gen_child)
 
+                queue_ref.append(deepcopy(ref_child))
+                queue_gen.append(deepcopy(gen_child))
+                # print(queue_gen)
+            
+            print(queue_gen)
 
 def switch_order(ref_node: Node, gen_node: Node, tree):
     """Switches the order of two nodes in a tree structure and filters simultaneous moves.

@@ -1,0 +1,12 @@
+EFG 2 R "Nuclear Crisis" { "Country A" "Country B" } ""
+p "" 1 1 "" { "Escalate" "Ignore" } 0
+p "" 2 1 "" { "Back down" "Escalate" } 0
+t "" 2 "Back Down" { 2, -1 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 3 "Both Retreat" { -1, -1 }
+t "" 5 "B Detonates" { -5, 5 }
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 4 "A Detonates" { 5, -5 }
+t "" 6 "Nuclear Disaster" { -10, -10 }
+t "" 1 "Ignore" { 1, 1 }

@@ -249,3 +249,136 @@ class EFGParser:
         with open(output_file, 'w') as f:
             f.write(f'EFG 2 R "{self.game.title}" {{ ' + ' '.join(f'"{p}"' for p in self.game.players) + ' }\n')
             f.write(self.to_efg())
+    
+    def collect_paths_to_terminal(self, node: Optional[Node] = None, path=None, paths=None):
+        if node is None:
+            node = self.game.root  # Use self.game.root
+        if path is None:
+            path = []
+        if paths is None:
+            paths = []
+
+        # Add the current node's action to the path
+        if node.parent_action is not None:
+            path.append(node.parent_action)
+
+        if node.node_type == NodeType.TERMINAL:
+            # If it's a terminal node, store the path along with outcome details
+            outcome_info = (node.payoffs)
+            paths.append((list(path), outcome_info))
+        else:
+            # Continue traversal for child nodes
+            for action, child in node.children.items():
+                child.parent_action = action  # Store action leading to this child
+                self.collect_paths_to_terminal(child, path, paths)
+
+        # Backtrack
+        if path:
+            path.pop()
+
+        return paths
+
+
+def get_outcomes(node: Node) -> List[Tuple[int, str, Tuple[float, ...]]]:
+    """
+    Recursively collect all terminal node outcomes from the tree.
+    Returns a list of tuples containing (outcome_number, outcome_name, payoffs as tuple).
+    """
+    outcomes = []
+    if node.node_type == NodeType.TERMINAL:
+        outcomes.append((tuple(node.payoffs)))
+    for child in node.children.values():
+        outcomes.extend(get_outcomes(child))
+    return outcomes
+
+def compare_outcomes(tree1: GameTree, tree2: GameTree) -> bool:
+    """
+    Compare the outcomes of two game trees.
+    Returns True if both trees have the same set of outcomes, False otherwise.
+    """
+    outcomes1 = get_outcomes(tree1.root)
+    outcomes2 = get_outcomes(tree2.root)
+    if outcomes1 == outcomes2:
+        print("The trees have the same outcomes.")
+        return True
+    else:
+        print("The trees have different outcomes.")
+        raise ValueError("The trees have different outcomes.")
+
+def get_chance_probs(node: Node) -> List[Tuple[str, Tuple[Tuple[str, float], ...]]]:
+    """
+    Recursively collect all chance nodes and their probability distributions.
+    Returns a list of tuples containing (node_label, sorted tuple of (action, probability)).
+    """
+    chance_nodes = []
+    if node.node_type == NodeType.CHANCE:
+        # Convert probability strings like "1/2" to float
+        sorted_probs = tuple(sorted((action, eval(prob)) for action, prob in node.probs.items()))
+        chance_nodes.append((sorted_probs))
+    for child in node.children.values():
+        chance_nodes.extend(get_chance_probs(child))
+    return chance_nodes
+
+def compare_chance_probs(tree1: GameTree, tree2: GameTree) -> bool:
+    """
+    Compare the probabilities of chance nodes in two game trees.
+    Returns True if both trees have the same probability distributions, False otherwise.
+    """
+    probs1 = dict(get_chance_probs(tree1.root))
+    probs2 = dict(get_chance_probs(tree2.root))
+
+    if probs1 == probs2:
+        print("The trees have the same chance node probabilities.")
+        return True
+    else:
+        print("The trees have different chance node probabilities.")
+        raise ValueError("The trees have different chance node probabilities.")
+
+
+def get_information_sets(node: Node, info_sets: Dict[int, List[Node]]) -> None:
+    """
+    Recursively collect all player nodes and group them by their information set.
+    """
+    if node.node_type == NodeType.PLAYER:
+        if node.information_set not in info_sets:
+            info_sets[node.information_set] = []
+        info_sets[node.information_set].append(node)
+    
+    for child in node.children.values():
+        get_information_sets(child, info_sets)
+
+def normalize_information_sets(info_sets: Dict[int, List[Node]]) -> List[Tuple[int, Tuple[str, Tuple[str, ...]]]]:
+    """
+    Normalize the information set structure to ignore numbering differences by 
+    using (player ID, (sorted action list)) as keys.
+    """
+    normalized_sets = []
+    for nodes in info_sets.values():
+        players = {node.player for node in nodes}  # Players in this information set
+        actions = {tuple(sorted(node.actions)) for node in nodes}  # Sort actions for consistency
+        normalized_sets.append((min(players), tuple(actions)))  # Use min player ID for consistency
+    return sorted(normalized_sets)  # Sorting ensures order-independent comparison
+
+def compare_information_sets(tree1: GameTree, tree2: GameTree) -> bool:
+    """
+    Compare the grouping of player decision nodes into information sets between two game trees,
+    ignoring the actual information set numbers but ensuring that the same nodes belong to the same sets.
+    Returns True if both trees have equivalent player information sets, False otherwise.
+    """
+    info_sets1 = {}
+    info_sets2 = {}
+    
+    get_information_sets(tree1.root, info_sets1)
+    get_information_sets(tree2.root, info_sets2)
+    
+    norm_info_sets1 = normalize_information_sets(info_sets1)
+    print(norm_info_sets1)
+    norm_info_sets2 = normalize_information_sets(info_sets2)
+    print(norm_info_sets2)
+    
+    if norm_info_sets1 == norm_info_sets2:
+        print("The trees have the same player information sets.")
+        return True
+    else:
+        print("The trees have different player information sets.")
+        raise ValueError("The trees have different player information sets.")
