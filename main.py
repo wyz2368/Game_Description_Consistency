@@ -40,8 +40,8 @@ check_equivalence(reference_game, generated_game)
 # Additional constraints
 
 path = parser_gen.collect_paths_to_terminal()
-print("Outcome", check_bach_game_outcomes(path))
+print(path)
+# print("Outcome", check_bach_game_outcomes(path))
 
 compare_information_sets(ref_game, gen_game)
-# compare_outcomes(ref_game, gen_game)
 compare_chance_probs(ref_game, gen_game)

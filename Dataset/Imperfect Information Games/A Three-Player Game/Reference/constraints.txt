@@ -1,3 +1,0 @@
-compare_chance_probs
-compare_outcomes
-compare_information_sets

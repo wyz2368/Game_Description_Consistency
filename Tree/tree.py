@@ -341,7 +341,7 @@ def get_information_sets(node: Node, info_sets: Dict[int, List[Node]]) -> None:
     """
     if node.node_type == NodeType.PLAYER:
         if node.information_set not in info_sets:
-            info_sets[node.information_set] = []
+            info_sets[node.information_set] = [] # maybe we don't need this
         info_sets[node.information_set].append(node)
     
     for child in node.children.values():
