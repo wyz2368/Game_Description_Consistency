@@ -4,7 +4,7 @@ from typing import List, Tuple, Dict, Optional
 import re
 import ast
 
-client = genai.Client(api_key="AIzaSyDTM3DfvBaPWOEOS8wyoGV2vXZ5fyquTBo") # Add your API key here
+client = genai.Client(api_key="") # Add your API key here
 
 def extract_python_code(response):
     """Extracts Python code from a given response string.

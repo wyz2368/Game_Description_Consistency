@@ -4,7 +4,7 @@ from google import genai
 from Tree import Node, NodeType
 from .action_match import extract_python_code
 
-client = genai.Client(api_key="AIzaSyDTM3DfvBaPWOEOS8wyoGV2vXZ5fyquTBo") # Add your API key here
+client = genai.Client(api_key="") # Add your API key here
 
 def reorder_players(gen_game, ref_players: List[str]):
     """
