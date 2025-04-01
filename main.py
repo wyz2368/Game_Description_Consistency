@@ -24,7 +24,7 @@ gen_game = parser_gen.parse_file(gen_efg_path)
 ref_game = parser_ref.parse_file(ref_efg_path)
 
 match_player(gen_game, ref_game)
-switch_order(ref_game.root, gen_game.root, gen_game)
+switch_order(ref_game.root, gen_game.root)
 
 parser_gen.save_to_efg("output.efg")
 
@@ -41,7 +41,7 @@ check_equivalence(reference_game, generated_game)
 
 path = parser_gen.collect_paths_to_terminal()
 print(path)
-# print("Outcome", check_bach_game_outcomes(path))
+print("Outcome", check_bach_game_outcomes(path))
 
-compare_information_sets(ref_game, gen_game)
-compare_chance_probs(ref_game, gen_game)
+# compare_information_sets(ref_game, gen_game)
+# compare_chance_probs(ref_game, gen_game)

@@ -227,7 +227,7 @@ class EFGParser:
 
         return self.game
     
-    def to_efg(self, node: Optional[Node] = None, depth: int = 0):
+    def to_efg(self, node: Optional[Node] = None):
         if node is None:
             node = self.game.root
 
@@ -242,7 +242,8 @@ class EFGParser:
             actions_str = ' '.join([f'"{a}"' for a in node.actions])
             node_str = f'p "{node.label}" {node.player} {node.information_set} "{node.information_set_label}" {{ {actions_str} }} 0'
 
-        children_str = '\n'.join(self.to_efg(child, depth + 1) for child in node.children.values())
+        children_str = '\n'.join(self.to_efg(child) for child in node.children.values())
+
         return f'{node_str}\n{children_str}'
 
     def save_to_efg(self, output_file: str):
@@ -252,31 +253,20 @@ class EFGParser:
     
     def collect_paths_to_terminal(self, node: Optional[Node] = None, path=None, paths=None):
         if node is None:
-            node = self.game.root  # Use self.game.root
+            node = self.game.root
         if path is None:
             path = []
         if paths is None:
             paths = []
 
-        # Add the current node's action to the path
-        if node.parent_action is not None:
-            path.append(node.parent_action)
-
         if node.node_type == NodeType.TERMINAL:
-            # If it's a terminal node, store the path along with outcome details
-            outcome_info = (node.payoffs)
-            paths.append((list(path), outcome_info))
+            paths.append((list(path), node.payoffs))
         else:
-            # Continue traversal for child nodes
             for action, child in node.children.items():
-                child.parent_action = action  # Store action leading to this child
-                self.collect_paths_to_terminal(child, path, paths)
-
-        # Backtrack
-        if path:
-            path.pop()
+                self.collect_paths_to_terminal(child, path + [action], paths)
 
         return paths
+
 
 
 def get_outcomes(node: Node) -> List[Tuple[int, str, Tuple[float, ...]]]:

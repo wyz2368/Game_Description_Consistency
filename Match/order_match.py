@@ -219,7 +219,7 @@ def mark_simultaneous_move_children(start_node):
 
         nodes_to_check = next_level_nodes  # Move to the next level
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
     """Filters simultaneous moves between a reference game node and a generated game node within a game tree.
     This function traverses the game tree, comparing nodes from the reference game with those from the generated game. It identifies simultaneous moves and ensures that the generated nodes conform to the structure and rules defined by the reference nodes. If discrepancies are found, appropriate errors are raised.
     Args:
@@ -449,13 +449,12 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, tree):
             
             print(queue_gen)
 
-def switch_order(ref_node: Node, gen_node: Node, tree):
+def switch_order(ref_node: Node, gen_node: Node):
     """Switches the order of two nodes in a tree structure and filters simultaneous moves.
     
     Args:
         ref_node (Node): The reference node whose order is to be switched.
         gen_node (Node): The general node whose order is to be switched.
-        tree: The tree structure containing the nodes.
     
     Returns:
         None: This function modifies the tree in place and does not return a value.
@@ -464,6 +463,4 @@ def switch_order(ref_node: Node, gen_node: Node, tree):
     assign_all_levels(ref_node)
     assign_all_levels(gen_node)
 
-    # tree.print_tree()
-
-    filter_simultaneous_moves(ref_node, gen_node, tree)
+    filter_simultaneous_moves(ref_node, gen_node)
