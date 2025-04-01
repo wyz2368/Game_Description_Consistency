@@ -2,7 +2,7 @@ from Algorithms import check_best_response_equivalence, check_better_response_eq
 from Match import switch_order, match_player
 from Tree import EFGParser, compare_outcomes, compare_chance_probs, compare_information_sets
 from utils import get_payoff_matrix
-from Constraints import check_bach_game_outcomes
+from Dataset.Constraints import check_bach_game_outcomes
 
 def check_equivalence(reference_game, generated_game):
     print("Order-preserving equivalence:")
