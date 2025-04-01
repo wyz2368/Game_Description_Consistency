@@ -19,10 +19,10 @@ def get_payoff_matrix(efg_file_path):
         FileNotFoundError: If the specified EFG file does not exist.
         ValueError: If the EFG file is not in a valid format.
     """
-    efg = gbt.Game.read_game(efg_file_path)
-    nfg_str = efg.write(format='nfg')
-    nfg = gbt.Game.parse_game(nfg_str)
-    payoff_gambit = nfg.to_arrays()
+    efg = gbt.read_efg(efg_file_path)
+    payoff_gambit = efg.to_arrays()
+    
+    print("Payoff Gambit:", payoff_gambit)
     
     payoff = []
     number_of_players = len(payoff_gambit) 
