@@ -421,18 +421,18 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
             if r_node.node_type != g_node.node_type:
                 raise ValueError(f"Node types do not match")
 
-            level = r_node.level
-            ref_actions = get_current_level_actions(r_node,level)
-            # gen_actions = get_current_level_actions(g_node)
-            level = g_node.level
-            original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level) 
-            # print("Original List", original_list)
-            # print("Modified List", modified_list)
             
-            print(queue_gen)
-            update_current_nodes(g_node, modified_list, ref_actions)
-            print(queue_gen)
+            if g_node.node_type != NodeType.TERMINAL:
+                level = r_node.level
+                ref_actions = get_current_level_actions(r_node,level)
+                # gen_actions = get_current_level_actions(g_node)
+                level = g_node.level
+                original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level) 
+                # print("Original List", original_list)
+                # print("Modified List", modified_list)
             
+                update_current_nodes(g_node, modified_list, ref_actions)
+
             for action, child in r_node.children.items():
                 child.parent_action = action
             
@@ -447,7 +447,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
                 queue_gen.append(deepcopy(gen_child))
                 # print(queue_gen)
             
-            print(queue_gen)
+            
 
 def switch_order(ref_node: Node, gen_node: Node):
     """Switches the order of two nodes in a tree structure and filters simultaneous moves.

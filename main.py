@@ -1,6 +1,6 @@
 from Algorithms import check_best_response_equivalence, check_better_response_equivalence, check_order_preserving_equivalence
 from Match import switch_order, match_player
-from Tree import EFGParser, compare_outcomes, compare_chance_probs, compare_information_sets
+from Tree import EFGParser, compare_chance_probs, compare_information_sets
 from utils import get_payoff_matrix
 from Dataset.Constraints import check_bach_game_outcomes
 
@@ -14,8 +14,8 @@ def check_equivalence(reference_game, generated_game):
     print("Best-response equivalence:")
     print(check_best_response_equivalence(reference_game, generated_game))
 
-gen_efg_path = "Dataset/Imperfect Information Games/Bach or Stravinsky/Correct/1.efg"
-ref_efg_path = "Dataset/Imperfect Information Games/Bach or Stravinsky/Reference/ref.efg"
+gen_efg_path = "Test_EFG/Correct/Gen/1.efg"
+ref_efg_path = "Test_EFG/Correct/Ref/1.efg"
 
 parser_gen = EFGParser()
 parser_ref = EFGParser()
@@ -39,9 +39,9 @@ check_equivalence(reference_game, generated_game)
 
 # Additional constraints
 
-path = parser_gen.collect_paths_to_terminal()
-print(path)
-print("Outcome", check_bach_game_outcomes(path))
+# path = parser_gen.collect_paths_to_terminal()
+# print(path)
+# print("Outcome", check_bach_game_outcomes(path))
 
 # compare_information_sets(ref_game, gen_game)
 # compare_chance_probs(ref_game, gen_game)

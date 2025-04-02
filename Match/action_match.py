@@ -61,16 +61,12 @@ def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str],
         if info_set_id is not None:
 
             original_actions = node.actions[:]
-            # print(original_actions)
+
             unique_actions_original.append((node.actions, node.player, level, node.information_set))  # Store one representative action
-            modified_actions = original_actions  # Default to the same actions
 
             ref_actions_for_level = [actions for actions, p, lvl, info in ref_actions 
                          if lvl == level and p == node.player and info == node.information_set]
 
-            # print(ref_actions_for_level)
-
-            # unique_actions.append((node.actions, node.player, level))  # Store one representative action
 
             if ref_actions_for_level:
 
@@ -88,8 +84,6 @@ def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str],
                 if response_check.text.strip() == "False":
                     raise ValueError("The actions in the generated game do not match the actions in the reference game.")
 
-                # print(ref_actions_for_level[0])
-                # print(original_actions)
                 prompt = (f"Given the following reference game actions from a game tree: {ref_actions_for_level[0]}. "
                           f"Modify the following generated game actions: {original_actions} to be consistent with the reference game actions, "
                           f"without changing the order of the actions. Provide the modified actions as a Python list. Only output the python list please.")
@@ -103,33 +97,32 @@ def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str],
     return unique_actions_original, unique_actions_modified
 
 def update_current_nodes(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], ref_actions: List[Tuple[List[str], int, int]]):
-    if node.node_type == NodeType.PLAYER:
-        for actions, _, _, _ in ref_actions:
-            for modified_actions, player, lvl, info_set in modified_actions_list:
-                node.actions = actions
-                new_children = {}
-                old_children = list(node.children.values())
-                for action in actions:
-                    for mod_action, child in zip(modified_actions, old_children):
-                        if action == mod_action:
-                            new_children[action] = child
-                node.children = new_children
     
-    if node.node_type == NodeType.CHANCE:
+    modified_actions, _, _, _ = modified_actions_list[0]
+    actions, _, _, _ = ref_actions[0]
 
-        for actions, _, _, _ in ref_actions:
-            for modified_actions, player, lvl, info_set in modified_actions_list:
-                node.actions = actions
-                new_children = {}
-                old_children = list(node.children.values())
-                # Preserve probabilities for corresponding actions
-                old_probs = node.probs
-                new_probs = {}
-                # Ensure a one-to-one mapping: zip may drop extra children if lengths differ.
-                for action in actions:
-                    for mod_action, child,  (old_action, prob) in zip(modified_actions, old_children, old_probs.items()):
-                        if action == mod_action:
-                            new_children[action] = child
-                            new_probs[action] = prob
-                node.children = new_children
-                node.probs = new_probs
+    if node.node_type == NodeType.PLAYER:
+        node.actions = actions
+        new_children = {}
+        old_children = list(node.children.values())
+        for action in actions:
+            for mod_action, child in zip(modified_actions, old_children):
+                if action == mod_action:
+                    new_children[action] = child
+        node.children = new_children
+    
+    elif node.node_type == NodeType.CHANCE:
+        node.actions = actions
+        new_children = {}
+        old_children = list(node.children.values())
+        old_probs = node.probs
+        new_probs = {}
+
+        for action in actions:
+            for mod_action, child, (old_action, prob) in zip(modified_actions, old_children, old_probs.items()):
+                if action == mod_action:
+                    new_children[action] = child
+                    new_probs[action] = prob
+
+        node.children = new_children
+        node.probs = new_probs
