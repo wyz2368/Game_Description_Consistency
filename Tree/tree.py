@@ -124,7 +124,8 @@ class EFGParser:
         elif node_type == NodeType.CHANCE:
             # Format: c "label" info_set "(info_set_label)" { "action1" prob1 "action2" prob2 ... } 0
 
-            pattern = r'c\s+"(.*?)"\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s+\d+\/\d+\s*)+)\}\s+(\d+)'
+            # pattern = r'c\s+"(.*?)"\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s+\d+\/\d+\s*)+)\}\s+(\d+)'
+            pattern = r'c\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s+\d+/\d+\s*)+)\}\s+\d+'
             match = re.search(pattern, line)
 
             if not match:
@@ -134,7 +135,8 @@ class EFGParser:
             information_set = int(match.group(2))
             information_set_label = match.group(3)
             outcomes = match.group(4)  # Outcomes with probabilities
-            outcome_pattern = r'"(\w+)"\s+(\d+/\d+)'
+            # outcome_pattern = r'"(\w+)"\s+(\d+/\d+)'
+            outcome_pattern = r'"([^"]+)"\s+(\d+/\d+)'
             outcomes_dict = {match[0]: match[1] for match in re.findall(outcome_pattern, outcomes)}
 
 
