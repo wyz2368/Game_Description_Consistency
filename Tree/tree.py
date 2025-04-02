@@ -267,34 +267,6 @@ class EFGParser:
 
         return paths
 
-
-
-def get_outcomes(node: Node) -> List[Tuple[int, str, Tuple[float, ...]]]:
-    """
-    Recursively collect all terminal node outcomes from the tree.
-    Returns a list of tuples containing (outcome_number, outcome_name, payoffs as tuple).
-    """
-    outcomes = []
-    if node.node_type == NodeType.TERMINAL:
-        outcomes.append((tuple(node.payoffs)))
-    for child in node.children.values():
-        outcomes.extend(get_outcomes(child))
-    return outcomes
-
-def compare_outcomes(tree1: GameTree, tree2: GameTree) -> bool:
-    """
-    Compare the outcomes of two game trees.
-    Returns True if both trees have the same set of outcomes, False otherwise.
-    """
-    outcomes1 = get_outcomes(tree1.root)
-    outcomes2 = get_outcomes(tree2.root)
-    if outcomes1 == outcomes2:
-        print("The trees have the same outcomes.")
-        return True
-    else:
-        print("The trees have different outcomes.")
-        raise ValueError("The trees have different outcomes.")
-
 def get_chance_probs(node: Node) -> List[Tuple[str, Tuple[Tuple[str, float], ...]]]:
     """
     Recursively collect all chance nodes and their probability distributions.
@@ -325,50 +297,52 @@ def compare_chance_probs(tree1: GameTree, tree2: GameTree) -> bool:
         raise ValueError("The trees have different chance node probabilities.")
 
 
-def get_information_sets(node: Node, info_sets: Dict[int, List[Node]]) -> None:
+def get_information_sets(node: Node, path: Optional[List[str]] = None, info_sets: Optional[Dict[Tuple[int, int], Tuple[str, ...]]] = None):
     """
-    Recursively collect all player nodes and group them by their information set.
+    Traverse the tree and collect a mapping from (player, information_set) to the path taken to reach that node.
     """
-    if node.node_type == NodeType.PLAYER:
-        if node.information_set not in info_sets:
-            info_sets[node.information_set] = [] # maybe we don't need this
-        info_sets[node.information_set].append(node)
-    
-    for child in node.children.values():
-        get_information_sets(child, info_sets)
+    if path is None:
+        path = []
+    if info_sets is None:
+        info_sets = {}
 
-def normalize_information_sets(info_sets: Dict[int, List[Node]]) -> List[Tuple[int, Tuple[str, Tuple[str, ...]]]]:
-    """
-    Normalize the information set structure to ignore numbering differences by 
-    using (player ID, (sorted action list)) as keys.
-    """
-    normalized_sets = []
-    for nodes in info_sets.values():
-        players = {node.player for node in nodes}  # Players in this information set
-        actions = {tuple(sorted(node.actions)) for node in nodes}  # Sort actions for consistency
-        normalized_sets.append((min(players), tuple(actions)))  # Use min player ID for consistency
-    return sorted(normalized_sets)  # Sorting ensures order-independent comparison
+    if node.node_type == NodeType.PLAYER:
+        key = (node.player, node.information_set)
+        info_sets.setdefault(key, []).append(tuple(path))
+
+    for action, child in node.children.items():
+        get_information_sets(child, path + [action], info_sets)
+
+    return info_sets
+
 
 def compare_information_sets(tree1: GameTree, tree2: GameTree) -> bool:
     """
-    Compare the grouping of player decision nodes into information sets between two game trees,
-    ignoring the actual information set numbers but ensuring that the same nodes belong to the same sets.
-    Returns True if both trees have equivalent player information sets, False otherwise.
+    Compare player information set structure (player, path), including frequency.
+    This accounts for simultaneous or repeated info sets.
     """
-    info_sets1 = {}
-    info_sets2 = {}
+    info_sets1 = get_information_sets(tree1.root)
+    info_sets2 = get_information_sets(tree2.root)
+
+    print("Tree 1 information sets:", info_sets1)
+    print("Tree 2 information sets:", info_sets2)
+
+    def to_structural_groupings(info_sets):
+        groupings = []
+        for (player, _), paths in info_sets.items():
+            element = (player, sorted(paths))
+            groupings.append(element)
+        return sorted(groupings)
     
-    get_information_sets(tree1.root, info_sets1)
-    get_information_sets(tree2.root, info_sets2)
-    
-    norm_info_sets1 = normalize_information_sets(info_sets1)
-    print(norm_info_sets1)
-    norm_info_sets2 = normalize_information_sets(info_sets2)
-    print(norm_info_sets2)
-    
-    if norm_info_sets1 == norm_info_sets2:
-        print("The trees have the same player information sets.")
+    groupings1 = to_structural_groupings(info_sets1)
+    groupings2 = to_structural_groupings(info_sets2)
+
+    print("Tree 1 grouped structural info sets:", groupings1)
+    print("Tree 2 grouped structural info sets:", groupings2)
+
+    if groupings1 == groupings2:
+        print("The trees have the same information set grouping structure.")
         return True
     else:
-        print("The trees have different player information sets.")
+        print("The trees have different information set grouping structure.")
         raise ValueError("The trees have different player information sets.")
