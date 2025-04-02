@@ -122,23 +122,28 @@ class EFGParser:
 
 
         elif node_type == NodeType.CHANCE:
-            # Format: c "label" info_set "(info_set_label)" { "action1" prob1 "action2" prob2 ... } 0
-
-            # pattern = r'c\s+"(.*?)"\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s+\d+\/\d+\s*)+)\}\s+(\d+)'
-            pattern = r'c\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s+\d+/\d+\s*)+)\}\s+\d+'
+            # Accepts: empty labels, action names with spaces, fractional or decimal probabilities
+            pattern = r'c\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s+(?:\d+/\d+|\d*\.\d+|\d+)\s*)+)\}\s+\d+'
             match = re.search(pattern, line)
 
             if not match:
-                raise ValueError("The line should match chance.")
+                raise ValueError(f"The line should match chance. Got: {line}")
 
             label = match.group(1)
             information_set = int(match.group(2))
             information_set_label = match.group(3)
-            outcomes = match.group(4)  # Outcomes with probabilities
-            # outcome_pattern = r'"(\w+)"\s+(\d+/\d+)'
-            outcome_pattern = r'"([^"]+)"\s+(\d+/\d+)'
-            outcomes_dict = {match[0]: match[1] for match in re.findall(outcome_pattern, outcomes)}
+            outcomes = match.group(4)
 
+            # Match any quoted action followed by a float or fraction
+            outcome_pattern = r'"([^"]+)"\s+(\d+/\d+|\d*\.\d+|\d+)'
+            outcomes_dict = {}
+            for action, prob_str in re.findall(outcome_pattern, outcomes):
+                if '/' in prob_str:
+                    num, denom = map(float, prob_str.split('/'))
+                    prob = num / denom
+                else:
+                    prob = float(prob_str)
+                outcomes_dict[action] = prob
 
             return Node(
                 node_type=node_type,
@@ -277,7 +282,10 @@ def get_chance_probs(node: Node) -> List[Tuple[str, Tuple[Tuple[str, float], ...
     chance_nodes = []
     if node.node_type == NodeType.CHANCE:
         # Convert probability strings like "1/2" to float
-        sorted_probs = tuple(sorted((action, eval(prob)) for action, prob in node.probs.items()))
+        sorted_probs = tuple(sorted(
+            (action, eval(prob) if isinstance(prob, str) else float(prob))
+            for action, prob in node.probs.items()
+        ))
         chance_nodes.append((sorted_probs))
     for child in node.children.values():
         chance_nodes.extend(get_chance_probs(child))
