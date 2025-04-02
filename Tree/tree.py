@@ -288,8 +288,8 @@ def compare_chance_probs(tree1: GameTree, tree2: GameTree) -> bool:
     Compare the probabilities of chance nodes in two game trees.
     Returns True if both trees have the same probability distributions, False otherwise.
     """
-    probs1 = dict(get_chance_probs(tree1.root))
-    probs2 = dict(get_chance_probs(tree2.root))
+    probs1 = get_chance_probs(tree1.root)
+    probs2 = get_chance_probs(tree2.root)
 
     if probs1 == probs2:
         print("The trees have the same chance node probabilities.")
