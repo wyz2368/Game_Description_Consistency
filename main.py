@@ -3,6 +3,14 @@ from Match import switch_order, match_player
 from Tree import EFGParser, compare_chance_probs, compare_information_sets
 from utils import get_payoff_matrix
 from Dataset.Constraints import check_bach_game_outcomes
+import argparse
+
+parser = argparse.ArgumentParser()
+
+parser.add_argument('-m', '--models', type=str, default="gemini", help="Select the model to use: 'gpt', 'gemini' or 'deepseek'")
+args = parser.parse_args()
+
+model = args.models
 
 def check_equivalence(reference_game, generated_game):
     print("Order-preserving equivalence:")
@@ -23,8 +31,8 @@ parser_ref = EFGParser()
 gen_game = parser_gen.parse_file(gen_efg_path)
 ref_game = parser_ref.parse_file(ref_efg_path)
 
-match_player(gen_game, ref_game)
-switch_order(ref_game.root, gen_game.root)
+match_player(gen_game, ref_game, model)
+switch_order(ref_game.root, gen_game.root, model)
 
 parser_gen.save_to_efg("output.efg")
 

@@ -31,3 +31,9 @@ def extract_python_code(response):
         filtered_code = []
     
     return filtered_code
+
+def convert_str_to_list(response):
+    
+    lst = ast.literal_eval(response)
+    
+    return lst

@@ -2,9 +2,8 @@ from typing import List
 from google import genai
 
 from Tree import Node, NodeType
-from .action_match import extract_python_code
-
-client = genai.Client(api_key="") # Add your API key here
+from .chatbot import infer_response
+from .utils import convert_str_to_list, extract_python_code
 
 def reorder_players(gen_game, ref_players: List[str]):
     """
@@ -32,7 +31,7 @@ def reorder_players(gen_game, ref_players: List[str]):
     if gen_game.root:
         update_player_numbers(gen_game.root)
 
-def match_palyer_name_llm(gen_game, ref_game):
+def match_palyer_name_llm(gen_game, ref_game, model):
     gen_players = gen_game.players
     ref_players = ref_game.players
     # Check the length of the players list
@@ -54,26 +53,25 @@ def match_palyer_name_llm(gen_game, ref_game):
                           f"The players may have different names and orders. Check if they represent the same set of players."
                           f"Output ONLY True if they match and False otherwise.")
     
-    response_check = client.models.generate_content(
-                    model="gemini-2.0-flash",
-                    contents=[prompt_check_valid])
-    
-    print(response_check.text)
+    response_check = infer_response(prompt_check_valid, model)
 
-    if response_check.text.strip() == "False":
+    if response_check == "False":
         raise ValueError("The players in the generated game do not match the players in the reference game.")
 
     prompt = (f"Given the following reference game players from a game tree: {ref_players}. "
               f"Modify the following generated game players: {gen_players} to be consistent with the reference game players, "
               f"without changing the order of the players. Provide the modified players as a Python list. Only output the python list please.")
-    response = client.models.generate_content(
-                    model="gemini-2.0-flash",
-                    contents=[prompt])
-    modified_players_name = extract_python_code(response.text)
-
+    
+    response = infer_response(prompt, model)
+    
+    if model == "gemini":
+        modified_players_name = extract_python_code(response)
+    else:
+        modified_players_name = convert_str_to_list(response)
 
     gen_game.players = modified_players_name
 
-def match_player(gen_game, ref_game):
-    match_palyer_name_llm(gen_game, ref_game)
+def match_player(gen_game, ref_game, model):
+    
+    match_palyer_name_llm(gen_game, ref_game, model)
     reorder_players(gen_game, ref_game.players)
