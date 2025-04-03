@@ -6,29 +6,16 @@ from .utils import extract_python_code
 
 client = genai.Client(api_key="") # Add your API key here
 
-def get_current_level_actions(node: Node, level: int = 0) -> List[Tuple[List[str], List[str], int]]:
-    unique_actions = []
 
-    if node.actions:
-        
-        unique_actions.append((node.actions, node.player, level, node.information_set))  # Store one representative action
+def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str], int, int]]) -> List[Tuple[List[str], List[str], int, int]]:
 
-    return unique_actions
-
-
-def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str], int, int]], level: int = 0) -> List[Tuple[List[str], List[str], int, int]]:
-    unique_actions_original = []
     unique_actions_modified = []
 
     if node.actions:
 
         original_actions = node.actions[:]
-
-        unique_actions_original.append((node.actions, node.player, level, node.information_set))  # Store one representative action
-
-        ref_actions_for_level = [actions for actions, p, lvl, info in ref_actions 
-                        if lvl == level and p == node.player and info == node.information_set]
-
+        
+        ref_actions_for_level = [ref_actions[0]]
 
         if ref_actions_for_level:
 
@@ -54,14 +41,14 @@ def get_current_level_actions_llm(node: Node, ref_actions: List[Tuple[List[str],
                             contents=[prompt])
             print(response.text)
             modified_actions = extract_python_code(response.text)
-            unique_actions_modified.append((modified_actions, node.player, level, node.information_set))  # Store one representative action    
+            unique_actions_modified.append((modified_actions))  # Store one representative action    
 
-    return unique_actions_original, unique_actions_modified
+    return unique_actions_modified
 
 def update_current_nodes(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], ref_actions: List[Tuple[List[str], int, int]]):
     
-    modified_actions, _, _, _ = modified_actions_list[0]
-    actions, _, _, _ = ref_actions[0]
+    modified_actions = modified_actions_list[0]
+    actions = ref_actions[0]
 
     if node.node_type == NodeType.PLAYER:
         node.actions = actions

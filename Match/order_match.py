@@ -7,7 +7,7 @@ from functools import reduce
 from operator import mul
 
 from Tree import Node, NodeType
-from .action_match import get_current_level_actions, get_current_level_actions_llm, update_current_nodes
+from .action_match import get_current_level_actions_llm, update_current_nodes
 
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
@@ -375,7 +375,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
                         collect_paths_new(child, path + [action])
                     else:
                         final_path = tuple(sorted(path + [action]))
-                        print(f"Final path: {final_path}")
                         for original_path, original_node in children_paths.items():
                             if final_path == original_path:
                                 node.children[action] = original_node
@@ -397,10 +396,8 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node):
 
             
             if g_node.node_type != NodeType.TERMINAL:
-                level = r_node.level
-                ref_actions = get_current_level_actions(r_node,level)
-                level = g_node.level
-                original_list, modified_list = get_current_level_actions_llm(g_node, ref_actions, level) 
+                ref_actions = [r_node.actions]
+                modified_list = get_current_level_actions_llm(g_node, ref_actions) 
                 update_current_nodes(g_node, modified_list, ref_actions)
 
             for action, child in r_node.children.items():
