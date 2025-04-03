@@ -14,8 +14,8 @@ def check_equivalence(reference_game, generated_game):
     print("Best-response equivalence:")
     print(check_best_response_equivalence(reference_game, generated_game))
 
-gen_efg_path = "Test_EFG/Correct/Gen/1.efg"
-ref_efg_path = "Test_EFG/Correct/Ref/1.efg"
+gen_efg_path = "Test_EFG/Correct/Gen/3.efg"
+ref_efg_path = "Test_EFG/Correct/Ref/3.efg"
 
 parser_gen = EFGParser()
 parser_ref = EFGParser()
