@@ -204,6 +204,21 @@ def mark_simultaneous_move_children(start_node):
 
         nodes_to_check = next_level_nodes  # Move to the next level
 
+def check_simultaneous_move_start_node(node):
+    
+    # 1. Check the children nodes are in the same information set
+    # 2. Check the children nodes doesn't have the terminal node
+    # 3. Check the children nodes has the same player
+    # 4. Maybe more conditions
+    
+    gen_info_sets = {child.information_set for child in node.children.values() if child.information_set is not None}
+    gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in node.children.values())
+    gen_players = {child.player for child in node.children.values() if child.node_type == NodeType.PLAYER}
+    
+    is_start_node = (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal)
+    
+    return is_start_node
+    
 ############# Below is the main function for switching the order of nodes in a game tree #############
 
 def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
@@ -274,12 +289,11 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
             # 1. Check the children nodes are in the same information set
             # 2. Check the children nodes doesn't have the terminal node
             # 3. Check the children nodes has the same player
-            gen_info_sets = {child.information_set for child in g_node.children.values() if child.information_set is not None}
-            gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in g_node.children.values())
-            gen_players = {child.player for child in g_node.children.values() if child.node_type == NodeType.PLAYER}
+            
+            gen_is_start_node = check_simultaneous_move_start_node(g_node)
             
             # If above conditions are not met, the node is NOT the start node of the simultaneous move
-            if not (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal):
+            if not gen_is_start_node:
                 gen_nodes_list.append(g_node)
                 match = False
                 rmn = None # rmn stands for reference matched node
@@ -293,12 +307,11 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
                 if not match:
                     raise ValueError(f"No matching reference node found for g_node with parent action")
                 else:
-                    # Check the matched reference node also meets the simultaneous move condition
-                    ref_info_sets = {child.information_set for child in rmn.children.values() if child.information_set is not None}
-                    ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in rmn.children.values())
-                    ref_players = {child.player for child in rmn.children.values() if child.node_type == NodeType.PLAYER}
-                    ref_terminal = rmn.node_type == NodeType.TERMINAL
-                    if len(ref_info_sets) == 1 and len(ref_players) == 1 and not ref_has_terminal and not ref_terminal:
+                    # Check the matched reference node also does NOT meets the simultaneous move condition
+                    
+                    rmn_is_start_node = check_simultaneous_move_start_node(rmn)
+                    
+                    if rmn_is_start_node:
                         raise ValueError(f"Reference node does not meet the simultaneous move condition")
 
                 continue  # Skip the g_node if it doesn't satisfy the condition
@@ -322,12 +335,11 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
             print(f"Matched ref_node, Parent Action: {matched_ref_node.parent_action}")
 
             # Verify that matched_ref_node also meets the simultaneous move condition
-            ref_info_sets = {child.information_set for child in matched_ref_node.children.values() if child.information_set is not None}
-            ref_has_terminal = any(child.node_type == NodeType.TERMINAL for child in matched_ref_node.children.values())
-            ref_players = {child.player for child in matched_ref_node.children.values() if child.node_type == NodeType.PLAYER}
+            
+            matched_ref_node_is_start_node = check_simultaneous_move_start_node(matched_ref_node)
 
-            if not (len(ref_info_sets) == 1 and len(ref_players) == 1 and not ref_has_terminal):
-                raise ValueError(f"Reference node {matched_ref_node.label} does not meet the simultaneous move condition")
+            if not matched_ref_node_is_start_node:
+                raise ValueError(f"Reference node {matched_ref_node} does not meet the simultaneous move condition")
             
             # Step 4: Mark all the nodes involved in the simultaneous move
             mark_simultaneous_move_children(matched_ref_node)
