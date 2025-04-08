@@ -1,27 +1,21 @@
 from Tree import NodeType
 
 """
-Consider a three-stage game. 
-In the first stage, a chance event randomly selects either ``L'' or ``R'', each with a probability of 1/2. 
-In the second stage, Player 1 observes this outcome and then selects either l or r. 
-In the third stage, Player 1 must choose between ``A'', and ``B'', but at this point, she has forgotten the outcome of the first stage and only remembers her decision from the second stage. 
-The payoffs in all outcomes are set to 0.
+At junction X, an absent-minded driver has two choices: EXIT, reaching destination A with a payoff of 0, or CONTINUE to junction Y. 
+At junction Y, the driver can choose to EXIT, arriving at destination B with a payoff of 4, or CONTINUE to C, which yields a payoff of 1. 
+The key assumption is that the driver cannot tell the difference between junctions X and Y and does not remember if he has already passed one of them.
 """
 
 paths_to_check = [
-    (['L', 'l', 'A'], [0]),
-    (['L', 'l', 'B'], [0]),
-    (['L', 'r', 'A'], [0]),
-    (['L', 'r', 'B'], [0]),
-    (['R', 'l', 'A'], [0]),
-    (['R', 'l', 'B'], [0]),
-    (['R', 'r', 'A'], [0]),
-    (['R', 'r', 'B'], [0])
+    (['EXIT'], [0]),
+    (['CONTINUE', 'EXIT'], [4]),
+    (['CONTINUE', 'CONTINUE'], [1])
 ]
 
 def check_payoffs(game):
     """
-    We need to check for all paths in the game tree, the payoffs are set to 0.
+    The payoffs are explicitly defined in the game tree as shown in the paths_to_check list.
+    We need to chek the payoffs for each path in the generated game tree are correct.
     """
     def traverse_path(node, path):
         current = node

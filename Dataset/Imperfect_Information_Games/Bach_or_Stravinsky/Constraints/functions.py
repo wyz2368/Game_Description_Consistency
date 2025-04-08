@@ -1,14 +1,5 @@
 from Tree import NodeType
 
-"""
-The ``Bach or Stravinsky?'' game involves two players, Alexis and Beverley, who want to attend a concert together. 
-Alexis prefers Bach, while Beverley prefers Stravinsky. 
-Both players make their choice between Bach and Stravinsky simultaneously and independently. 
-If they both choose Bach, Alexis, the Bach enthusiast, receives a higher payoff, while Beverley receives a lower payoff. 
-Conversely, if they both choose Stravinsky, Beverley, who favors Stravinsky, receives a higher payoff, and Alexis receives a lower payoff. 
-If they choose different concerts, neither player receives any payoff.
-"""
-
 paths_to_check = [
     ['Stravinsky', 'Bach'],
     ['Bach', 'Stravinsky'],
@@ -16,13 +7,7 @@ paths_to_check = [
     ['Stravinsky', 'Stravinsky']
 ]
 
-def check_payoffs(game):
-    """
-    The constraints needed to check are:
-    If they both choose Bach, Alexis, the Bach enthusiast, receives a higher payoff, while Beverley receives a lower payoff. 
-    Conversely, if they both choose Stravinsky, Beverley, who favors Stravinsky, receives a higher payoff, and Alexis receives a lower payoff. 
-    If they choose different concerts, neither player receives any payoff.
-    """
+def check_payoff(game):
     def traverse_path(node, path):
         current = node
         for action in path:
