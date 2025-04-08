@@ -184,10 +184,12 @@ class EFGParser:
                 actions=actions
             )
 
-    def build_tree(self, node: Node):
+    def build_tree(self, node: Node, level: int = 0):
         """
         Recursively build the game tree by reading lines from self.lines
         """
+        node.level = level
+
         if node.node_type == NodeType.TERMINAL:
             self.game.level_to_nodes[self.current_level].append(node)
             self.current_level -= 1
@@ -206,7 +208,7 @@ class EFGParser:
                 self.game.level_to_nodes[self.current_level].append(child)
                 self.current_level += 1
                 # Build subtree.
-                self.build_tree(child)
+                self.build_tree(child, level + 1)
 
         self.current_level -= 1
 
@@ -230,7 +232,7 @@ class EFGParser:
             self.game.level_to_nodes[self.current_level].append(self.game.root)
             self.current_level += 1
             self.current_line += 1
-            self.build_tree(self.game.root)
+            self.build_tree(self.game.root, level=0)
 
         return self.game
     

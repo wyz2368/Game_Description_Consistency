@@ -153,24 +153,6 @@ def reorder_generated_game(reference_node, generated_node):
 
     return reordered_nodes
 
-def assign_all_levels(node: Node, level: int = 0):
-    """Assigns levels to a tree structure starting from the given node.
-    
-    This function recursively assigns a level to each node in a tree, where the 
-    level of the root node is specified by the `level` parameter. Each child node 
-    is assigned a level that is one greater than its parent's level.
-    
-    Args:
-        node (Node): The root node from which to start assigning levels.
-        level (int, optional): The level to assign to the root node. Defaults to 0.
-    
-    Returns:
-        None: This function modifies the `level` attribute of the nodes in place.
-    """
-    node.level = level
-    for child in node.children.values():
-        assign_all_levels(child, level + 1)
-
 def mark_simultaneous_move_children(start_node):
     """Marks nodes and their children in a game tree that represent simultaneous moves.
     This function traverses the game tree starting from the given `start_node`, marking nodes that are part of simultaneous move scenarios. It filters out terminal nodes and ensures that only valid simultaneous move nodes are processed. If a node is determined to be part of a simultaneous move, it and all its children are marked as checked.
@@ -435,8 +417,5 @@ def switch_order(ref_node: Node, gen_node: Node, model: str):
     Returns:
         None: This function modifies the tree in place and does not return a value.
     """
-
-    assign_all_levels(ref_node)
-    assign_all_levels(gen_node)
 
     filter_simultaneous_moves(ref_node, gen_node, model)

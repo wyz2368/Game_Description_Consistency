@@ -24,7 +24,7 @@ def check_equivalence(reference_game, generated_game):
     print(check_best_response_equivalence(reference_game, generated_game))
 
 # Step 1: Parse the EFG files
-path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky"
+path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/"
 gen_efg_path = path + "Correct/1.efg"
 ref_efg_path = path + "Reference/ref.efg"
 
@@ -48,8 +48,10 @@ spec.loader.exec_module(functions)
 with open(path + 'Constraints/constraints.txt', 'r') as file:
     constraints = [line.strip() for line in file]
 
-if "player order" in constraints:
-    if not functions.check_player_order(gen_game):
+print(constraints)
+
+if "players order" in constraints:
+    if not functions.check_players_order(gen_game):
         raise ValueError("Player order is not correct.")
 
 # Step 4: Switch the order of the players in the generated game if simlutaneous moves are involved
@@ -67,6 +69,11 @@ generated_game = get_payoff_matrix(switch_gen_path)
 print(generated_game)
 
 check_equivalence(reference_game, generated_game)
+
+# Step 6: Check the payoff constraints
+if "payoffs" in constraints:
+    if not functions.check_payoffs(gen_game):
+        raise ValueError("Payoff constraints are not satisfied.")
 
 # Step 6: Check the chance probabilities and information sets if needed
 compare_information_sets(ref_game, gen_game)

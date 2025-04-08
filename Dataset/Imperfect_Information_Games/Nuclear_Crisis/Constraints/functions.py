@@ -88,7 +88,7 @@ def check_payoffs(game):
 
 
 
-def check_player_order(game):
+def check_players_order(game):
     """
     At level 2, ensure the PLAYER node (representing the first move in the nuclear crisis)
     is assigned to Country A.
