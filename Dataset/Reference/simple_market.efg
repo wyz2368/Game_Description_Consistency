@@ -1,6 +1,0 @@
-EFG 2 R "Simple Market Entry" { "Firm 1" "Firm 2" } ""
-p "" 2 1 "" { "Enter" "Out" } 0
-p "" 1 1 "" { "Fight" "Accommodate" } 0
-t "" 2 "Fight" { -1, 1 }
-t "" 3 "Accommodate" { 1, 1 }
-t "" 1 "No Entry" { 3, 0 }
