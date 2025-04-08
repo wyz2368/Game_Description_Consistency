@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, compare_chance_probs, EFGParser
 
 """
 This is a game with three players.
@@ -8,6 +8,10 @@ In the third stage, if player 1 chooses "L", then player 2 can select either "l"
 In the fourth stage, if player 2 selects "l," then player 3 can choose between "a" and "b." Player 3 does not know player 2's prior choice. The game concludes with a payoff of (3, 3, 3) once player 3 makes a decision.
 Throughout the game, none of the players have knowledge of the previous moves of other players or the chance event.
 """
+
+# Constraints:
+# Explicit payoffs are correct
+# Cance probabilities are correct
 
 paths_to_check = [
     (['A', 'L', 'l', 'a'], [3, 3, 3]),
@@ -50,3 +54,23 @@ def check_payoffs(game):
     else:
         raise ValueError("No path matched the expected payoffs.")
 
+
+#========Test Functions Below===================================================================================
+
+ref_game_path = ""
+after_switch_game_path = ""
+
+parser_ref = EFGParser()
+parser_gen = EFGParser()
+
+ref_game = parser_ref.parse_file(ref_game_path)
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True
+    
+def test_chance():
+    print("Checking chance probabilities...")
+    assert compare_chance_probs(ref_game, gen_game) == True

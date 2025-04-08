@@ -1,0 +1,1 @@
+pytest -s Constraints_test/test_market_entry.py

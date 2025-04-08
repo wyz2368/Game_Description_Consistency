@@ -1,10 +1,13 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 A chance node will select one of four possible outcomes: A, B, C, or D. 
 After observing the result of the chance node, Player 1 will choose from three available actions: E, F, or G. In the following stage, Player 2, having observed Player 1's choice, will choose between two actions: Q or W. 
 Payoffs are as follows: under A, Q gives (1, -1) and W gives (2, -2); under B, Q gives (3, -3) and W gives (-3, 3); under C, Q gives (0, 0) and W gives (-1, 1); and under D, Q gives (4, -4) and W gives (-4, 4). 
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['A', 'E', 'Q'], [1, -1]),
@@ -65,3 +68,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

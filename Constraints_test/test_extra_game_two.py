@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 In the first stage, Player 1 has three options: A, B, and C. 
@@ -8,6 +8,9 @@ Finally, in the fourth stage, Player 3 can decide between actions Q and W.
 If Player 3 selects Q in the final stage, all players receive a payoff of 3. 
 However, if Player 3 opts for W, Player 1 and Player 2 each receive a payoff of 2, while Player 3 gets 3.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['A', 'D', 'F', 'Q'], [3, 3, 3]),
@@ -68,3 +71,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

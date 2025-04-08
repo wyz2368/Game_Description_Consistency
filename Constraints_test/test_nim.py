@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 The game involves a single pile of five stones, with two players, Alice and Bob, taking turns. On each turn, a player can remove either one or two stones (but only one stone if only one remains). The goal is to avoid taking the last stone.
@@ -21,6 +21,9 @@ Alice starts and can choose to remove one or two stones.
 
 In this game, the winner earns one point, while the loser loses one point.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['Take 1', 'Take 1', 'Take 1', 'Take 1', 'Take 1'], [-1, 1]),
@@ -61,3 +64,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

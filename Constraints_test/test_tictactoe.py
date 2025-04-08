@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 You’re playing a two-player paper-and-pencil game, where players take turns marking a three-by-three grid with either an "x" or an "o." The objective is to get three of your marks in a row, column, or diagonal to win.
@@ -25,6 +25,9 @@ If "x" places the mark on (1,0),
       If "x" places the mark on (0,2), "x" wins.
    If "o" places the mark on (0,2), "o" wins.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['(0,0)', '(0,2)'], [-1, 1]),
@@ -64,3 +67,17 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

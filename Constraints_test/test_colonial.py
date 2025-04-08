@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser, compare_chance_probs
 
 """
 There are two players in this scenario: Country A and Country B. 
@@ -12,6 +12,10 @@ Granting independence results in Country A earning 0, while Country B gains 3. A
 In the event of war, Country B has a 0.3 probability of winning. 
 If Country B wins the war, it loses 3, while Country A loses 1. If Country B loses the war, it loses 5, and Country A still loses 1.
 """
+
+# Constraints:
+# Explicit payoffs are correct
+# Cance probabilities are correct
 
 paths_to_check = [
     (['Accept', 'Tax'], [6, -2]),
@@ -49,3 +53,24 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+    
+
+#========Test Functions Below===================================================================================
+
+ref_game_path = ""
+after_switch_game_path = ""
+
+parser_ref = EFGParser()
+parser_gen = EFGParser()
+
+ref_game = parser_ref.parse_file(ref_game_path)
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True
+    
+def test_chance():
+    print("Checking chance probabilities...")
+    assert compare_chance_probs(ref_game, gen_game) == True

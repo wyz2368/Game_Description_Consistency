@@ -1,10 +1,15 @@
-from Tree import NodeType
+from Tree import NodeType, compare_information_sets, EFGParser
 
 """
 At junction X, an absent-minded driver has two choices: EXIT, reaching destination A with a payoff of 0, or CONTINUE to junction Y. 
 At junction Y, the driver can choose to EXIT, arriving at destination B with a payoff of 4, or CONTINUE to C, which yields a payoff of 1. 
 The key assumption is that the driver cannot tell the difference between junctions X and Y and does not remember if he has already passed one of them.
 """
+
+# Constraints:
+# Explicit payoffs are correct
+# Information sets are correct
+
 
 paths_to_check = [
     (['EXIT'], [0]),
@@ -41,3 +46,24 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+
+#========Test Functions Below===================================================================================
+
+ref_game_path = "Dataset/Reference/an_absent_minded_driver.efg"
+after_switch_game_path ="Dataset/Reference/an_absent_minded_driver.efg"
+
+parser_ref = EFGParser()
+parser_gen = EFGParser()
+
+ref_game = parser_ref.parse_file(ref_game_path)
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True
+    
+def test_information_sets():
+    print("Checking information sets...")
+    assert compare_information_sets(ref_game, gen_game) == True

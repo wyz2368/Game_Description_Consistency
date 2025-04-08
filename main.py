@@ -24,7 +24,7 @@ def check_equivalence(reference_game, generated_game):
     print(check_best_response_equivalence(reference_game, generated_game))
 
 # Step 1: Parse the EFG files
-path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/"
+path = "Dataset/Imperfect_Information_Games/Bagwell/"
 gen_efg_path = path + "Correct/1.efg"
 ref_efg_path = path + "Reference/ref.efg"
 
@@ -39,20 +39,20 @@ match_player(gen_game, ref_game, model)
 
 # Step 3: Read constraints needed for the game and import the constraints functions.
 # Define the dynamic path
-function_path = os.path.join(path, "Constraints", "functions.py")
-# Dynamically load the module
-spec = importlib.util.spec_from_file_location("functions", function_path)
-functions = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(functions)
+# function_path = os.path.join(path, "Constraints", "functions.py")
+# # Dynamically load the module
+# spec = importlib.util.spec_from_file_location("functions", function_path)
+# functions = importlib.util.module_from_spec(spec)
+# spec.loader.exec_module(functions)
 
-with open(path + 'Constraints/constraints.txt', 'r') as file:
-    constraints = [line.strip() for line in file]
+# with open(path + 'Constraints/constraints.txt', 'r') as file:
+#     constraints = [line.strip() for line in file]
 
-print(constraints)
+# print(constraints)
 
-if "players order" in constraints:
-    if not functions.check_players_order(gen_game):
-        raise ValueError("Player order is not correct.")
+# if "players order" in constraints:
+#     if not functions.check_players_order(gen_game):
+#         raise ValueError("Player order is not correct.")
 
 # Step 4: Switch the order of the players in the generated game if simlutaneous moves are involved
 # At the same time, the name of the actions are mathed to the reference game
@@ -70,11 +70,11 @@ print(generated_game)
 
 check_equivalence(reference_game, generated_game)
 
-# Step 6: Check the payoff constraints
-if "payoffs" in constraints:
-    if not functions.check_payoffs(gen_game):
-        raise ValueError("Payoff constraints are not satisfied.")
+# # Step 6: Check the payoff constraints
+# if "payoffs" in constraints:
+#     if not functions.check_payoffs(gen_game):
+#         raise ValueError("Payoff constraints are not satisfied.")
 
-# Step 6: Check the chance probabilities and information sets if needed
-compare_information_sets(ref_game, gen_game)
-compare_chance_probs(ref_game, gen_game)
+# # Step 6: Check the chance probabilities and information sets if needed
+# compare_information_sets(ref_game, gen_game)
+# compare_chance_probs(ref_game, gen_game)

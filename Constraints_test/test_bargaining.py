@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 A and B are negotiating how to split 10,000 pounds in cash, following these rules: 
@@ -9,6 +9,9 @@ If A rejects B’s offer, A proposes a new split where A receives 5,200 pounds, 
 Here, B has no choice but to accept, resulting in A receiving 4,693 pounds and B receiving 4,332 pounds.
 The final amount each player receives is their payoff in the negotiation.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['Propose 5500-4500', 'Accept'], [5500, 4500]),
@@ -44,3 +47,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 This is a two-player card game between Alice and Bob, using a deck of only three cards: a King, Queen, and Jack. 
@@ -21,6 +21,9 @@ Alice can check or bet 1, WITHOUT knowing the allocation of the chance node.
         If Bob folds then Alice takes the pot of 3 (i.e. winning 1 from player 2).
         If Bob calls, the game ends. (i.e. the higher card wins 2 from the other player).
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['J-Q', 'check', 'check'], [-1, 1]),
@@ -88,3 +91,17 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

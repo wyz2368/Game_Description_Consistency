@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 Consider a game with two players, Alice and Bob, where Alice makes the first move. 
@@ -11,6 +11,9 @@ If neither player takes the coins by the end of the game, Alice will receive the
 The game has four moves in total: Alice moves (take or push), Bob moves (take or push, where the final push also doubles the piles before the game ends), Alice moves again, and finally, Bob moves. 
 All actions are visible to both players.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['take'], [4, 1]),
@@ -49,3 +52,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

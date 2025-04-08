@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser    
 
 """
 Consider a three-stage game. 
@@ -7,6 +7,9 @@ In the second stage, Player 1 observes this outcome and then selects either l or
 In the third stage, Player 1 must choose between ``A'', and ``B'', but at this point, she has forgotten the outcome of the first stage and only remembers her decision from the second stage. 
 The payoffs in all outcomes are set to 0.
 """
+
+# Constraints:
+# Explicit payoffs are correct
 
 paths_to_check = [
     (['L', 'l', 'A'], [0]),
@@ -47,3 +50,16 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True

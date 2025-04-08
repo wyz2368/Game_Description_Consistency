@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 The ``Bach or Stravinsky?'' game involves two players, Alexis and Beverley, who want to attend a concert together. 
@@ -9,12 +9,17 @@ Conversely, if they both choose Stravinsky, Beverley, who favors Stravinsky, rec
 If they choose different concerts, neither player receives any payoff.
 """
 
+# Constraints:
+# Explicit payoffs are correct
+
 paths_to_check = [
     ['Stravinsky', 'Bach'],
     ['Bach', 'Stravinsky'],
     ['Bach', 'Bach'],
     ['Stravinsky', 'Stravinsky']
 ]
+
+
 
 def check_payoffs(game):
     """
@@ -59,3 +64,19 @@ def check_payoffs(game):
         return True
     else:
         raise ValueError("No path matched the expected payoffs.")
+
+
+
+#========Test Functions Below===================================================================================
+
+after_switch_game_path =""
+
+parser_gen = EFGParser()
+
+gen_game = parser_gen.parse_file(after_switch_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True
+    

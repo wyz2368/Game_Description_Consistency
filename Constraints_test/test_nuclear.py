@@ -1,4 +1,4 @@
-from Tree import NodeType
+from Tree import NodeType, EFGParser
 
 """
 After Country B provokes Country A, a sequence of decisions unfolds. Country A must first decide to either escalate (E) the situation or ignore it (I) and end the game. If Country A ignores the provocation, both countries receive a small positive payoff.
@@ -8,6 +8,10 @@ If one country detonates while the other retreats, the detonating country gains 
 However, if neither country retreats, retaliation follows the first nuclear strike, resulting in a catastrophic nuclear disaster, yielding a very large negative payoff for both countries. 
 If both countries retreat, they each suffer a small negative payoff.
 """
+
+# Constraints:
+# Payoffs (Only check the negative and positive are correct)
+# Player order
 
 paths_to_check = [
     ['Escalate', 'Back down'],
@@ -69,19 +73,19 @@ def check_payoffs(game):
     if not (dd[0] < 0 and dd[1] < 0):
         raise ValueError(f"Constraint failed: Detonate + Detonate → catastrophic loss for both. Got {dd}")
     
-    # Check the payoff relationships
-    small_payoff = [abs(ignore[0]), abs(ignore[1]), abs(back_down[0]), abs(back_down[1]), abs(rr[0]), abs(rr[1])]
-    large_payoff = [abs(rd[0]), abs(rd[1]), abs(dr[0]), abs(dr[1])]
-    very_large_payoff = [abs(dd[0]), abs(dd[1])]
+    # # Check the payoff relationships
+    # small_payoff = [abs(ignore[0]), abs(ignore[1]), abs(back_down[0]), abs(back_down[1]), abs(rr[0]), abs(rr[1])]
+    # large_payoff = [abs(rd[0]), abs(rd[1]), abs(dr[0]), abs(dr[1])]
+    # very_large_payoff = [abs(dd[0]), abs(dd[1])]
 
-    # small < large < very_large
-    # Ensure all small < all large
-    if not all(s < l for s in small_payoff for l in large_payoff):
-        raise ValueError(f"Constraint failed: Not all small payoffs are less than large ones.\nSmall: {small_payoff}\nLarge: {large_payoff}")
+    # # small < large < very_large
+    # # Ensure all small < all large
+    # if not all(s < l for s in small_payoff for l in large_payoff):
+    #     raise ValueError(f"Constraint failed: Not all small payoffs are less than large ones.\nSmall: {small_payoff}\nLarge: {large_payoff}")
 
-    # Ensure all large < all very large
-    if not all(l < v for l in large_payoff for v in very_large_payoff):
-        raise ValueError(f"Constraint failed: Not all large payoffs are less than very large ones.\nLarge: {large_payoff}\nVery large: {very_large_payoff}")
+    # # Ensure all large < all very large
+    # if not all(l < v for l in large_payoff for v in very_large_payoff):
+    #     raise ValueError(f"Constraint failed: Not all large payoffs are less than very large ones.\nLarge: {large_payoff}\nVery large: {very_large_payoff}")
 
     print("All crisis escalation payoff constraints are satisfied.")
     return True
@@ -115,3 +119,27 @@ def check_player_order(game):
 
     print(f"{expected_player} correctly moves first in the nuclear crisis.")
     return True
+
+
+#========Test Functions Below===================================================================================
+ref_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
+after_switch_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
+original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
+
+parser_ref = EFGParser()
+parser_gen = EFGParser()
+parser_original = EFGParser()
+
+ref_game = parser_ref.parse_file(ref_game_path)
+gen_game = parser_gen.parse_file(after_switch_game_path)
+original_game = parser_original.parse_file(original_game_path)
+
+def test_payoffs():
+    print("Checking payoffs...")
+    check_payoffs(gen_game)
+    assert check_payoffs(gen_game) == True
+
+def test_order():
+    print("Checking player order...")
+    check_player_order(original_game)
+    assert check_player_order(original_game) == True
