@@ -10,6 +10,5 @@ t "" 3 "Both Retreat" { -1, -1 }
 t "" 4 "B Detonates" { -10, 10 }
 p "" 2 2 "" { "Retreat" "Detonate" } 0
 t "" 5 "A Detonates" { 10, -10 }
-t "" 6 "Nuclear Disaster" { -100, -100 }
+t "" 6 "Nuclear Disaster" { -50, -50 }
 t "" 1 "Ignore Provocation" { 1, 1 }
-

@@ -1,4 +1,4 @@
-from Tree import NodeType, EFGParser    
+from Tree import NodeType, EFGParser, compare_information_sets, compare_chance_probs   
 
 """
 Consider a three-stage game. 
@@ -10,6 +10,8 @@ The payoffs in all outcomes are set to 0.
 
 # Constraints:
 # Explicit payoffs are correct
+# Check information set
+# Check chance probabilities
 
 paths_to_check = [
     (['L', 'l', 'A'], [0]),
@@ -56,13 +58,24 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
+ref_game_path = ""
 after_switch_game_path =""
 
+parser_ref = EFGParser()
 parser_gen = EFGParser()
 
+ref_game = parser_ref.parse_file(ref_game_path)
 gen_game = parser_gen.parse_file(after_switch_game_path)
 
 def test_payoffs():
     print("Checking payoffs...")
     check_payoffs(gen_game)
     assert check_payoffs(gen_game) == True
+    
+def test_information_sets():
+    print("Checking information sets...")
+    assert compare_information_sets(ref_game, gen_game) == True
+    
+def test_chance():
+    print("Checking chance probabilities...")
+    assert compare_chance_probs(ref_game, gen_game) == True

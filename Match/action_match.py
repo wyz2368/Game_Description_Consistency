@@ -16,7 +16,7 @@ def get_current_level_actions_llm(node, ref_actions, model):
         prompt_check_valid = (f"You are given two lists of actions\\"
                     f"Generated Actions: {original_actions}"
                     f"Reference Actions: {ref_actions}"
-                    f"The actions may have different names and orders. Check if they represent the same set of actions."
+                    f"Disregard the different names and orders. Check if they represent the same meaning of actions."
                     f"Output ONLY True if they match and False otherwise.")
         
         response_check = infer_response(prompt_check_valid, model)
@@ -33,8 +33,11 @@ def get_current_level_actions_llm(node, ref_actions, model):
         if model == "gemini":
             modified_actions = extract_python_code(response)
         else:
-            modified_actions = convert_str_to_list(response)
-
+            try:
+               modified_actions = convert_str_to_list(response)
+            except:
+                print("Try another method to convert the response to a list.")
+                modified_actions = extract_python_code(response)
     else:
         raise ValueError("The node does not have any actions.")
         
