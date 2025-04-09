@@ -41,7 +41,8 @@ def check_payoffs(game):
     for path in paths_to_check:
         terminal_node = traverse_path(game.root, path)
         if terminal_node is None:
-            raise ValueError(f"Path {path} does not lead to a terminal node.")
+            print(f"Path {path} does not lead to a terminal node.")
+            return False
 
         if path == ['Enter', 'Fight']:
             fight_payoff = terminal_node.payoffs
@@ -52,7 +53,8 @@ def check_payoffs(game):
 
     # Check constraints
     if out_payoff is None or fight_payoff is None or accommodate_payoff is None:
-        raise ValueError("One or more required paths are missing from the game tree.")
+        print("One or more required paths are missing from the game tree.")
+        return False
 
     firm1_out, firm2_out = out_payoff
     firm1_accom, firm2_accom = accommodate_payoff
@@ -60,15 +62,18 @@ def check_payoffs(game):
 
     # 1. Check Firm 1 earns more than Firm 2 enters and Firm 1 accommodates, which is not checked by order_preserving.
     if firm1_out <= firm1_accom:
-        raise ValueError(f"Constraint failed: Firm 1 should earn more when Firm 2 is out, got {firm1_out} and {firm1_accom}.")
+        print(f"Constraint failed: Firm 1 should earn more when Firm 2 is out, got {firm1_out} and {firm1_accom}.")
+        return False
     
     # 2. If Firm 2 enters and Firm 1 accommodates, both firms earn equally.
     if firm1_accom != firm2_accom:
-        raise ValueError(f"Constraint failed: Expected equal payoffs on accommodate, got {firm1_accom} and {firm2_accom}.")
+        print(f"Constraint failed: Expected equal payoffs on accommodate, got {firm1_accom} and {firm2_accom}.")
+        return False
 
     # 3. If Firm 2 enters and Firm 1 fights, Firm 2 earns more than Firm 1.
     if firm2_fight <= firm1_fight:
-        raise ValueError(f"Constraint failed: Firm 2 should earn more than Firm 1 when fighting, got {firm1_fight} and {firm2_fight}.")
+        print(f"Constraint failed: Firm 2 should earn more than Firm 1 when fighting, got {firm1_fight} and {firm2_fight}.")
+        return False
 
     print("All payoff constraints are satisfied.")
     return True

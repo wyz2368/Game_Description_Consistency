@@ -35,41 +35,50 @@ def check_payoffs(game):
     for path in paths_to_check:
         terminal_node = traverse_path(game.root, path)
         if terminal_node is None:
-            raise ValueError(f"Path {path} does not lead to a terminal node.")
+            print(f"Path {path} does not lead to a terminal node.")
+            return False
         
         payoffs = terminal_node.payoffs
 
         if path[0] == path[1]:  # Draw
             if payoffs != [0, 0]:
-                raise ValueError(f"Path {path} is a draw but payoff is not [0, 0]: {payoffs}")
+                print(f"Path {path} is a draw but payoff is not [0, 0]: {payoffs}")
+                return False
         else:
             # 1. Zero-sum
             if sum(payoffs) != 0:
-                raise ValueError(f"Path {path} is not zero-sum: sum is {sum(payoffs)}, payoffs={payoffs}")
+                print(f"Path {path} is not zero-sum: sum is {sum(payoffs)}, payoffs={payoffs}")
+                return False
             
             if path == ['Rock', 'Paper']:
                 if payoffs[0] >= payoffs[1]:
-                    raise ValueError(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    print(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    return False
 
             elif path == ['Rock', 'Scissors']:
                 if payoffs[0] <= payoffs[1]:
-                    raise ValueError(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    print(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    return False
 
             elif path == ['Paper', 'Rock']:
                 if payoffs[0] <= payoffs[1]:
-                    raise ValueError(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    print(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    return False
 
             elif path == ['Paper', 'Scissors']:
                 if payoffs[0] >= payoffs[1]:
-                    raise ValueError(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    print(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    return False
 
             elif path == ['Scissors', 'Rock']:
                 if payoffs[0] >= payoffs[1]:
-                    raise ValueError(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    print(f"Path {path} should have loser payoff < winner payoff: {payoffs}")
+                    return False
 
             elif path == ['Scissors', 'Paper']:
                 if payoffs[0] <= payoffs[1]:
-                    raise ValueError(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    print(f"Path {path} should have winner payoff > loser payoff: {payoffs}")
+                    return False
 
 
     print("All paths satisfy draw, zero-sum, winner-higher, and consistent reward conditions.")

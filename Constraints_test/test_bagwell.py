@@ -38,7 +38,8 @@ def check_payoffs(game):
     for path in paths_to_check:
         terminal_node = traverse_path(game.root, path)
         if terminal_node is None:
-            raise ValueError(f"Path {path} does not lead to a terminal node.")
+            print(f"Path {path} does not lead to a terminal node.")
+            return False
         
         outcome = terminal_node.payoffs
 
@@ -53,7 +54,8 @@ def check_payoffs(game):
         print("All path leads to the correct expected payoff logic.")
         return True
     else:
-        raise ValueError(f"Condition failed: Expected A > F, but got A={A}, F={F}")
+        print(f"Condition failed: Expected A > F, but got A={A}, F={F}")
+        return False
 
 
 #========Test Functions Below===================================================================================
