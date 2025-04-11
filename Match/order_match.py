@@ -193,11 +193,12 @@ def check_simultaneous_move_start_node(node):
     # 3. Check the children nodes has the same player
     # 4. Maybe more conditions
     
+    node_type = (node.node_type != NodeType.CHANCE)
     gen_info_sets = {child.information_set for child in node.children.values() if child.information_set is not None}
     gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in node.children.values())
     gen_players = {child.player for child in node.children.values() if child.node_type == NodeType.PLAYER}
     
-    is_start_node = (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal)
+    is_start_node = (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal and node_type)
     
     return is_start_node
     
@@ -343,14 +344,23 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
                 
                 for action, child in node.children.items():
                     if child.checked:
-                        collect_paths(child, path + [action])
+                        if node.node_type == NodeType.PLAYER:
+                            collect_paths(child, path + [(node.player, action)])
+                        elif node.node_type == NodeType.CHANCE:
+                            collect_paths(child, path + [(-1, action)])
                     else:
-                        children_paths[tuple(sorted(path + [action]))] = child
+                        if node.node_type == NodeType.PLAYER:
+                            children_paths[tuple(sorted(path + [(node.player, action)]))] = child
+                        elif node.node_type == NodeType.CHANCE:
+                            children_paths[tuple(sorted(path + [(-1, action)]))] = child
             
             # Start collecting paths from each action of the start node
             for action in g_node.actions:
                 child = g_node.children[action]
-                collect_paths(child, [action])
+                if g_node.node_type == NodeType.PLAYER:
+                    collect_paths(child, [(g_node.player, action)])
+                elif g_node.node_type == NodeType.CHANCE:
+                    collect_paths(child, [(-1, action)])
             
             new_gen = reorder_generated_game(matched_ref_node, g_node) # Get a list of reordered nodes like [(['A', 'B'], 1, 0, 1), (['C', 'D', 'E'], 2, 1, 1), (['C', 'D', 'E'], 2, 1, 1)]
             # Update the actions in the generated game to the reordered actions for this simultaneous move part
@@ -366,15 +376,24 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
                     return               
                 for action, child in node.children.items():
                     if child.checked:
-                        collect_paths_new(child, path + [action])
+                        if node.node_type == NodeType.PLAYER:
+                            collect_paths_new(child, path + [(node.player, action)])
+                        elif node.node_type == NodeType.CHANCE:
+                            collect_paths_new(child, path + [(-1, action)])
                     else:
-                        final_path = tuple(sorted(path + [action]))
+                        if node.node_type == NodeType.PLAYER:
+                            final_path = tuple(sorted(path + [(node.player, action)]))
+                        elif node.node_type == NodeType.CHANCE:
+                            final_path = tuple(sorted(path + [(-1, action)]))
                         for original_path, original_node in children_paths.items():
                             if final_path == original_path:
                                 node.children[action] = original_node
                 
             for action, child in g_node.children.items():
-                collect_paths_new(child, [action])
+                if g_node.node_type == NodeType.PLAYER:
+                    collect_paths_new(child, [(g_node.player, action)])
+                elif g_node.node_type == NodeType.CHANCE:
+                    collect_paths_new(child, [(-1, action)])
             
             gen_nodes_list.append(g_node)
               
@@ -402,8 +421,8 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
 
             for ref_child, gen_child in zip(r_node.children.values(), g_node.children.values()):
 
-                queue_ref.append(deepcopy(ref_child))
-                queue_gen.append(deepcopy(gen_child))
+                queue_ref.append(ref_child)
+                queue_gen.append(gen_child)
             
             
 

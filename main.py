@@ -24,8 +24,8 @@ def check_equivalence(reference_game, generated_game):
     print(check_best_response_equivalence(reference_game, generated_game))
 
 # Step 1: Parse the EFG files
-path = "Dataset/Perfect_Information_Games/Extra_Game_Three/"
-gen_efg_path = path + "Correct/3.efg"
+path = "Dataset/Perfect_Information_Games/Nim_(with_5_in_one_pile)/"
+gen_efg_path = path + "Incorrect/5.efg"
 ref_efg_path = path + "Reference/ref.efg"
 
 parser_gen = EFGParser()

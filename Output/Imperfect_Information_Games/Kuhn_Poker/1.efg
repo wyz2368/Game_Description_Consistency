@@ -1,0 +1,56 @@
+EFG 2 R "Two-player card game" { "Alice" "Bob" }
+c "" 1 "" { "J-Q" 0.16666666666666666 "J-K" 0.16666666666666666 "Q-J" 0.16666666666666666 "Q-K" 0.16666666666666666 "K-J" 0.16666666666666666 "K-Q" 0.16666666666666666 } 0
+p "" 1 1 "" { "check" "bet" } 0
+p "" 2 5 "" { "check" "bet" } 0
+t "" 2 "Higher card wins 1" { -1, 1 }
+p "" 1 2 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 2 6 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 1 1 "" { "check" "bet" } 0
+p "" 2 1 "" { "check" "bet" } 0
+t "" 2 "Higher card wins 1" { -1, 1 }
+p "" 1 2 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 2 2 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 1 3 "" { "check" "bet" } 0
+p "" 2 3 "" { "check" "bet" } 0
+t "" 1 "Higher card wins 1" { 1, -1 }
+p "" 1 4 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 5 "Higher card wins 2" { 2, -2 }
+p "" 2 4 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 5 "Higher card wins 2" { 2, -2 }
+p "" 1 3 "" { "check" "bet" } 0
+p "" 2 1 "" { "check" "bet" } 0
+t "" 2 "Higher card wins 1" { -1, 1 }
+p "" 1 4 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 2 2 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 6 "Higher card wins 2" { -2, 2 }
+p "" 1 5 "" { "check" "bet" } 0
+p "" 2 3 "" { "check" "bet" } 0
+t "" 1 "Higher card wins 1" { 1, -1 }
+p "" 1 6 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 5 "Higher card wins 2" { 2, -2 }
+p "" 2 4 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 5 "Higher card wins 2" { 2, -2 }
+p "" 1 5 "" { "check" "bet" } 0
+p "" 2 5 "" { "check" "bet" } 0
+t "" 1 "Higher card wins 1" { 1, -1 }
+p "" 1 6 "" { "fold" "call" } 0
+t "" 3 "Bob wins 3" { -1, 1 }
+t "" 5 "Higher card wins 2" { 2, -2 }
+p "" 2 6 "" { "fold" "call" } 0
+t "" 4 "Alice wins 3" { 1, -1 }
+t "" 5 "Higher card wins 2" { 2, -2 }

@@ -7,6 +7,4 @@ p "" 2 1 "" { "Take" "Push" } 0
 t "" 2 "Bob takes after first push" { 2, 8 }
 p "" 1 2 "" { "Take" "Push" } 0
 t "" 3 "Alice takes after second push" { 4, 16 }
-p "" 2 2 "" { "Take" "Push" } 0
-t "" 4 "Bob takes after third push" { 8, 32 }
-t "" 5 "Final push, Alice gets larger pile" { 32, 16 }
+t "" 4 "Bob takes after third push" { 32, 8 }

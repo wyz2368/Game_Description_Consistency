@@ -67,7 +67,11 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     if model == "gemini":
         modified_players_name = extract_python_code(response)
     else:
-        modified_players_name = convert_str_to_list(response)
+        try:
+            modified_players_name = convert_str_to_list(response)
+        except:
+            print("Try another method to convert the response to a list.")
+            modified_players_name = extract_python_code(response)
 
     gen_game.players = modified_players_name
 

@@ -1,4 +1,4 @@
-EFG 2 R "Kuhn's poker" { "Player 1" "Player 2" } ""
+EFG 2 R "Kuhn's poker" { "Alice" "Bob" } ""
 c "" 1 "" { "J-Q" 1/6 "J-K" 1/6 "Q-J" 1/6 "Q-K" 1/6 "K-J" 1/6 "K-Q" 1/6} 0
 p "player 1" 1 1 "J" { "check" "bet" } 0
 p "player 2" 2 1 "1cQ" { "check" "bet" } 0
