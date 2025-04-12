@@ -1,4 +1,4 @@
-from Tree import NodeType, compare_chance_probs, EFGParser
+from Tree import NodeType, compare_chance_probs, compare_information_sets, EFGParser
 
 """
 This is a game with three players.
@@ -60,8 +60,8 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-ref_game_path = ""
-after_switch_game_path = ""
+ref_game_path = "Dataset/Imperfect_Information_Games/A_Three_Player_Game/Reference/ref.efg"
+after_switch_game_path = "output.efg"
 
 parser_ref = EFGParser()
 parser_gen = EFGParser()
@@ -77,3 +77,7 @@ def test_payoffs():
 def test_chance():
     print("Checking chance probabilities...")
     assert compare_chance_probs(ref_game, gen_game) == True
+
+def test_information_sets():
+    print("Checking information sets...")
+    assert compare_information_sets(ref_game, gen_game) == True

@@ -50,7 +50,7 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     prompt_check_valid = (f"You are given two lists of players\\"
                           f"Generated Game Players: {gen_players}"
                           f"Reference Game Players: {ref_players}"
-                          f"The players may have different names and orders. Check if they represent the same set of players."
+                          f"Disregard the different names and orders. Check if they represent the same set of players."
                           f"Output ONLY True if they match and False otherwise.")
     
     response_check = infer_response(prompt_check_valid, model)

@@ -122,7 +122,6 @@ class EFGParser:
 
 
         elif node_type == NodeType.CHANCE:
-            # Accepts: empty labels, action names with spaces, fractional or decimal probabilities
             pattern = r'c\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s+(?:\d+/\d+|\d*\.\d+|\d+)\s*)+)\}\s+\d+'
             match = re.search(pattern, line)
 
@@ -134,15 +133,19 @@ class EFGParser:
             information_set_label = match.group(3)
             outcomes = match.group(4)
 
-            # Match any quoted action followed by a float or fraction
             outcome_pattern = r'"([^"]+)"\s+(\d+/\d+|\d*\.\d+|\d+)'
             outcomes_dict = {}
             for action, prob_str in re.findall(outcome_pattern, outcomes):
                 if '/' in prob_str:
-                    num, denom = map(float, prob_str.split('/'))
-                    prob = num / denom
+                    # Already a fraction
+                    prob = prob_str
+                elif '.' in prob_str:
+                    # less than 1, convert to fraction
+                    from fractions import Fraction
+                    prob = str(Fraction(prob_str))
                 else:
-                    prob = float(prob_str)
+                    # equivalent to "1"
+                    prob = f"{prob_str}/1"
                 outcomes_dict[action] = prob
 
             return Node(

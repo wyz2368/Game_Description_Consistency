@@ -1,5 +1,5 @@
 EFG 2 R "Extensive Form Game with Chance Node" { "Player 1" "Player 2" }
-c "" 1 "" { "A" 0.25 "B" 0.25 "C" 0.25 "D" 0.25 } 0
+c "" 1 "" { "A" 1/4 "B" 1/4 "C" 1/4 "D" 1/4 } 0
 p "" 1 1 "" { "E" "F" "G" } 0
 p "" 2 1 "" { "Q" "W" } 0
 t "" 1 "" { 1, -1 }

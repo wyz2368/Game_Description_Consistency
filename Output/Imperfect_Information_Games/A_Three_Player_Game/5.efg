@@ -1,5 +1,5 @@
 EFG 2 R "Three Players Game with Imperfect Information" { "Player 1" "Player 2" "Player 3" }
-c "" 1 "" { "A" 0.3333333333333333 "B" 0.6666666666666666 } 0
+c "" 1 "" { "A" 1/3 "B" 2/3 } 0
 p "" 1 1 "" { "L" "R" } 0
 p "" 2 1 "" { "l" "r" } 0
 p "" 3 1 "" { "a" "b" } 0
