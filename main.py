@@ -1,7 +1,7 @@
 from Algorithms import check_best_response_equivalence, check_better_response_equivalence, check_order_preserving_equivalence
 from Match import switch_order, match_player
 from Tree import EFGParser, compare_chance_probs, compare_information_sets
-from utils import get_payoff_matrix
+from utils import get_payoff_matrix, check_strategy_counts
 import argparse
 import importlib.util
 import os
@@ -50,4 +50,8 @@ print(reference_game)
 generated_game = get_payoff_matrix(switch_gen_path)
 print(generated_game)
 
-check_equivalence(reference_game, generated_game)
+
+if check_strategy_counts(reference_game, generated_game):
+    # Check the equivalence of the games
+    print("Checking equivalence...")
+    check_equivalence(reference_game, generated_game)
