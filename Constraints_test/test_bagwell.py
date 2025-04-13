@@ -12,12 +12,13 @@ Assign values to each of these payoffs and set all the outcomes.
 """
 
 # Constraints:
-# payoff values A>F
+# payoff values A>F, W>B
 # chance probabilities are correct
 
 paths_to_check = [
-    ['S', 'Interpreted as S', 'S'],
-    ['C', 'Misinterpreted as S', 'C']
+    ['S', 'Received S', 'S'],
+    ['S', 'Received S', 'C'],
+    ['C', 'Received S', 'C']
 ]
 
 def check_payoffs(game):
@@ -33,7 +34,7 @@ def check_payoffs(game):
             current = current.children[action]
         return current if current.node_type == NodeType.TERMINAL else None
     
-    A = F = None
+    A = F = W = B = None
     
     for path in paths_to_check:
         terminal_node = traverse_path(game.root, path)
@@ -45,12 +46,16 @@ def check_payoffs(game):
 
         if path[0] == 'S' and path[2] == 'S':
             A = outcome[0]
+            B = outcome[1]
+        
+        elif path[0] == 'S' and path[2] == 'C':
+            W = outcome[0]
 
         elif path[0] == 'C' and path[2] == 'C':
             F = outcome[0]
 
 
-    if A>F:
+    if A>F and W>B:
         print("All path leads to the correct expected payoff logic.")
         return True
     else:

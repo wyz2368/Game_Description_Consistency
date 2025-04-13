@@ -1,11 +1,15 @@
 from Tree import NodeType, EFGParser, compare_information_sets, compare_chance_probs   
 
 """
-Consider a three-stage game. 
-In the first stage, a chance event randomly selects either ``L'' or ``R'', each with a probability of 1/2. 
-In the second stage, Player 1 observes this outcome and then selects either l or r. 
-In the third stage, Player 1 must choose between ``A'', and ``B'', but at this point, she has forgotten the outcome of the first stage and only remembers her decision from the second stage. 
-The payoffs in all outcomes are set to 0.
+Consider a three-stage game. In the first stage, a chance event randomly selects either ``L'' or ``R'', each with a probability of 1/2. In the second stage, Player 1 observes this outcome and then selects either l or r. In the third stage, Player 1 must choose between ``A'', and ``B'', and at this point, she remembers both the outcome of the first stage and her decision from the second stage. The payoffs at the end of the game depend on the full sequence of moves and are given as follows:
+If the sequence is (L, l, A), Player 1 receives 3
+If the sequence is (L, l, B), Player 1 receives 1
+If the sequence is (L, r, A), Player 1 receives 0
+If the sequence is (L, r, B), Player 1 receives 2
+If the sequence is (R, l, A), Player 1 receives 4
+If the sequence is (R, l, B), Player 1 receives 2
+If the sequence is (R, r, A), Player 1 receives 1
+If the sequence is (R, r, B), Player 1 receives 0
 """
 
 # Constraints:
@@ -14,13 +18,13 @@ The payoffs in all outcomes are set to 0.
 # Check chance probabilities
 
 paths_to_check = [
-    (['L', 'l', 'A'], [0]),
-    (['L', 'l', 'B'], [0]),
+    (['L', 'l', 'A'], [3]),
+    (['L', 'l', 'B'], [1]),
     (['L', 'r', 'A'], [0]),
-    (['L', 'r', 'B'], [0]),
-    (['R', 'l', 'A'], [0]),
-    (['R', 'l', 'B'], [0]),
-    (['R', 'r', 'A'], [0]),
+    (['L', 'r', 'B'], [2]),
+    (['R', 'l', 'A'], [4]),
+    (['R', 'l', 'B'], [2]),
+    (['R', 'r', 'A'], [1]),
     (['R', 'r', 'B'], [0])
 ]
 

@@ -24,30 +24,30 @@ def check_equivalence(reference_game, generated_game):
     print(check_best_response_equivalence(reference_game, generated_game))
 
 # Step 1: Parse the EFG files
-path = "Dataset/Imperfect_Information_Games/A_Three_Player_Game/"
+path = "Dataset/Imperfect_Information_Games/Bagwell/"
 gen_efg_path = path + "Correct/1.efg"
 ref_efg_path = path + "Reference/ref.efg"
 
-parser_gen = EFGParser()
-parser_ref = EFGParser()
+# parser_gen = EFGParser()
+# parser_ref = EFGParser()
 
-gen_game = parser_gen.parse_file(gen_efg_path)
-ref_game = parser_ref.parse_file(ref_efg_path)
+# gen_game = parser_gen.parse_file(gen_efg_path)
+# ref_game = parser_ref.parse_file(ref_efg_path)
 
-# Step 2: Match players
-match_player(gen_game, ref_game, model)
+# # Step 2: Match players
+# match_player(gen_game, ref_game, model)
 
-# Step 3: Switch the order of players in the generated game
-switch_order(ref_game.root, gen_game.root, model)
+# # Step 3: Switch the order of players in the generated game
+# switch_order(ref_game.root, gen_game.root, model)
 
-# save the mathed game
-switch_gen_path = "output.efg"
-parser_gen.save_to_efg("output.efg")
+# # save the mathed game
+# switch_gen_path = "output.efg"
+# parser_gen.save_to_efg("output.efg")
 
 # Step 5: Check the strategic equivalence of the games
 reference_game = get_payoff_matrix(ref_efg_path)
 print(reference_game)
-generated_game = get_payoff_matrix(switch_gen_path)
+generated_game = get_payoff_matrix(gen_efg_path)
 print(generated_game)
 
 
