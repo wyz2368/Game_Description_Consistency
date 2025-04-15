@@ -2,18 +2,24 @@ import itertools
 import numpy as np
 from multiprocessing import Pool, cpu_count
 
+def generate_partition(dividers, num_opponent_strategies):
+    scaled_dividers = [0] + list(dividers) + [1]
+    return np.diff(scaled_dividers)
 
-def sample_beliefs(payoff_matrix, num_points=5):
+def sample_beliefs_parallel(payoff_matrix, num_points=5):
     opponent_shape = payoff_matrix.shape[1:]
     num_opponent_strategies = int(np.prod(opponent_shape))
 
     linspace_values = np.linspace(0, 1, num_points)
-    partitions = []
-
-    for dividers in itertools.combinations_with_replacement(linspace_values, num_opponent_strategies - 1):
-        scaled_dividers = [0] + list(dividers) + [1]
-        partition = np.diff(scaled_dividers)
-        partitions.append(partition)
+    divider_combinations = list(
+        itertools.combinations_with_replacement(linspace_values, num_opponent_strategies - 1)
+    )
+    print(cpu_count())
+    with Pool(processes=cpu_count()) as pool:
+        partitions = pool.starmap(
+            generate_partition,
+            [(dividers, num_opponent_strategies) for dividers in divider_combinations],
+        )
 
     return np.array(partitions)
 
@@ -61,11 +67,12 @@ def check_best_response_equivalence_multiprocessing(payoff_matrix_g, payoff_matr
     for player in range(num_players):
         payoff_g = payoff_matrix_g[player]
         payoff_g_prime = payoff_matrix_g_prime[player]
-        belief_array = sample_beliefs(payoff_g, num_points)
+        belief_array = sample_beliefs_parallel(payoff_g, num_points)
 
         for strategy in range(payoff_g.shape[0]):
             tasks.append((player, strategy, payoff_g, payoff_g_prime, belief_array))
-
+    
+    print(cpu_count())
     with Pool(processes=cpu_count()) as pool:
         for result in pool.imap_unordered(compare_strategy_beliefs, tasks, chunksize=1):
             if not result:

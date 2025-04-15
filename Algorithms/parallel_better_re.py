@@ -2,18 +2,24 @@ import itertools
 import numpy as np
 from multiprocessing import Pool, cpu_count
 
+def generate_partition(dividers, num_opponent_strategies):
+    scaled_dividers = [0] + list(dividers) + [1]
+    return np.diff(scaled_dividers)
 
-def sample_beliefs(payoff_matrix, num_points=5):
+def sample_beliefs_parallel(payoff_matrix, num_points=5):
     opponent_shape = payoff_matrix.shape[1:]
     num_opponent_strategies = int(np.prod(opponent_shape))
 
     linspace_values = np.linspace(0, 1, num_points)
-    partitions = []
-
-    for dividers in itertools.combinations_with_replacement(linspace_values, num_opponent_strategies - 1):
-        scaled_dividers = [0] + list(dividers) + [1]
-        partition = np.diff(scaled_dividers)
-        partitions.append(partition)
+    divider_combinations = list(
+        itertools.combinations_with_replacement(linspace_values, num_opponent_strategies - 1)
+    )
+    print(cpu_count())
+    with Pool(processes=cpu_count()) as pool:
+        partitions = pool.starmap(
+            generate_partition,
+            [(dividers, num_opponent_strategies) for dividers in divider_combinations],
+        )
 
     return np.array(partitions)
 
@@ -43,7 +49,7 @@ def check_better_response_equivalence_multiprocessing(payoff_matrix_g, payoff_ma
 
     for player in range(num_players):
         num_strategies = payoff_matrix_g[player].shape[0]
-        belief_array = sample_beliefs(payoff_matrix_g[player], num_points)
+        belief_array = sample_beliefs_parallel(payoff_matrix_g[player], num_points)
 
         for strategy in range(num_strategies):
             for alt_strategy in range(strategy + 1, num_strategies):
@@ -55,7 +61,7 @@ def check_better_response_equivalence_multiprocessing(payoff_matrix_g, payoff_ma
                     payoff_matrix_g_prime[player],
                     belief_array
                 ))
-
+    print(cpu_count())
     with Pool(processes=cpu_count()) as pool:
         for result in pool.imap_unordered(compare_better_response_beliefs, tasks, chunksize=1):
             if not result:
