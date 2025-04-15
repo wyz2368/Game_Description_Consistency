@@ -1,7 +1,7 @@
 import itertools
 import numpy as np
 
-def sample_beliefs(payoff_matrix, num_points=10):
+def sample_beliefs(payoff_matrix, num_points=5):
     """_summary_
 
     Args:

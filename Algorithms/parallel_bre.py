@@ -3,7 +3,7 @@ import numpy as np
 from multiprocessing import Pool, cpu_count
 
 
-def sample_beliefs(payoff_matrix, num_points=10):
+def sample_beliefs(payoff_matrix, num_points=5):
     opponent_shape = payoff_matrix.shape[1:]
     num_opponent_strategies = int(np.prod(opponent_shape))
 
