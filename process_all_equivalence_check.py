@@ -2,7 +2,9 @@ import os
 from Algorithms import (
     check_order_preserving_equivalence,
     check_better_response_equivalence,
-    check_best_response_equivalence
+    check_best_response_equivalence,
+    check_best_response_equivalence_multiprocessing,
+    check_better_response_equivalence_multiprocessing
 )
 from utils import get_payoff_matrix, check_strategy_counts
 
@@ -13,10 +15,10 @@ def check_equivalence(reference_game, generated_game):
     results.append(str(check_order_preserving_equivalence(reference_game, generated_game)))
 
     results.append("Better-response equivalence:")
-    results.append(str(check_better_response_equivalence(reference_game, generated_game)))
+    results.append(str(check_better_response_equivalence_multiprocessing(reference_game, generated_game)))
 
     results.append("Best-response equivalence:")
-    results.append(str(check_best_response_equivalence(reference_game, generated_game)))
+    results.append(str(check_best_response_equivalence_multiprocessing(reference_game, generated_game)))
 
     return "\n".join(results)
 
