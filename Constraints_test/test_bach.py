@@ -74,7 +74,7 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-after_switch_game_path =""
+after_switch_game_path ="Output/Imperfect_Information_Games/Bach_or_Stravinsky/5.efg"
 
 parser_gen = EFGParser()
 

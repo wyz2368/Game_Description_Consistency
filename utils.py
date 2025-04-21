@@ -35,27 +35,29 @@ def get_payoff_matrix(efg_file_path):
 def check_strategy_counts(reference_game, generated_game):
     """
     Compares the number of strategies per player in the reference and generated games.
-    
+
     Args:
         reference_game (list of np.ndarray): Payoff matrices for the reference game.
         generated_game (list of np.ndarray): Payoff matrices for the generated game.
-    
+
     Returns:
         bool: True if each player has the same number of strategies in both games, False otherwise.
     """
-    num_players_ref = len(reference_game)
-    num_players_gen = len(generated_game)
+    ref_shape = reference_game[0].shape
+    gen_shape = generated_game[0].shape
 
-    if num_players_ref != num_players_gen:
-        print(f"Different number of players: reference ({num_players_ref}), generated ({num_players_gen})")
+    if len(ref_shape) != len(gen_shape):
+        print(f"Different number of players: reference ({len(ref_shape)}), generated ({len(gen_shape)})")
         return False
 
-    for player in range(num_players_ref):
-        ref_strat_count = reference_game[player].shape[0]
-        gen_strat_count = generated_game[player].shape[0]
-        if ref_strat_count != gen_strat_count:
-            print(f"Mismatch in strategies for player {player}: reference ({ref_strat_count}), generated ({gen_strat_count})")
-            return False
+    all_match = True
+    for i, (ref_count, gen_count) in enumerate(zip(ref_shape, gen_shape)):
+        if ref_count != gen_count:
+            print(f"Player {i} strategy count mismatch: reference ({ref_count}), generated ({gen_count})")
+            all_match = False
 
-    print("Number of strategies per player match between reference and generated games.")
-    return True
+    if all_match:
+        print("Number of strategies per player match between reference and generated games.")
+
+    return all_match
+

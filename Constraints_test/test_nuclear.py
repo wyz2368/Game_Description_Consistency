@@ -14,7 +14,7 @@ If both countries retreat, they each suffer a small negative payoff.
 # Player order
 
 paths_to_check = [
-    ['Escalate', 'Back down'],
+    ['Escalate', 'Back Down'],
     ['Escalate', 'Escalate', 'Retreat', 'Retreat'],
     ['Escalate', 'Escalate', 'Retreat', 'Detonate'],
     ['Escalate', 'Escalate', 'Detonate', 'Retreat'],
@@ -51,7 +51,7 @@ def check_payoffs(game):
         return False
 
     # Constraint 2: Escalate → Back down → A gains small, B loses small
-    back_down = outcomes.get(('Escalate', 'Back down'))
+    back_down = outcomes.get(('Escalate', 'Back Down'))
     if not (back_down[0] > 0 and back_down[1] < 0):
         print(f"Constraint failed: 'Back down' should give A small gain, B small loss. Got {back_down}")
         return False
@@ -132,8 +132,8 @@ def check_player_order(game):
 
 #========Test Functions Below===================================================================================
 ref_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
-after_switch_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
-original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
+after_switch_game_path = "Output/Imperfect_Information_Games/Nuclear_Crisis/2.efg"
+original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Correct/2.efg"
 
 parser_ref = EFGParser()
 parser_gen = EFGParser()

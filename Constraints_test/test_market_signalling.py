@@ -10,7 +10,6 @@ If the new manufacturer is weak and sends a weak signal, and the existing manufa
 
 # Constraints:
 # Explicit payoffs are correct
-# Cance probabilities are correct
 
 paths_to_check = [
     (['Strong', 'Signal Strong', 'Fight'], [1, 0]),

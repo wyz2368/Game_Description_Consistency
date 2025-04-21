@@ -70,7 +70,7 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-after_switch_game_path =""
+after_switch_game_path ="Dataset/Perfect_Information_Games/Nim_(with_5_in_one_pile)/Incorrect/5.efg"
 
 parser_gen = EFGParser()
 

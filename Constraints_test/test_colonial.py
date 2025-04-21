@@ -60,8 +60,8 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-ref_game_path = ""
-after_switch_game_path = ""
+ref_game_path = "Dataset/Perfect_Information_Games/Colonial_Control/Reference/ref.efg"
+after_switch_game_path = "Dataset/Perfect_Information_Games/Colonial_Control/Incorrect/4.efg"
 
 parser_ref = EFGParser()
 parser_gen = EFGParser()

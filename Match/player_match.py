@@ -15,7 +15,11 @@ def reorder_players(gen_game, ref_players: List[str]):
     
     # Create a mapping from the old player index to the new player index
     player_mapping = {gen_players.index(player) + 1: ref_players.index(player) + 1 for player in gen_players}
-    print(player_mapping)
+
+    payoff_mapping = {gen_players.index(player): ref_players.index(player) for player in gen_players}
+    
+    print("Player mapping:", player_mapping)
+    print("Payoff mapping:", payoff_mapping)
     
     # Update the game players order
     gen_game.players = ref_players
@@ -26,6 +30,13 @@ def reorder_players(gen_game, ref_players: List[str]):
         
         for child in node.children.values():
             update_player_numbers(child)
+        # Reorder payoffs for terminal nodes
+        if node.node_type == NodeType.TERMINAL and node.payoffs:
+            reordered = [0] * len(node.payoffs)
+            for old_idx, payoff in enumerate(node.payoffs):
+                new_idx = payoff_mapping[old_idx]
+                reordered[new_idx] = payoff
+            node.payoffs = reordered
     
     # Apply updates to the tree
     if gen_game.root:
@@ -57,12 +68,26 @@ def match_palyer_name_llm(gen_game, ref_game, model):
 
     if response_check == "False":
         raise ValueError("The players in the generated game do not match the players in the reference game.")
-
-    prompt = (f"Given the following reference game players from a game tree: {ref_players}. "
-              f"Modify the following generated game players: {gen_players} to be consistent with the reference game players, "
-              f"without changing the order of the players. Provide the modified players as a Python list. Only output the python list please.")
     
+    print(gen_players)
+    prompt = (
+    f"Given this example:\n"
+    f"Reference players: ['Alice', 'Bob', 'Charlie']\n"
+    f"Generated players: ['P2', 'P3', 'P1']\n"
+    f"The modified players should be: ['Bob', 'Charlie', 'Alice']\n"
+    f"—because 'P2' is in position 0 and maps to 'Bob', 'P3' is in position 1 and maps to 'Charlie', "
+    f"and 'P1' is in position 2 and maps to 'Alice'. The **order of the generated list stays the same**, "
+    f"only the names are updated using the reference mapping: 'P1' → 'Alice', 'P2' → 'Bob', 'P3' → 'Charlie'.\n\n"
+    f"Now apply the same logic to the following:\n"
+    f"Reference players: {ref_players}\n"
+    f"Generated players: {gen_players}\n\n"
+    f"Replace the generated player names with the reference names by matching 'P1', 'P2', etc. to the correct name in the reference list. "
+    f"Do NOT change the order of the generated list. Only modify the names based on the mapping.\n"
+    f"Output the result as a Python list. Output ONLY the list, no extra text."
+)
+
     response = infer_response(prompt, model)
+    print(response)
     
     if model == "gemini":
         modified_players_name = extract_python_code(response)

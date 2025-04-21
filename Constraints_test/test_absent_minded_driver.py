@@ -53,8 +53,8 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-ref_game_path = "Dataset/Reference/an_absent_minded_driver.efg"
-after_switch_game_path ="Dataset/Reference/an_absent_minded_driver.efg"
+ref_game_path = "Dataset/Imperfect_Information_Games/Absent_Minded_Driver/Reference/ref.efg"
+after_switch_game_path ="Output/Imperfect_Information_Games/Absent_Minded_Driver/4.efg"
 
 parser_ref = EFGParser()
 parser_gen = EFGParser()
@@ -65,8 +65,10 @@ gen_game = parser_gen.parse_file(after_switch_game_path)
 def test_payoffs():
     print("Checking payoffs...")
     check_payoffs(gen_game)
+    print (check_payoffs(gen_game))
     assert check_payoffs(gen_game) == True
     
 def test_information_sets():
     print("Checking information sets...")
+    print(compare_information_sets(ref_game, gen_game))
     assert compare_information_sets(ref_game, gen_game) == True
