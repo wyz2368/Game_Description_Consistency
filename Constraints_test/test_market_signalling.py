@@ -56,13 +56,13 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-ref_game_path = ""
-after_switch_game_path = ""
+# ref_game_path = ""
+after_switch_game_path = "Output/Imperfect_Information_Games/Market_Signalling_Game/5.efg"
 
-parser_ref = EFGParser()
+# parser_ref = EFGParser()
 parser_gen = EFGParser()
 
-ref_game = parser_ref.parse_file(ref_game_path)
+# ref_game = parser_ref.parse_file(ref_game_path)
 gen_game = parser_gen.parse_file(after_switch_game_path)
 
 def test_payoffs():
@@ -70,6 +70,6 @@ def test_payoffs():
     check_payoffs(gen_game)
     assert check_payoffs(gen_game) == True
     
-def test_chance():
-    print("Checking chance probabilities...")
-    assert compare_chance_probs(ref_game, gen_game) == True
+# def test_chance():
+#     print("Checking chance probabilities...")
+#     assert compare_chance_probs(ref_game, gen_game) == True

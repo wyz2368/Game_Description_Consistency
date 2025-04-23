@@ -23,11 +23,40 @@ paths_to_check = [
     (['push', 'push', 'push', 'push'], [64, 16])
 ]
 
+def check_first_player(game):
+    players = game.players
+
+    if 0 not in game.level_to_nodes:
+        print("Level 2 not found in the game tree.")
+        return False
+
+    level_0_nodes = game.level_to_nodes[0]
+
+    player_node = next((node for node in level_0_nodes if node.node_type == NodeType.PLAYER), None)
+    
+    if not player_node:
+        print("No PLAYER node found at level 2. Cannot verify player order.")
+        return False
+    
+    expected_player = players[0]  # Alice
+    actual_player = players[player_node.player - 1]  # Adjust for 0-based index
+    
+
+    if actual_player != expected_player:
+        print(f"Expected {expected_player} to move first, but got {actual_player}.")
+        return False
+    return True
+
 def check_payoffs(game):
     """
     The game start with one pile with 4 coins and another with 1 coin so the payoff are explicitly defined.
     Then, we need to check all the payoffs in the game tree.
     """
+
+    if not check_first_player(game):
+        print("First player check failed.")
+        return False
+    
     def traverse_path(node, path):
         current = node
         for action in path:
@@ -58,7 +87,7 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-after_switch_game_path =""
+after_switch_game_path ="Output/Perfect_Information_Games/Centipede/3.efg"
 
 parser_gen = EFGParser()
 

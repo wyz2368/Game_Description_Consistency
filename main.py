@@ -27,8 +27,8 @@ def check_equivalence(reference_game, generated_game):
 
 if __name__ == "__main__":
     # Step 1: Parse the EFG files
-    path = "Dataset/Perfect_Information_Games/Simple_Bargaining_Game/"
-    gen_efg_path = path + "Incorrect/4.efg"
+    path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/"
+    gen_efg_path = path + "Incorrect/5.efg"
     ref_efg_path = path + "Reference/ref.efg"
 
     parser_gen = EFGParser()

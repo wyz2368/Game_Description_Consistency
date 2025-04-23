@@ -1,6 +1,6 @@
 Order-preserving equivalence:
 True
 Better-response equivalence:
-True
+False
 Best-response equivalence:
 True

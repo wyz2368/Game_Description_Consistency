@@ -1,1 +1,1 @@
-pytest -s Constraints_test/test_market_signalling.py
+pytest -s Constraints_test/test_tictactoe.py

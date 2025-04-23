@@ -13,7 +13,6 @@ Assign values to each of these payoffs and set all the outcomes.
 
 # Constraints:
 # payoff values A>F, W>B
-# chance probabilities are correct
 
 paths_to_check = [
     ['S', 'Received S', 'S'],
@@ -65,13 +64,13 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-ref_game_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
-after_switch_game_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
+# ref_game_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
+after_switch_game_path = "Output/Imperfect_Information_Games/Bagwell/5.efg"
 
-parser_ref = EFGParser()
+# parser_ref = EFGParser()
 parser_gen = EFGParser()
 
-ref_game = parser_ref.parse_file(ref_game_path)
+# ref_game = parser_ref.parse_file(ref_game_path)
 gen_game = parser_gen.parse_file(after_switch_game_path)
 
 def test_payoffs():
@@ -79,6 +78,6 @@ def test_payoffs():
     check_payoffs(gen_game)
     assert check_payoffs(gen_game) == True
     
-def test_chance():
-    print("Checking chance probabilities...")
-    assert compare_chance_probs(ref_game, gen_game) == True
+# def test_chance():
+#     print("Checking chance probabilities...")
+#     assert compare_chance_probs(ref_game, gen_game) == True

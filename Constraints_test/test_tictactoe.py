@@ -74,7 +74,7 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-after_switch_game_path = "Output/Perfect_Information_Games/Tic_Tac_Toe/5.efg"
+after_switch_game_path = "Output/Perfect_Information_Games/Tic_Tac_Toe/3.efg"
 
 parser_gen = EFGParser()
 
