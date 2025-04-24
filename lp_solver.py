@@ -35,7 +35,7 @@ def solve_lp_problem(payoff):
             objective = pulp.lpSum(
                 variable_list[i] * payoff_strategy[i] for i in range(num_opponent_strategies)
             )
-            prob += objective  # set objective
+            # prob += objective  # set objective
 
             
             # Add better-response constraints
@@ -81,8 +81,8 @@ def lp_comparison(gen_payoff, ref_payoff):
         return False
 
                 
-gen_path = "Output_temp/Kuhn_Poker/5.efg"
-ref_path = "Dataset/Imperfect_Information_Games/Kuhn_Poker/Reference/ref.efg"
+gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/5.efg"
+ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
 
 reference_game = get_payoff_matrix(ref_path)
 print(reference_game)
