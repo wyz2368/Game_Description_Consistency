@@ -22,7 +22,8 @@ def solve_lp_problem(payoff):
 
         for strategy in range(num_strategies):
             # Create a linear programming problem
-            prob = pulp.LpProblem("BestResponseCheck", sense=pulp.LpMaximize)
+            # prob = pulp.LpProblem("BestResponseCheck", sense=pulp.LpMaximize)
+            prob = pulp.LpProblem("BestResponseCheck", pulp.LpMinimize)
 
             variable_list = [
                 pulp.LpVariable(f"opponent_strategy_{i}", lowBound=0, upBound=1, cat="Continuous")
@@ -36,6 +37,7 @@ def solve_lp_problem(payoff):
                 variable_list[i] * payoff_strategy[i] for i in range(num_opponent_strategies)
             )
             # prob += objective  # set objective
+            prob += 0 # set objective to 0
 
             
             # Add better-response constraints
@@ -52,13 +54,15 @@ def solve_lp_problem(payoff):
             # Probability distribution constraint
             prob += pulp.lpSum(variable_list) == 1
             
-            prob.solve()
-
+            # prob.solve()
+            prob.solve(pulp.PULP_CBC_CMD(msg=True))
+            
+            print(prob.to_dict())
             
             # print("Status:", pulp.LpStatus[prob.status]) 
             belief_list = []
             for v in prob.variables():
-                # print(v.name, "=", v.varValue)
+                print(v.name, "=", v.varValue)
                 belief_list.append(v.varValue)
             all_belief_list.append(belief_list)
 
@@ -81,8 +85,11 @@ def lp_comparison(gen_payoff, ref_payoff):
         return False
 
                 
-gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/5.efg"
-ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
+# gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/3.efg"
+# ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
+
+gen_path = "Output/Imperfect_Information_Games/Bagwell/5.efg"
+ref_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
 
 reference_game = get_payoff_matrix(ref_path)
 print(reference_game)
