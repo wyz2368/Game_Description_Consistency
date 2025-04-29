@@ -1,105 +1,75 @@
 from utils import get_payoff_matrix
 import cdd
 import numpy as np
-import concurrent.futures
 
+def ext_points_worker(args):
+    A, b, lin_set = args
+    A = np.array(A, dtype='float')
+    b = np.array(b, dtype='float').reshape(-1, 1)
+    M = np.hstack((b, A))
 
-def ext_points_mat_vec(A,b, lin_set):
-    
-    #set A to minus A and transorm it to np array, as c
-    A = -np.array(A)
-    
-    #transorm b to np array, as required by pycddlib
-    # b = np.array(b)
-    b = np.array(b).reshape(-1, 1)
-    
-    #make them into one matrix, as required by pycddlib.
-    #it means that the first column is vector b and the other columns are matrix A. 
-    #for example, if M =  [[-1,-1],[1,0],[0,1]] and b = [[1],[0],[0]], then you get 
-    #M = np.hstack((b,A)) = [[1,-1,-1],[0,1,0],[0,0,1]] 
-    #No special logic why we do it exactly like that. It's just that pycddlib needs this format. 
-    # print("A:", A)
-    # print("b:", b)
-    M = np.hstack((b,A))
-
-    print("M:", M.shape)
-
-    print("Starting solving polyhedron...")
-    mat = cdd.matrix_from_array(M, rep_type=cdd.RepType.INEQUALITY, lin_set = lin_set)
-    # print(mat)
+    mat = cdd.matrix_from_array(M, rep_type=cdd.RepType.INEQUALITY, lin_set=lin_set)
     cdd.matrix_canonicalize(mat)
+
     poly = cdd.polyhedron_from_matrix(mat)
     ext = cdd.copy_generators(poly)
-    print("Finished solving polyhedron.")
 
     vertices = []
-    # print(ext.array)
-
     for row in ext.array:
-        if row[0] == 1:  # vertex, not ray
-            belief = [float(x) for x in row[1:]]
-            vertices.append(belief)
-    print("Vertices:", vertices)
-    
+        if row[0] == 1:  # vertex
+            vertices.append([float(x) for x in row[1:]])
     return vertices
 
-def solve_lp_problem(payoff):
-    print("Solving LP problem...")
+import multiprocessing as mp
 
-    all_belief_list = []
+def solve_lp_problem(payoff):
+    print("Solving LP problem in parallel...")
+    all_tasks = []
     number_of_players = len(payoff)
 
     for player in range(number_of_players):
-        opponent_shape = payoff[player].shape[1:]
-        num_opponent_strategies = int(np.prod(opponent_shape))
-        num_strategies = payoff[player].shape[0]
+        player_shape = payoff[player].shape
+        num_strategies = player_shape[player]
+        opponent_shape = player_shape[:player] + player_shape[player+1:]
+        num_opponent_profiles = int(np.prod(opponent_shape))
 
         for strategy in range(num_strategies):
-            # Payoff vector for the selected strategy
-            selected_payoff = payoff[player][strategy].flatten()
-            A = []
-            b = []
+            selected_payoff = np.moveaxis(payoff[player], player, 0)[strategy].flatten()
+            A, b = [], []
 
-            
             for alt in range(num_strategies):
                 if alt == strategy:
                     continue
-                
-                # Add inequalities for the selected strategy
-                alt_payoff = payoff[player][alt].flatten()
-                # print("alt_payoff:", alt_payoff)
-                # print("selected_payoff:", selected_payoff)
-                constraint = alt_payoff - selected_payoff
-                A.append(constraint)
+                alt_payoff = np.moveaxis(payoff[player], player, 0)[alt].flatten()
+                A.append(selected_payoff - alt_payoff)
                 b.append(0)
-            
-            # Add inequalities for the probability distribution
-            for i in range(num_opponent_strategies):
-                xi_non_negative = np.zeros(num_opponent_strategies)
-                xi_non_negative[i] = -1  # -xi <= 0  (means xi >= 0)
+
+            for i in range(num_opponent_profiles):
+                xi_non_negative = np.zeros(num_opponent_profiles)
+                xi_non_negative[i] = 1
                 A.append(xi_non_negative)
                 b.append(0)
 
-                xi_at_most_one = np.zeros(num_opponent_strategies)
-                xi_at_most_one[i] = 1  # xi <= 1
+                xi_at_most_one = np.zeros(num_opponent_profiles)
+                xi_at_most_one[i] = -1
                 A.append(xi_at_most_one)
                 b.append(1)
 
-            
-            # Add equality constraint for the probability distribution
-            sum_constraint = np.ones(num_opponent_strategies)
+            sum_constraint = -np.ones(num_opponent_profiles)
             A.append(sum_constraint)
             b.append(1)
             lin_set = [len(A) - 1]
 
-            # Solve the LP problem
-            ver = ext_points_mat_vec(A, b, lin_set)
-            all_belief_list.append(ver)
+            all_tasks.append((A, b, lin_set))
 
+    print("Number of tasks:", len(all_tasks))
+    print("cpu_count:", mp.cpu_count())
+    with mp.Pool(processes=mp.cpu_count()) as pool:
+        all_belief_list = pool.map(ext_points_worker, all_tasks)
+    
+    print("Finished solving LP problem.")
     print(all_belief_list)
-
     return all_belief_list
-
 
 def lp_comparison(gen_payoff, ref_payoff):
     # Solve LP problem for generated game
@@ -116,20 +86,24 @@ def lp_comparison(gen_payoff, ref_payoff):
         print("The games are not equivalent.")
         return False
 
-                
-# gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/3.efg"
-# ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
-gen_path = "Output_temp/Kuhn_Poker/1.efg"
-ref_path = "Dataset/Imperfect_Information_Games/Kuhn_Poker/Reference/ref.efg"
 
-# gen_path = "Output/Imperfect_Information_Games/Bagwell/5.efg"
-# ref_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
+if __name__ == '__main__':
+    # gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/1.efg"
+    # ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
 
-reference_game = get_payoff_matrix(ref_path)
-print(reference_game)
-generated_game = get_payoff_matrix(gen_path)
-print(generated_game)
+    gen_path = "Output_temp/Kuhn_Poker/1.efg"
+    ref_path = "Dataset/Imperfect_Information_Games/Kuhn_Poker/Reference/ref.efg"
 
-result = lp_comparison(generated_game, reference_game)
+    # gen_path = "Output/Imperfect_Information_Games/Bagwell/1.efg"
+    # ref_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
 
-print("Result of LP comparison:", result)
+    # gen_path = "Output/Imperfect_Information_Games/A_Three_Player_Game/1.efg"
+    # ref_path = "Dataset/Imperfect_Information_Games/A_Three_Player_Game/Reference/ref.efg"
+    reference_game = get_payoff_matrix(ref_path)
+    print(reference_game)
+    generated_game = get_payoff_matrix(gen_path)
+    print(generated_game)
+
+    result = lp_comparison(generated_game, reference_game)
+
+    print("Result of LP comparison:", result)

@@ -9,4 +9,4 @@
 
 conda activate fastgambit # Or whatever you called your environment.
 python --version
-python process_all_equivalence_check.py
+python .py

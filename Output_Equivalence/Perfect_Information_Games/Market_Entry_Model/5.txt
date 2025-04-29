@@ -3,4 +3,4 @@ False
 Better-response equivalence:
 True
 Best-response equivalence:
-False
+True
