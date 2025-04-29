@@ -54,8 +54,8 @@ def solve_lp_problem(payoff):
             # Probability distribution constraint
             prob += pulp.lpSum(variable_list) == 1
             
-            # prob.solve()
-            prob.solve(pulp.PULP_CBC_CMD(msg=True))
+            prob.solve()
+            # prob.solve(pulp.PULP_CBC_CMD(msg=True))
             
             print(prob.to_dict())
             
@@ -88,8 +88,11 @@ def lp_comparison(gen_payoff, ref_payoff):
 # gen_path = "Output/Imperfect_Information_Games/Bach_or_Stravinsky/3.efg"
 # ref_path = "Dataset/Imperfect_Information_Games/Bach_or_Stravinsky/Reference/ref.efg"
 
-gen_path = "Output/Imperfect_Information_Games/Bagwell/5.efg"
-ref_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
+# gen_path = "Output/Imperfect_Information_Games/Bagwell/5.efg"
+# ref_path = "Dataset/Imperfect_Information_Games/Bagwell/Reference/ref.efg"
+
+gen_path = "Output_temp/Kuhn_Poker/1.efg"
+ref_path = "Dataset/Imperfect_Information_Games/Kuhn_Poker/Reference/ref.efg"
 
 reference_game = get_payoff_matrix(ref_path)
 print(reference_game)

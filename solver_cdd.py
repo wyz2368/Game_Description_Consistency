@@ -5,11 +5,11 @@ import numpy as np
 def ext_points_mat_vec(A,b, lin_set):
     
     #set A to minus A and transorm it to np array, as c
-    A = -np.array(A)
+    A = np.array(A,dtype='float')
     
     #transorm b to np array, as required by pycddlib
     # b = np.array(b)
-    b = np.array(b).reshape(-1, 1)
+    b = np.array(b, dtype='float').reshape(-1, 1)
     
     #make them into one matrix, as required by pycddlib.
     #it means that the first column is vector b and the other columns are matrix A. 
@@ -19,16 +19,29 @@ def ext_points_mat_vec(A,b, lin_set):
     # print("A:", A)
     # print("b:", b)
     M = np.hstack((b,A))
+    
+    # print("M:", M)
 
-    print("M:", M.shape)
+    # print("M:", M.shape)
+    # num_constraints, num_columns = M.shape
 
     print("Starting solving polyhedron...")
     mat = cdd.matrix_from_array(M, rep_type=cdd.RepType.INEQUALITY, lin_set = lin_set)
     # print(mat)
     cdd.matrix_canonicalize(mat)
     print("Canonicalized matrix:", mat)
+    # print("Matrix M:\n", M)
+    # print("lin_set:", lin_set)
+
     poly = cdd.polyhedron_from_matrix(mat)
-    print("hi")
+    # print("Poly: ", poly)
+    # print("hi")
+    # row_basis, col_basis, rank = cdd.matrix_rank(mat)
+    # print(f"Rank of matrix: {rank}/{num_constraints}")
+
+    # if rank < num_constraints:
+    #     print("Warning: constraint matrix rank deficient. Skipping.")
+    #     return []
     ext = cdd.copy_generators(poly)
     print("Finished solving polyhedron.")
 
@@ -69,25 +82,25 @@ def solve_lp_problem(payoff):
                 alt_payoff = payoff[player][alt].flatten()
                 # print("alt_payoff:", alt_payoff)
                 # print("selected_payoff:", selected_payoff)
-                constraint = alt_payoff - selected_payoff
+                constraint = selected_payoff - alt_payoff
                 A.append(constraint)
                 b.append(0)
             
             # Add inequalities for the probability distribution
             for i in range(num_opponent_strategies):
                 xi_non_negative = np.zeros(num_opponent_strategies)
-                xi_non_negative[i] = -1  # -xi <= 0  (means xi >= 0)
+                xi_non_negative[i] = 1  #
                 A.append(xi_non_negative)
                 b.append(0)
 
                 xi_at_most_one = np.zeros(num_opponent_strategies)
-                xi_at_most_one[i] = 1  # xi <= 1
+                xi_at_most_one[i] = -1  
                 A.append(xi_at_most_one)
                 b.append(1)
 
             
             # Add equality constraint for the probability distribution
-            sum_constraint = np.ones(num_opponent_strategies)
+            sum_constraint = -np.ones(num_opponent_strategies)
             A.append(sum_constraint)
             b.append(1)
             lin_set = [len(A) - 1]
