@@ -1,5 +1,3 @@
-from .best_response_equivalence import check_best_response_equivalence
-from .better_response_equivalence import check_better_response_equivalence
 from .order_preserving_equivalence import check_order_preserving_equivalence
-from .parallel_better_re import check_better_response_equivalence_multiprocessing
-from .parallel_bre import check_best_response_equivalence_multiprocessing
+from .check_best_response import check_vertex_best_response
+from .check_better_response import check_better_response

@@ -1,24 +1,18 @@
 import os
-from Algorithms import (
-    check_order_preserving_equivalence,
-    check_better_response_equivalence,
-    check_best_response_equivalence,
-    check_best_response_equivalence_multiprocessing,
-    check_better_response_equivalence_multiprocessing
-)
-from utils import get_payoff_matrix, check_strategy_counts
+from Algorithms import check_order_preserving_equivalence, check_vertex_best_response, check_better_response
+from utils import check_strategy_counts, get_payoff_gambit
 
 
-def check_equivalence(reference_game, generated_game):
+def check_equivalence(reference_game, generated_game, game_name):
     results = []
     results.append("Order-preserving equivalence:")
     results.append(str(check_order_preserving_equivalence(reference_game, generated_game)))
 
-    results.append("Better-response equivalence:")
-    results.append(str(check_better_response_equivalence(reference_game, generated_game)))
-
     results.append("Best-response equivalence:")
-    results.append(str(check_best_response_equivalence(reference_game, generated_game)))
+    results.append(str(check_vertex_best_response(reference_game, generated_game, game_name)))
+
+    results.append("Better-response equivalence:")
+    results.append(str(check_better_response(reference_game, generated_game, game_name)))
 
     return "\n".join(results)
 
@@ -49,8 +43,8 @@ for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
             print(f"Checking equivalence for {gen_efg_path}...")
 
             try:
-                reference_game = get_payoff_matrix(ref_path)
-                generated_game = get_payoff_matrix(gen_efg_path)
+                reference_game = get_payoff_gambit(ref_path)
+                generated_game = get_payoff_gambit(gen_efg_path)
                 if not check_strategy_counts(reference_game, generated_game):
                     print(f"Strategy counts do not match for {gen_efg_path}, skipping equivalence check.")
 
@@ -62,7 +56,7 @@ for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
                         f.write("Strategy counts do not match between reference and generated game.\nEquivalence check skipped.")
                     continue
 
-                result_text = check_equivalence(reference_game, generated_game)
+                result_text = check_equivalence(reference_game, generated_game, game_name)
 
                 # Write results to output_equivalence/<game_type>/<game_name>/<file>.txt
                 output_txt_dir = os.path.join(equivalence_root, game_type, game_name)

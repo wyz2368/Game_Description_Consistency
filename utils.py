@@ -32,6 +32,13 @@ def get_payoff_matrix(efg_file_path):
     
     return payoff
 
+def get_payoff_gambit(efg_file_path):
+
+    efg = gbt.read_efg(efg_file_path)
+    payoff_gambit = efg.to_arrays()
+    
+    return payoff_gambit
+
 def check_strategy_counts(reference_game, generated_game):
     """
     Compares the number of strategies per player in the reference and generated games.
