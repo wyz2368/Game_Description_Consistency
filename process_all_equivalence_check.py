@@ -12,12 +12,12 @@ def check_equivalence(reference_game, generated_game, game_name):
     results.append(str(check_vertex_best_response(reference_game, generated_game, game_name)))
 
     results.append("Better-response equivalence:")
-    results.append(str(check_better_response(reference_game, generated_game, game_name)))
+    results.append(str(check_better_response(reference_game, generated_game)))
 
     return "\n".join(results)
 
-output_root = "Output"
-dataset_root = "Dataset"
+output_root = "Output_added"
+dataset_root = "Dataset_added"
 equivalence_root = "Output_Equivalence"
 
 for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:

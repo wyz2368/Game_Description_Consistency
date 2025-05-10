@@ -289,13 +289,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
                         break
                 if not match:
                     raise ValueError(f"No matching reference node found for g_node with parent action")
-                else:
-                    # Check the matched reference node also does NOT meets the simultaneous move condition
-                    
-                    rmn_is_start_node = check_simultaneous_move_start_node(rmn)
-                    
-                    if rmn_is_start_node:
-                        raise ValueError(f"Reference node does not meet the simultaneous move condition")
 
                 continue  # Skip the g_node if it doesn't satisfy the condition
           

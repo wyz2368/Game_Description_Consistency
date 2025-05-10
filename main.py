@@ -1,4 +1,4 @@
-from Algorithms import check_best_response_equivalence, check_better_response_equivalence, check_order_preserving_equivalence
+from Algorithms import check_order_preserving_equivalence, check_vertex_best_response, check_better_response
 from Match import switch_order, match_player
 from Tree import EFGParser, compare_chance_probs, compare_information_sets
 from utils import get_payoff_matrix, check_strategy_counts
@@ -17,18 +17,18 @@ def check_equivalence(reference_game, generated_game):
     print("Order-preserving equivalence:")
     print(check_order_preserving_equivalence(reference_game, generated_game))
 
-    print("Better-response equivalence:")
-    print(check_better_response_equivalence(reference_game, generated_game))
-
     print("Best-response equivalence:")
-    print(check_best_response_equivalence(reference_game, generated_game))
+    print(check_vertex_best_response(reference_game, generated_game , "test"))
+
+    print("Better-response equivalence:")
+    print(check_better_response(reference_game, generated_game))
 
     
 
 if __name__ == "__main__":
     # Step 1: Parse the EFG files
-    path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/"
-    gen_efg_path = path + "Incorrect/5.efg"
+    path = "Dataset/Perfect_Information_Games/Centipede/"
+    gen_efg_path = path + "Correct/2.efg"
     ref_efg_path = path + "Reference/ref.efg"
 
     parser_gen = EFGParser()

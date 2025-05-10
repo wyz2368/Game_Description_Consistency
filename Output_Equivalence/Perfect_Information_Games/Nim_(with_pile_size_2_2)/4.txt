@@ -1,0 +1,2 @@
+Strategy counts do not match between reference and generated game.
+Equivalence check skipped.

@@ -24,20 +24,20 @@ def get_current_level_actions_llm(node, ref_actions, model):
         if response_check == "False":
             raise ValueError("The actions in the generated game do not match the actions in the reference game.")
 
-        prompt = (f"Given the following reference game actions from a game tree: {ref_actions}. "
-                    f"Modify the following generated game actions: {original_actions} to be consistent with the reference game actions, "
-                    f"without changing the order of the actions. Provide the modified actions as a Python list. Only output the python list please.")
+        prompt = (
+        f"The following is a list of reference game actions from a game tree: {ref_actions}\n"
+        f"Please update the names in this generated list of game actions: {original_actions} so that they match the names in the reference list.\n"
+        f"Do not change the order of items in the generated list.\n"
+        f"Only return the modified list in Python list format."
+        )
         
         response = infer_response(prompt, model)
-        
-        if model == "gemini":
+
+        try:
             modified_actions = extract_python_code(response)
-        else:
-            try:
-               modified_actions = convert_str_to_list(response)
-            except:
-                print("Try another method to convert the response to a list.")
-                modified_actions = extract_python_code(response)
+        except:
+            print("Try another method to convert the response to a list.")
+            modified_actions = convert_str_to_list(response) 
     else:
         raise ValueError("The node does not have any actions.")
         

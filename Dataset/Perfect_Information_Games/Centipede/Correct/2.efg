@@ -1,4 +1,4 @@
-EFG 2 R "Coin Doubling Game" { "Bob" "Alice" }
+EFG 2 R "Coin Doubling Game" { "B" "A" }
 ""
 
 p "" 2 1 "" { "take" "push" } 0

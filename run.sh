@@ -1,1 +1,1 @@
-pytest -s Constraints_test/test_kuhn.py
+pytest -s Constraints_test/test_centipede.py

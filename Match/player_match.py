@@ -70,33 +70,22 @@ def match_palyer_name_llm(gen_game, ref_game, model):
         raise ValueError("The players in the generated game do not match the players in the reference game.")
     
     print(gen_players)
+    
     prompt = (
-    f"Given this example:\n"
-    f"Reference players: ['Alice', 'Bob', 'Charlie']\n"
-    f"Generated players: ['P2', 'P3', 'P1']\n"
-    f"The modified players should be: ['Bob', 'Charlie', 'Alice']\n"
-    f"—because 'P2' is in position 0 and maps to 'Bob', 'P3' is in position 1 and maps to 'Charlie', "
-    f"and 'P1' is in position 2 and maps to 'Alice'. The **order of the generated list stays the same**, "
-    f"only the names are updated using the reference mapping: 'P1' → 'Alice', 'P2' → 'Bob', 'P3' → 'Charlie'.\n\n"
-    f"Now apply the same logic to the following:\n"
-    f"Reference players: {ref_players}\n"
-    f"Generated players: {gen_players}\n\n"
-    f"Replace the generated player names with the reference names by matching 'P1', 'P2', etc. to the correct name in the reference list. "
-    f"Do NOT change the order of the generated list. Only modify the names based on the mapping.\n"
-    f"Output the result as a Python list. Output ONLY the list, no extra text."
-)
+    f"The following is a list of reference game players from a game tree: {ref_players}\n"
+    f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
+    f"Do not change the order of items in the generated list.\n"
+    f"Only return the modified list in Python list format."
+    )
 
     response = infer_response(prompt, model)
     print(response)
     
-    if model == "gemini":
-        modified_players_name = extract_python_code(response)
-    else:
-        try:
-            modified_players_name = convert_str_to_list(response)
-        except:
-            print("Try another method to convert the response to a list.")
-            modified_players_name = extract_python_code(response)
+    try:
+        modified_players_name = extract_python_code(response) 
+    except:
+        print("Try another method to convert the response to a list.")
+        modified_players_name = convert_str_to_list(response)
 
     gen_game.players = modified_players_name
 

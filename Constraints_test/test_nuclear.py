@@ -132,8 +132,8 @@ def check_player_order(game):
 
 #========Test Functions Below===================================================================================
 ref_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
-after_switch_game_path = "Output/Imperfect_Information_Games/Nuclear_Crisis/5.efg"
-original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Incorrect/5.efg"
+after_switch_game_path = "Output/Imperfect_Information_Games/Nuclear_Crisis/3.efg"
+original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Incorrect/3.efg"
 
 parser_ref = EFGParser()
 parser_gen = EFGParser()
