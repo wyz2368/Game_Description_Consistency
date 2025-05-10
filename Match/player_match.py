@@ -3,7 +3,7 @@ from google import genai
 
 from Tree import Node, NodeType
 from .chatbot import infer_response
-from .utils import convert_str_to_list, extract_python_code
+from .utils import convert_str_to_list, extract_python_code, safe_extract_player_list
 
 def reorder_players(gen_game, ref_players: List[str]):
     """
@@ -69,8 +69,6 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     if response_check == "False":
         raise ValueError("The players in the generated game do not match the players in the reference game.")
     
-    print(gen_players)
-    
     prompt = (
     f"The following is a list of reference game players from a game tree: {ref_players}\n"
     f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
@@ -79,13 +77,8 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     )
 
     response = infer_response(prompt, model)
-    print(response)
     
-    try:
-        modified_players_name = extract_python_code(response) 
-    except:
-        print("Try another method to convert the response to a list.")
-        modified_players_name = convert_str_to_list(response)
+    modified_players_name = safe_extract_player_list(response)
 
     gen_game.players = modified_players_name
 

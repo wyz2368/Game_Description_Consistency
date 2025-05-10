@@ -2,7 +2,7 @@ from google import genai
 from Tree import Node, NodeType
 from typing import List, Tuple
 from .chatbot import infer_response
-from .utils import extract_python_code, convert_str_to_list
+from .utils import extract_python_code, convert_str_to_list, safe_extract_player_list
 
 def get_current_level_actions_llm(node, ref_actions, model):
 
@@ -33,11 +33,10 @@ def get_current_level_actions_llm(node, ref_actions, model):
         
         response = infer_response(prompt, model)
 
-        try:
-            modified_actions = extract_python_code(response)
-        except:
-            print("Try another method to convert the response to a list.")
-            modified_actions = convert_str_to_list(response) 
+        modified_actions = safe_extract_player_list(response)
+
+        print("Modified actions:", modified_actions)
+        
     else:
         raise ValueError("The node does not have any actions.")
         
