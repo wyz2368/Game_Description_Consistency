@@ -309,7 +309,8 @@ def compare_chance_probs(tree1: GameTree, tree2: GameTree) -> bool:
         return True
     else:
         print("The trees have different chance node probabilities.")
-        raise ValueError("The trees have different chance node probabilities.")
+        # raise ValueError("The trees have different chance node probabilities.")
+        return False
 
 
 def get_information_sets(node: Node, path: Optional[List[str]] = None, info_sets: Optional[Dict[Tuple[int, int], Tuple[str, ...]]] = None):
@@ -360,4 +361,5 @@ def compare_information_sets(tree1: GameTree, tree2: GameTree) -> bool:
         return True
     else:
         print("The trees have different information set grouping structure.")
-        raise ValueError("The trees have different player information sets.")
+        # raise ValueError("The trees have different player information sets.")
+        return False

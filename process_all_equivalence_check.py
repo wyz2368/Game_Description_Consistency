@@ -1,6 +1,7 @@
 import os
 from Algorithms import check_order_preserving_equivalence, check_vertex_best_response, check_better_response
-from utils import check_strategy_counts, get_payoff_gambit
+from utils import get_payoff_gambit
+from Tree import compare_information_sets, EFGParser
 
 
 def check_equivalence(reference_game, generated_game, game_name):
@@ -16,8 +17,8 @@ def check_equivalence(reference_game, generated_game, game_name):
 
     return "\n".join(results)
 
-output_root = "Output_added"
-dataset_root = "Dataset_added"
+output_root = "Output"
+dataset_root = "Dataset"
 equivalence_root = "Output_Equivalence"
 
 for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
@@ -45,7 +46,14 @@ for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
             try:
                 reference_game = get_payoff_gambit(ref_path)
                 generated_game = get_payoff_gambit(gen_efg_path)
-                if not check_strategy_counts(reference_game, generated_game):
+
+                parser_ref = EFGParser()
+                parser_gen = EFGParser()
+
+                ref_game = parser_ref.parse_file(ref_path)
+                gen_game = parser_gen.parse_file(gen_efg_path)
+
+                if not compare_information_sets(ref_game, gen_game):
                     print(f"Strategy counts do not match for {gen_efg_path}, skipping equivalence check.")
 
                     output_txt_dir = os.path.join(equivalence_root, game_type, game_name)

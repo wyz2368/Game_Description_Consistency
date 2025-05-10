@@ -1,1 +1,0 @@
-pytest -s Constraints_test/test_centipede.py
