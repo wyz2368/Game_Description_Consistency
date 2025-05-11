@@ -34,7 +34,7 @@ def get_current_level_actions_llm(node, ref_actions, model):
         # f"Only return the modified list in Python list format."
         # )
         prompt = (
-        f"You are given two lists of actions and they represent the same meaning of actions.\\"
+        f"You are given two lists of actions that refer to the same set of actions.\\"
         f"Generated Actions: {original_actions}"
         f"Reference Actions: {ref_actions}"
         f"Please update the names in this generated list of game actions: {original_actions} so that they match the names in the reference list.\n"

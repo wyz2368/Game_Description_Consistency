@@ -69,12 +69,21 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     if response_check == "False":
         raise ValueError("The players in the generated game do not match the players in the reference game.")
     
+    # prompt = (
+    # f"The following is a list of reference game players from a game tree: {ref_players}\n"
+    # f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
+    # f"Do not change the order of items in the generated list.\n"
+    # f"Only return the modified list in Python list format."
+    # )
+
     prompt = (
-    f"The following is a list of reference game players from a game tree: {ref_players}\n"
-    f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
-    f"Do not change the order of items in the generated list.\n"
-    f"Only return the modified list in Python list format."
-    )
+        f"You are given two lists of players that refer to the same set of players.\\"
+        f"Generated Players: {gen_players}"
+        f"Reference Players: {ref_players}"
+        f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
+        f"Do not change the order of items in the generated list.\n"
+        f"Only return the modified list in Python list format."
+        )
 
     response = infer_response(prompt, model)
     
