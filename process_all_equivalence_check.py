@@ -47,6 +47,10 @@ for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
                 reference_game = get_payoff_gambit(ref_path)
                 generated_game = get_payoff_gambit(gen_efg_path)
 
+                if len(reference_game) == 1:
+                    print(f"Only one player in game {gen_efg_path}, skipping equivalence check.")
+                    continue
+
                 parser_ref = EFGParser()
                 parser_gen = EFGParser()
 
