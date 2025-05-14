@@ -70,17 +70,6 @@ def check_payoffs(game):
 
 #========Test Functions Below===================================================================================
 
-# after_switch_game_path ="Dataset/Perfect_Information_Games/Nim_(with_5_in_one_pile)/Incorrect/5.efg"
-
-# parser_gen = EFGParser()
-
-# gen_game = parser_gen.parse_file(after_switch_game_path)
-
-# def test_payoffs():
-#     print("Checking payoffs...")
-#     check_payoffs(gen_game)
-#     assert check_payoffs(gen_game) == True
-
 def test_constraints(ref_game_path, output_game_path, original_game_path):
 
     parser_ref = EFGParser()

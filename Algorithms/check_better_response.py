@@ -24,8 +24,6 @@ def check_better_response(payoff_gen, payoff_ref):
                 a = (y2 - y1) / (x2 - x1)
                 b = y1 - a * x1
 
-                # print(f"Player {player}: a = {a}, b = {b}")
-
                 # Check if it works for all points
                 if all(gen[k] == a * ref[k] + b for k in range(len(ref))):
                     break  # Found valid affine mapping

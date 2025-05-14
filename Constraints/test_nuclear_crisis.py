@@ -79,20 +79,7 @@ def check_payoffs(game):
     if not (dd[0] < 0 and dd[1] < 0):
         print(f"Constraint failed: Detonate + Detonate → catastrophic loss for both. Got {dd}")
         return False
-    
-    # # Check the payoff relationships
-    # small_payoff = [abs(ignore[0]), abs(ignore[1]), abs(back_down[0]), abs(back_down[1]), abs(rr[0]), abs(rr[1])]
-    # large_payoff = [abs(rd[0]), abs(rd[1]), abs(dr[0]), abs(dr[1])]
-    # very_large_payoff = [abs(dd[0]), abs(dd[1])]
 
-    # # small < large < very_large
-    # # Ensure all small < all large
-    # if not all(s < l for s in small_payoff for l in large_payoff):
-    #     print(f"Constraint failed: Not all small payoffs are less than large ones.\nSmall: {small_payoff}\nLarge: {large_payoff}")
-
-    # # Ensure all large < all very large
-    # if not all(l < v for l in large_payoff for v in very_large_payoff):
-    #     print(f"Constraint failed: Not all large payoffs are less than very large ones.\nLarge: {large_payoff}\nVery large: {very_large_payoff}")
 
     print("All crisis escalation payoff constraints are satisfied.")
     return True
@@ -131,27 +118,6 @@ def check_player_order(game):
 
 
 #========Test Functions Below===================================================================================
-# ref_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Reference/ref.efg"
-# after_switch_game_path = "Output/Imperfect_Information_Games/Nuclear_Crisis/3.efg"
-# original_game_path = "Dataset/Imperfect_Information_Games/Nuclear_Crisis/Incorrect/3.efg"
-
-# parser_ref = EFGParser()
-# parser_gen = EFGParser()
-# parser_original = EFGParser()
-
-# ref_game = parser_ref.parse_file(ref_game_path)
-# gen_game = parser_gen.parse_file(after_switch_game_path)
-# original_game = parser_original.parse_file(original_game_path)
-
-# def test_payoffs():
-#     print("Checking payoffs...")
-#     check_payoffs(gen_game)
-#     assert check_payoffs(gen_game) == True
-
-# def test_order():
-#     print("Checking player order...")
-#     check_player_order(original_game)
-#     assert check_player_order(original_game) == True
 
 def test_constraints(ref_game_path, output_game_path, original_game_path):
 

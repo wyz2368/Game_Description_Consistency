@@ -4,7 +4,7 @@ from Match import switch_order, match_player
 from Tree import EFGParser
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-m', '--models', type=str, default="gemini", help="Select the model to use: 'gpt', 'gemini' or 'deepseek'")
+parser.add_argument('-m', '--models', type=str, default="gpt", help="Select the model to use: 'gpt' or 'deepseek'")
 args = parser.parse_args()
 model = args.models
 

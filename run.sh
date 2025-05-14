@@ -1,0 +1,3 @@
+python process_all_matching.py -m gpt
+python process_all_equivalence_check.py
+python process_all_constraints.py
