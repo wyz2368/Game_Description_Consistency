@@ -1,6 +1,6 @@
 # Game Description Consistency
 
-Add some descriptions
+A framework for automated evaluation of natural language translation to Extensive-Form Games.
 
 ## 🚀 Quick Start
 
@@ -51,20 +51,20 @@ Constraint results are saved to:
 ```
 Game_Description_Consistency/
 │
-├── Algorithms/                # Equivalence check logic
+├── Algorithms/                # Equivalence checking Algorithms
 ├── Constraints/               # Custom constraint tests (e.g., test_xxx.py)
 ├── Dataset/                   # Reference and generated game data
-├── Match/                     # Player/structure matching
-├── Output/                    # Output of model-aligned `.efg` files
+├── Match/                     # Code for matching generated game to reference game
+├── Output/                    # Output of mathed generated efg
 ├── Output_Constraints/        # Constraint checking results
 ├── Output_Equivalence/        # Equivalence checking results
-├── Tree/                      # EFG parsing and utilities
+├── Tree/                      # Code for parsing EFG to tree structure
 │
-├── process_all_matching.py    # Aligns generated `.efg` files to reference
+├── process_all_matching.py    # Match generated `.efg` files to reference
 ├── process_all_equivalence_check.py  # Checks equivalence metrics
-├── process_all_constraints.py        # Validates against game constraints
+├── process_all_constraints.py        # Check game constraints
 ├── run.sh                     # Optional shell script to run all steps
-├── utils.py                   # Inference utilities for Gemini, GPT, DeepSeek
+├── utils.py                   # Uilts functions convert efg to nfg
 └── README.md                  # This file
 ```
 
@@ -79,12 +79,14 @@ Three LLMs are currently supported:
 
 You can set API keys in `Match/chatbot.py`:
 
+For ChatGPT:
+
 ```python
 os.environ["OPENAI_API_KEY"] = "" # Add your API key here
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 ```
 
-In deepseek
+For deepseek:
 
 ```python
 client = OpenAI(api_key="", base_url="https://api.deepseek.com")
@@ -105,7 +107,7 @@ Dataset/
               └── Incorrect/*.efg
 ```
 
-2. Add constraint logic (optional) in `Constraints/test_{game_name}.py` with a function:
+2. Add constraint checking code (optional) in `Constraints/test_{game_name}.py` with a function:
 
 ```python
 def test_constraints(ref_path, gen_path, original_path):

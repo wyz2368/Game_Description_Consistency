@@ -1,8 +1,6 @@
-from google import genai
-from Tree import Node, NodeType
-from typing import List, Tuple
+from Tree import NodeType
 from .chatbot import infer_response
-from .utils import extract_python_code, convert_str_to_list, safe_extract_player_list
+from .utils import safe_extract_player_list
 
 def get_current_level_actions_llm(node, ref_actions, model):
 
@@ -24,15 +22,6 @@ def get_current_level_actions_llm(node, ref_actions, model):
         if response_check == "False":
             raise ValueError("The actions in the generated game do not match the actions in the reference game.")
 
-        # prompt = (
-        # f"You are given two lists of actions\\"
-        # f"Generated Actions: {original_actions}"
-        # f"Reference Actions: {ref_actions}"
-        # f"The following is a list of reference game actions from a game tree: {ref_actions}\n"
-        # f"Please update the names in this generated list of game actions: {original_actions} so that they match the names in the reference list.\n"
-        # f"Do not change the order of items in the generated list.\n"
-        # f"Only return the modified list in Python list format."
-        # )
         prompt = (
         f"You are given two lists of actions that refer to the same set of actions.\\"
         f"Generated Actions: {original_actions}"

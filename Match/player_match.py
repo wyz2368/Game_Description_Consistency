@@ -1,9 +1,7 @@
 from typing import List
-from google import genai
-
 from Tree import Node, NodeType
 from .chatbot import infer_response
-from .utils import convert_str_to_list, extract_python_code, safe_extract_player_list
+from .utils import safe_extract_player_list
 
 def reorder_players(gen_game, ref_players: List[str]):
     """
@@ -49,14 +47,6 @@ def match_palyer_name_llm(gen_game, ref_game, model):
     if len(gen_players) != len(ref_players):
         raise ValueError("The number of players in the generated game does not match the number of players in the reference game.")
     
-    # check_prompt = (f"Verify whether all players in {gen_players} correspond to players in {ref_players}, "
-    #             f"considering possible name differences. Return ONLY 'True' or 'False'.")
-    # check_response = client.models.generate_content(
-    #     model="gemini-2.0-flash",
-    #     contents=[check_prompt])
-    # player_check = check_response.text.strip()
-    # print(player_check)
-    
     # f"However, if you think the name in generated game doesn't have a matched name in reference game, return Only an empty list."
     prompt_check_valid = (f"You are given two lists of players\\"
                           f"Generated Game Players: {gen_players}"
@@ -68,13 +58,6 @@ def match_palyer_name_llm(gen_game, ref_game, model):
 
     if response_check == "False":
         raise ValueError("The players in the generated game do not match the players in the reference game.")
-    
-    # prompt = (
-    # f"The following is a list of reference game players from a game tree: {ref_players}\n"
-    # f"Please update the names in this generated list of game players: {gen_players} so that they match the names in the reference list.\n"
-    # f"Do not change the order of items in the generated list.\n"
-    # f"Only return the modified list in Python list format."
-    # )
 
     prompt = (
         f"You are given two lists of players that refer to the same set of players.\\"

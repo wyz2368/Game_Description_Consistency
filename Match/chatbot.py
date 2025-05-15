@@ -2,18 +2,6 @@ from google import genai
 from openai import OpenAI
 import os
 
-def infer_from_gemini(prompt):
-    """
-    Use the Gemini API to infer a response from a given prompt.
-    """
-    client = genai.Client(api_key="")  # Add your API key here
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=[prompt]
-    )
-    return response.text.strip()
-
-
 def infer_from_gpt(prompt):
     os.environ["OPENAI_API_KEY"] = "" # Add your API key here
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
@@ -69,9 +57,7 @@ def infer_from_deepseek(prompt):
 
 
 def infer_response(prompt, model):
-    if model == "gemini":
-        response = infer_from_gemini(prompt)
-    elif model == "gpt":
+    if model == "gpt":
         response = infer_from_gpt(prompt)
     elif model == "deepseek":
         response = infer_from_deepseek(prompt)
