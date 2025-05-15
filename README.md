@@ -86,7 +86,7 @@ os.environ["OPENAI_API_KEY"] = "" # Add your API key here
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 ```
 
-For deepseek:
+For DeepSeek:
 
 ```python
 client = OpenAI(api_key="", base_url="https://api.deepseek.com")
