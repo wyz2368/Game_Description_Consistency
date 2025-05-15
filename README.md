@@ -49,7 +49,7 @@ Constraint results are saved to:
 ## 📁 Project Structure
 
 ```
-GAME_DESCRIPTION_COMPARISON/
+Game_Description_Consistency/
 │
 ├── Algorithms/                # Equivalence check logic
 ├── Constraints/               # Custom constraint tests (e.g., test_xxx.py)
