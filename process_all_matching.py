@@ -9,7 +9,7 @@ args = parser.parse_args()
 model = args.models
 
 dataset_root = "Dataset"
-output_root = "Output"
+output_root = "Results/Output"
 
 # Iterate through both game type folders
 for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:

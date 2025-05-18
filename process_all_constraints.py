@@ -2,10 +2,10 @@ import os
 import importlib.util
 from natsort import natsorted  # For natural filename sorting
 
-output_root = "Output"
+output_root = "Results/Output"
 constraints_root = "Constraints"
 dataset_root = "Dataset"
-constraints_output_root = "Output_Constraints"
+constraints_output_root = "Results/Output_Constraints"
 
 # Loop through game types
 for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:

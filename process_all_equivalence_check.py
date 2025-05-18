@@ -17,9 +17,9 @@ def check_equivalence(reference_game, generated_game, game_name):
 
     return "\n".join(results)
 
-output_root = "Output"
+output_root = "Results/Output"
 dataset_root = "Dataset"
-equivalence_root = "Output_Equivalence"
+equivalence_root = "Results/Output_Equivalence"
 
 for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
     game_type_path = os.path.join(output_root, game_type)
