@@ -55,9 +55,10 @@ Game_Description_Consistency/
 ├── Constraints/               # Custom constraint tests (e.g., test_xxx.py)
 ├── Dataset/                   # Reference and generated game data
 ├── Match/                     # Code for matching generated game to reference game
-├── Output/                    # Output of mathed generated efg
-├── Output_Constraints/        # Constraint checking results
-├── Output_Equivalence/        # Equivalence checking results
+├── Results/                   # All evaluation outputs
+│   ├── Output/                # Matched generated EFG files
+│   ├── Output_Constraints/    # Constraint checking results
+│   └── Output_Equivalence/   # Equivalence checking results
 ├── Tree/                      # Code for parsing EFG to tree structure
 │
 ├── process_all_matching.py    # Match generated `.efg` files to reference
@@ -118,7 +119,7 @@ def test_constraints(ref_path, gen_path, original_path):
 
 After running all steps, outputs will be saved in:
 
-* `Output/`: Aligned EFG files
-* `Output_Equivalence/`: Equivalence test results
-* `Output_Constraints/`: Constraint satisfaction reports
+* `Results/Output/`: Aligned EFG files
+* `Results/Output_Equivalence/`: Equivalence test results
+* `Results/Output_Constraints/`: Constraint satisfaction reports
 
