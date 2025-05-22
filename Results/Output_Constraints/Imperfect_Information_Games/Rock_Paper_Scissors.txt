@@ -1,5 +1,0 @@
-1.efg True
-2.efg True
-3.efg True
-4.efg False
-5.efg False
