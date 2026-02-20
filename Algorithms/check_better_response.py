@@ -27,6 +27,8 @@ def check_better_response(payoff_gen, payoff_ref):
                 # Check if it works for all points
                 if all(gen[k] == a * ref[k] + b for k in range(len(ref))):
                     break  # Found valid affine mapping
+                else:
+                    return False  # Unique (a,b) failed -> impossible overall
             else:
                 continue  # No break, try next i
             break  # Found valid mapping, skip remaining i
