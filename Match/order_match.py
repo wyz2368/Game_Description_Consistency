@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Set, FrozenSet, Any
 from collections import defaultdict
 from copy import deepcopy
 from collections import deque
@@ -7,7 +7,6 @@ from functools import reduce
 from operator import mul
 
 from Tree import Node, NodeType
-from .action_match import get_current_level_actions_llm, update_current_nodes
 
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
@@ -154,37 +153,56 @@ def reorder_generated_game(reference_node, generated_node):
     return reordered_nodes
 
 def mark_simultaneous_move_children(start_node):
-    """Marks nodes and their children in a game tree that represent simultaneous moves.
-    This function traverses the game tree starting from the given `start_node`, marking nodes that are part of simultaneous move scenarios. It filters out terminal nodes and ensures that only valid simultaneous move nodes are processed. If a node is determined to be part of a simultaneous move, it and all its children are marked as checked.
-    Args:
-        start_node (Node): The starting node of the game tree from which to begin marking simultaneous move nodes.
-    Returns:
-        None: The function modifies the nodes in place, marking them as checked.
+    """
+    Mark the simultaneous-move block starting at start_node.
+
+    The key change vs your version:
+    - We validate the ENTIRE frontier (nodes_to_check) together as one "level",
+      instead of validating each parent independently.
+    - If the level is valid (same infoset + same player across all nodes), we mark
+      them checked and advance to the next level.
     """
     nodes_to_check = [start_node]
-    
+
     while nodes_to_check:
+        # Collect all children from the whole frontier (this forms the "next level")
         next_level_nodes = []
-
         for node in nodes_to_check:
-            # Filter out terminal nodes
-            if any(child.node_type == NodeType.TERMINAL for child in node.children.values()):
-                continue  # Skip processing terminal branches
+            next_level_nodes.extend(list(node.children.values()))
 
-            # Ensure the node belongs to a simultaneous move
-            info_sets = {child.information_set for child in node.children.values() if child.information_set is not None}
-            players = {child.player for child in node.children.values() if child.node_type == NodeType.PLAYER}
+        # If nothing to expand, stop
+        if not next_level_nodes:
+            break
 
-            if len(info_sets) != 1 or len(players) != 1:
-                continue  # Skip if not a valid simultaneous move
+        # Stop if any terminal is present in the next level
+        if any(child.node_type == NodeType.TERMINAL for child in next_level_nodes):
+            break
 
-            # Mark current node and its children
+        # Require all nodes in next level to be PLAYER nodes (adjust if you allow CHANCE here)
+        if not all(child.node_type == NodeType.PLAYER for child in next_level_nodes):
+            break
+
+        # Require all nodes in next level to have infoset
+        if any(child.information_set is None for child in next_level_nodes):
+            break
+
+        # Now the key: check SAME infoset and SAME player across the WHOLE next level
+        info_sets = {child.information_set for child in next_level_nodes}
+        players = {child.player for child in next_level_nodes}
+
+        if len(info_sets) != 1 or len(players) != 1:
+            # Not a valid simultaneous-move layer
+            break
+
+        # If we got here, this level is a valid simultaneous layer:
+        # mark current frontier + next level as checked, then advance
+        for node in nodes_to_check:
             node.checked = True
-            for child in node.children.values():
-                child.checked = True
-                next_level_nodes.append(child)
+        for child in next_level_nodes:
+            child.checked = True
 
-        nodes_to_check = next_level_nodes  # Move to the next level
+        nodes_to_check = next_level_nodes
+
 
 def check_simultaneous_move_start_node(node):
     
@@ -210,7 +228,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
     Args:
         ref_node (Node): The reference game node to compare against.
         gen_node (Node): The generated game node to be filtered.
-        tree: The game tree containing the nodes.
     
     Raises:
         ValueError: If a matching reference node cannot be found for a generated node, or if the reference node does not meet the simultaneous move condition.
@@ -274,8 +291,9 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
             # 3. Check the children nodes has the same player
             
             gen_is_start_node = check_simultaneous_move_start_node(g_node)
-            
+
             # If above conditions are not met, the node is NOT the start node of the simultaneous move
+
             if not gen_is_start_node:
                 gen_nodes_list.append(g_node)
                 match = False
@@ -324,69 +342,64 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
             children_paths = {}
 
             def collect_paths(node, path):
-                """To capture the structure (paths) of all nodes in the current subtree 
-                under g_node that are involved in a simultaneous move."""
-
                 if not node.checked:
                     return
-                
-                # If leaf node or next nodes aren't checked, store the path
+
                 if not node.children:
                     children_paths[tuple(path)] = node
                     return
-                
+
                 for action, child in node.children.items():
+                    if node.node_type == NodeType.PLAYER:
+                        step = (node.level, node.player, action)
+                    else:  # CHANCE
+                        step = (node.level, -1, action)
+
                     if child.checked:
-                        if node.node_type == NodeType.PLAYER:
-                            collect_paths(child, path + [(node.player, action)])
-                        elif node.node_type == NodeType.CHANCE:
-                            collect_paths(child, path + [(-1, action)])
+                        collect_paths(child, path + [step])
                     else:
-                        if node.node_type == NodeType.PLAYER:
-                            children_paths[tuple(sorted(path + [(node.player, action)]))] = child
-                        elif node.node_type == NodeType.CHANCE:
-                            children_paths[tuple(sorted(path + [(-1, action)]))] = child
+                        children_paths[tuple(path + [step])] = child
+
             
             # Start collecting paths from each action of the start node
             for action in g_node.actions:
                 child = g_node.children[action]
                 if g_node.node_type == NodeType.PLAYER:
-                    collect_paths(child, [(g_node.player, action)])
+                    collect_paths(child, [(g_node.level ,g_node.player, action)])
                 elif g_node.node_type == NodeType.CHANCE:
-                    collect_paths(child, [(-1, action)])
+                    collect_paths(child, [(g_node.level, -1, action)])
             
             new_gen = reorder_generated_game(matched_ref_node, g_node) # Get a list of reordered nodes like [(['A', 'B'], 1, 0, 1), (['C', 'D', 'E'], 2, 1, 1), (['C', 'D', 'E'], 2, 1, 1)]
             # Update the actions in the generated game to the reordered actions for this simultaneous move part
             update_nodes_with_switching_order(g_node, new_gen, level=g_node.level) 
 
-
             # To restore the original subtree from children_paths after reordering actions in g_node.
             # After reordering actions using update_nodes_with_switching_order, the structure of g_node is changed. 
             # We need to track the path first and then restore the correct children on the path.
+
             def collect_paths_new(node, path):
-                """Recursively collect paths for all children of the given node."""
                 if not node.checked:
-                    return               
+                    return
+
                 for action, child in node.children.items():
+                    if node.node_type == NodeType.PLAYER:
+                        step = (node.level, node.player, action)
+                    else:  # CHANCE
+                        step = (node.level, -1, action)
+
                     if child.checked:
-                        if node.node_type == NodeType.PLAYER:
-                            collect_paths_new(child, path + [(node.player, action)])
-                        elif node.node_type == NodeType.CHANCE:
-                            collect_paths_new(child, path + [(-1, action)])
+                        collect_paths_new(child, path + [step])
                     else:
-                        if node.node_type == NodeType.PLAYER:
-                            final_path = tuple(sorted(path + [(node.player, action)]))
-                        elif node.node_type == NodeType.CHANCE:
-                            final_path = tuple(sorted(path + [(-1, action)]))
-                        for original_path, original_node in children_paths.items():
-                            if final_path == original_path:
-                                node.children[action] = original_node
-                
+                        final_path = tuple(path + [step])
+                        original_node = children_paths.get(final_path)
+                        if original_node is not None:
+                            node.children[action] = original_node
+
             for action, child in g_node.children.items():
                 if g_node.node_type == NodeType.PLAYER:
-                    collect_paths_new(child, [(g_node.player, action)])
+                    collect_paths_new(child, [(g_node.level, g_node.player, action)])
                 elif g_node.node_type == NodeType.CHANCE:
-                    collect_paths_new(child, [(-1, action)])
+                    collect_paths_new(child, [(g_node.level, -1, action)])
             
             gen_nodes_list.append(g_node)
               
@@ -400,12 +413,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
             if r_node.node_type != g_node.node_type:
                 raise ValueError(f"Node types do not match")
 
-            
-            if g_node.node_type != NodeType.TERMINAL:
-                ref_actions = r_node.actions
-                modified_list = get_current_level_actions_llm(g_node, ref_actions, model) 
-                update_current_nodes(g_node, modified_list, ref_actions)
-
             for action, child in r_node.children.items():
                 child.parent_action = action
             
@@ -416,6 +423,95 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
 
                 queue_ref.append(ref_child)
                 queue_gen.append(gen_child)
+
+def build_infoset_partition(
+    root: Node,
+    *,
+    include_chance: bool = False,
+    require_parent_action: bool = True,
+) -> Dict[int, Set[Tuple[Tuple[int, str], ...]]]:
+    """
+    Returns a mapping: information_set_id -> set of node-paths (each path is a tuple of (player, action) pairs).
+
+    Node path convention:
+      - For each edge into a node, append (parent.player, child.parent_action).
+      - Root has empty path.
+    """
+    partition: Dict[int, Set[Tuple[Tuple[int, str], ...]]] = defaultdict(set)
+
+    stack: List[Tuple[Node, Tuple[Tuple[int, str], ...]]] = [(root, tuple())]
+
+    while stack:
+        node, path = stack.pop()
+
+        # Record PLAYER nodes with an infoset
+        if node.node_type == NodeType.PLAYER and node.information_set is not None:
+            partition[node.information_set].add(path)
+
+        # Traverse children
+        for action, child in node.children.items():
+            # You already set child.parent_action = action in filter_simultaneous_moves Stage 2,
+            # but we can also use `action` directly from the dict.
+            edge_action = getattr(child, "parent_action", None)
+            if require_parent_action and edge_action is None:
+                # Fall back to dict key if parent_action is not set
+                edge_action = action
+
+            if edge_action is None:
+                # If still None, skip or raise; choose raise to catch inconsistencies early
+                raise ValueError("Child has no parent_action and action key is None/unavailable.")
+
+            # Typically (player, action) is parent PLAYER's identity + the edge action label
+            if node.node_type == NodeType.PLAYER:
+                next_path = path + ((node.player, edge_action),)
+            elif node.node_type == NodeType.CHANCE:
+                if include_chance:
+                    next_path = path + ((-1, edge_action),)
+                else:
+                    # If you don't want chance in the path identity, keep the same path
+                    next_path = path
+            else:
+                # TERMINAL has no children in normal trees, but handle generically
+                next_path = path
+
+            stack.append((child, next_path))
+
+    return partition
+
+def canonicalize_partition(
+    part: Dict[int, Set[Tuple[Tuple[int, str], ...]]]
+) -> List[FrozenSet[Tuple[Tuple[int, str], ...]]]:
+    """
+    Convert {infoset_id -> set(paths)} into a canonical, order-independent representation:
+      a sorted list of frozensets, where each frozenset is the group of paths in one infoset.
+    """
+    groups = [frozenset(paths) for paths in part.values()]
+    # Sort deterministically for stable comparison / debugging
+    groups.sort(key=lambda g: (len(g), sorted(map(str, g))))
+    return groups
+
+
+def infoset_partitions_equal(ref_root: Node, gen_root: Node) -> Tuple[bool, Any]:
+    """
+    Returns (equal, debug_info). Comparison is ID-independent.
+    debug_info contains canonical forms if not equal.
+    """
+    ref_part = build_infoset_partition(ref_root)
+    gen_part = build_infoset_partition(gen_root)
+
+    ref_can = canonicalize_partition(ref_part)
+    gen_can = canonicalize_partition(gen_part)
+
+    ok = (ref_can == gen_can)
+    debug = None
+    if not ok:
+        debug = {
+            "ref_num_infosets": len(ref_part),
+            "gen_num_infosets": len(gen_part),
+            "ref_groups": ref_can,
+            "gen_groups": gen_can,
+        }
+    return ok, debug
             
             
 
@@ -431,3 +527,8 @@ def switch_order(ref_node: Node, gen_node: Node, model: str):
     """
 
     filter_simultaneous_moves(ref_node, gen_node, model)
+
+    ok, _ = infoset_partitions_equal(ref_node, gen_node)
+
+    if not ok:
+        raise ValueError("Generated game infoset partition does not match reference game.")
