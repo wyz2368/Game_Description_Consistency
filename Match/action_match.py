@@ -6,7 +6,35 @@ from typing import Dict, Union, List
 from collections import deque
 from Tree import NodeType
 
-def get_current_level_actions_llm(original_actions: List[str], ref_actions: List[str], model: str) -> Dict[str, str]:
+def check_name_consistent(original_actions: List[str], ref_actions: List[str], model: str):
+
+    prompt_check_valid = (
+        f"You are given two lists of actions\\"
+        f"Generated Actions: {original_actions}"
+        f"Reference Actions: {ref_actions}"
+        f"Disregard the different names and orders. Check if they represent the same meaning of actions."
+        f"Output ONLY True if they match and False otherwise."
+    )
+
+    response_check = infer_response(prompt_check_valid, model)
+
+    return response_check
+
+def check_name_consistent_after_mapping(updated_actions: List[str], ref_actions: List[str], model: str):
+
+    prompt_check_valid = (
+        f"You are given two lists of actions\\"
+        f"Generated Actions: {updated_actions}"
+        f"Reference Actions: {ref_actions}"
+        f"Disregard the different orders. Check if they represent the same names actions."
+        f"Output ONLY True if they match and False otherwise."
+    )
+
+    response_check = infer_response(prompt_check_valid, model)
+
+    return response_check
+
+def match_all_actions_llm(original_actions: List[str], ref_actions: List[str], model: str) -> Dict[str, str]:
     """
     Returns a mapping {generated_action_name -> reference_action_name}.
     This is computed by asking the LLM to output the renamed list in the SAME ORDER as original_actions.
@@ -18,15 +46,7 @@ def get_current_level_actions_llm(original_actions: List[str], ref_actions: List
     print("Original actions:", original_actions)
     print("Reference actions:", ref_actions)
 
-    prompt_check_valid = (
-        f"You are given two lists of actions\\"
-        f"Generated Actions: {original_actions}"
-        f"Reference Actions: {ref_actions}"
-        f"Disregard the different names and orders. Check if they represent the same meaning of actions."
-        f"Output ONLY True if they match and False otherwise."
-    )
-
-    response_check = infer_response(prompt_check_valid, model)
+    response_check = check_name_consistent(original_actions, ref_actions, model)
 
     if response_check == "False":
         raise ValueError("The actions in the generated game do not match the actions in the reference game.")
@@ -111,7 +131,7 @@ def build_global_action_mappings(ref_total: Dict[Key, List[str]],
         gen_actions = gen_total[k]
 
         # LLM produces mapping for this key
-        mappings[k] = get_current_level_actions_llm(gen_actions, ref_actions, model)
+        mappings[k] = match_all_actions_llm(gen_actions, ref_actions, model)
 
     return mappings
 

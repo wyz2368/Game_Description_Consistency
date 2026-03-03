@@ -1,5 +1,5 @@
-from typing import List, Tuple, Dict, Optional
-from collections import defaultdict
+from typing import List, Tuple, Dict, Optional, Union
+from collections import defaultdict, deque 
 import re
 from dataclasses import dataclass
 from enum import Enum
@@ -43,6 +43,7 @@ class GameTree:
         self.root: Optional[Node] = None
 
         self.level_to_nodes = defaultdict(list)
+    
 
     def print_tree(self, node: Optional[Node] = None, depth: int = 0):
         if node is None:
@@ -69,6 +70,44 @@ class GameTree:
             for action, child in node.children.items():
                 print(f"{indent}Action: {action} →")
                 self.print_tree(child, depth + 1)
+    
+    def get_total_unique_actions(self) -> Dict[Union[int, str], List[str]]:
+        """
+        Traverse the whole tree and return:
+            {
+            "chance": [unique chance actions],
+            <player_number>: [unique player actions],
+            ...
+            }
+
+        Notes:
+        - PLAYER nodes contribute to their player key (int).
+        - CHANCE nodes contribute to the "chance" key (str).
+        - TERMINAL nodes contribute nothing.
+        """
+        if self.root is None:
+            return {}
+
+        actions_map = defaultdict(set)
+        queue = deque([self.root])
+
+        while queue:
+            node = queue.popleft()
+
+            if node.actions:
+                if node.node_type == NodeType.PLAYER and node.player is not None:
+                    for a in node.actions:
+                        actions_map[node.player].add(a)
+
+                elif node.node_type == NodeType.CHANCE:
+                    for a in node.actions:
+                        actions_map["chance"].add(a)
+
+            for child in node.children.values():
+                queue.append(child)
+
+        # Convert sets to sorted lists for stable output
+        return {k: sorted(list(v)) for k, v in actions_map.items()}
 
 
 class EFGParser:
@@ -94,23 +133,25 @@ class EFGParser:
         node_type = NodeType(line[0])
 
         if node_type == NodeType.TERMINAL:
-            # Format: t "" outcome_number "Outcome Label" { payoff1 payoff2 }
+            # Robust: capture everything inside {...} then parse numbers (ints or floats)
+            pattern = r'^t\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*([^}]*)\s*\}\s*$'
+            m = re.search(pattern, line)
+            if not m:
+                raise ValueError(f"The line should match terminal. Got: {line}")
 
-            pattern = r't\s+"(.*?)"\s+(\d+)\s+"(.*?)"\s+\{\s*([-?\d+\s,]+)\}'
+            label = m.group(1)
+            outcome_number = int(m.group(2))
+            outcome_name = m.group(3)
+            values = m.group(4)
 
-            match = re.search(pattern, line)
+            # matches: -1, 0.5, 2, -3.25
+            nums = re.findall(r'-?\d+(?:\.\d+)?', values)
 
-            if not match:
-                raise ValueError("The line should match terminal.")
-
-
-            label = match.group(1)
-            outcome_number = int(match.group(2))
-            outcome_name = match.group(3)
-            values = match.group(4)
-            # Parse the values into a list of integers
-            payoffs = list(map(int, re.findall(r'-?\d+', values)))
-
+            # use float if any payoff has '.', else int
+            if any('.' in x for x in nums):
+                payoffs = [float(x) for x in nums]
+            else:
+                payoffs = [int(x) for x in nums]
 
             return Node(
                 node_type=node_type,
@@ -119,7 +160,6 @@ class EFGParser:
                 outcome_name=outcome_name,
                 payoffs=payoffs
             )
-
 
         elif node_type == NodeType.CHANCE:
             pattern = r'c\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s+(?:\d+/\d+|\d*\.\d+|\d+)\s*)+)\}\s+\d+'

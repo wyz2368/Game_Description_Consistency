@@ -8,6 +8,8 @@ from operator import mul
 
 from Tree import Node, NodeType
 
+from .action_match import check_name_consistent_after_mapping, update_current_nodes
+
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
     Updates the actions and children keys of each Node with modified actions from unique_actions_modified.
@@ -222,7 +224,7 @@ def check_simultaneous_move_start_node(node):
     
 ############# Below is the main function for switching the order of nodes in a game tree #############
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappings):
     """Filters simultaneous moves between a reference game node and a generated game node within a game tree.
     This function traverses the game tree, comparing nodes from the reference game with those from the generated game. It identifies simultaneous moves and ensures that the generated nodes conform to the structure and rules defined by the reference nodes. If discrepancies are found, appropriate errors are raised.
     Args:
@@ -405,13 +407,45 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str):
               
 
         ############## Stage 2: Action Matching and Updating Nodes ######################   
-        for g_node, r_node in zip(gen_nodes_list,ref_nodes_list_temp):
+        for g_node, r_node in zip(gen_nodes_list, ref_nodes_list_temp):
 
             if len(r_node.children.values()) != len(g_node.children.values()):
                 raise ValueError(f"Number of children do not match")
             
             if r_node.node_type != g_node.node_type:
                 raise ValueError(f"Node types do not match")
+            
+            if g_node.node_type in (NodeType.PLAYER, NodeType.CHANCE):
+                if not r_node.actions or not g_node.actions:
+                    raise ValueError("Missing actions on non-terminal node.")
+
+                # Pick mapping key
+                if g_node.node_type == NodeType.CHANCE:
+                    key = "chance"
+                else:
+                    key = g_node.player  # player-by-player mapping
+
+                if key not in mappings:
+                    raise ValueError(f"No mapping found for key={key}")
+
+                key_map = mappings[key]
+
+                # Rename generated actions in its OWN order
+                modified_actions = []
+                for a in g_node.actions:
+                    if a not in key_map:
+                        raise ValueError(f"Generated action '{a}' not found in mapping for key={key}")
+                    modified_actions.append(key_map[a])
+                print("g_node", g_node.actions)
+                ref_actions = r_node.actions
+
+                check_consistent = check_name_consistent_after_mapping(modified_actions, ref_actions, model)
+
+                if check_consistent == "False":
+                    raise ValueError("The actions in the generated game do not match the actions in the reference game.")
+                
+                print("modified_actions", modified_actions)
+                update_current_nodes(g_node, modified_actions, ref_actions)
 
             for action, child in r_node.children.items():
                 child.parent_action = action
@@ -515,7 +549,7 @@ def infoset_partitions_equal(ref_root: Node, gen_root: Node) -> Tuple[bool, Any]
             
             
 
-def switch_order(ref_node: Node, gen_node: Node, model: str):
+def switch_order(ref_node: Node, gen_node: Node, model: str, mappings):
     """Switches the order of two nodes in a tree structure and filters simultaneous moves.
     
     Args:
@@ -526,7 +560,7 @@ def switch_order(ref_node: Node, gen_node: Node, model: str):
         None: This function modifies the tree in place and does not return a value.
     """
 
-    filter_simultaneous_moves(ref_node, gen_node, model)
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings)
 
     ok, _ = infoset_partitions_equal(ref_node, gen_node)
 
