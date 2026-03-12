@@ -1,6 +1,6 @@
 import os
 import argparse
-from Match import switch_order, match_player
+from Match import switch_order, match_player, build_global_action_mappings
 from Tree import EFGParser
 
 parser = argparse.ArgumentParser()
@@ -48,7 +48,12 @@ for game_type in ["Imperfect_Information_Games", "Perfect_Information_Games"]:
                     ref_game = parser_ref.parse_file(ref_path)
 
                     match_player(gen_game, ref_game, model)
-                    switch_order(ref_game.root, gen_game.root, model)
+                    ref_total = ref_game.get_total_unique_actions()
+                    gen_total = gen_game.get_total_unique_actions()
+
+                    mappings = build_global_action_mappings(ref_total, gen_total, model)
+
+                    switch_order(ref_game.root, gen_game.root, model, mappings)
 
                     # Save output under Output/{game_type}/{game_name}/{filename}
                     output_dir = os.path.join(output_root, game_type, game_name)
