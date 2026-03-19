@@ -458,54 +458,44 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                 queue_ref.append(ref_child)
                 queue_gen.append(gen_child)
 
+
 def build_infoset_partition(
     root: Node,
     *,
-    include_chance: bool = False,
+    include_chance: bool = True,
     require_parent_action: bool = True,
-) -> Dict[int, Set[Tuple[Tuple[int, str], ...]]]:
+) -> Dict[Tuple[int, int], Set[Tuple[Tuple[int, str], ...]]]:
     """
-    Returns a mapping: information_set_id -> set of node-paths (each path is a tuple of (player, action) pairs).
-
-    Node path convention:
-      - For each edge into a node, append (parent.player, child.parent_action).
-      - Root has empty path.
+    Returns a mapping:
+        (player, information_set_id) -> set of node-paths
     """
-    partition: Dict[int, Set[Tuple[Tuple[int, str], ...]]] = defaultdict(set)
+    partition: Dict[Tuple[int, int], Set[Tuple[Tuple[int, str], ...]]] = defaultdict(set)
 
     stack: List[Tuple[Node, Tuple[Tuple[int, str], ...]]] = [(root, tuple())]
 
     while stack:
         node, path = stack.pop()
 
-        # Record PLAYER nodes with an infoset
         if node.node_type == NodeType.PLAYER and node.information_set is not None:
-            partition[node.information_set].add(path)
+            key = (node.player, node.information_set)
+            partition[key].add(path)
 
-        # Traverse children
         for action, child in node.children.items():
-            # You already set child.parent_action = action in filter_simultaneous_moves Stage 2,
-            # but we can also use `action` directly from the dict.
             edge_action = getattr(child, "parent_action", None)
             if require_parent_action and edge_action is None:
-                # Fall back to dict key if parent_action is not set
                 edge_action = action
 
             if edge_action is None:
-                # If still None, skip or raise; choose raise to catch inconsistencies early
                 raise ValueError("Child has no parent_action and action key is None/unavailable.")
 
-            # Typically (player, action) is parent PLAYER's identity + the edge action label
             if node.node_type == NodeType.PLAYER:
                 next_path = path + ((node.player, edge_action),)
             elif node.node_type == NodeType.CHANCE:
                 if include_chance:
                     next_path = path + ((-1, edge_action),)
                 else:
-                    # If you don't want chance in the path identity, keep the same path
                     next_path = path
             else:
-                # TERMINAL has no children in normal trees, but handle generically
                 next_path = path
 
             stack.append((child, next_path))

@@ -4,6 +4,8 @@ import re
 from dataclasses import dataclass
 from enum import Enum
 
+from fractions import Fraction
+
 class NodeType(Enum):
     CHANCE = 'c'
     PLAYER = 'p'
@@ -127,13 +129,10 @@ class EFGParser:
         return title, players
 
     def parse_node(self, line: str) -> Node:
-        parts = line.strip().split()
-        # node_type = NodeType(parts[0])
 
         node_type = NodeType(line[0])
 
         if node_type == NodeType.TERMINAL:
-            # Robust: capture everything inside {...} then parse numbers (ints or floats)
             pattern = r'^t\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*([^}]*)\s*\}\s*$'
             m = re.search(pattern, line)
             if not m:
@@ -144,14 +143,17 @@ class EFGParser:
             outcome_name = m.group(3)
             values = m.group(4)
 
-            # matches: -1, 0.5, 2, -3.25
-            nums = re.findall(r'-?\d+(?:\.\d+)?', values)
+            payoff_tokens = [token.strip() for token in values.split(',') if token.strip()]
 
-            # use float if any payoff has '.', else int
-            if any('.' in x for x in nums):
-                payoffs = [float(x) for x in nums]
-            else:
-                payoffs = [int(x) for x in nums]
+            def parse_payoff(token: str):
+                if '/' in token:
+                    return float(Fraction(token))
+                elif '.' in token:
+                    return float(token)
+                else:
+                    return int(token)
+
+            payoffs = [parse_payoff(token) for token in payoff_tokens]
 
             return Node(
                 node_type=node_type,
@@ -181,7 +183,6 @@ class EFGParser:
                     prob = prob_str
                 elif '.' in prob_str:
                     # less than 1, convert to fraction
-                    from fractions import Fraction
                     prob = str(Fraction(prob_str))
                 else:
                     # equivalent to "1"
