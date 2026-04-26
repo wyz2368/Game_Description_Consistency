@@ -36,8 +36,3 @@ def check_better_response(payoff_gen, payoff_ref):
             return False  # No valid affine mapping found
 
     return True
-
-
-
-
-
