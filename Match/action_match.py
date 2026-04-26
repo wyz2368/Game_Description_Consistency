@@ -1,66 +1,116 @@
-from typing import Dict, List
+from typing import Dict, Union, List, Tuple
 from .chatbot import infer_response
 from .utils import safe_extract_player_list
-from typing import Dict, Union, List
 
-from collections import deque
 from Tree import NodeType
+import re
 
-def check_name_consistent(original_actions: List[str], ref_actions: List[str], model: str):
+Key = Union[int, str]  # player number or "chance"
 
+def parse_reason_answer_block(response: str) -> Tuple[str, str]:
+    """
+    Parse:
+      <reason>...</reason>
+      <answer>True|False</answer>
+    """
+    reason_match = re.search(r"<reason>\s*(.*?)\s*</reason>", response, re.DOTALL)
+    answer_match = re.search(r"<answer>\s*(True|False)\s*</answer>", response, re.DOTALL)
+
+    if not answer_match:
+        raise ValueError(f"Invalid check response format: {response}")
+
+    reason = reason_match.group(1).strip() if reason_match else ""
+    answer = answer_match.group(1).strip()
+    return reason, answer
+
+def check_name_consistent(
+    original_actions: List[str],
+    ref_actions: List[str],
+    model: str,
+    game_description: str,
+) -> Tuple[str, str]:
+    """
+    Returns:
+        (answer, reason)
+    where answer is "True" or "False"
+    """
     prompt_check_valid = (
-        f"You are given two lists of actions\\"
-        f"Generated Actions: {original_actions}"
-        f"Reference Actions: {ref_actions}"
-        f"Disregard the different names and orders. Check if they represent the same meaning of actions."
-        f"Output ONLY True if they match and False otherwise."
+        f"You are given a game description and two lists of action labels.\n\n"
+        f"Game description:\n{game_description}\n\n"
+        f"Generated Actions: {original_actions}\n"
+        f"Reference Actions: {ref_actions}\n\n"
+        f"Decide whether these two lists refer to the same set of underlying game actions.\n"
+        f"Focus on the underlying game choice, not surface wording.\n"
+        f"Treat different naming conventions as equivalent when they refer to the same action.\n"
+        f"Use the game description to resolve coordinates, positions, shorthand, aliases, or paraphrases.\n\n"
+        f"Output format:\n"
+        f"<reason>\n"
+        f"Provide a brief explanation in 2 to 4 sentences.\n"
+        f"Explain how the generated actions correspond to the reference actions.\n"
+        f"</reason>\n"
+        f"<answer>\n"
+        f"True or False\n"
+        f"</answer>\n\n"
+        f"Do not output anything outside these tags."
     )
 
-    response_check = infer_response(prompt_check_valid, model)
+    response = infer_response(prompt_check_valid, model)
+    print("Raw check response:", response)
 
-    return response_check
+    reason, answer = parse_reason_answer_block(response)
 
-def check_name_consistent_after_mapping(updated_actions: List[str], ref_actions: List[str], model: str):
+    print("Check reason:", reason)
+    print("Check final answer:", answer)
 
-    prompt_check_valid = (
-        f"You are given two lists of actions\\"
-        f"Generated Actions: {updated_actions}"
-        f"Reference Actions: {ref_actions}"
-        f"Disregard the different orders. Check if they represent the same names actions."
-        f"Output ONLY True if they match and False otherwise."
-    )
+    return answer, reason
 
-    response_check = infer_response(prompt_check_valid, model)
 
-    return response_check
-
-def match_all_actions_llm(original_actions: List[str], ref_actions: List[str], model: str) -> Dict[str, str]:
+def match_all_actions_llm(
+    original_actions: List[str],
+    ref_actions: List[str],
+    model: str,
+    game_description: str,
+) -> Dict[str, str]:
     """
     Returns a mapping {generated_action_name -> reference_action_name}.
-    This is computed by asking the LLM to output the renamed list in the SAME ORDER as original_actions.
+    The LLM must return the mapped list in the SAME ORDER as original_actions.
     """
-
     if not original_actions:
         raise ValueError("Empty original_actions provided.")
 
     print("Original actions:", original_actions)
     print("Reference actions:", ref_actions)
 
-    response_check = check_name_consistent(original_actions, ref_actions, model)
+    check_result, reason = check_name_consistent(
+        original_actions=original_actions,
+        ref_actions=ref_actions,
+        model=model,
+        game_description=game_description,
+    )
 
-    if response_check == "False":
-        raise ValueError("The actions in the generated game do not match the actions in the reference game.")
+    if check_result != "True":
+        raise ValueError(
+            "The actions in the generated game do not match the actions in the reference game. "
+            f"Reason: {reason}"
+        )
 
     prompt = (
-        f"You are given two lists of actions that refer to the same set of actions.\\"
-        f"Generated Actions: {original_actions}"
-        f"Reference Actions: {ref_actions}"
-        f"Please update the names in this generated list of game actions: {original_actions} so that they match the names in the reference list.\n"
-        f"Do not change the order of items in the generated list.\n"
-        f"Only return the modified list in Python list format."
+        f"You are given a game description and two lists of action labels that refer to the same set of game actions.\n\n"
+        f"Game description:\n{game_description}\n\n"
+        f"Generated Actions: {original_actions}\n"
+        f"Reference Actions: {ref_actions}\n\n"
+        f"Task: replace each generated action with the best-matching reference action.\n\n"
+        f"Match actions by their underlying meaning in the game, not by surface wording.\n"
+        f"Use the game description to resolve paraphrases, alternate naming conventions, coordinates, shorthand, or role-specific wording.\n"
+        f"Keep the exact same order as the generated actions list.\n"
+        f"Do not add, remove, or reorder items.\n"
+        f"Each output item must be chosen from the reference actions list.\n\n"
+        f"Return ONLY the mapped list in valid Python list format."
     )
 
     response = infer_response(prompt, model)
+    print("Raw mapping response:", response)
+
     modified_actions = safe_extract_player_list(response)
 
     if len(modified_actions) != len(original_actions):
@@ -68,11 +118,17 @@ def match_all_actions_llm(original_actions: List[str], ref_actions: List[str], m
             f"LLM output length mismatch. original={len(original_actions)} modified={len(modified_actions)}"
         )
 
+    # Validate mapped list is the same action set as reference
+    if sorted(modified_actions) != sorted(ref_actions):
+        raise ValueError(
+            f"Mapped actions do not match reference actions.\n"
+            f"Modified: {modified_actions}\n"
+            f"Reference: {ref_actions}"
+        )
+
     print("Modified actions:", modified_actions)
 
-    # Mapping: generated name -> reference name
-    mapping = dict(zip(original_actions, modified_actions))
-    return mapping
+    return dict(zip(original_actions, modified_actions))
 
 def update_current_nodes(node, modified_actions, ref_actions):
 
@@ -109,11 +165,13 @@ def update_current_nodes(node, modified_actions, ref_actions):
         node.children = new_children
         node.probs = new_probs
 
-Key = Union[int, str]  # player number or "chance"
 
-def build_global_action_mappings(ref_total: Dict[Key, List[str]],
-                                 gen_total: Dict[Key, List[str]],
-                                 model: str) -> Dict[Key, Dict[str, str]]:
+def build_global_action_mappings(
+    ref_total: Dict[Key, List[str]],
+    gen_total: Dict[Key, List[str]],
+    model: str,
+    game_description: str,
+) -> Dict[Key, Dict[str, str]]:
     """
     Returns:
       {
@@ -130,82 +188,13 @@ def build_global_action_mappings(ref_total: Dict[Key, List[str]],
 
         gen_actions = gen_total[k]
 
-        # LLM produces mapping for this key
-        mappings[k] = match_all_actions_llm(gen_actions, ref_actions, model)
+        print(f"\nBuilding mapping for key={k}")
+
+        mappings[k] = match_all_actions_llm(
+            original_actions=gen_actions,
+            ref_actions=ref_actions,
+            model=model,
+            game_description=game_description,
+        )
 
     return mappings
-
-def traverse_and_update(ref_root, gen_root, mappings):
-    """
-    Traverse both trees together.
-    For each PLAYER/CHANCE node in generated tree, rename its actions using the key-specific mapping,
-    then call update_current_nodes(gen_node, modified_actions, ref_actions_from_ref_node).
-    """
-    q_ref = deque([ref_root])
-    q_gen = deque([gen_root])
-
-    while q_ref and q_gen:
-        r_node = q_ref.popleft()
-        g_node = q_gen.popleft()
-
-        # Basic structural checks
-        if r_node.node_type != g_node.node_type:
-            raise ValueError(f"Node type mismatch: ref={r_node.node_type} gen={g_node.node_type}")
-
-        if g_node.node_type in (NodeType.PLAYER, NodeType.CHANCE):
-            if not r_node.actions or not g_node.actions:
-                raise ValueError("Missing actions on non-terminal node.")
-
-            # Pick mapping key
-            if g_node.node_type == NodeType.CHANCE:
-                key = "chance"
-            else:
-                key = g_node.player  # player-by-player mapping
-
-            if key not in mappings:
-                raise ValueError(f"No mapping found for key={key}")
-
-            key_map = mappings[key]
-
-            # Rename generated actions in its OWN order
-            modified_actions = []
-            for a in g_node.actions:
-                if a not in key_map:
-                    raise ValueError(f"Generated action '{a}' not found in mapping for key={key}")
-                modified_actions.append(key_map[a])
-            print("g_node", g_node.actions)
-
-            # Reference actions come from the reference node (the canonical order/names)
-            ref_actions = r_node.actions
-
-            # This will set g_node.actions = ref_actions and re-key children/probs accordingly
-
-            print("modified_actions", modified_actions)
-            update_current_nodes(g_node, modified_actions, ref_actions)
-
-        # After update, enqueue children in current dict order (now aligned with reference order)
-        if len(r_node.children) != len(g_node.children):
-            raise ValueError("Children count mismatch after update.")
-
-        for r_child, g_child in zip(r_node.children.values(), g_node.children.values()):
-            q_ref.append(r_child)
-            q_gen.append(g_child)
-
-    if q_ref or q_gen:
-        raise ValueError("Tree size mismatch: traversal ended unevenly.")
-
-
-def match_names_then_update_tree(ref_game, gen_game, model: str):
-    """
-    ref_game, gen_game are GameTree objects.
-    Assumes you already implemented game.get_total_unique_actions() returning:
-      {"chance": [...], 1: [...], 2: [...], ...}
-    """
-    ref_total = ref_game.get_total_unique_actions()
-    gen_total = gen_game.get_total_unique_actions()
-
-    mappings = build_global_action_mappings(ref_total, gen_total, model)
-
-    print(mappings)
-
-    traverse_and_update(ref_game.root, gen_game.root, mappings)

@@ -1,25 +1,13 @@
-from google import genai
 from openai import OpenAI
 import os
 
 def infer_from_gpt(prompt):
-    os.environ["OPENAI_API_KEY"] = "" # Add your API key here
+    os.environ["OPENAI_API_KEY"] = ""  # Add your API key here
     client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
     
     def get_response(text):
         
         model = "gpt-5-mini"
-        
-        # completion = client.chat.completions.create(
-        #     # model="gpt-4-0125-preview",
-        #     # model = "gpt-4-1106-preview",
-        #     # model="gpt-3.5-turbo",
-        #     # model = "gpt-3.5-turbo-16k",
-        #     model = "gpt-4o",
-        #     messages=text,
-        #     temperature=0.0,
-        #     top_p=1.0
-        # )
 
         completion = client.chat.completions.create(
             model=model,

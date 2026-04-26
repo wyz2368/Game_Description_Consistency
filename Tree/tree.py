@@ -28,6 +28,9 @@ class Node:
     checked: bool = False  # New attribute to track checked nodes
     parent_action: Optional[str] = None  # New parent action reference
 
+    # Below used for merging dummy chance nodes
+    raw_actions: Optional[List[str]] = None
+
 
     def __post_init__(self):
         if self.children is None:
@@ -101,10 +104,6 @@ class GameTree:
                     for a in node.actions:
                         actions_map[node.player].add(a)
 
-                elif node.node_type == NodeType.CHANCE:
-                    for a in node.actions:
-                        actions_map["chance"].add(a)
-
             for child in node.children.values():
                 queue.append(child)
 
@@ -176,33 +175,36 @@ class EFGParser:
             outcomes = match.group(4)
 
             outcome_pattern = r'"([^"]+)"\s+(\d+/\d+|\d*\.\d+|\d+)'
+
+            raw_actions = []
             outcomes_dict = {}
+
             for action, prob_str in re.findall(outcome_pattern, outcomes):
-                if '/' in prob_str:
-                    # Already a fraction
-                    prob = prob_str
-                elif '.' in prob_str:
-                    # less than 1, convert to fraction
-                    prob = str(Fraction(prob_str))
+                raw_actions.append(action)
+
+                prob = Fraction(prob_str)
+                if action in outcomes_dict:
+                    outcomes_dict[action] += prob
                 else:
-                    # equivalent to "1"
-                    prob = f"{prob_str}/1"
-                outcomes_dict[action] = prob
+                    outcomes_dict[action] = prob
+
+            outcomes_dict = {
+                action: str(prob)
+                for action, prob in outcomes_dict.items()
+            }
 
             return Node(
                 node_type=node_type,
                 label=label,
                 information_set=information_set,
                 information_set_label=information_set_label,
-                actions=list(outcomes_dict.keys()),
+                actions=list(outcomes_dict.keys()),  # 合并后的 action
+                raw_actions=raw_actions,             # 原始 action 数量
                 probs=outcomes_dict
             )
 
 
         elif node_type == NodeType.PLAYER:
-            # Format: p "" player_number info_set_number "(info_set_label)" { actions } 0
-            # pattern = r'p\s+"(.*?)"\s+(\d+)\s+(\d+)\s+"(.*?)"\s+\{\s+((?:"\w+"\s*)+)\}\s+(\d+)'
-            # pattern = r'p\s+"([^"]*)"\s+(\d+)\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s*)+)\s*\}\s+(\d+)'
             pattern = r'p\s+"([^"]*)"\s+(\d+)\s+(\d+)\s+"([^"]*)"\s+\{\s*((?:"[^"]+"\s*)+)\s*\}\s+(\d+)'
             match = re.search(pattern, line)
 
@@ -239,19 +241,18 @@ class EFGParser:
             self.current_level -= 1
             return
 
-        actions = node.actions
+        actions = node.raw_actions if node.raw_actions is not None else node.actions
+
         for action in actions:
-            # print("action:", action)
             if self.current_line < len(self.lines):
                 child = self.parse_node(self.lines[self.current_line])
-                # child.level = self.current_level + 1
                 self.current_line += 1
-                # Link node to parents.
-                node.add_child(action, child)
-                # Add node to level.
+
+                node.add_child(action, child)  # 重复 action 会覆盖，保留最后一个
+
                 self.game.level_to_nodes[self.current_level].append(child)
                 self.current_level += 1
-                # Build subtree.
+
                 self.build_tree(child, level + 1)
 
         self.current_level -= 1

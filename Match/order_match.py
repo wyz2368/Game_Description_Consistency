@@ -1,14 +1,16 @@
 from typing import List, Tuple, Dict, Set, FrozenSet, Any
 from collections import defaultdict
 from copy import deepcopy
-from collections import deque
+from collections import deque, Counter
 
 from functools import reduce
 from operator import mul
 
+from fractions import Fraction
+
 from Tree import Node, NodeType
 
-from .action_match import check_name_consistent_after_mapping, update_current_nodes
+from .action_match import update_current_nodes, match_all_actions_llm
 
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
@@ -224,7 +226,7 @@ def check_simultaneous_move_start_node(node):
     
 ############# Below is the main function for switching the order of nodes in a game tree #############
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappings):
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappings, game_description):
     """Filters simultaneous moves between a reference game node and a generated game node within a game tree.
     This function traverses the game tree, comparing nodes from the reference game with those from the generated game. It identifies simultaneous moves and ensures that the generated nodes conform to the structure and rules defined by the reference nodes. If discrepancies are found, appropriate errors are raised.
     Args:
@@ -421,30 +423,34 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
 
                 # Pick mapping key
                 if g_node.node_type == NodeType.CHANCE:
-                    key = "chance"
+                    # If it is a chance node, we need to match the action labels during traversal.
+                    ref_actions = r_node.actions
+                    key_map = match_all_actions_llm(g_node.actions, ref_actions, model, game_description)
+                    modified_actions = [key_map[a] for a in g_node.actions]
                 else:
                     key = g_node.player  # player-by-player mapping
 
-                if key not in mappings:
-                    raise ValueError(f"No mapping found for key={key}")
+                    if key not in mappings:
+                        raise ValueError(f"No mapping found for key={key}")
 
-                key_map = mappings[key]
+                    key_map = mappings[key]
 
-                # Rename generated actions in its OWN order
-                modified_actions = []
-                for a in g_node.actions:
-                    if a not in key_map:
-                        raise ValueError(f"Generated action '{a}' not found in mapping for key={key}")
-                    modified_actions.append(key_map[a])
-                print("g_node", g_node.actions)
-                ref_actions = r_node.actions
+                    # Rename generated actions in its OWN order
+                    modified_actions = []
+                    for a in g_node.actions:
+                        if a not in key_map:
+                            raise ValueError(f"Generated action '{a}' not found in mapping for key={key}")
+                        modified_actions.append(key_map[a])
+                    
+                    # print("g_node", g_node.actions)
+                    ref_actions = r_node.actions
 
-                check_consistent = check_name_consistent_after_mapping(modified_actions, ref_actions, model)
+                    # print("ref_actions", ref_actions)
+                    # print("modified_actions", modified_actions)
 
-                if check_consistent == "False":
-                    raise ValueError("The actions in the generated game do not match the actions in the reference game.")
+                    if Counter(modified_actions) != Counter(ref_actions):
+                        raise ValueError("The actions in the generated game do not match the actions in the reference game.")
                 
-                print("modified_actions", modified_actions)
                 update_current_nodes(g_node, modified_actions, ref_actions)
 
             for action, child in r_node.children.items():
@@ -536,10 +542,69 @@ def infoset_partitions_equal(ref_root: Node, gen_root: Node) -> Tuple[bool, Any]
             "gen_groups": gen_can,
         }
     return ok, debug
-            
-            
 
-def switch_order(ref_node: Node, gen_node: Node, model: str, mappings):
+
+def to_prob(x):
+    if isinstance(x, Fraction):
+        return x
+    if isinstance(x, (int, float)):
+        return Fraction(x)
+    if isinstance(x, str):
+        return Fraction(x.strip())
+    raise TypeError(f"Unsupported probability type: {type(x)} value={x}")
+    
+def compress_chance_nodes(node: Node):
+    """
+    Compress chains of chance nodes.
+
+    Example:
+        chance --A(1/2)--> chance --a1(1/2)--> terminal
+
+    becomes:
+        chance --Aa1(1/4)--> terminal
+    """
+
+    if node.node_type == NodeType.TERMINAL:
+        return
+
+    # First recursively compress children
+    for child in list(node.children.values()):
+        compress_chance_nodes(child)
+
+    if node.node_type != NodeType.CHANCE:
+        return
+
+    new_children = {}
+    new_probs = {}
+
+    for action, child in list(node.children.items()):
+        prob = node.probs[action]
+
+        # print(prob)
+
+        if child.node_type == NodeType.CHANCE:
+            for child_action, grandchild in child.children.items():
+                combined_action = f"{action} {child_action}"
+                combined_prob = to_prob(prob) * to_prob(child.probs[child_action])
+
+                new_children[combined_action] = grandchild
+                new_probs[combined_action] = combined_prob
+
+                grandchild.parent_action = combined_action
+                grandchild.parent = node
+
+        else:
+            new_children[action] = child
+            new_probs[action] = prob
+            child.parent_action = action
+            child.parent = node
+
+    node.actions = list(new_children.keys())
+    node.children = new_children
+    node.probs = new_probs   
+
+
+def switch_order(ref_node: Node, gen_node: Node, model: str, mappings, game_description):
     """Switches the order of two nodes in a tree structure and filters simultaneous moves.
     
     Args:
@@ -550,7 +615,9 @@ def switch_order(ref_node: Node, gen_node: Node, model: str, mappings):
         None: This function modifies the tree in place and does not return a value.
     """
 
-    filter_simultaneous_moves(ref_node, gen_node, model, mappings)
+    compress_chance_nodes(gen_node)
+
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description)
 
     ok, _ = infoset_partitions_equal(ref_node, gen_node)
 
