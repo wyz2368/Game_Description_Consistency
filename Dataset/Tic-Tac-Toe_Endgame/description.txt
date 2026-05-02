@@ -1,0 +1,10 @@
+You are playing a paper-and-pencil game for two players (x and o) who take turns marking the spaces in a three-by-three grid with "x" or "o".
+The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner.
+Winner gains 1 and loser loses 1.
+
+Assuming "e" represents empty, the start board state is:
+e | x | e
+x | e | o
+x | e | o
+
+"o" is the next mover.

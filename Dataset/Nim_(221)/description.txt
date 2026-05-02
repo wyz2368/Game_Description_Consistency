@@ -1,0 +1,5 @@
+Two players, Alice and Bob, play a game that begins with three piles containing 2, 2, and 1 stones, respectively.
+Alice makes the first move, and the players alternate turns.
+During a turn, a player removes one or two stones, but only from one pile.
+The player who removes the last stone from the board wins the game.
+The winner of the game earns one point, while the loser loses one point.
