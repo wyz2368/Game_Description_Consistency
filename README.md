@@ -148,7 +148,7 @@ Arguments:
 
 `--num_generations` is required because the final summary reports pass@N.
 
-## Data Format
+## Data Format for Evaluation
 
 Each reference game folder under `Dataset/` should look like:
 
