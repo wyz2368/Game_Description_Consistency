@@ -1,0 +1,3 @@
+game_name: Russian_Roulette_V1
+dataset_path: /Users/samuel/Desktop/Benchmark/Dataset/Russian_Roulette_V1
+description_path: /Users/samuel/Desktop/Benchmark/Dataset/Russian_Roulette_V1/description.txt

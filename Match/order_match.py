@@ -6,7 +6,7 @@ from collections import deque, Counter
 from functools import reduce
 from operator import mul
 
-from Tree import Node, NodeType, compare_chance_probs, get_path_to_node
+from Tree import Node, NodeType, compare_chance_probs, get_path_to_node, check_no_zero_prob_chance_branches
 
 from .action_match import update_current_nodes, match_all_actions_llm
 from .utils import extract_type2_tsm_paths_from_json_files
@@ -367,13 +367,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                 raise ValueError(f"No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
 
             print(f"Matched ref_node, Parent Action: {matched_ref_node.parent_action}")
-
-            # # Verify that matched_ref_node also meets the simultaneous move condition
-            
-            # matched_ref_node_is_start_node = check_simultaneous_move_start_node(matched_ref_node)
-
-            # if not matched_ref_node_is_start_node:
-            #     raise ValueError(f"Reference node {matched_ref_node} does not meet the simultaneous move condition")
             
             # Step 4: Mark all the nodes involved in the simultaneous move
             mark_simultaneous_move_children(matched_ref_node)
@@ -601,6 +594,9 @@ def switch_order(
             Optional list of JSON file paths containing type-2 player-order
             constraints.
     """
+
+    # First check whether the game tree has 0 prob chance branch.
+    check_no_zero_prob_chance_branches(gen_game)
 
     ref_node = ref_game.root
     gen_node = gen_game.root

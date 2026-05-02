@@ -1,0 +1,118 @@
+import pygambit as gbt
+
+# Reasoning (step-by-step) in comments:
+# - Players alternate, Player 1 starts.
+# - A decision node is fully characterized by (acting player, number of remaining chambers).
+# - After a safe trigger pull the number of remaining chambers decreases by 1 and play passes to the other player.
+# - When a player quits, he gets 0 and the other player gets 1.
+# - When the gun fires the acting player dies (payoff -1) and the other player wins (payoff 1).
+# - For k > 1 remaining chambers, a pull leads to a chance node:
+#     Fire with probability 1/k -> acting player dies
+#     Safe with probability (k-1)/k -> play continues with k-1 chambers and the other player's turn
+# - For k = 1, pulling fires for certain -> immediate death of the acting player (no chance node needed).
+# - Because every decision node reveals the remaining-chamber count, there are no information sets to merge.
+# - We build the tree explicitly for k = 6 down to k = 1 without loops.
+
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Russian roulette, 6-chamber, alternating turns")
+
+# Root: Player 1 with 6 chambers
+g.append_move(g.root, "Player 1", ["Pull", "Quit"])
+# References to children of root
+p1_k6_pull = g.root.children[0]
+p1_k6_quit = g.root.children[1]
+
+# Outcome if Player 1 quits at k=6: P1 withdraws (0), P2 wins (1)
+g.set_outcome(p1_k6_quit, g.add_outcome([0, 1], label="P1 quits at 6"))
+
+# If Player 1 pulls at k=6 -> chance with prob 1/6 fire, 5/6 safe
+g.append_move(p1_k6_pull, g.players.chance, ["Fire", "Safe"])
+g.set_chance_probs(p1_k6_pull.infoset, [gbt.Rational(1, 6), gbt.Rational(5, 6)])
+fire6 = p1_k6_pull.children[0]
+safe6 = p1_k6_pull.children[1]
+
+# Fire at k=6: Player 1 dies
+g.set_outcome(fire6, g.add_outcome([-1, 1], label="P1 dies at 6"))
+
+# Safe -> Player 2 with 5 chambers
+g.append_move(safe6, "Player 2", ["Pull", "Quit"])
+p2_k5_pull = safe6.children[0]
+p2_k5_quit = safe6.children[1]
+
+# P2 quits at k=5: P2 withdraws (0), P1 wins (1)
+g.set_outcome(p2_k5_quit, g.add_outcome([1, 0], label="P2 quits at 5"))
+
+# P2 pulls at k=5 -> chance 1/5 fire, 4/5 safe
+g.append_move(p2_k5_pull, g.players.chance, ["Fire", "Safe"])
+g.set_chance_probs(p2_k5_pull.infoset, [gbt.Rational(1, 5), gbt.Rational(4, 5)])
+fire5 = p2_k5_pull.children[0]
+safe5 = p2_k5_pull.children[1]
+
+# Fire at k=5: Player 2 dies
+g.set_outcome(fire5, g.add_outcome([1, -1], label="P2 dies at 5"))
+
+# Safe -> Player 1 with 4 chambers
+g.append_move(safe5, "Player 1", ["Pull", "Quit"])
+p1_k4_pull = safe5.children[0]
+p1_k4_quit = safe5.children[1]
+
+# P1 quits at k=4
+g.set_outcome(p1_k4_quit, g.add_outcome([0, 1], label="P1 quits at 4"))
+
+# P1 pulls at k=4 -> chance 1/4 fire, 3/4 safe
+g.append_move(p1_k4_pull, g.players.chance, ["Fire", "Safe"])
+g.set_chance_probs(p1_k4_pull.infoset, [gbt.Rational(1, 4), gbt.Rational(3, 4)])
+fire4 = p1_k4_pull.children[0]
+safe4 = p1_k4_pull.children[1]
+
+# Fire at k=4: Player 1 dies
+g.set_outcome(fire4, g.add_outcome([-1, 1], label="P1 dies at 4"))
+
+# Safe -> Player 2 with 3 chambers
+g.append_move(safe4, "Player 2", ["Pull", "Quit"])
+p2_k3_pull = safe4.children[0]
+p2_k3_quit = safe4.children[1]
+
+# P2 quits at k=3
+g.set_outcome(p2_k3_quit, g.add_outcome([1, 0], label="P2 quits at 3"))
+
+# P2 pulls at k=3 -> chance 1/3 fire, 2/3 safe
+g.append_move(p2_k3_pull, g.players.chance, ["Fire", "Safe"])
+g.set_chance_probs(p2_k3_pull.infoset, [gbt.Rational(1, 3), gbt.Rational(2, 3)])
+fire3 = p2_k3_pull.children[0]
+safe3 = p2_k3_pull.children[1]
+
+# Fire at k=3: Player 2 dies
+g.set_outcome(fire3, g.add_outcome([1, -1], label="P2 dies at 3"))
+
+# Safe -> Player 1 with 2 chambers
+g.append_move(safe3, "Player 1", ["Pull", "Quit"])
+p1_k2_pull = safe3.children[0]
+p1_k2_quit = safe3.children[1]
+
+# P1 quits at k=2
+g.set_outcome(p1_k2_quit, g.add_outcome([0, 1], label="P1 quits at 2"))
+
+# P1 pulls at k=2 -> chance 1/2 fire, 1/2 safe
+g.append_move(p1_k2_pull, g.players.chance, ["Fire", "Safe"])
+g.set_chance_probs(p1_k2_pull.infoset, [gbt.Rational(1, 2), gbt.Rational(1, 2)])
+fire2 = p1_k2_pull.children[0]
+safe2 = p1_k2_pull.children[1]
+
+# Fire at k=2: Player 1 dies
+g.set_outcome(fire2, g.add_outcome([-1, 1], label="P1 dies at 2"))
+
+# Safe -> Player 2 with 1 chamber
+g.append_move(safe2, "Player 2", ["Pull", "Quit"])
+p2_k1_pull = safe2.children[0]
+p2_k1_quit = safe2.children[1]
+
+# At k=1, pulling fires for certain -> immediate death of acting player (no chance node)
+# P2 pulls at k=1 -> Player 2 dies
+g.set_outcome(p2_k1_pull, g.add_outcome([1, -1], label="P2 dies at 1"))
+
+# P2 quits at k=1
+g.set_outcome(p2_k1_quit, g.add_outcome([1, 0], label="P2 quits at 1"))
+
+# Save the EFG
+g.to_efg("russian_roulette_6.efg")

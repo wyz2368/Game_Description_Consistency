@@ -1,0 +1,143 @@
+import pygambit as gbt
+
+# Create the game with two players
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Six-chamber alternating Russian Roulette")
+
+# Reasoning:
+# - Chance at g.root chooses which of 6 chambers (1..6) is loaded:
+#   g.root.children[0]..g.root.children[5].
+g.append_move(g.root, g.players.chance,
+              ["Chamber 1", "Chamber 2", "Chamber 3", "Chamber 4", "Chamber 5", "Chamber 6"])
+# Set equal probabilities for each chamber (1/6 each).
+g.set_chance_probs(g.root.infoset, [gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6),
+                                    gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6)])
+
+# For each chance outcome, Player 1 moves first with two actions: Quit (index 0) or Pull (index 1).
+# Use explicit (no-loop) calls as required.
+g.append_move(g.root.children[0], "Player 1", ["Quit", "Pull"])
+g.append_move(g.root.children[1], "Player 1", ["Quit", "Pull"])
+g.append_move(g.root.children[2], "Player 1", ["Quit", "Pull"])
+g.append_move(g.root.children[3], "Player 1", ["Quit", "Pull"])
+g.append_move(g.root.children[4], "Player 1", ["Quit", "Pull"])
+g.append_move(g.root.children[5], "Player 1", ["Quit", "Pull"])
+
+# - Player 1 cannot observe which chamber was selected, so all 6 of his initial decision nodes
+#   are in one information set. Assign them to the infoset of the second node (children[1]).
+g.set_infoset(g.root.children[0], g.root.children[1].infoset)
+g.set_infoset(g.root.children[2], g.root.children[1].infoset)
+g.set_infoset(g.root.children[3], g.root.children[1].infoset)
+g.set_infoset(g.root.children[4], g.root.children[1].infoset)
+g.set_infoset(g.root.children[5], g.root.children[1].infoset)
+
+# Create outcome objects to reuse
+p1_quits = g.add_outcome([0, 1], label="P1 quits")    # quitter 0, other 1
+p2_quits = g.add_outcome([1, 0], label="P2 quits")
+p1_dies = g.add_outcome([-1, 1], label="P1 dies")     # shooter -1, other +1
+p2_dies = g.add_outcome([1, -1], label="P2 dies")
+
+# Now build the rest of the tree explicitly (no loops).
+# For each chance child, handle the Pull branch (children[1]).
+# For chamber 1 (root.children[0]), pulling at first turn kills Player 1 immediately.
+g.set_outcome(g.root.children[0].children[0], p1_quits)   # P1 quits at start
+g.set_outcome(g.root.children[0].children[1], p1_dies)    # P1 pulls -> chamber 1 loaded -> dies
+
+# For chambers 2..6, a first pull (by P1) is safe and passes to Player 2's first decision.
+# Append Player 2's first moves (Quit or Pull) at those nodes.
+g.append_move(g.root.children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.append_move(g.root.children[2].children[1], "Player 2", ["Quit", "Pull"])
+g.append_move(g.root.children[3].children[1], "Player 2", ["Quit", "Pull"])
+g.append_move(g.root.children[4].children[1], "Player 2", ["Quit", "Pull"])
+g.append_move(g.root.children[5].children[1], "Player 2", ["Quit", "Pull"])
+
+# Set P1 quit outcomes at the initial nodes for chambers 2..6
+g.set_outcome(g.root.children[1].children[0], p1_quits)
+g.set_outcome(g.root.children[2].children[0], p1_quits)
+g.set_outcome(g.root.children[3].children[0], p1_quits)
+g.set_outcome(g.root.children[4].children[0], p1_quits)
+g.set_outcome(g.root.children[5].children[0], p1_quits)
+
+# - The Player 2 first-turn nodes (for bullet in chambers 2..6) are in one infoset.
+g.set_infoset(g.root.children[2].children[1], g.root.children[1].children[1].infoset)
+g.set_infoset(g.root.children[3].children[1], g.root.children[1].children[1].infoset)
+g.set_infoset(g.root.children[4].children[1], g.root.children[1].children[1].infoset)
+g.set_infoset(g.root.children[5].children[1], g.root.children[1].children[1].infoset)
+
+# Outcomes and further moves depending on which chamber is loaded:
+
+# Chamber 2 (root.children[1]):
+# - P2 quits -> P1 wins
+# - P2 pulls -> P2 dies (since chamber 2 is loaded on the second pull)
+g.set_outcome(g.root.children[1].children[1].children[0], p2_quits)
+g.set_outcome(g.root.children[1].children[1].children[1], p2_dies)
+
+# Chamber 3 (root.children[2]):
+# - P2 quits -> P1 wins
+# - P2 pulls -> safe -> Player 1's second decision (after two safe pulls)
+g.set_outcome(g.root.children[2].children[1].children[0], p2_quits)
+g.append_move(g.root.children[2].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[2].children[1].children[1].children[0], p1_quits)
+g.set_outcome(g.root.children[2].children[1].children[1].children[1], p1_dies)
+
+# Chamber 4 (root.children[3]):
+# - P2 quits -> P1 wins
+# - P2 pulls -> safe -> P1 second decision
+g.set_outcome(g.root.children[3].children[1].children[0], p2_quits)
+g.append_move(g.root.children[3].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[3].children[1].children[1].children[0], p1_quits)
+# If P1 pulls at this node (third pull), it's safe for chamber 4 -> moves to P2 second decision
+g.append_move(g.root.children[3].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[3].children[1].children[1].children[1].children[0], p2_quits)
+g.set_outcome(g.root.children[3].children[1].children[1].children[1].children[1], p2_dies)
+
+# Chamber 5 (root.children[4]):
+# - P2 quits -> P1 wins
+# - P2 pulls -> safe -> P1 second decision
+g.set_outcome(g.root.children[4].children[1].children[0], p2_quits)
+g.append_move(g.root.children[4].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[4].children[1].children[1].children[0], p1_quits)
+# If P1 pulls here -> safe -> P2 second decision
+g.append_move(g.root.children[4].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[0], p2_quits)
+# If P2 pulls here -> safe -> P1 third decision (the 5th pull happens by P1)
+g.append_move(g.root.children[4].children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[1].children[0], p1_quits)
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[1].children[1], p1_dies)
+
+# Chamber 6 (root.children[5]):
+# - P2 quits -> P1 wins
+# - P2 pulls -> safe -> P1 second decision
+g.set_outcome(g.root.children[5].children[1].children[0], p2_quits)
+g.append_move(g.root.children[5].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[5].children[1].children[1].children[0], p1_quits)
+# If P1 pulls here -> safe -> P2 second decision
+g.append_move(g.root.children[5].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[0], p2_quits)
+# If P2 pulls here -> safe -> P1 third decision
+g.append_move(g.root.children[5].children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[0], p1_quits)
+# If P1 pulls here -> safe -> final P2 decision (6th pull)
+g.append_move(g.root.children[5].children[1].children[1].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[1].children[0], p2_quits)
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[1].children[1], p2_dies)
+
+# - After two safe pulls, it's Player 1's turn again. He only observes "two safe clicks",
+#   so all nodes corresponding to bullet in chambers 3..6 are indistinguishable to him and form an infoset.
+g.set_infoset(g.root.children[3].children[1].children[1], g.root.children[2].children[1].children[1].infoset)
+g.set_infoset(g.root.children[4].children[1].children[1], g.root.children[2].children[1].children[1].infoset)
+g.set_infoset(g.root.children[5].children[1].children[1], g.root.children[2].children[1].children[1].infoset)
+
+# - After three safe pulls, Player 2's second decision nodes (bullet in chambers 4..6) are indistinguishable,
+#   so group them.
+g.set_infoset(g.root.children[4].children[1].children[1].children[1], g.root.children[3].children[1].children[1].children[1].infoset)
+g.set_infoset(g.root.children[5].children[1].children[1].children[1], g.root.children[3].children[1].children[1].children[1].infoset)
+
+# - After four safe pulls, Player 1's third decision nodes (bullet in chambers 5..6) are indistinguishable,
+#   so group them.
+g.set_infoset(g.root.children[5].children[1].children[1].children[1].children[1], g.root.children[4].children[1].children[1].children[1].children[1].infoset)
+
+# Note: the final possible decision (after five safe pulls, only bullet in chamber 6 remains)
+# is a singleton and does not require grouping.
+
+# Save the EFG
+g.to_efg("six_chamber_russian_roulette.efg")

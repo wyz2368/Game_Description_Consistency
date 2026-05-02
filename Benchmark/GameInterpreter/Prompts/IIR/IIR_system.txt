@@ -1,0 +1,1 @@
+You will be given a game description. Think about the imperfect information in the game and represent using representation of pygambit API.

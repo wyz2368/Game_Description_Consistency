@@ -1,0 +1,155 @@
+import pygambit as gbt
+
+# Step-by-step reasoning is written as comments inline with the code.
+# Summary of the reasoning:
+# - The initial location of the loaded chamber (1..6) is drawn by chance at the root.
+# - Players alternate pulls: Player 1 acts on pulls 1,3,5 and Player 2 acts on pulls 2,4,6.
+# - After each pull, the outcome (fire or blank) is common knowledge, so every decision node
+#   is fully distinguished by history (how many blanks have occurred). Therefore no information
+#   sets need to be merged across different histories.
+# - On each decision node a player has two actions: "Quit" (guaranteed survival but the other wins)
+#   or "Pull" (may die if the current chamber is the loaded one; otherwise play continues).
+# - Payoffs:
+#   * If a player quits: quitter gets 0, other gets 1.
+#   * If a player pulls and the gun fires (he shoots himself): shooter gets -1, other gets 1.
+#   * There are no other payoff values.
+#
+# Implementation plan (explicit, without loops or recursion):
+# - Add a chance move at the root with six equiprobable outcomes: "Loaded 1" .. "Loaded 6".
+# - For each chance branch i (loaded at pull i), explicitly build the sequence of decision nodes
+#   up to the i-th pull. At each decision node create actions ["Quit", "Pull"].
+# - Set terminal outcomes at every terminal node (quit branches and pull-then-fire branches).
+# - Use gbt.Rational to set the chance probabilities as 1/6 for each loaded position.
+#
+# Note: No g.set_infoset(...) calls are necessary because every decision node is unique and
+# fully observable by both players.
+
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Sequential Russian roulette with quitting option")
+
+# Add chance node at root determining which chamber is loaded (1..6)
+g.append_move(g.root, g.players.chance, ["Loaded 1", "Loaded 2", "Loaded 3", "Loaded 4", "Loaded 5", "Loaded 6"])
+# Set equal probabilities 1/6 for each loaded position using gbt.Rational
+g.set_chance_probs(g.root.infoset, [gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6),
+                                    gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6)])
+
+# Define commonly used outcomes:
+# - p1_quit: Player 1 quits -> P1 gets 0, P2 gets 1
+# - p2_quit: Player 2 quits -> P1 gets 1, P2 gets 0
+# - p1_death: Player 1 pulls and dies -> P1 gets -1, P2 gets 1
+# - p2_death: Player 2 pulls and dies -> P1 gets 1, P2 gets -1
+p1_quit = g.add_outcome([0, 1], label="P1 quits")
+p2_quit = g.add_outcome([1, 0], label="P2 quits")
+p1_death = g.add_outcome([-1, 1], label="P1 dies")
+p2_death = g.add_outcome([1, -1], label="P2 dies")
+
+# ---------- Branch: Loaded 1 (root.children[0]) ----------
+# Pull number 1 is loaded. Player 1 acts first.
+g.append_move(g.root.children[0], "Player 1", ["Quit", "Pull"])
+# If Player 1 quits immediately:
+g.set_outcome(g.root.children[0].children[0], p1_quit)
+# If Player 1 pulls, the gun fires (loaded at 1) and P1 dies:
+g.set_outcome(g.root.children[0].children[1], p1_death)
+
+# ---------- Branch: Loaded 2 (root.children[1]) ----------
+# Pull number 2 is loaded. Player 1 acts first (pull 1), then Player 2 (pull 2).
+g.append_move(g.root.children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits immediately:
+g.set_outcome(g.root.children[1].children[0], p1_quit)
+# P1 pulls (blank) -> goes to Player 2 decision
+g.append_move(g.root.children[1].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 2:
+g.set_outcome(g.root.children[1].children[1].children[0], p2_quit)
+# P2 pulls and the gun fires (loaded at 2) -> P2 dies:
+g.set_outcome(g.root.children[1].children[1].children[1], p2_death)
+
+# ---------- Branch: Loaded 3 (root.children[2]) ----------
+# Pull number 3 is loaded. Sequence: P1 (1), P2 (2), P1 (3).
+g.append_move(g.root.children[2], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 1:
+g.set_outcome(g.root.children[2].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 2:
+g.append_move(g.root.children[2].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 2:
+g.set_outcome(g.root.children[2].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 3:
+g.append_move(g.root.children[2].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 3:
+g.set_outcome(g.root.children[2].children[1].children[1].children[0], p1_quit)
+# P1 pulls and the gun fires (loaded at 3) -> P1 dies:
+g.set_outcome(g.root.children[2].children[1].children[1].children[1], p1_death)
+
+# ---------- Branch: Loaded 4 (root.children[3]) ----------
+# Pull number 4 is loaded. Sequence: P1(1), P2(2), P1(3), P2(4).
+g.append_move(g.root.children[3], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 1:
+g.set_outcome(g.root.children[3].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 2:
+g.append_move(g.root.children[3].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 2:
+g.set_outcome(g.root.children[3].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 3:
+g.append_move(g.root.children[3].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 3:
+g.set_outcome(g.root.children[3].children[1].children[1].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 4:
+g.append_move(g.root.children[3].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 4:
+g.set_outcome(g.root.children[3].children[1].children[1].children[1].children[0], p2_quit)
+# P2 pulls and the gun fires (loaded at 4) -> P2 dies:
+g.set_outcome(g.root.children[3].children[1].children[1].children[1].children[1], p2_death)
+
+# ---------- Branch: Loaded 5 (root.children[4]) ----------
+# Pull number 5 is loaded. Sequence: P1(1), P2(2), P1(3), P2(4), P1(5).
+g.append_move(g.root.children[4], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 1:
+g.set_outcome(g.root.children[4].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 2:
+g.append_move(g.root.children[4].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 2:
+g.set_outcome(g.root.children[4].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 3:
+g.append_move(g.root.children[4].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 3:
+g.set_outcome(g.root.children[4].children[1].children[1].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 4:
+g.append_move(g.root.children[4].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 4:
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 5:
+g.append_move(g.root.children[4].children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 5:
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[1].children[0], p1_quit)
+# P1 pulls and the gun fires (loaded at 5) -> P1 dies:
+g.set_outcome(g.root.children[4].children[1].children[1].children[1].children[1].children[1], p1_death)
+
+# ---------- Branch: Loaded 6 (root.children[5]) ----------
+# Pull number 6 is loaded. Sequence: P1(1), P2(2), P1(3), P2(4), P1(5), P2(6).
+g.append_move(g.root.children[5], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 1:
+g.set_outcome(g.root.children[5].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 2:
+g.append_move(g.root.children[5].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 2:
+g.set_outcome(g.root.children[5].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 3:
+g.append_move(g.root.children[5].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 3:
+g.set_outcome(g.root.children[5].children[1].children[1].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 4:
+g.append_move(g.root.children[5].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 4:
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[0], p2_quit)
+# P2 pulls -> blank -> P1 at pull 5:
+g.append_move(g.root.children[5].children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+# P1 quits at pull 5:
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[0], p1_quit)
+# P1 pulls -> blank -> P2 at pull 6:
+g.append_move(g.root.children[5].children[1].children[1].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+# P2 quits at pull 6:
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[1].children[0], p2_quit)
+# P2 pulls and the gun fires (loaded at 6) -> P2 dies:
+g.set_outcome(g.root.children[5].children[1].children[1].children[1].children[1].children[1].children[1], p2_death)
+
+# Save the EFG to file
+g.to_efg("sequential_russian_roulette.efg")

@@ -1,0 +1,81 @@
+import pygambit as gbt
+
+# Step-by-step reasoning is embedded in the comments below.
+# Summary of the model:
+# - Two players: "Player 1" acts first, then players alternate.
+# - On a decision node a player chooses "Quit" or "Pull".
+# - "Quit" yields payoff 0 for the quitter and 1 for the other player.
+# - "Pull" leads to a chance node: "Fire" (player who pulled dies) or "Empty" (game continues).
+# - The probability of "Fire" equals 1/(number of remaining chambers).
+# - All histories are observed, so this is a perfect-information tree (no infosets to set).
+# - We explicitly unroll the tree for up to the 6 chambers. No loops or recursion are used.
+
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Sequential six-chamber Russian roulette")
+
+# Create terminal outcomes that we will reuse:
+# If a player pulls and fires, the shooter gets -1 and the other gets +1.
+p1_shot = g.add_outcome([-1, 1], label="P1 shot")
+p2_shot = g.add_outcome([1, -1], label="P2 shot")
+# If a player quits, he gets 0 and the other gets 1.
+p1_quit = g.add_outcome([0, 1], label="P1 quits")
+p2_quit = g.add_outcome([1, 0], label="P2 quits")
+
+# Root: Player 1 decides first.
+# Actions: children[0] = "Quit" (terminal), children[1] = "Pull" -> chance node
+g.append_move(g.root, "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[0], p1_quit)
+
+# After Player 1 pulls: chance over chamber 1 (1/6 fire, 5/6 empty)
+g.append_move(g.root.children[1], g.players.chance, ["Fire", "Empty"])
+g.set_chance_probs(g.root.children[1].infoset, [gbt.Rational(1, 6), gbt.Rational(5, 6)])
+# If Fire: Player 1 shot
+g.set_outcome(g.root.children[1].children[0], p1_shot)
+# If Empty: game continues to Player 2 decision
+g.append_move(g.root.children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[1].children[1].children[0], p2_quit)
+
+# Player 2 pulls: chance over chamber 2 (1/5 fire, 4/5 empty)
+g.append_move(g.root.children[1].children[1].children[1], g.players.chance, ["Fire", "Empty"])
+g.set_chance_probs(g.root.children[1].children[1].children[1].infoset, [gbt.Rational(1, 5), gbt.Rational(4, 5)])
+# If Fire: Player 2 shot
+g.set_outcome(g.root.children[1].children[1].children[1].children[0], p2_shot)
+# If Empty: to Player 1 decision after two empty pulls
+g.append_move(g.root.children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[0], p1_quit)
+
+# Player 1 pulls (3rd chamber): chance (1/4 fire, 3/4 empty)
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1], g.players.chance, ["Fire", "Empty"])
+g.set_chance_probs(g.root.children[1].children[1].children[1].children[1].children[1].infoset, [gbt.Rational(1, 4), gbt.Rational(3, 4)])
+# If Fire: Player 1 shot
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[0], p1_shot)
+# If Empty: to Player 2 decision after three empty pulls
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[0], p2_quit)
+
+# Player 2 pulls (4th chamber): chance (1/3 fire, 2/3 empty)
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1], g.players.chance, ["Fire", "Empty"])
+g.set_chance_probs(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].infoset, [gbt.Rational(1, 3), gbt.Rational(2, 3)])
+# If Fire: Player 2 shot
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[0], p2_shot)
+# If Empty: to Player 1 decision after four empty pulls
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1], "Player 1", ["Quit", "Pull"])
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[0], p1_quit)
+
+# Player 1 pulls (5th chamber): chance (1/2 fire, 1/2 empty)
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1], g.players.chance, ["Fire", "Empty"])
+g.set_chance_probs(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].infoset, [gbt.Rational(1, 2), gbt.Rational(1, 2)])
+# If Fire: Player 1 shot
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[0], p1_shot)
+# If Empty: to Player 2 decision after five empty pulls
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1], "Player 2", ["Quit", "Pull"])
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[0], p2_quit)
+
+# Player 2 pulls (6th chamber): only one remaining chamber, so chance has only "Fire" with probability 1
+g.append_move(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1], g.players.chance, ["Fire"])
+g.set_chance_probs(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].infoset, [gbt.Rational(1, 1)])
+# Fire: Player 2 shot (game ends)
+g.set_outcome(g.root.children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[1].children[0], p2_shot)
+
+# Save the EFG to a file
+g.to_efg("russian_roulette.efg")

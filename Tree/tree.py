@@ -534,3 +534,72 @@ def get_path_to_node(node: Node, players: List[str]) -> List[Tuple[str, str]]:
 
     path.reverse()
     return path
+
+def check_no_zero_prob_chance_branches(tree: GameTree, raise_error: bool = True) -> bool:
+    """
+    Check whether any chance node has a probability-0 branch.
+
+    A chance branch with probability 0 is illegal.
+
+    Returns:
+        True if no zero-probability chance branches are found.
+        False otherwise, unless raise_error=True.
+
+    If raise_error=True:
+        raises ValueError with details of all illegal branches.
+    """
+
+    if tree.root is None:
+        return True
+
+    illegal_branches = []
+    queue = deque([(tree.root, [])])
+
+    while queue:
+        node, path = queue.popleft()
+
+        if node.node_type == NodeType.CHANCE:
+            for action, prob in node.probs.items():
+                prob_fraction = parse_prob(prob)
+
+                if prob_fraction == 0:
+                    illegal_branches.append({
+                        "chance_node_label": node.label,
+                        "information_set": node.information_set,
+                        "information_set_label": node.information_set_label,
+                        "action": action,
+                        "probability": prob,
+                        "path": tuple(path),
+                    })
+
+        for action, child in node.children.items():
+            if node.node_type == NodeType.PLAYER:
+                actor = node.player
+            elif node.node_type == NodeType.CHANCE:
+                actor = "chance"
+            else:
+                continue
+
+            queue.append((child, path + [(actor, action)]))
+
+    if illegal_branches:
+        message_lines = ["Illegal chance branches with probability 0 found:"]
+
+        for branch in illegal_branches:
+            message_lines.append(
+                f'- Chance node "{branch["chance_node_label"]}" '
+                f'(info set {branch["information_set"]}, '
+                f'label "{branch["information_set_label"]}") '
+                f'has action "{branch["action"]}" with probability {branch["probability"]}. '
+                f'Path: {branch["path"]}'
+            )
+
+        message = "\n".join(message_lines)
+
+        if raise_error:
+            raise ValueError(message)
+
+        print(message)
+        return False
+
+    return True

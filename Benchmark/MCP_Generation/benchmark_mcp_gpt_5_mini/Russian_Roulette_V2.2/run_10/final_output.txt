@@ -1,0 +1,13 @@
+I built the full extensive-form game for six-chamber Russian roulette, validated it, and saved it.
+
+Validation result:
+- all_terminal_nodes_have_outcomes: true
+- unresolved_terminal_nodes: []
+
+Saved file:
+- russian_roulette_6.efg
+
+If you want, I can:
+- display the tree structure in text form,
+- export the game in another format, or
+- modify player names / payoffs / chamber count.

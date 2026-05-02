@@ -1,0 +1,11 @@
+
+================================================================================
+ATTEMPT 1
+================================================================================
+TRACEBACK:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Benchmark/Iterative_Generation/Tree_Infer/infer_CoT.py", line 66, in infer_game_tree_CoT
+    exec(code, exec_globals)
+  File "<string>", line 73, in <module>
+  File "<string>", line 21, in build_turn
+AttributeError: 'pygambit.gambit.Player' object has no attribute 'name'. Did you mean: 'game'?

@@ -1,0 +1,17 @@
+def replay_infosets(g):
+    """Replays g.set_infoset(...) calls."""
+    g.set_infoset(g.root.children['Bullet 2'], g.root.children['Bullet 1'].infoset)
+    g.set_infoset(g.root.children['Bullet 3'], g.root.children['Bullet 1'].infoset)
+    g.set_infoset(g.root.children['Bullet 3'].children['Pull'], g.root.children['Bullet 2'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 4'], g.root.children['Bullet 1'].infoset)
+    g.set_infoset(g.root.children['Bullet 4'].children['Pull'], g.root.children['Bullet 2'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 4'].children['Pull'].children['Pull'], g.root.children['Bullet 3'].children['Pull'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 5'], g.root.children['Bullet 1'].infoset)
+    g.set_infoset(g.root.children['Bullet 5'].children['Pull'], g.root.children['Bullet 2'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 5'].children['Pull'].children['Pull'], g.root.children['Bullet 3'].children['Pull'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 5'].children['Pull'].children['Pull'].children['Pull'], g.root.children['Bullet 4'].children['Pull'].children['Pull'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 6'], g.root.children['Bullet 1'].infoset)
+    g.set_infoset(g.root.children['Bullet 6'].children['Pull'], g.root.children['Bullet 2'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 6'].children['Pull'].children['Pull'], g.root.children['Bullet 3'].children['Pull'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 6'].children['Pull'].children['Pull'].children['Pull'], g.root.children['Bullet 4'].children['Pull'].children['Pull'].children['Pull'].infoset)
+    g.set_infoset(g.root.children['Bullet 6'].children['Pull'].children['Pull'].children['Pull'].children['Pull'], g.root.children['Bullet 5'].children['Pull'].children['Pull'].children['Pull'].children['Pull'].infoset)

@@ -1,0 +1,134 @@
+import pygambit as gbt
+
+# Create the game with two players: Player 1 and Player 2.
+# Reasoning:
+# - Chance first chooses which chamber (0..5) contains the bullet; players do not observe this.
+# - Player 1 moves first. On each turn the current player chooses Pull or Quit.
+#   We order actions as ["Pull", "Quit"] so that the Pull branch is children[0]
+#   and the Quit branch is children[1]. This ordering matches the infoset grouping
+#   specified below (which refers to .children[0] for the "Pull" continuation).
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Two-player alternating Russian Roulette (6 chambers)")
+
+# Chance node selecting the loaded chamber (equal probability 1/6 each).
+g.append_move(g.root, g.players.chance, ["Chamber 0", "Chamber 1", "Chamber 2", "Chamber 3", "Chamber 4", "Chamber 5"])
+g.set_chance_probs(g.root.infoset, [gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6), gbt.Rational(1, 6)])
+
+# Append Player 1's initial decision node under each chance outcome.
+# Actions: "Pull" (children[0]) or "Quit" (children[1]).
+g.append_move(g.root.children[0], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[1], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[2], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[3], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[4], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[5], "Player 1", ["Pull", "Quit"])
+
+# For chance = 1..5 (i.e., not chamber 0), if Player 1 pulls the first time he survives,
+# so the game continues to Player 2. Append Player 2's decision nodes at those Pull branches.
+g.append_move(g.root.children[1].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[2].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[3].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[4].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[5].children[0], "Player 2", ["Pull", "Quit"])
+
+# For chance = 2..5, if both first pulls are safe, it returns to Player 1. Append those Player 1 nodes.
+g.append_move(g.root.children[2].children[0].children[0], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[3].children[0].children[0], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[4].children[0].children[0], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[5].children[0].children[0], "Player 1", ["Pull", "Quit"])
+
+# For chance = 3..5, after three safe pulls it's Player 2's turn again. Append those Player 2 nodes.
+g.append_move(g.root.children[3].children[0].children[0].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[4].children[0].children[0].children[0], "Player 2", ["Pull", "Quit"])
+g.append_move(g.root.children[5].children[0].children[0].children[0], "Player 2", ["Pull", "Quit"])
+
+# For chance = 4..5, after four safe pulls it's Player 1's turn. Append those Player 1 nodes.
+g.append_move(g.root.children[4].children[0].children[0].children[0].children[0], "Player 1", ["Pull", "Quit"])
+g.append_move(g.root.children[5].children[0].children[0].children[0].children[0], "Player 1", ["Pull", "Quit"])
+
+# For chance = 5, after five safe pulls it's Player 2's final turn. Append that Player 2 node.
+g.append_move(g.root.children[5].children[0].children[0].children[0].children[0].children[0], "Player 2", ["Pull", "Quit"])
+
+# Add outcome objects to reuse.
+p1_quits = g.add_outcome([0, 1], label="P1 quits (P2 wins)")
+p2_quits = g.add_outcome([1, 0], label="P2 quits (P1 wins)")
+p1_shot = g.add_outcome([-1, 1], label="P1 shot (P2 wins)")
+p2_shot = g.add_outcome([1, -1], label="P2 shot (P1 wins)")
+
+# Set Quit outcomes: Quit is children[1] at every decision node.
+# Player 1 quit nodes:
+g.set_outcome(g.root.children[0].children[1], p1_quits)
+g.set_outcome(g.root.children[1].children[1], p1_quits)
+g.set_outcome(g.root.children[2].children[1], p1_quits)
+g.set_outcome(g.root.children[3].children[1], p1_quits)
+g.set_outcome(g.root.children[4].children[1], p1_quits)
+g.set_outcome(g.root.children[5].children[1], p1_quits)
+
+g.set_outcome(g.root.children[2].children[0].children[0].children[1], p1_quits)
+g.set_outcome(g.root.children[3].children[0].children[0].children[1], p1_quits)
+g.set_outcome(g.root.children[4].children[0].children[0].children[1], p1_quits)
+g.set_outcome(g.root.children[5].children[0].children[0].children[1], p1_quits)
+
+g.set_outcome(g.root.children[4].children[0].children[0].children[0].children[1], p1_quits)
+g.set_outcome(g.root.children[5].children[0].children[0].children[0].children[1], p1_quits)
+
+# Player 2 quit nodes:
+g.set_outcome(g.root.children[1].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[2].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[3].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[4].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[5].children[0].children[1], p2_quits)
+
+g.set_outcome(g.root.children[3].children[0].children[0].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[4].children[0].children[0].children[0].children[1], p2_quits)
+g.set_outcome(g.root.children[5].children[0].children[0].children[0].children[1], p2_quits)
+
+g.set_outcome(g.root.children[5].children[0].children[0].children[0].children[0].children[1], p2_quits)
+
+# Set shot (death) outcomes at the Pull child nodes where the selected chamber equals the current chamber.
+# Chamber indices: turn 1 -> chamber 0 (P1), turn 2 -> chamber 1 (P2), turn 3 -> chamber 2 (P1), ...
+# So for chance = j the death occurs on the j-th chamber's Pull child:
+# j = 0: root.children[0].children[0] (P1 pulls and dies)
+g.set_outcome(g.root.children[0].children[0], p1_shot)
+
+# j = 1: root.children[1].children[0].children[0] (P2 pulls and dies)
+g.set_outcome(g.root.children[1].children[0].children[0], p2_shot)
+
+# j = 2: root.children[2].children[0].children[0].children[0] (P1 pulls and dies)
+g.set_outcome(g.root.children[2].children[0].children[0].children[0], p1_shot)
+
+# j = 3: root.children[3].children[0].children[0].children[0].children[0] (P2 pulls and dies)
+g.set_outcome(g.root.children[3].children[0].children[0].children[0].children[0], p2_shot)
+
+# j = 4: root.children[4].children[0].children[0].children[0].children[0].children[0] (P1 pulls and dies)
+g.set_outcome(g.root.children[4].children[0].children[0].children[0].children[0].children[0], p1_shot)
+
+# j = 5: root.children[5].children[0].children[0].children[0].children[0].children[0].children[0] (P2 pulls and dies)
+g.set_outcome(g.root.children[5].children[0].children[0].children[0].children[0].children[0].children[0], p2_shot)
+
+# Now set the information sets (imperfect information) as specified.
+# Reasoning for infosets (in comments above): players do not observe the selected chamber,
+# so decision nodes that are indistinguishable (same number of past safe pulls for the player)
+# must be grouped into the same infoset. The following lines implement the grouping.
+g.set_infoset(g.root.children[0], g.root.children[1].infoset)
+g.set_infoset(g.root.children[2], g.root.children[1].infoset)
+g.set_infoset(g.root.children[3], g.root.children[1].infoset)
+g.set_infoset(g.root.children[4], g.root.children[1].infoset)
+g.set_infoset(g.root.children[5], g.root.children[1].infoset)
+
+g.set_infoset(g.root.children[2].children[0], g.root.children[1].children[0].infoset)
+g.set_infoset(g.root.children[3].children[0], g.root.children[1].children[0].infoset)
+g.set_infoset(g.root.children[4].children[0], g.root.children[1].children[0].infoset)
+g.set_infoset(g.root.children[5].children[0], g.root.children[1].children[0].infoset)
+
+g.set_infoset(g.root.children[3].children[0].children[0], g.root.children[2].children[0].children[0].infoset)
+g.set_infoset(g.root.children[4].children[0].children[0], g.root.children[2].children[0].children[0].infoset)
+g.set_infoset(g.root.children[5].children[0].children[0], g.root.children[2].children[0].children[0].infoset)
+
+g.set_infoset(g.root.children[4].children[0].children[0].children[0], g.root.children[3].children[0].children[0].children[0].infoset)
+g.set_infoset(g.root.children[5].children[0].children[0].children[0], g.root.children[3].children[0].children[0].children[0].infoset)
+
+g.set_infoset(g.root.children[5].children[0].children[0].children[0].children[0], g.root.children[4].children[0].children[0].children[0].children[0].infoset)
+
+# Save the EFG to a file.
+g.to_efg("russian_roulette_6chambers.efg")

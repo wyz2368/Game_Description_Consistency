@@ -1,0 +1,17 @@
+def replay_infosets(g):
+    """Replays g.set_infoset(...) calls."""
+    g.set_infoset(g.root.children['Bullet in chamber 2'], g.root.children['Bullet in chamber 1'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 3'], g.root.children['Bullet in chamber 1'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 3'].children['Pull trigger'], g.root.children['Bullet in chamber 2'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 4'], g.root.children['Bullet in chamber 1'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 4'].children['Pull trigger'], g.root.children['Bullet in chamber 2'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 4'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 3'].children['Pull trigger'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 5'], g.root.children['Bullet in chamber 1'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 5'].children['Pull trigger'], g.root.children['Bullet in chamber 2'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 5'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 3'].children['Pull trigger'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 5'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 4'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 6'], g.root.children['Bullet in chamber 1'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 6'].children['Pull trigger'], g.root.children['Bullet in chamber 2'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 6'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 3'].children['Pull trigger'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 6'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 4'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'].infoset)
+    g.set_infoset(g.root.children['Bullet in chamber 6'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'], g.root.children['Bullet in chamber 5'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'].children['Pull trigger'].infoset)

@@ -2,12 +2,17 @@ game_id: Memory One Game
 source: Hand-crafted Description
 extraction_methodology: Manual
 description: |-
-  Two players, A and B, take turns choosing one of two actions X and Y over 6 moves. 
-  A acts in moves 1, 3, 5 and B acts in moves 2, 4, 6. 
-  A public clock reveals the current round number to the moving player (equivalently, each player knows whether this is their 1st, 2nd, or 3rd personal move).
-  Players do not see the other player's actions and only remember their own last 1 actions. 
-  At the end of the game, each pair of moves (one from A and one from B) is compared: if both chose the same action, they each get 1 point; otherwise, they get 0. 
-  The final payoff is the total points each player earns, so the maximum possible payoff for each player is 3.
+  Consider a game played between two players, A and B, over three rounds of two stages each.
+  Player A acts at stages 1, 3, and 5; Player B acts at stages 2, 4, and 6.
+  At every stage, the acting player selects an action from the set {X, Y}.
+
+  Players know the current stage number, but they do not observe their opponent's actions.
+  Moreover, the players have bounded memory: they recall only their own last action, forgetting any moves they made before that.
+
+  At the end of the third round, payoffs are determined by comparing the players' chosen actions within each respective round.
+  For any given round, if both players selected the same action, each receives a payoff of 1; if their actions differ, each receives 0.
+
+  A player's final payoff is the sum of the points earned across all three rounds, yielding a maximum possible payoff of 3 per player.
 strategic_equivalence_notion: Strong VNM Equivalence
 constraint_descriptions:
 - Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.

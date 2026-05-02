@@ -1,17 +1,17 @@
 game_id: Gambling
-source: 
+source:
 extraction_methodology: Manual
 description: |-
-  A gambler decides whether to enter a casino.
-  If he stays out, both the gambler and the casino receive get 0.
-  If he enters, he plays Matching Pennies against the dealer: each simultaneously chooses Heads or Tails.
-  If the choices match, the gambler wins and the dealer loses; otherwise, the gambler loses and the dealer wins. 
-  In either case, the winner's gain equals the loser's loss, which equals to 1.
+  A gambler decides whether to enter a casino. If the gambler stays out, both the gambler and the dealer receive a payoff of 0.
+
+  If the gambler enters, they play a coin toss game against the dealer: both players simultaneously choose either Heads or Tails.
+
+  If the choices match, the gambler receives 1 and the dealer receives -1; otherwise, the dealer receives 1 and the gambler receives -1.
 strategic_equivalence_notion: Strong VNM Equivalence
 constraint_descriptions:
 - Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 - TSM constraint.
-additional_comments: 
+additional_comments:
 related games: []
 assets:
   description: description.txt

@@ -2,17 +2,20 @@ game_id: Monty Hall Problem
 source:
 extraction_methodology: Manual
 description: |-
-  This is a single-player decision problem. There are three closed doors, with a car behind one door and a goat behind each of the other two.
+  This is a single-player decision problem.
+  There are three closed doors, numbered 1, 2, and 3: behind one is a car, and behind each of the other two is a goat.
 
-  Before any decisions are made, nature chooses uniformly at random which door the car is behind.
-  The player does not observe nature's choice; the host, who is not a player, knows.
+  Nature first chooses uniformly at random which door hides the car.
+  Without observing nature's choice, the player then chooses one of the three doors.
 
-  The player first chooses one of the three doors. 
-  Then one of the two unchosen doors opens automatically, always revealing a goat; if both unchosen doors hide goats, either one may be opened; the choice carries no information relevant to the game and need not be modelled.
-  The player observes which door the host opened and then chooses either to stick with their original door or to switch to the remaining unopened door. 
+  After the player's first choice, the lowest-numbered unchosen door that hides a goat is opened to reveal the goat.
+  The player observes which door was opened.
+  So now there is one chosen door, one opened door, and a final remaining unopened door.
 
-  The player gets 1 if the car is chosen.
-  The player gets 0 if a goat is chosen.
+  The player then makes their final choice of which door to open to decide if they win a prize or not,
+  their originally chosen door, or the remaining unopened door.
+
+  If the car is behind the player's finally chosen door, the player receives 1, otherwise, it hides the goat and they receive 0.
 strategic_equivalence_notion: Strong VNM Equivalence
 constraint_descriptions:
 - Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.

@@ -1,0 +1,1 @@
+Given a game description in natural language, you will be asked to generate python code for the Gambit API (pygambit) to construct a corresponding extensive-form game in Gambit.

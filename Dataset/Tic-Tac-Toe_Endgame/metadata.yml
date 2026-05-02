@@ -2,16 +2,19 @@ game_id: Tic-Tac-Toe Endgame
 source: Tic-tac-toe. Wikipedia. https://en.wikipedia.org/wiki/Tic-tac-toe (accessed April 14, 2026).
 extraction_methodology: Manual
 description: |-
-  You are playing a paper-and-pencil game for two players (x and o) who take turns marking the spaces in a three-by-three grid with "x" or "o". 
-  The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner. 
-  Winner wil gain 1 and loser will lose 1.
+  Consider a game played between two players, X and O, who alternate turns marking the empty spaces of a 3x3 grid with their respective marks ("x" or "o").
 
-  Assuming "e" represents empty, the start board state is: 
+  The player who places three of their marks in a horizontal, vertical, or diagonal row wins the game.
+  The winner receives a payoff of 1, and the loser receives a payoff of -1.
+  If the grid is completely filled without a winner, the game is a draw and both players receive a payoff of 0.
+
+  Assume the game begins from the following board state, where "e" represents an empty space:
+
   e | x | e
   x | e | o
   x | e | o
 
-  "o" is the next mover.
+  Player O is the next to move.
 strategic_equivalence_notion: Strong VNM Equivalence
 constraint_descriptions:
 - Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.

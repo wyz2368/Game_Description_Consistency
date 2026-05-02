@@ -1,0 +1,13 @@
+I've built the full extensive-form game for the two-player Russian roulette (6-chamber) following your requirements.
+
+Validation result:
+- all_terminal_nodes_have_outcomes: true
+- unresolved_terminal_nodes: []
+
+Saved file:
+- ./russian_roulette.efg
+
+If you'd like, I can:
+- display the tree structure or key paths,
+- export the game in a different format,
+- compute/derive subgame-perfect equilibria or analyze optimal strategies.
