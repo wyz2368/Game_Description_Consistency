@@ -1,0 +1,33 @@
+game_id: Monty Hall with Strategic Host
+source: Richard D. Gill, 2011. "The Monty Hall problem is not a probability puzzle (It's a challenge in mathematical modelling)," Statistica Neerlandica, Netherlands Society for Statistics and Operations Research, vol. 65(1), pp. 58-71.
+extraction_methodology: Manual
+description: |-
+  This is a zero-sum two-player game between the player and the adversarial host.
+  There are three closed doors: behind one is a car, and behind each of the other two is a goat.
+
+  The host first decides which door to hide the car behind, knowing that the player will try to find it.
+  Without observing the host's choice, the player then chooses one of the three doors.
+
+  The host observes the player's choice and decides whether to keep all remaining doors closed or to reveal a goat behind one of the unchosen doors.
+  When both unchosen doors hide goats, the host chooses which of the two to reveal.
+  If the host reveals a goat, the player observes which door was revealed and then chooses to either stick with their original door or switch to the remaining unopened door.
+  If the host keeps the doors closed, the player's original door stands as their final choice.
+
+  The player's final door is then opened: the player receives 1 if it hides the car and -1 if it hides a goat; the host's payoffs are the opposite of the player's.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+additional_comments:
+- This is a zero-sum variant of the Monty Hall game with an adversarial host who does not always open a door
+- Monty Hall as "finite two-person zero-sum game in which the player tries to maximize his probability of getting the car, the host tries to minimize it" is analysed in Proposition 4, Section 2.2, Gill (2011)
+  Gill (2011) does not model situations where "the host does not always open a door, or where he might be trying to help you, or might be trying to cheat you" citing Wikipedia and Rosenhouse (2009) as references.
+- Rosenhouse (2009), "The Monty Hall Problem, The Remarkable Story of Math's Most Contentious Brain Teaser," Oxford University Press, Section 1.8,
+  documents that the historical TV show "Let's Make A Deal" featured a strategic host, deciding to open a door or not, thus, motivating the adversarial-host formulation
+  "Typically, if the contestant initially chose a goat the door was opened immediately and the game ended on the spot.
+  But if the contestant chose the car, Monty opened one of the remaining doors and gave the contestant the option of switching."
+- Neither source formalizes the extensive-form game with a strategic non-opening option; the formulation here combines Gill's zero-sum framing with the historical motivation Rosenhouse documents.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

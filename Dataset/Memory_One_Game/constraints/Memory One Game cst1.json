@@ -1,0 +1,12 @@
+{
+    "Cst Type":1,
+    "Path":{
+        "1":{"type":"Decision","player":"A","action":"X"},
+        "2":{"type":"Decision","player":"B","action":"X"},
+        "3":{"type":"Decision","player":"A","action":"X"},
+        "4":{"type":"Decision","player":"B","action":"X"},
+        "5":{"type":"Decision","player":"A","action":"X"},
+        "6":{"type":"Decision","player":"B","action":"X"}},
+    "Payoffs":{"A":3,"B":3},
+"Comments":"Type 1 is payoff seeding. None means no constraints on it."
+}

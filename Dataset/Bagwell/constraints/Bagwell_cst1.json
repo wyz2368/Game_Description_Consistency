@@ -1,0 +1,13 @@
+{
+    "Cst Type":3,
+    "P1 Payoff":{
+        "1":{"type":"Decision","player":"Player 1","action":"S"},
+        "2":{"type":"Chance","player":"Chance","action":"Perceive S"},
+        "3":{"type":"Decision","player":"Player 2","action":"S"},
+        "Player order":"1"},
+    "P1 Payoff 2":{
+        "1":{"type":"Decision","player":"Player 1","action":"C"},
+        "2":{"type":"Chance","player":"Chance","action":"Perceive C"},
+        "3":{"type":"Decision","player":"Player 2","action":"C"},
+        "Player order":"1"},
+    "Relationship":">","Comments":"Type 3 is for payoff comparison."}

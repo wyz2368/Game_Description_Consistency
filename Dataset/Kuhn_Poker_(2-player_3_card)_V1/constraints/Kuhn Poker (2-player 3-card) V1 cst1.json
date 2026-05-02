@@ -1,0 +1,9 @@
+{
+    "Cst Type":1,
+    "Path":{
+        "1":{"type":"Chance","player":"Chance","action":"P1:K P2:Q"},
+        "2":{"type":"Decision","player":"Player One","action":"Check"},
+        "3":{"type":"Decision","player":"Player Two","action":"Check"}},
+    "Payoffs":{"Player One":1,"Player Two":-1},
+    "Comments":"Type 1 is a payoff constraint for seeding the payoffs in one strategy profiles"
+}

@@ -1,14 +1,16 @@
 from openai import OpenAI
 import os
 
-def infer_from_gpt(prompt):
-    os.environ["OPENAI_API_KEY"] = ""  # Add your API key here
-    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    
-    def get_response(text):
-        
-        model = "gpt-5-mini"
 
+def infer_response(prompt, model):
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY is not set.")
+
+    client = OpenAI(api_key=api_key)
+
+    def get_response(text):
         completion = client.chat.completions.create(
             model=model,
             messages=text,
@@ -26,42 +28,4 @@ def infer_from_gpt(prompt):
     message_pool.append(user_message)
     
     response = get_response(message_pool)
-    
     return response
-
-
-def infer_from_deepseek(prompt):
-    client = OpenAI(api_key="", base_url="https://api.deepseek.com")
-    
-    def get_response(text):
-        response = client.chat.completions.create(
-            model="deepseek-chat",
-            messages=text,
-            stream=False
-        )
-        return response.choices[0].message.content
-    
-    message_pool = []
-    init_message = "You are a helpful assistant."
-    system_message = {"role": "system", "content": init_message}
-    message_pool.append(system_message)
-    
-    user_message = {"role": "user", "content": prompt}
-    message_pool.append(user_message)
-    
-    response = get_response(message_pool)
-    
-    return response
-
-
-def infer_response(prompt, model):
-    if model == "gpt":
-        response = infer_from_gpt(prompt)
-    elif model == "deepseek":
-        response = infer_from_deepseek(prompt)
-    else:
-        raise ValueError("Invalid model specified.")
-    
-    return response
-    
-    

@@ -1,0 +1,30 @@
+game_id: Centipede (30_rounds)
+source: Rosenthal, R. W. (1981). "Games of Perfect Information, Predatory Pricing and the Chain-Store Paradox." Journal of Economic Theory, 25(1), 92-100.
+extraction_methodology: Manual
+description: |-
+  Consider two players, Alice and Bob, seated across a table from each other. Alice moves first.
+
+  At the start of the game, two piles of coins sit on Alice's side of the table: one pile contains 4 coins and the other contains 1 coin.
+
+  On each turn, the active player —- the player on whose side the piles currently sit -— chooses one of two actions:
+  - take: keep the larger pile and give the smaller pile to the other player. In this case, the game ends immediately.
+  - push: slide both piles across the table to the other player. The other player then becomes the active player.
+
+  Each push doubles both piles, so the amounts at stake grow over time. For instance:
+  - if Alice takes on her very first move, she gets 4 coins and Bob gets 1;
+  - if Bob takes on his first move (after Alice pushes once), he gets 8 and Alice gets 2;
+  - if Alice takes on her second move (after two pushes), she gets 16 and Bob gets 4; and so on.
+
+  The game lasts 60 moves at most: Alice makes the odd-numbered moves (1, 3, 5, …, 59) and Bob makes the even-numbered moves (2, 4, …, 60).
+  If no one ever takes, Alice obtains the larger pile and Bob gets the smaller one.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+additional_comments:
+- The original centipede game is due to Rosenthal (1981); we consider a 60-moves (30 rounds of 2 moves each) version of it
+- The payoff structure is borrowed from McKelvey, R. D., & Palfrey, T. R. (1992). "An Experimental Study of the Centipede Game." Econometrica, 60(4), 803-836. Their experimental version is the one with payoffs starting at (0.40, 0.10) doubling at each node.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

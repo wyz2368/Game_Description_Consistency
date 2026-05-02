@@ -1,0 +1,19 @@
+game_id: Nuclear_Crisis
+source: Mihai Manea. Extensive Form Games. MIT OpenCourseWare, March 2, 2016. https://ocw.mit.edu/courses/14-16-strategy-and-information-spring-2016/8aba65347a9edb17b1e718c3c221e42a_MIT14_16S16_Form_Games.pdf (accessed April 20, 2026).
+extraction_methodology: Manual
+description: |-
+  The Country A can choose to escalate (E) or end the game by ignoring the provocation (I). If Country A ignores the provocation, both countries receive a positive payoff.
+  If the game escalates, Country B faces a similar choice: to back down (B), but lose face with a  negative payoff while Country A gains a positive payoff, or escalate (E).
+  Escalation leads to nuclear crisis: a simultaneous move game where each nation chooses to either retreat (R) and lose credibility or detonate. 
+  Unless both countries retreat, retaliation to the first nuclear strike culminates in nuclear disaster.
+  If one country detonates while the other retreats, the detonating country gains a positive payoff, while the retreating country incurs a negative payoff. However, if neither country retreats, retaliation follows the first nuclear strike, resulting in a catastrophic nuclear disaster, yielding a negative payoff for both countries. If both countries retreat, they each suffer a negative payoff.
+strategic_equivalence_notion: Order-Preserving Equivalence
+constraint_descriptions:
+- Check that the signs of the payoffs are correct, that is, whether each payoff is positive or negative as required.
+- TSM constraint.
+additional_comments: The original lecture note gives the payoff matrix with explicit values. We modify these into payoff relationships to make the translation more challenging.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

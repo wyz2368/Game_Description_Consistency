@@ -3,4 +3,3 @@ __pycache__/
 .pytest_cache/
 *.efg
 *.txt
-test_gambit.py

@@ -1,125 +1,80 @@
 # Game Description Consistency
 
-A framework for automated evaluation of natural language translation to Extensive-Form Games.
+## Setup
 
-## 🚀 Quick Start
-
-### 1. Run All Matching
-
-Match the players and order of moves in the generated games to those in the reference game:
+Install the Python dependencies:
 
 ```bash
-python process_all_matching.py -m gpt
+pip install -r requirements.txt
 ```
 
-**Arguments:**
-
-* `-m`, `--models`: Selects the LLM used for inference (`gpt` or `deepseek`). `gpt`.
-
-### 2. Check Equivalence
-
-Evaluate logical equivalence between reference and generated games:
+For a faster version of `pygambit`, install the local copy from this repository. This is intentionally not included in `requirements.txt`.
 
 ```bash
-python process_all_equivalence_check.py
+cd gambit
+pip install .
+cd ..
 ```
 
-This checks:
-
-* Order-preserving equivalence
-* Best-response equivalence
-* Better-response equivalence
-
-Results are saved under:
-`Output_Equivalence/{Game_Type}/{Game_Name}/{Generated_File}.txt`
-
-### 3. Test Constraint Satisfaction
-
-Verify that generated games adhere to game-specific constraints:
+Export your OpenAI API key before running the GPT matcher:
 
 ```bash
-python process_all_constraints.py
+export OPENAI_API_KEY="your_openai_api_key_here"
 ```
 
-Constraint results are saved to:
-`Output_Constraints/{Game_Type}/{Game_Name}.txt`
+## Run The Evaluation
 
----
+An example command is:
 
-## 📁 Project Structure
-
-```
-Game_Description_Consistency/
-│
-├── Algorithms/                # Equivalence checking Algorithms
-├── Constraints/               # Custom constraint tests (e.g., test_xxx.py)
-├── Dataset/                   # Reference and generated game data
-├── Match/                     # Code for matching generated game to reference game
-├── Results/                   # All evaluation outputs
-│   ├── Output/                # Matched generated EFG files
-│   ├── Output_Constraints/    # Constraint checking results
-│   └── Output_Equivalence/   # Equivalence checking results
-├── Tree/                      # Code for parsing EFG to tree structure
-│
-├── process_all_matching.py    # Match generated `.efg` files to reference
-├── process_all_equivalence_check.py  # Checks equivalence metrics
-├── process_all_constraints.py        # Check game constraints
-├── run.sh                     # Optional shell script to run all steps
-├── utils.py                   # Uilts functions convert efg to nfg
-└── README.md                  # This file
+```bash
+python match_and_check_all.py \
+  --dataset_root Dataset \
+  --generated_root Dataset_Check_Evaluator \
+  --output_root Results/Output \
+  --report_root Results/Check_Reports \
+  --num_generations 5 \
+  -m gpt-5-mini
 ```
 
----
+Arguments:
 
-## 🤖 LLM Integration
+- `--dataset_root`: folder containing reference games.
+- `--generated_root`: folder containing generated `.efg` samples.
+- `--output_root`: folder where matched `.efg` files are saved.
+- `--report_root`: folder where per-sample reports and `summary.txt` are saved.
+- `--num_generations`, `-n`: required number of generated samples per game. This is used to calculate pass@N.
+- `--model`, `-m`: OpenAI model used for matching. The default is `gpt-5-mini`.
 
-Three LLMs are currently supported:
+`--num_generations` is required because the final summary reports pass@N.
 
-* **GPT (OpenAI)**
-* **DeepSeek**
+## Check The Evaluation
 
-You can set API keys in `Match/chatbot.py`:
+To check the evaluation, simply run:
 
-For ChatGPT:
-
-```python
-os.environ["OPENAI_API_KEY"] = "" # Add your API key here
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+```bash
+./run_evaluation_checker.sh
 ```
 
-For DeepSeek:
+## Data Format
 
-```python
-client = OpenAI(api_key="", base_url="https://api.deepseek.com")
-```
+Each reference game folder under `Dataset/` should look like:
 
----
-
-## 🧪 Adding New Games
-
-1. Place your `.efg` reference and generated files in:
-
-```
+```text
 Dataset/
-  └── {Game_Type}/
-        └── {Game_Name}/
-              ├── Reference/ref.efg
-              ├── Correct/*.efg
-              └── Incorrect/*.efg
+└── {Game_Name}/
+    ├── game.efg
+    ├── description.txt
+    ├── metadata.yml
+    └── constraints/
+        └── *.json
 ```
 
-2. Add constraint checking code (optional) in `Constraints/test_{game_name}.py` with a function:
+Each generated game folder should contain `.efg` samples:
 
-```python
-def test_constraints(ref_path, gen_path, original_path):
-    ...
+```text
+Dataset_Generate/
+└── {Game_Name}/
+    ├── 1.efg
+    ├── 2.efg
+    └── 3.efg
 ```
-
-## ✅ Output Example
-
-After running all steps, outputs will be saved in:
-
-* `Results/Output/`: Aligned EFG files
-* `Results/Output_Equivalence/`: Equivalence test results
-* `Results/Output_Constraints/`: Constraint satisfaction reports
-

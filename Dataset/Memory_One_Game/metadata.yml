@@ -1,0 +1,20 @@
+game_id: Memory One Game
+source: Hand-crafted Description
+extraction_methodology: Manual
+description: |-
+  Two players, A and B, take turns choosing one of two actions X and Y over 6 moves. 
+  A acts in moves 1, 3, 5 and B acts in moves 2, 4, 6. 
+  A public clock reveals the current round number to the moving player (equivalently, each player knows whether this is their 1st, 2nd, or 3rd personal move).
+  Players do not see the other player's actions and only remember their own last 1 actions. 
+  At the end of the game, each pair of moves (one from A and one from B) is compared: if both chose the same action, they each get 1 point; otherwise, they get 0. 
+  The final payoff is the total points each player earns, so the maximum possible payoff for each player is 3.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+- In each round, where each round includes one move by A and one move by B, check that A moves first and B moves second in the simultaneous move.
+additional_comments: This game description is designed to include a complex imperfect recall scenario in which the player forgets their own previous actions.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

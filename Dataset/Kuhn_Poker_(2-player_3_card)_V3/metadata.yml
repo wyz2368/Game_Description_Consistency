@@ -1,0 +1,29 @@
+game_id: Kuhn Poker (2-player 3-card) V3
+source: Harold W Kuhn., 1950. A simplified two-person poker. Contributions to the Theory of Games 1, pp.97-103.
+extraction_methodology: Manual
+description: |-
+  This is a two-player card game between Player One and Player Two, using a deck of three cards: King, Queen, and Jack (King beats Queen beats Jack).
+
+  Chance deals the cards in two stages: first, Player One is dealt a card uniformly at random from the three cards; then, after Player One's first decision, Player Two is dealt a card uniformly at random from the remaining two.
+  Each player observes their own card and all actions taken by either player, but neither observes their opponent's card nor the undealt third card.
+
+  Player One moves first and chooses either to check or to bet.
+  If Player One bets, Player Two then chooses either to fold or to call.
+  If Player One checks, Player Two chooses either to check or to bet; if Player Two bets, Player One then chooses either to fold or to call.
+
+  The game ends in one of three ways.
+  If both players check, the player with the higher-ranked card wins.
+  If one player bets and the other folds, the betting player wins.
+  If one player bets and the other calls, the player with the higher-ranked card wins.
+  A player who wins after both players check gets 1; the loser gets -1.
+  A player whose opponent folds gets 1; the folding player gets -1.
+  A player who wins after a bet is called gets 2; the loser gets -2.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+additional_comments: The description of how the game proceeds is taken from wikipedia (https://en.wikipedia.org/wiki/Kuhn_poker) [accessed April 14, 2026]. We remove any reference to Kuhn Poker in the description and refer to it only as a two-player card game, in order to reduce potential memorization issues for LLMs. Furthermore, this version of Kuhn Poker has Player One move before Player Two's card is dealt.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

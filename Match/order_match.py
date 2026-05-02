@@ -6,11 +6,16 @@ from collections import deque, Counter
 from functools import reduce
 from operator import mul
 
-from fractions import Fraction
-
-from Tree import Node, NodeType
+from Tree import Node, NodeType, compare_chance_probs, get_path_to_node
 
 from .action_match import update_current_nodes, match_all_actions_llm
+from .utils import extract_type2_tsm_paths_from_json_files
+
+from typing import Tuple, Any, Dict, List, Optional
+
+from pathlib import Path
+from typing import Union, Optional
+
 
 def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tuple[List[str], int, int, int]], level: int = 0):
     """
@@ -51,34 +56,26 @@ def update_nodes_with_switching_order(node: Node, modified_actions_list: List[Tu
         # print(level)
         update_nodes_with_switching_order(child, modified_actions_list, level + 1)
 
+def node_player_id(node: Node):
+    if node.node_type == NodeType.CHANCE:
+        return -1
+    return node.player
+
 def get_unique_actions_by_level_partial_tree(
     node: Node
-) -> List[Tuple[List[str], List[str], int, int]]:
-    """Retrieve unique actions from a given node in a partial game tree.
-    
-    This function processes a node and its children to collect unique actions that are marked as checked. 
-    It specifically looks for player nodes and records their actions along with relevant information such as 
-    the player, level, and information set.
-    
-    Args:
-        node (Node): The node from which to collect unique actions. It should be marked as checked.
-    
-    Returns:
-        List[Tuple[List[str], List[str], int, int]]: A list of tuples, each containing:
-            - A list of actions (List[str]): The actions available at the node.
-            - A list of players (List[str]): The players associated with the actions.
-            - An integer representing the level of the node (int).
-            - An integer representing the information set ID (int).
-    """
-
+) -> List[Tuple[List[str], Any, int, int]]:
     unique_actions = []
 
-    # Only process nodes that are marked as checked (part of the simultaneous move path)
     if node.checked:
-        
-        unique_actions.append((node.actions, node.player, node.level, node.information_set))
+        unique_actions.append(
+            (
+                node.actions,
+                node_player_id(node),   # changed here
+                node.level,
+                node.information_set,
+            )
+        )
 
-        # Recursively collect actions from children
         for child in node.children.values():
             unique_actions.extend(get_unique_actions_by_level_partial_tree(child))
 
@@ -208,25 +205,53 @@ def mark_simultaneous_move_children(start_node):
         nodes_to_check = next_level_nodes
 
 
-def check_simultaneous_move_start_node(node):
-    
-    # 1. Check the children nodes are in the same information set
-    # 2. Check the children nodes doesn't have the terminal node
-    # 3. Check the children nodes has the same player
-    # 4. Maybe more conditions
-    
-    node_type = (node.node_type != NodeType.CHANCE)
-    gen_info_sets = {child.information_set for child in node.children.values() if child.information_set is not None}
-    gen_has_terminal = any(child.node_type == NodeType.TERMINAL for child in node.children.values())
-    gen_players = {child.player for child in node.children.values() if child.node_type == NodeType.PLAYER}
-    
-    is_start_node = (len(gen_info_sets) == 1 and len(gen_players) == 1 and not gen_has_terminal and node_type)
-    
-    return is_start_node
-    
+PathStep = Tuple[str, str]
+PathToNode = List[PathStep]
+
+
+def check_simultaneous_move_start_node(
+    path_to_node: PathToNode,
+    tsm_paths: Union[List[PathToNode], Set[Tuple[PathStep, ...]]],
+) -> bool:
+    """
+    Check whether the current node is the start of a TSM.
+
+    New logic:
+    - Do NOT infer TSM from information sets / children / players.
+    - A node is a TSM start only if its path matches one of the Type-2
+      constraint paths.
+
+    Args:
+        path_to_node:
+            Path returned by get_path_to_node, e.g.
+                [("Gambler", "Enter")]
+
+        tsm_paths:
+            List or set of TSM start paths extracted from Type-2 constraints, e.g.
+                [
+                    [("Gambler", "Enter")],
+                    [("P1", "A"), ("P2", "B")]
+                ]
+
+    Returns:
+        True if path_to_node exactly matches one Type-2 TSM path.
+    """
+
+    normalized_path = tuple(path_to_node)
+
+    normalized_tsm_paths = {
+        tuple(path)
+        for path in tsm_paths
+    }
+
+    return normalized_path in normalized_tsm_paths
+
 ############# Below is the main function for switching the order of nodes in a game tree #############
 
-def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappings, game_description):
+def profile_key(path):
+    return tuple(sorted((player, action) for level, player, action in path))
+
+def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappings, game_description, player_names, tsm_path):
     """Filters simultaneous moves between a reference game node and a generated game node within a game tree.
     This function traverses the game tree, comparing nodes from the reference game with those from the generated game. It identifies simultaneous moves and ensures that the generated nodes conform to the structure and rules defined by the reference nodes. If discrepancies are found, appropriate errors are raised.
     Args:
@@ -288,15 +313,26 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                 if not match:
                     raise ValueError(f"No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
                 continue
-            
-            # Step 2: check the node is the start node of the simultaneous move
-            # 1. Check the children nodes are in the same information set
-            # 2. Check the children nodes doesn't have the terminal node
-            # 3. Check the children nodes has the same player
-            
-            gen_is_start_node = check_simultaneous_move_start_node(g_node)
 
-            # If above conditions are not met, the node is NOT the start node of the simultaneous move
+            # Step 2: Check whether the current node is explicitly marked as the start
+            # of a simultaneous-move block by a Type-2 constraint.
+            #
+            # Important:
+            # - If there are no Type-2 TSM paths, then no node should be treated as a TSM start.
+            # - If Type-2 TSM paths exist, compare the current node's history path against them.
+
+            if tsm_path:
+                path_to_check = get_path_to_node(g_node, player_names)
+
+                gen_is_start_node = check_simultaneous_move_start_node(
+                    path_to_check,
+                    tsm_path,
+                )
+            else:
+                gen_is_start_node = False
+
+            # If the current path does not match any Type-2 TSM path,
+            # this node is not the start of a simultaneous-move block.
 
             if not gen_is_start_node:
                 gen_nodes_list.append(g_node)
@@ -314,7 +350,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
 
                 continue  # Skip the g_node if it doesn't satisfy the condition
           
-            print("Simultaneous move detected for g_node")
+            print("TSM detected for g_node")
             
             # Step 3: Switch the order of simultaneous moves nodes
             matched_ref_node = None
@@ -332,12 +368,12 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
 
             print(f"Matched ref_node, Parent Action: {matched_ref_node.parent_action}")
 
-            # Verify that matched_ref_node also meets the simultaneous move condition
+            # # Verify that matched_ref_node also meets the simultaneous move condition
             
-            matched_ref_node_is_start_node = check_simultaneous_move_start_node(matched_ref_node)
+            # matched_ref_node_is_start_node = check_simultaneous_move_start_node(matched_ref_node)
 
-            if not matched_ref_node_is_start_node:
-                raise ValueError(f"Reference node {matched_ref_node} does not meet the simultaneous move condition")
+            # if not matched_ref_node_is_start_node:
+            #     raise ValueError(f"Reference node {matched_ref_node} does not meet the simultaneous move condition")
             
             # Step 4: Mark all the nodes involved in the simultaneous move
             mark_simultaneous_move_children(matched_ref_node)
@@ -350,7 +386,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                     return
 
                 if not node.children:
-                    children_paths[tuple(path)] = node
+                    children_paths[profile_key(path)] = node
                     return
 
                 for action, child in node.children.items():
@@ -362,7 +398,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                     if child.checked:
                         collect_paths(child, path + [step])
                     else:
-                        children_paths[tuple(path + [step])] = child
+                        children_paths[profile_key(path + [step])] = child
 
             
             # Start collecting paths from each action of the start node
@@ -394,10 +430,16 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                     if child.checked:
                         collect_paths_new(child, path + [step])
                     else:
-                        final_path = tuple(path + [step])
-                        original_node = children_paths.get(final_path)
+                        final_key = profile_key(path + [step])
+                        original_node = children_paths.get(final_key)
+                        print("final_key", final_key, "original_node", original_node)
+
                         if original_node is not None:
                             node.children[action] = original_node
+                        else:
+                            raise ValueError(
+                                f"Failed to restore subtree for simultaneous action profile: {final_key}"
+                            )
 
             for action, child in g_node.children.items():
                 if g_node.node_type == NodeType.PLAYER:
@@ -463,7 +505,6 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
 
                 queue_ref.append(ref_child)
                 queue_gen.append(gen_child)
-
 
 def build_infoset_partition(
     root: Node,
@@ -544,82 +585,44 @@ def infoset_partitions_equal(ref_root: Node, gen_root: Node) -> Tuple[bool, Any]
     return ok, debug
 
 
-def to_prob(x):
-    if isinstance(x, Fraction):
-        return x
-    if isinstance(x, (int, float)):
-        return Fraction(x)
-    if isinstance(x, str):
-        return Fraction(x.strip())
-    raise TypeError(f"Unsupported probability type: {type(x)} value={x}")
-    
-def compress_chance_nodes(node: Node):
+def switch_order(
+    ref_game,
+    gen_game,
+    model,
+    mappings,
+    game_description,
+    constraint_paths: Optional[List[Union[str, Path]]] = None,
+):
     """
-    Compress chains of chance nodes.
+    Switches simultaneous-move order in the generated tree.
 
-    Example:
-        chance --A(1/2)--> chance --a1(1/2)--> terminal
-
-    becomes:
-        chance --Aa1(1/4)--> terminal
-    """
-
-    if node.node_type == NodeType.TERMINAL:
-        return
-
-    # First recursively compress children
-    for child in list(node.children.values()):
-        compress_chance_nodes(child)
-
-    if node.node_type != NodeType.CHANCE:
-        return
-
-    new_children = {}
-    new_probs = {}
-
-    for action, child in list(node.children.items()):
-        prob = node.probs[action]
-
-        # print(prob)
-
-        if child.node_type == NodeType.CHANCE:
-            for child_action, grandchild in child.children.items():
-                combined_action = f"{action} {child_action}"
-                combined_prob = to_prob(prob) * to_prob(child.probs[child_action])
-
-                new_children[combined_action] = grandchild
-                new_probs[combined_action] = combined_prob
-
-                grandchild.parent_action = combined_action
-                grandchild.parent = node
-
-        else:
-            new_children[action] = child
-            new_probs[action] = prob
-            child.parent_action = action
-            child.parent = node
-
-    node.actions = list(new_children.keys())
-    node.children = new_children
-    node.probs = new_probs   
-
-
-def switch_order(ref_node: Node, gen_node: Node, model: str, mappings, game_description):
-    """Switches the order of two nodes in a tree structure and filters simultaneous moves.
-    
     Args:
-        ref_node (Node): The reference node whose order is to be switched.
-        gen_node (Node): The general node whose order is to be switched.
-    
-    Returns:
-        None: This function modifies the tree in place and does not return a value.
+        constraint_paths:
+            Optional list of JSON file paths containing type-2 player-order
+            constraints.
     """
 
-    compress_chance_nodes(gen_node)
+    ref_node = ref_game.root
+    gen_node = gen_game.root
 
-    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description)
+    path_to_tsm = extract_type2_tsm_paths_from_json_files(constraint_paths)
 
-    ok, _ = infoset_partitions_equal(ref_node, gen_node)
+    print("Path to TSM: ", path_to_tsm)
+
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+    
+    # Check the information set partitions are correct.
+    ok, debug = infoset_partitions_equal(ref_node, gen_node)
 
     if not ok:
-        raise ValueError("Generated game infoset partition does not match reference game.")
+        raise ValueError(
+            f"Generated game infoset partition does not match reference game. Debug: {debug}"
+        )
+    
+    # Check chance nodes and their probabilities by path.
+    chance_ok = compare_chance_probs(ref_game, gen_game)
+
+    if not chance_ok:
+        raise ValueError(
+            "Generated game chance nodes/probabilities do not match reference game."
+        )

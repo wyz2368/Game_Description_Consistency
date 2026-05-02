@@ -321,39 +321,112 @@ class EFGParser:
 
         return paths
 
-def get_chance_probs(node: Node) -> List[Tuple[str, Tuple[Tuple[str, float], ...]]]:
+
+Actor = Union[int, str]
+PathKey = Tuple[Tuple[Actor, str], ...]
+
+
+def parse_prob(prob) -> Fraction:
     """
-    Recursively collect all chance nodes and their probability distributions.
-    Returns a list of tuples containing (node_label, sorted tuple of (action, probability)).
+    Safely parse probability values stored as int, float, Fraction,
+    or strings like '1/2' or '0.5'.
+
+    Returns a Fraction so comparisons are exact.
     """
-    chance_nodes = []
+    if isinstance(prob, Fraction):
+        return prob
+
+    return Fraction(str(prob))
+
+
+def collect_chance_nodes_by_path(
+    node: Node,
+    path: Optional[List[Tuple[Actor, str]]] = None,
+    chance_map: Optional[Dict[PathKey, Dict[str, Fraction]]] = None
+) -> Dict[PathKey, Dict[str, Fraction]]:
+    """
+    Collect all chance nodes in the tree.
+
+    Key:
+        path to the chance node, including both player and chance actions:
+        (
+            (1, "A"),
+            ("chance", "High"),
+            (2, "L")
+        )
+
+    Value:
+        dictionary mapping chance action -> probability:
+        {
+            "Heads": Fraction(1, 2),
+            "Tails": Fraction(1, 2)
+        }
+    """
+
+    if path is None:
+        path = []
+
+    if chance_map is None:
+        chance_map = {}
+
     if node.node_type == NodeType.CHANCE:
-        # Convert probability strings like "1/2" to float
-        sorted_probs = tuple(sorted(
-            (action, eval(prob) if isinstance(prob, str) else float(prob))
+        chance_map[tuple(path)] = {
+            action: parse_prob(prob)
             for action, prob in node.probs.items()
-        ))
-        chance_nodes.append((sorted_probs))
-    for child in node.children.values():
-        chance_nodes.extend(get_chance_probs(child))
-    return chance_nodes
+        }
+
+    for action, child in node.children.items():
+        if node.node_type == NodeType.PLAYER:
+            actor = node.player
+        elif node.node_type == NodeType.CHANCE:
+            actor = "chance"
+        else:
+            continue
+
+        next_path = path + [(actor, action)]
+        collect_chance_nodes_by_path(child, next_path, chance_map)
+
+    return chance_map
 
 def compare_chance_probs(tree1: GameTree, tree2: GameTree) -> bool:
     """
-    Compare the probabilities of chance nodes in two game trees.
-    Returns True if both trees have the same probability distributions, False otherwise.
+    Compare chance nodes in two game trees.
+
+    Checks both:
+    1. whether chance nodes appear at the same paths;
+    2. whether their action-probability distributions are the same.
     """
-    probs1 = get_chance_probs(tree1.root)
-    probs2 = get_chance_probs(tree2.root)
 
-    if probs1 == probs2:
-        print("The trees have the same chance node probabilities.")
+    chance1 = collect_chance_nodes_by_path(tree1.root)
+    chance2 = collect_chance_nodes_by_path(tree2.root)
+
+    if chance1 == chance2:
+        print("The trees have the same chance nodes and probabilities at the same paths.")
         return True
-    else:
-        print("The trees have different chance node probabilities.")
-        # raise ValueError("The trees have different chance node probabilities.")
-        return False
 
+    print("The trees have different chance nodes, probabilities, or paths.")
+
+    only_in_1 = set(chance1.keys()) - set(chance2.keys())
+    only_in_2 = set(chance2.keys()) - set(chance1.keys())
+    common_paths = set(chance1.keys()) & set(chance2.keys())
+
+    if only_in_1:
+        print("\nChance paths only in tree 1:")
+        for path in sorted(only_in_1):
+            print(path, chance1[path])
+
+    if only_in_2:
+        print("\nChance paths only in tree 2:")
+        for path in sorted(only_in_2):
+            print(path, chance2[path])
+
+    for path in sorted(common_paths):
+        if chance1[path] != chance2[path]:
+            print(f"\nDifferent chance probabilities at path {path}:")
+            print("Tree 1:", chance1[path])
+            print("Tree 2:", chance2[path])
+
+    return False
 
 def get_information_sets(node: Node, path: Optional[List[str]] = None, info_sets: Optional[Dict[Tuple[int, int], Tuple[str, ...]]] = None):
     """
@@ -405,3 +478,59 @@ def compare_information_sets(tree1: GameTree, tree2: GameTree) -> bool:
         print("The trees have different information set grouping structure.")
         # raise ValueError("The trees have different player information sets.")
         return False
+
+def get_path_to_node(node: Node, players: List[str]) -> List[Tuple[str, str]]:
+    """
+    Return the path from the root to `node` as a list of:
+
+        (player_name_or_chance, action)
+
+    Example:
+        [
+            ("Gambler", "Enter"),
+            ("Dealer", "Deal High")
+        ]
+
+    Chance nodes are represented as:
+        ("chance", action)
+
+    Assumes:
+        - child.parent is set
+        - child.parent_action is set
+        - EFG player ids are 1-based, so player 1 maps to players[0]
+    """
+
+    path = []
+    current = node
+
+    while hasattr(current, "parent"):
+        parent = current.parent
+        action = current.parent_action
+
+        if action is None:
+            raise ValueError("Node has parent but no parent_action.")
+
+        if parent.node_type == NodeType.CHANCE:
+            actor = "chance"
+
+        elif parent.node_type == NodeType.PLAYER:
+            if parent.player is None:
+                raise ValueError("Player node has no player id.")
+
+            player_index = parent.player - 1
+
+            if player_index < 0 or player_index >= len(players):
+                raise ValueError(
+                    f"Player id {parent.player} is out of range for players list."
+                )
+
+            actor = players[player_index]
+
+        else:
+            raise ValueError("Terminal node cannot be a parent in a valid path.")
+
+        path.append((actor, action))
+        current = parent
+
+    path.reverse()
+    return path

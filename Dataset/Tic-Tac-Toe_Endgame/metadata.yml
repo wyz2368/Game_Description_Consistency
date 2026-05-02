@@ -1,0 +1,22 @@
+game_id: Tic-Tac-Toe Endgame
+source: Tic-tac-toe. Wikipedia. https://en.wikipedia.org/wiki/Tic-tac-toe (accessed April 14, 2026).
+extraction_methodology: Manual
+description: |-
+  You are playing a paper-and-pencil game for two players (x and o) who take turns marking the spaces in a three-by-three grid with "x" or "o". 
+  The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row is the winner. 
+  Winner wil gain 1 and loser will lose 1.
+
+  Assuming "e" represents empty, the start board state is: 
+  e | x | e
+  x | e | o
+  x | e | o
+
+  "o" is the next mover.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+additional_comments: The game description is taken from Wikipedia, as cited in the source. We add an initial board state from the middle of the game to keep the game size suitable for expression in EFG. Moreover, since the description there does not include payoff information, we manually add explicit payoff values to ensure that the description is complete. There is also a simpler version of Tic-Tac-Toe in our dataset with fewer empty spaces on the board.
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

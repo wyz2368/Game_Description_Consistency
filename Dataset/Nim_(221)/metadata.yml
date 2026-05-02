@@ -1,0 +1,18 @@
+game_id: Nim (221)
+source: Bouton, C.L., 1901. Nim, a game with a complete mathematical theory. Annals of mathematics, 3(1/4), pp.35-39.
+extraction_methodology: Manual
+description: |-
+  Two players, Alice and Bob, play a game that begins with three piles containing 2, 2, and 1 stones, respectively.
+  Alice makes the first move, and the players alternate turns.
+  During a turn, a player removes one or two stones, but only from one pile.
+  The player who removes the last stone from the board wins the game.
+  The winner of the game earns one point, while the loser loses one point.
+strategic_equivalence_notion: Strong VNM Equivalence
+constraint_descriptions:
+- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
+additional_comments: The original paper describes a family of Nim games. Therefore, we create a new description for one specific instance from that family, using pile sizes 2, 2, and 1. Moreover, since the original description does not include payoff information, we manually add explicit payoff values to ensure that the description is complete.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg
