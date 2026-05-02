@@ -1,0 +1,130 @@
+Gambit: User documentation
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Gambit** is a library of game theory software and tools for the
+construction and analysis of finite extensive and strategic games.
+
+- **Users:** We recommend most newcomers install the PyGambit Python package and read the associated documentation, which includes tutorials and a complete API reference.
+- **Contributors:** Please read the :ref:`code of conduct and contribution guidelines <contributing>` before posting on GitHub.
+
+.. grid::
+
+   .. grid-item-card:: ⬇️ Installing Gambit
+      :columns: 3
+
+      Quick installation with PyGambit:
+      ``pip install pygambit``
+
+      .. button-ref:: install
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+
+   .. grid-item-card:: 🐍 PyGambit
+      :columns: 3
+
+      Explore tutorial notebooks and API reference docs.
+
+      .. button-ref:: pygambit
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+
+   .. grid-item-card:: 🧮 Analysing games
+      :columns: 3
+
+      Compute equilibria and run econometric estimations.
+
+      .. button-ref:: algorithms
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+   .. grid-item-card:: 📚 Catalog of games
+      :columns: 3
+
+      Browse a curated collection of game theory models.
+
+      .. button-ref:: catalog
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+   .. grid-item-card:: 🖱️ Graphical interface
+      :columns: 3
+
+      Interactively create, explore, and find equilibria of games.
+
+      .. button-ref:: section-gui
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+   .. grid-item-card:: 💻 Command-line interface
+      :columns: 3
+
+      Use Gambit's command-line tools for scripting.
+
+      .. button-ref:: command-line
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+   .. grid-item-card:: 🐛 Bugs and feature requests
+      :columns: 3
+
+      Report bugs and feature requests on GitHub.
+
+      .. button-ref:: github-issues
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+   .. grid-item-card:: 📖 Developer docs
+      :columns: 3
+
+      Guides for developers & contributors to the package.
+
+      .. button-ref:: developer
+         :ref-type: ref
+         :click-parent:
+         :color: secondary
+         :expand:
+
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   install
+   algorithms
+   pygambit
+   tools
+   gui
+   catalog
+   developer
+   formats
+   biblio
+
+.. toctree::
+   :hidden:
+
+   contents
+
+.. Or, see a :ref:`more detailed table of contents <full-contents>`.
+
+.. Indices and tables
+.. ==================
+
+.. * :ref:`genindex`
+.. * :ref:`modindex`
+.. * :ref:`search`

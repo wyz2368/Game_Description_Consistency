@@ -1,0 +1,100 @@
+.. _gambit-logit:
+
+:program:`gambit-logit`
+=======================
+
+Compute and/or estimate quantal response equilbria.
+See the :ref:`algorithm description <logit>` for full details.
+
+.. versionchanged:: 16.2.0
+
+   The criterion for accepting whether a point is sufficiently close to a
+   Nash equilibrium to terminate the path-following is specified
+   in terms of the maximum regret.  This regret is interpreted as a fraction
+   of the difference between the maximum and minimum payoffs in the game.
+
+.. program:: gambit-logit
+
+.. cmdoption:: -d
+
+   Express all output using decimal representations with the specified
+   number of digits.  The default is `-d 6`.
+
+.. cmdoption:: -s
+
+   Sets the initial step size for the predictor phase of
+   the tracing procedure. The default value is .03. The step size is
+   specified in terms of the arclength along the branch of the
+   correspondence, and not the size of the step measured in terms of
+   lambda. So, for example, if the step size is currently .03, but the
+   position of the strategy profile on the branch is changing rapidly
+   with lambda, then lambda will change by much less then .03 between
+   points reported by the program.
+
+.. cmdoption:: -a
+
+   Sets the maximum acceleration of the step size during
+   the tracing procedure. This is interpreted as a multiplier. The
+   default is 1.1, which means the step size is increased or decreased by
+   no more than ten percent of its current value at every step. A value
+   close to one would keep the step size (almost) constant at every step.
+
+.. cmdoption:: -m
+
+   .. versionadded:: 16.2.0
+
+   Specify the maximum regret criterion for acceptance as an approximate Nash equilibrium
+   (default is 1e-8).  See :ref:`pygambit-nash-maxregret` for interpretation and guidance.
+
+.. cmdoption:: -l
+
+   While tracing, compute the logit equilibrium points
+   with parameter LAMBDA accurately.  This option may be specified multiple times,
+   in which case points are found for each successive lambda, in the order specified,
+   along the branch.
+
+   .. versionchanged:: 16.3.0
+
+      Added support for specifying multiple lambda values.
+
+.. cmdoption:: -S
+
+   By default, the program uses behavior strategies for extensive
+   games; this switch instructs the program to use reduced strategic game
+   strategies for extensive games. (This has no effect for strategic
+   games, since a strategic game is its own reduced strategic game.)
+
+.. cmdoption:: -h
+
+   Prints a help message listing the available options.
+
+.. cmdoption:: -e
+
+   By default, all points computed are output by the program. If
+   this switch is specified, only the approximation to the Nash
+   equilibrium at the end of the branch is output.
+
+Computing the principal branch, in mixed strategies, of :download:`e02.nfg
+<../contrib/games/e02.nfg>`, the reduced strategic form of the example
+in Figure 2 of Selten (International Journal of Game Theory,
+1975)
+
+   $ gambit-logit e02.nfg
+   Compute a branch of the logit equilibrium correspondence
+   Gambit version |release|, Copyright (C) 1994-2026, The Gambit Project
+   This is free software, distributed under the GNU GPL
+
+   0.000000,0.333333,0.333333,0.333333,0.5,0.5
+   0.022853,0.335873,0.328284,0.335843,0.501962,0.498038
+   0.047978,0.338668,0.322803,0.33853,0.504249,0.495751
+   0.075600,0.341747,0.316863,0.34139,0.506915,0.493085
+   0.105965,0.345145,0.310443,0.344413,0.510023,0.489977
+   0.139346,0.348902,0.303519,0.347578,0.51364,0.48636
+
+   ...
+
+   735614.794714,1,0,4.40659e-11,0.500016,0.499984
+   809176.283787,1,0,3.66976e-11,0.500015,0.499985
+   890093.921767,1,0,3.05596e-11,0.500014,0.499986
+   979103.323545,1,0,2.54469e-11,0.500012,0.499988
+   1077013.665501,1,0,2.11883e-11,0.500011,0.499989
