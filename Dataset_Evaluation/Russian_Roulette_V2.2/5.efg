@@ -1,0 +1,26 @@
+EFG 2 R "Six-chamber Russian roulette, alternating turns" { "Player 1" "Player 2" }
+""
+
+p "" 1 1 "" { "Pull trigger" "Quit" } 0
+c "" 1 "" { "Fire" 1/6 "No fire" 5/6 } 0
+t "" 1 "Actor dies (Player 1 dies)" { -1, 1 }
+p "" 2 1 "" { "Pull trigger" "Quit" } 0
+c "" 2 "" { "Fire" 1/5 "No fire" 4/5 } 0
+t "" 2 "Actor dies (Player 2 dies)" { 1, -1 }
+p "" 1 2 "" { "Pull trigger" "Quit" } 0
+c "" 3 "" { "Fire" 1/4 "No fire" 3/4 } 0
+t "" 1 "Actor dies (Player 1 dies)" { -1, 1 }
+p "" 2 2 "" { "Pull trigger" "Quit" } 0
+c "" 4 "" { "Fire" 1/3 "No fire" 2/3 } 0
+t "" 2 "Actor dies (Player 2 dies)" { 1, -1 }
+p "" 1 3 "" { "Pull trigger" "Quit" } 0
+c "" 5 "" { "Fire" 1/2 "No fire" 1/2 } 0
+t "" 1 "Actor dies (Player 1 dies)" { -1, 1 }
+p "" 2 2 "" { "Pull trigger" "Quit" } 0
+t "" 2 "Actor dies (Player 2 dies)" { 1, -1 }
+t "" 3 "Player 2 quits (Player 1 wins)" { 1, 0 }
+t "" 4 "Player 1 quits (Player 2 wins)" { 0, 1 }
+t "" 3 "Player 2 quits (Player 1 wins)" { 1, 0 }
+t "" 4 "Player 1 quits (Player 2 wins)" { 0, 1 }
+t "" 3 "Player 2 quits (Player 1 wins)" { 1, 0 }
+t "" 4 "Player 1 quits (Player 2 wins)" { 0, 1 }

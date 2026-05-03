@@ -1,0 +1,61 @@
+EFG 2 R "Adversarial Monty Hall game (Host chooses hiding place)" { "Player" "Host" }
+""
+
+p "" 2 1 "" { "Hide behind door 1" "Hide behind door 2" "Hide behind door 3" } 0
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 2 2 "" { "Keep closed" "Open door 2" "Open door 3" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 2 3 "" { "Keep closed" "Open door 3" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 4 "" { "Keep closed" "Open door 2" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 2 5 "" { "Keep closed" "Open door 3" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 6 "" { "Keep closed" "Open door 1" "Open door 3" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 2 7 "" { "Keep closed" "Open door 1" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 2 8 "" { "Keep closed" "Open door 2" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 9 "" { "Keep closed" "Open door 1" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 10 "" { "Keep closed" "Open door 1" "Open door 2" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }

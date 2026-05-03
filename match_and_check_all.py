@@ -147,7 +147,7 @@ def run_equivalence_check(
     if strategic_equivalence_notion == "Strong VNM Equivalence":
         return check_strong_vnm_equivalence(reference_game, generated_game)
 
-    if strategic_equivalence_notion == "Order-preserving Equivalence":
+    if strategic_equivalence_notion == "Order-preserving Equivalence" or "Order-Preserving Equivalence":
         return check_order_preserving_equivalence(reference_game, generated_game)
 
     raise ValueError(
