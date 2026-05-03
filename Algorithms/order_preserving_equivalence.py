@@ -41,7 +41,7 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
         # print("Number of strategies:", num_strategies)
         
         num_opponent_strategies = [payoff_matrix_g[player].shape[i+1] for i in range(num_opponents)]
-        opponent_strategy_profiles = product(*(range(n) for n in num_opponent_strategies))
+
         # print("Number of opponents:", num_opponents)
         # print("Opponent strategy sizes:", num_opponent_strategies)
 
@@ -49,6 +49,8 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
             for s_i_prime in range(s_i + 1, num_strategies):
 
                 # print("Strategy pair:", s_i, s_i_prime)
+
+                opponent_strategy_profiles = product(*(range(n) for n in num_opponent_strategies))
 
                 for s_minus_i in opponent_strategy_profiles:
                     # Payoffs in game G
@@ -66,6 +68,8 @@ def check_order_preserving_equivalence(payoff_matrix_g, payoff_matrix_g_prime):
                     # Compare relationships
                     relation_g = get_relationship(u_g, u_g_prime)
                     relation_g_prime = get_relationship(u_g_dash, u_g_prime_dash)
+
+                    print(f"G: {u_g} {relation_g} {u_g_prime} | G': {u_g_dash} {relation_g_prime} {u_g_prime_dash}")
 
                     if relation_g != relation_g_prime:
                         return False  # Relation mismatch found
