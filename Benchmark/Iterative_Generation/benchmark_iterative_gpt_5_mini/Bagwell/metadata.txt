@@ -1,3 +1,0 @@
-game_name: Bagwell
-dataset_path: /Users/samuel/Desktop/Game_Description_Consistency/Dataset/Bagwell
-description_path: /Users/samuel/Desktop/Game_Description_Consistency/Dataset/Bagwell/description.txt

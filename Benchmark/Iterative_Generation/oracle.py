@@ -99,6 +99,8 @@ def generate_info_set_label(
            - whether Player {player} remembers their own past actions,
            - whether Player {player} remembers earlier observations,
            - whether any previously known information has been forgotten.
+    Do NOT analyze observations that are not present in the current history.
+    External or unnecessary information does not affect the information set.
 
     Step 3: Duplicate check
         Examine each previous label for Player {player}, one at a time.
@@ -120,6 +122,12 @@ def generate_info_set_label(
            and at B's first decision node, B can observe a1 but cannot distinguish a2 from a3.
            Then the description should say that B observed a1 at the first stage.
            It should NOT also say that B cannot distinguish a2 from a3 at that first stage, because that is part of the general observation rule rather than part of the specific remembered history that should be recorded in the label.
+
+           Do NOT include observations that are not in the history.
+           For example, if the history is:
+              Chance: object 2 -> Player: Choose object 3
+           and Player observes that object 1 is revealed, then the sentence may only refer to whether Player observes object 2 and that Player previously chose object 3.
+           Do not add information that is absent from the history.
            
            If some earlier information is no longer remembered by Player {player} at the current node, do NOT include it in the description.
 

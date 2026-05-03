@@ -1,8 +1,0 @@
-Validation result:
-- all_terminal_nodes_have_outcomes: true
-- unresolved_terminal_nodes: []
-
-Saved file:
-- russian_roulette_6.efg
-
-I built the full extensive-form game for the 6-chamber Russian roulette described, validated it, and saved the .efg file in the current working directory.

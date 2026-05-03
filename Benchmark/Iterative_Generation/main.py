@@ -140,14 +140,30 @@ if __name__ == "__main__":
                     player_actions_dict = extract_player_actions_dict(g)
                     print("player_actions_dict:", player_actions_dict)
 
-                    assign_information_sets_with_labels(
-                        g=g,
-                        game_description=description,
-                        player_actions_dict=player_actions_dict,
-                        model=args.model,
-                        temperature=args.temperature,
-                        log_dir=run_dir,
-                    )
+                    max_retries = 5 # Set a Max retry number for information set assignment
+                    last_error = None
+
+                    for attempt in range(1, max_retries + 1):
+                        try:
+                            assign_information_sets_with_labels(
+                                g=g,
+                                game_description=description,
+                                player_actions_dict=player_actions_dict,
+                                model=args.model,
+                                temperature=args.temperature,
+                                log_dir=run_dir,
+                            )
+                            break
+
+                        except Exception as e:
+                            last_error = e
+                            print(
+                                f"  [RETRY INFOSETS] Error in assign_information_sets_with_labels "
+                                f"for {game_name} run {i}, attempt {attempt}/{max_retries}: {e}"
+                            )
+
+                            if attempt == max_retries:
+                                raise last_error
 
                     labeled_efg_path = os.path.join(run_dir, "game.efg")
                     g.to_efg(labeled_efg_path)

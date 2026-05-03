@@ -87,7 +87,7 @@ Output in exactly two parts:
 
 Part 1: Reasoning
 First explain your understanding of the game description (e.g. the transition rules of the game, the terminal conditions, and how the payoffs are determined) and your implementation plan.
-Follow the game description exactly. For example, if it says a particular player acts first, the game tree must start with that player’s decision node. Do not infer a different starting structure beyond what is explicitly described.
+Follow the game description exactly. For example, if it says a particular player acts first, the game tree must start with that player's decision node. Do not infer a different starting structure beyond what is explicitly described.
 
 Part 2: Code
 Then provide the complete Python code (in python block ```python .... ```) that builds the game tree and saves the EFG file.
