@@ -1,0 +1,18 @@
+EFG 2 R "Noisy-Leader Game" { "Player 1" "Player 2" }
+""
+
+p "" 1 1 "" { "C" "S" } 0
+c "" 1 "" { "phi=C" 0.99 "phi=S" 0.01 } 0
+p "" 2 1 "" { "C" "S" } 0
+t "" 1 "C_phiC_C" { 4, 6 }
+t "" 2 "C_phiC_S" { 6, 5 }
+p "" 2 2 "" { "C" "S" } 0
+t "" 3 "C_phiS_C" { 4, 6 }
+t "" 4 "C_phiS_S" { 6, 5 }
+c "" 2 "" { "phi=C" 0.01 "phi=S" 0.99 } 0
+p "" 2 3 "" { "C" "S" } 0
+t "" 5 "S_phiC_C" { 3, 1 }
+t "" 6 "S_phiC_S" { 5, 4 }
+p "" 2 4 "" { "C" "S" } 0
+t "" 7 "S_phiS_C" { 3, 1 }
+t "" 8 "S_phiS_S" { 5, 4 }

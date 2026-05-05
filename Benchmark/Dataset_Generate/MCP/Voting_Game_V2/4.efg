@@ -1,0 +1,46 @@
+EFG 2 R "Two-player Borda Voting (Simultaneous Rankings)" { "Player 1" "Player 2" }
+""
+
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "winner_A" { 2, 0 }
+t "" 2 "winner_A" { 2, 0 }
+t "" 3 "winner_B" { 1, 1 }
+t "" 4 "winner_B" { 1, 1 }
+t "" 5 "winner_A" { 2, 0 }
+t "" 6 "winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "winner_A" { 2, 0 }
+t "" 8 "winner_A" { 2, 0 }
+t "" 9 "winner_A" { 2, 0 }
+t "" 10 "winner_C" { 0, 2 }
+t "" 11 "winner_C" { 0, 2 }
+t "" 12 "winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "winner_B" { 1, 1 }
+t "" 14 "winner_A" { 2, 0 }
+t "" 15 "winner_B" { 1, 1 }
+t "" 16 "winner_B" { 1, 1 }
+t "" 17 "winner_C" { 0, 2 }
+t "" 18 "winner_B" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "winner_B" { 1, 1 }
+t "" 20 "winner_C" { 0, 2 }
+t "" 21 "winner_B" { 1, 1 }
+t "" 22 "winner_B" { 1, 1 }
+t "" 23 "winner_C" { 0, 2 }
+t "" 24 "winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "winner_A" { 2, 0 }
+t "" 26 "winner_C" { 0, 2 }
+t "" 27 "winner_C" { 0, 2 }
+t "" 28 "winner_C" { 0, 2 }
+t "" 29 "winner_C" { 0, 2 }
+t "" 30 "winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "winner_C" { 0, 2 }
+t "" 32 "winner_C" { 0, 2 }
+t "" 33 "winner_B" { 1, 1 }
+t "" 34 "winner_C" { 0, 2 }
+t "" 35 "winner_C" { 0, 2 }
+t "" 36 "winner_C" { 0, 2 }

@@ -1,0 +1,43 @@
+EFG 2 R "Monty Hall Single-Player" { "Player" }
+""
+
+c "" 1 "" { "Car1" 1/3 "Car2" 1/3 "Car3" 1/3 } 0
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 2 "" { "Open2" 1 } 0
+p "" 1 2 "" { "Stay" "Switch" } 0
+t "" 1 "c1_p1_o2_stay_win" { 1 }
+t "" 2 "c1_p1_o2_switch_lose" { 0 }
+c "" 3 "" { "Open3" 1 } 0
+p "" 1 3 "" { "Stay" "Switch" } 0
+t "" 3 "c1_p2_o3_stay_lose" { 0 }
+t "" 4 "c1_p2_o3_switch_win" { 1 }
+c "" 4 "" { "Open2" 1 } 0
+p "" 1 4 "" { "Stay" "Switch" } 0
+t "" 5 "c1_p3_o2_stay_lose" { 0 }
+t "" 6 "c1_p3_o2_switch_win" { 1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 5 "" { "Open3" 1 } 0
+p "" 1 5 "" { "Stay" "Switch" } 0
+t "" 7 "c2_p1_o3_stay_lose" { 0 }
+t "" 8 "c2_p1_o3_switch_win" { 1 }
+c "" 6 "" { "Open1" 1 } 0
+p "" 1 6 "" { "Stay" "Switch" } 0
+t "" 9 "c2_p2_o1_stay_win" { 1 }
+t "" 10 "c2_p2_o1_switch_lose" { 0 }
+c "" 7 "" { "Open1" 1 } 0
+p "" 1 7 "" { "Stay" "Switch" } 0
+t "" 11 "c2_p3_o1_stay_lose" { 0 }
+t "" 12 "c2_p3_o1_switch_win" { 1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 8 "" { "Open2" 1 } 0
+p "" 1 8 "" { "Stay" "Switch" } 0
+t "" 13 "c3_p1_o2_stay_lose" { 0 }
+t "" 14 "c3_p1_o2_switch_win" { 1 }
+c "" 9 "" { "Open1" 1 } 0
+p "" 1 9 "" { "Stay" "Switch" } 0
+t "" 15 "c3_p2_o1_stay_lose" { 0 }
+t "" 16 "c3_p2_o1_switch_win" { 1 }
+c "" 10 "" { "Open1" 1 } 0
+p "" 1 10 "" { "Stay" "Switch" } 0
+t "" 17 "c3_p3_o1_stay_win" { 1 }
+t "" 18 "c3_p3_o1_switch_lose" { 0 }

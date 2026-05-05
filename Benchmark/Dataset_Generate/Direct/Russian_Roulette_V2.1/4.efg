@@ -1,0 +1,50 @@
+EFG 2 R "Alternating Russian Roulette (6 chambers)" { "Player 1" "Player 2" }
+c "" 1 "" { "L1" 1/6 "L2" 1/6 "L3" 1/6 "L4" 1/6 "L5" 1/6 "L6" 1/6 } 0
+p "" 1 1 "" { "Pull" "Quit" } 0
+t "" 1 "P1 dies (chamber 1)" { -1, 1 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+t "" 2 "P2 dies (chamber 2)" { 1, -1 }
+t "" 4 "P2 quits (chamber 2)" { 1, 0 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+t "" 1 "P1 dies (chamber 3)" { -1, 1 }
+t "" 3 "P1 quits (chamber 3)" { 0, 1 }
+t "" 4 "P2 quits (chamber 2)" { 1, 0 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+t "" 2 "P2 dies (chamber 4)" { 1, -1 }
+t "" 4 "P2 quits (chamber 4)" { 1, 0 }
+t "" 3 "P1 quits (chamber 3)" { 0, 1 }
+t "" 4 "P2 quits (chamber 2)" { 1, 0 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+t "" 1 "P1 dies (chamber 5)" { -1, 1 }
+t "" 3 "P1 quits (chamber 5)" { 0, 1 }
+t "" 4 "P2 quits (chamber 4)" { 1, 0 }
+t "" 3 "P1 quits (chamber 3)" { 0, 1 }
+t "" 4 "P2 quits (chamber 2)" { 1, 0 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+p "" 2 3 "" { "Pull" "Quit" } 0
+t "" 2 "P2 dies (chamber 6)" { 1, -1 }
+t "" 4 "P2 quits (chamber 6)" { 1, 0 }
+t "" 3 "P1 quits (chamber 5)" { 0, 1 }
+t "" 4 "P2 quits (chamber 4)" { 1, 0 }
+t "" 3 "P1 quits (chamber 3)" { 0, 1 }
+t "" 4 "P2 quits (chamber 2)" { 1, 0 }
+t "" 3 "P1 quits (chamber 1)" { 0, 1 }

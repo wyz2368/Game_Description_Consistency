@@ -1,0 +1,43 @@
+EFG 2 R "Monty Hall (single-player decision)" { "Player" }
+""
+
+c "" 1 "" { "Car behind door 1" 1/3 "Car behind door 2" 1/3 "Car behind door 3" 1/3 } 0
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+c "" 2 "" { "Open door 2" 1 } 0
+p "" 1 2 "" { "Choose door 1" "Choose door 3" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+c "" 3 "" { "Open door 3" 1 } 0
+p "" 1 3 "" { "Choose door 2" "Choose door 1" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 4 "" { "Open door 2" 1 } 0
+p "" 1 4 "" { "Choose door 3" "Choose door 1" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+c "" 5 "" { "Open door 3" 1 } 0
+p "" 1 5 "" { "Choose door 1" "Choose door 2" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 6 "" { "Open door 1" 1 } 0
+p "" 1 6 "" { "Choose door 2" "Choose door 3" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+c "" 7 "" { "Open door 1" 1 } 0
+p "" 1 7 "" { "Choose door 3" "Choose door 2" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+c "" 8 "" { "Open door 2" 1 } 0
+p "" 1 2 "" { "Choose door 1" "Choose door 3" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 9 "" { "Open door 1" 1 } 0
+p "" 1 6 "" { "Choose door 2" "Choose door 3" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 10 "" { "Open door 1" 1 } 0
+p "" 1 7 "" { "Choose door 3" "Choose door 2" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }

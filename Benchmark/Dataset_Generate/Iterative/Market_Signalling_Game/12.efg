@@ -1,0 +1,18 @@
+EFG 2 R "Entry signaling game (Strong/Weak types)" { "New manufacturer" "Existing manufacturer" }
+""
+
+c "" 1 "" { "Strong" 2/3 "Weak" 1/3 } 0
+p "" 1 1 "" { "Signal S" "Signal W" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 1 "Strong type, Signal S, Fight" { 1, 0 }
+t "" 2 "Strong type, Signal S, Accommodate" { 3, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 3 "Strong type, Signal W, Fight" { 0, 0 }
+t "" 4 "Strong type, Signal W, Accommodate" { 2, 1 }
+p "" 1 2 "" { "Signal S" "Signal W" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 5 "Weak type, Signal S, Fight" { 0, 2 }
+t "" 6 "Weak type, Signal S, Accommodate" { 2, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 7 "Weak type, Signal W, Fight" { 1, 2 }
+t "" 8 "Weak type, Signal W, Accommodate" { 3, 1 }

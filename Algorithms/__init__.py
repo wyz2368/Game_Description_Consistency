@@ -1,2 +1,3 @@
-from .order_preserving_equivalence import check_order_preserving_equivalence
-from .check_strong_vnm_equivalence import check_strong_vnm_equivalence
+from .check_reduced_strategies import same_reduced_strategies
+from .check_explict_payoff import check_payoffs
+from .check_total_ordering import check_total_order_matching

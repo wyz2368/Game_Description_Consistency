@@ -1,0 +1,22 @@
+EFG 2 R "Threat and Crisis Game" { "Country A" "Country B" }
+""
+
+p "" 1 1 "" { "Threat" "Ignore" } 0
+p "" 2 1 "" { "Back down" "Counter-threat" } 0
+t "" 2 "B_backs_down" { 4, 3 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+t "" 3 "mutual_retreat_1" { 2, 3 }
+t "" 4 "A_wins_crisis_1" { 5, 2 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+t "" 5 "B_wins_crisis_1" { 1, 5 }
+t "" 6 "mutual_detonation_1" { -100, -100 }
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+t "" 7 "mutual_retreat_2" { 2, 3 }
+t "" 8 "A_wins_crisis_2" { 5, 2 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+t "" 9 "B_wins_crisis_2" { 1, 5 }
+t "" 10 "mutual_detonation_2" { -100, -100 }
+t "" 1 "ignore" { 3, 4 }

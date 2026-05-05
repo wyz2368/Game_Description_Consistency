@@ -5,24 +5,21 @@ description: |-
     This is a two-player card game between Player One and Player Two, using a deck of four cards: Ace, King, Queen, and Jack (Ace beats King beats Queen beats Jack).
 
     A single move of chance draws an ordered pair of cards uniformly at random and assigns them to Player One and Player Two respectively; the other two cards are set aside.
-    Each player observes their own card and all actions taken by either player, but not their opponent's card and not the two undealt cards.
+    Each player observes their own card and all actions taken by either player, but neither observes their opponent's card nor the two undealt cards.
 
     Player One moves first and chooses either to check or to bet.
     If Player One bets, Player Two then chooses either to fold or to call.
     If Player One checks, Player Two chooses either to check or to bet; if Player Two bets, Player One then chooses either to fold or to call.
 
     The game ends in one of three ways.
-    If both players check, the player with the higher-ranked card wins.
-    If one player bets and the other folds, the betting player wins.
-    If one player bets and the other calls, the player with the higher-ranked card wins.
-    A player who wins after both players check gets 1; the loser gets -1.
-    A player whose opponent folds gets 1; the folding player gets -1.
-    A player who wins after a bet is called gets 2; the loser gets -2.
-strategic_equivalence_notion: Strong VNM Equivalence
+    If both players check, the player with the higher-ranked card receives 1 and the other receives -1.
+    If one player bets and the other folds, the betting player receives 1 and the folding player receives -1.
+    If one player bets and the other calls, the player with the higher-ranked card receives 2 and the other receives -2.
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
-additional_comments: This game is a variation of Kuhn Poker. The original game uses a three-card deck, and we modify it to four cards to make the game larger and more difficult to translate. The game description is adapted from Wikipedia (https://en.wikipedia.org/wiki/Kuhn_poker) [accessed April 14, 2026].
-related games: []
+additional_comments:
+    The action structure of Kuhn poker follows the Wikipedia article on Kuhn poker (https://en.wikipedia.org/wiki/Kuhn_poker, accessed April 14, 2026).
+    This variant is a generalisation of Kuhn_Poker_(2-player_3-cards) modified to a four-cards deck to make the game larger and more challenging to translate.
 assets:
   description: description.txt
   script: game.py

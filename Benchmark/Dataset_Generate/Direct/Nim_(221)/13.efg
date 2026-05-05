@@ -1,0 +1,113 @@
+EFG 2 R "Take-the-last stone game (piles 2,2,1)" { "Alice" "Bob" }
+p "" 1 1 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile2" "Take 2 from pile2" "Take 1 from pile3" } 0
+p "" 2 1 "" { "Take 1 from pile1" "Take 1 from pile2" "Take 2 from pile2" "Take 1 from pile3" } 0
+p "" 1 2 "" { "Take 1 from pile2" "Take 2 from pile2" "Take 1 from pile3" } 0
+p "" 2 2 "" { "Take 1 from pile2" "Take 1 from pile3" } 0
+p "" 1 3 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 4 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 3 "" { "Take 1 from pile3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 4 "" { "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 1 5 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 5 "" { "Take 1 from pile2" "Take 2 from pile2" "Take 1 from pile3" } 0
+p "" 1 6 "" { "Take 1 from pile2" "Take 1 from pile3" } 0
+p "" 2 6 "" { "Take 1 from pile3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 7 "" { "Take 1 from pile2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 7 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 8 "" { "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 2 8 "" { "Take 1 from pile2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 9 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile2" "Take 1 from pile3" } 0
+p "" 1 9 "" { "Take 1 from pile1" "Take 1 from pile2" "Take 1 from pile3" } 0
+p "" 2 10 "" { "Take 1 from pile2" "Take 1 from pile3" } 0
+p "" 1 10 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 11 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 11 "" { "Take 1 from pile1" "Take 1 from pile3" } 0
+p "" 1 12 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 13 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 12 "" { "Take 1 from pile1" "Take 1 from pile2" } 0
+p "" 1 14 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 15 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 16 "" { "Take 1 from pile2" "Take 1 from pile3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 17 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile3" } 0
+p "" 2 15 "" { "Take 1 from pile1" "Take 1 from pile3" } 0
+p "" 1 18 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 19 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 17 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 1 20 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 21 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile2" } 0
+p "" 2 18 "" { "Take 1 from pile1" "Take 1 from pile2" } 0
+p "" 1 22 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 23 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 20 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 1 24 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 21 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile3" } 0
+p "" 1 25 "" { "Take 1 from pile1" "Take 1 from pile3" } 0
+p "" 2 22 "" { "Take 1 from pile3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 23 "" { "Take 1 from pile1" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 26 "" { "Take 1 from pile3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 27 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 2 24 "" { "Take 1 from pile1" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 25 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 1 28 "" { "Take 1 from pile1" "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 2 26 "" { "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 1 29 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 27 "" { "Take 1 from pile1" "Take 1 from pile2" } 0
+p "" 1 30 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 31 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 28 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 1 32 "" { "Take 1 from pile2" "Take 2 from pile2" } 0
+p "" 2 29 "" { "Take 1 from pile2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 33 "" { "Take 1 from pile1" "Take 2 from pile1" "Take 1 from pile2" } 0
+p "" 2 30 "" { "Take 1 from pile1" "Take 1 from pile2" } 0
+p "" 1 34 "" { "Take 1 from pile2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 35 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 31 "" { "Take 1 from pile2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 32 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 1 36 "" { "Take 1 from pile1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 37 "" { "Take 1 from pile1" "Take 2 from pile1" } 0
+p "" 2 33 "" { "Take 1 from pile1" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }

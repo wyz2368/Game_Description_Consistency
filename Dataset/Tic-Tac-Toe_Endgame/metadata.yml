@@ -2,22 +2,22 @@ game_id: Tic-Tac-Toe Endgame
 source: Tic-tac-toe. Wikipedia. https://en.wikipedia.org/wiki/Tic-tac-toe (accessed April 14, 2026).
 extraction_methodology: Manual
 description: |-
-  Consider a game played between two players, X and O, who alternate turns marking the empty spaces of a 3x3 grid with their respective marks ("x" or "o").
+  Consider a game played between two players, X and O, who alternate turns on a 3x3 grid, marking empty spaces with "x" and "o" respectively.
 
-  The player who places three of their marks in a horizontal, vertical, or diagonal row wins the game.
+  The game ends immediately when a player places three of their marks in a horizontal, vertical, or diagonal row; that player wins the game.
   The winner receives a payoff of 1, and the loser receives a payoff of -1.
   If the grid is completely filled without a winner, the game is a draw and both players receive a payoff of 0.
 
-  Assume the game begins from the following board state, where "e" represents an empty space:
+  Assume the game begins from the following board state, where "e" represents an empty space and the outer numbers represent the coordinate axes:
 
-  e | x | e
-  x | e | o
-  x | e | o
+      0   1   2
+  0 | e | x | e |
+  1 | x | e | o |
+  2 | x | e | o |
 
   Player O is the next to move.
-strategic_equivalence_notion: Strong VNM Equivalence
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 additional_comments: The game description is taken from Wikipedia, as cited in the source. We add an initial board state from the middle of the game to keep the game size suitable for expression in EFG. Moreover, since the description there does not include payoff information, we manually add explicit payoff values to ensure that the description is complete. There is also a simpler version of Tic-Tac-Toe in our dataset with fewer empty spaces on the board.
 assets:
   description: description.txt

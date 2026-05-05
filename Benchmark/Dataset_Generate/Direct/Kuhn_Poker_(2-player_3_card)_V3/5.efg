@@ -1,0 +1,59 @@
+EFG 2 R "Three-card sequential betting game" { "Player One" "Player Two" }
+c "" 1 "" { "King" 1/3 "Queen" 1/3 "Jack" 1/3 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+c "" 1 "" { "Queen" 1/2 "Jack" 1/2 } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 1 "K vs Q both check" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 2 "P1 folds to P2 bet (K vs Q)" { -1, 1 }
+t "" 3 "P1 calls P2 bet (K vs Q)" { 2, -2 }
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 4 "K vs J both check" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 5 "P1 folds to P2 bet (K vs J)" { -1, 1 }
+t "" 6 "P1 calls P2 bet (K vs J)" { 2, -2 }
+c "" 1 "" { "Queen" 1/2 "Jack" 1/2 } 0
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 7 "P2 folds to P1 bet (K vs Q)" { 1, -1 }
+t "" 8 "P2 calls P1 bet (K vs Q)" { 2, -2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 9 "P2 folds to P1 bet (K vs J)" { 1, -1 }
+t "" 10 "P2 calls P1 bet (K vs J)" { 2, -2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+c "" 1 "" { "King" 1/2 "Jack" 1/2 } 0
+p "" 2 4 "" { "Check" "Bet" } 0
+t "" 11 "Q vs K both check" { -1, 1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 12 "P1 folds to P2 bet (Q vs K)" { -1, 1 }
+t "" 13 "P1 calls P2 bet (Q vs K)" { -2, 2 }
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 14 "Q vs J both check" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 15 "P1 folds to P2 bet (Q vs J)" { -1, 1 }
+t "" 16 "P1 calls P2 bet (Q vs J)" { 2, -2 }
+c "" 1 "" { "King" 1/2 "Jack" 1/2 } 0
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 17 "P2 folds to P1 bet (Q vs K)" { 1, -1 }
+t "" 18 "P2 calls P1 bet (Q vs K)" { -2, 2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 19 "P2 folds to P1 bet (Q vs J)" { 1, -1 }
+t "" 20 "P2 calls P1 bet (Q vs J)" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+c "" 1 "" { "King" 1/2 "Queen" 1/2 } 0
+p "" 2 4 "" { "Check" "Bet" } 0
+t "" 21 "J vs K both check" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 22 "P1 folds to P2 bet (J vs K)" { -1, 1 }
+t "" 23 "P1 calls P2 bet (J vs K)" { -2, 2 }
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 24 "J vs Q both check" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 25 "P1 folds to P2 bet (J vs Q)" { -1, 1 }
+t "" 26 "P1 calls P2 bet (J vs Q)" { -2, 2 }
+c "" 1 "" { "King" 1/2 "Queen" 1/2 } 0
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 27 "P2 folds to P1 bet (J vs K)" { 1, -1 }
+t "" 28 "P2 calls P1 bet (J vs K)" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 29 "P2 folds to P1 bet (J vs Q)" { 1, -1 }
+t "" 30 "P2 calls P1 bet (J vs Q)" { -2, 2 }

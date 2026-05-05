@@ -1,0 +1,36 @@
+Game: Bagwell
+Generated file: 1.efg
+Reference path: Dataset/Bagwell/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/Bagwell/1.efg
+Matched path: Results/MCP/Output/Bagwell/1.efg
+Status: PASS
+
+=== Timing ===
+Matching time seconds: 30.925501
+Constraint check time seconds: 1.987865
+Total sample time seconds: 32.913365
+
+=== Algorithm Checks ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total Order
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Algorithm checks passed: True
+Constraint checks passed: True
+All checks passed: True

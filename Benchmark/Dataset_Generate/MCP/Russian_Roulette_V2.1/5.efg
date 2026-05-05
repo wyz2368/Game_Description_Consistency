@@ -1,0 +1,52 @@
+EFG 2 R "Two-player Russian Roulette (6-chamber)" { "Player 1" "Player 2" }
+""
+
+c "" 1 "" { "1" 1/6 "2" 1/6 "3" 1/6 "4" 1/6 "5" 1/6 "6" 1/6 } 0
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "P1_quit_at_start_if_loaded1" { 0, 1 }
+t "" 7 "P1_pulls_and_loaded1_death" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 2 "P1_quit_at_start_if_loaded2" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 8 "P2_quit_after_one_pull_if_loaded2" { 1, 0 }
+t "" 13 "P2_pulls_and_loaded2_death" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 3 "P1_quit_at_start_if_loaded3" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 9 "P2_quit_after_one_pull_if_loaded3" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 14 "P1_quit_after_two_pulls_if_loaded3" { 0, 1 }
+t "" 18 "P1_pulls_and_loaded3_death" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 4 "P1_quit_at_start_if_loaded4" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 10 "P2_quit_after_one_pull_if_loaded4" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 15 "P1_quit_after_two_pulls_if_loaded4" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 19 "P2_quit_after_three_pulls_if_loaded4" { 1, 0 }
+t "" 22 "P2_pulls_and_loaded4_death" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 5 "P1_quit_at_start_if_loaded5" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 11 "P2_quit_after_one_pull_if_loaded5" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 16 "P1_quit_after_two_pulls_if_loaded5" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 20 "P2_quit_after_three_pulls_if_loaded5" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 23 "P1_quit_after_four_pulls_if_loaded5" { 0, 1 }
+t "" 25 "P1_pulls_and_loaded5_death" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 6 "P1_quit_at_start_if_loaded6" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 12 "P2_quit_after_one_pull_if_loaded6" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 17 "P1_quit_after_two_pulls_if_loaded6" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 21 "P2_quit_after_three_pulls_if_loaded6" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 24 "P1_quit_after_four_pulls_if_loaded6" { 0, 1 }
+p "" 2 3 "" { "Quit" "Pull" } 0
+t "" 26 "P2_quit_after_five_pulls_if_loaded6" { 1, 0 }
+t "" 27 "P2_pulls_and_loaded6_death" { 1, -1 }

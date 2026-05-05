@@ -1,0 +1,110 @@
+EFG 2 R "Four-card betting game" { "Player One" "Player Two" }
+c "" 1 "" { "A K" 1/12 "A Q" 1/12 "A J" 1/12 "K A" 1/12 "K Q" 1/12 "K J" 1/12 "Q A" 1/12 "Q K" 1/12 "Q J" 1/12 "J A" 1/12 "J K" 1/12 "J Q" 1/12 } 0
+p "" 1 1 "" { "Bet" "Check" } 0
+p "" 2 9 "" { "Fold" "Call" } 0
+t "" 1 "P1 wins by fold" { 1, -1 }
+t "" 2 "P1 wins by call" { 2, -2 }
+p "" 2 13 "" { "Check" "Bet" } 0
+t "" 3 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 4 "P2 wins by fold" { -1, 1 }
+t "" 5 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 1 "" { "Bet" "Check" } 0
+p "" 2 10 "" { "Fold" "Call" } 0
+t "" 6 "P1 wins by fold" { 1, -1 }
+t "" 7 "P2 wins by call" { -2, 2 }
+p "" 2 14 "" { "Check" "Bet" } 0
+t "" 8 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 9 "P2 wins by fold" { -1, 1 }
+t "" 10 "Showdown after call P2 wins" { -2, 2 }
+p "" 1 1 "" { "Bet" "Check" } 0
+p "" 2 11 "" { "Fold" "Call" } 0
+t "" 11 "P1 wins by fold" { 1, -1 }
+t "" 12 "P1 wins by call" { 2, -2 }
+p "" 2 15 "" { "Check" "Bet" } 0
+t "" 13 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 14 "P2 wins by fold" { -1, 1 }
+t "" 15 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 1 "" { "Bet" "Check" } 0
+p "" 2 12 "" { "Fold" "Call" } 0
+t "" 16 "P1 wins by fold" { 1, -1 }
+t "" 17 "P2 wins by call" { -2, 2 }
+p "" 2 16 "" { "Check" "Bet" } 0
+t "" 18 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 19 "P2 wins by fold" { -1, 1 }
+t "" 20 "Showdown after call P2 wins" { -2, 2 }
+p "" 1 2 "" { "Bet" "Check" } 0
+p "" 2 9 "" { "Fold" "Call" } 0
+t "" 21 "P1 wins by fold" { 1, -1 }
+t "" 22 "P1 wins by call" { 2, -2 }
+p "" 2 13 "" { "Check" "Bet" } 0
+t "" 23 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 24 "P2 wins by fold" { -1, 1 }
+t "" 25 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 2 "" { "Bet" "Check" } 0
+p "" 2 10 "" { "Fold" "Call" } 0
+t "" 26 "P1 wins by fold" { 1, -1 }
+t "" 27 "P2 wins by call" { -2, 2 }
+p "" 2 14 "" { "Check" "Bet" } 0
+t "" 28 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 29 "P2 wins by fold" { -1, 1 }
+t "" 30 "Showdown after call P2 wins" { -2, 2 }
+p "" 1 2 "" { "Bet" "Check" } 0
+p "" 2 11 "" { "Fold" "Call" } 0
+t "" 31 "P1 wins by fold" { 1, -1 }
+t "" 32 "P1 wins by call" { 2, -2 }
+p "" 2 15 "" { "Check" "Bet" } 0
+t "" 33 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 34 "P2 wins by fold" { -1, 1 }
+t "" 35 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 2 "" { "Bet" "Check" } 0
+p "" 2 12 "" { "Fold" "Call" } 0
+t "" 36 "P1 wins by fold" { 1, -1 }
+t "" 37 "P2 wins by call" { -2, 2 }
+p "" 2 16 "" { "Check" "Bet" } 0
+t "" 38 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 39 "P2 wins by fold" { -1, 1 }
+t "" 40 "Showdown after call P2 wins" { -2, 2 }
+p "" 1 3 "" { "Bet" "Check" } 0
+p "" 2 9 "" { "Fold" "Call" } 0
+t "" 41 "P1 wins by fold" { 1, -1 }
+t "" 42 "P1 wins by call" { 2, -2 }
+p "" 2 13 "" { "Check" "Bet" } 0
+t "" 43 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 44 "P2 wins by fold" { -1, 1 }
+t "" 45 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 3 "" { "Bet" "Check" } 0
+p "" 2 10 "" { "Fold" "Call" } 0
+t "" 46 "P1 wins by fold" { 1, -1 }
+t "" 47 "P2 wins by call" { -2, 2 }
+p "" 2 14 "" { "Check" "Bet" } 0
+t "" 48 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 49 "P2 wins by fold" { -1, 1 }
+t "" 50 "Showdown after call P2 wins" { -2, 2 }
+p "" 1 3 "" { "Bet" "Check" } 0
+p "" 2 11 "" { "Fold" "Call" } 0
+t "" 51 "P1 wins by fold" { 1, -1 }
+t "" 52 "P1 wins by call" { 2, -2 }
+p "" 2 15 "" { "Check" "Bet" } 0
+t "" 53 "Showdown both check P1 wins" { 1, -1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 54 "P2 wins by fold" { -1, 1 }
+t "" 55 "Showdown after call P1 wins" { 2, -2 }
+p "" 1 3 "" { "Bet" "Check" } 0
+p "" 2 12 "" { "Fold" "Call" } 0
+t "" 56 "P1 wins by fold" { 1, -1 }
+t "" 57 "P2 wins by call" { -2, 2 }
+p "" 2 16 "" { "Check" "Bet" } 0
+t "" 58 "Showdown both check P2 wins" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 59 "P2 wins by fold" { -1, 1 }
+t "" 60 "Showdown after call P2 wins" { -2, 2 }

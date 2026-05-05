@@ -1,5 +1,6 @@
 Consider next the noisy-leader game.
 In this game, a pure strategy for Player 1 is simply an action, a1 in {C, S}.
+
 Let the signal received by Player 2 be denoted by phi, and assume for simplicity that phi either takes value C or S.
 The signal technology works as follows:
 Prob(phi = S | S) = 1 - epsilon = Prob(phi = C | C)
@@ -7,11 +8,11 @@ In other words, when Player 1 chooses a particular action, the probability that 
 Take epsilon = 0.01.
 Player 2 observes a signal, either C or S, and then chooses an action from {C, S}.
 
-The resulting payoffs for each player are based on the chosen combination:
-- if both choose S, the payoff is (A, B);
-- if Player 1 chooses S and Player 2 chooses C, it is (W, D);
-- if Player 1 chooses C and Player 2 chooses S, it is (E, W);
-- if both choose C, the payoff is (F, F).
+Each player's payoff is determined by the realised action profile and does not depend on which signal Player 2 observed.
 
-The payoff rankings from highest to lowest are: E (highest), A, F, W, B, and D (lowest).
-Assign values to each of these payoffs.
+Player 1's best outcome is when they play C while Player 2 plays S.
+Their second-best outcome is when both play S, followed by both playing C.
+Player 1's worst outcome is when they play S while Player 2 plays C.
+
+Player 2's best outcome is when both play C, followed by when Player 1 plays C while Player 2 plays S.
+The outcome where both play S is third, and Player 2's worst outcome is when they play C while Player 1 plays S.

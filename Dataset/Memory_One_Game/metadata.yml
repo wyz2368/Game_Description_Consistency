@@ -2,21 +2,18 @@ game_id: Memory One Game
 source: Hand-crafted Description
 extraction_methodology: Manual
 description: |-
-  Consider a game played between two players, A and B, over three rounds of two stages each.
-  Player A acts at stages 1, 3, and 5; Player B acts at stages 2, 4, and 6.
-  At every stage, the acting player selects an action from the set {X, Y}.
+  Consider a game played between two players, A and B, over six stages.
+  Player A acts at the odd-numbered stages and Player B at the even-numbered stages; at every stage, the acting player selects an action from the set {X, Y}.
+  The six stages are grouped into three rounds: round 1 comprises stages 1 and 2, round 2 stages 3 and 4, and round 3 stages 5 and 6.
 
-  Players know the current stage number, but they do not observe their opponent's actions.
-  Moreover, the players have bounded memory: they recall only their own last action, forgetting any moves they made before that.
+  Neither player observes the other's actions. The players also have imperfect recall; specifically,
+  when acting, a player's information consists only of the current stage number and their own most recent action (if any).
 
-  At the end of the third round, payoffs are determined by comparing the players' chosen actions within each respective round.
-  For any given round, if both players selected the same action, each receives a payoff of 1; if their actions differ, each receives 0.
-
-  A player's final payoff is the sum of the points earned across all three rounds, yielding a maximum possible payoff of 3 per player.
-strategic_equivalence_notion: Strong VNM Equivalence
+  At the end of stage 6, payoffs are determined round by round.
+  In each round, if both players selected the same action that round, each receives 1 point for that round; if their actions differed, each receives 0.
+  A player's final payoff is the sum of points across the three rounds.
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
-- In each round, where each round includes one move by A and one move by B, check that A moves first and B moves second in the simultaneous move.
 additional_comments: This game description is designed to include a complex imperfect recall scenario in which the player forgets their own previous actions.
 related games: []
 assets:

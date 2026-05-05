@@ -23,5 +23,5 @@ c "" 5 "" { "Fire" 1/2 "Survive" 1/2 } 0
 t "" 2 "P1 shot (P1=L, P2=W)" { -1, 1 }
 p "" 2 3 "" { "Quit" "Pull" } 0
 t "" 3 "P2 quits (P2=D, P1=W)" { 1, 0 }
-c "" 6 "" { "Fire" 1} 0
+c "" 6 "" { "Fire" 1 } 0
 t "" 4 "P2 shot (P2=L, P1=W)" { 1, -1 }

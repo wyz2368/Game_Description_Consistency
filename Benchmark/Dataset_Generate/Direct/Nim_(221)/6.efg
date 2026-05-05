@@ -1,0 +1,14 @@
+EFG 2 R "Take-away from total 5 stones (simplified)" { "Alice" "Bob" }
+p "" 1 1 "" { "Take1" "Take2" } 0
+p "" 2 1 "" { "Take1" "Take2" } 0
+p "" 1 2 "" { "Take1" "Take2" } 0
+p "" 2 2 "" { "Take1" "Take2" } 0
+p "" 1 3 "" { "Take1" "Take2" } 0
+p "" 2 3 "" { "Take1" "Take2" } 0
+p "" 1 4 "" { "Take1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }

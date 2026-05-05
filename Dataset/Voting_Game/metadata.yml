@@ -1,0 +1,27 @@
+game_id: Voting_game
+source:
+extraction_methodology: Manual
+description: |-
+  Player 1 and Player 2 vote on three candidates, A, B, and C.
+  Each player's ballot is a strict ranking of the three candidates, and the two players submit their ballots simultaneously.
+
+  Ballots are scored by Borda count:
+  - a candidate receives two points each time it is ranked first on a ballot,
+  - one point each time it is ranked second, and
+  - zero points each time it is ranked third.
+
+  The candidate with the highest total score wins.
+  If two or more candidates are tied for the highest score, the tie is broken according to the priority order A, B, C.
+  Among the tied candidates, the one appearing earliest in this order wins.
+
+  Each player's payoff depends only on which candidate wins, not on which ballots were submitted to produce that win.
+  Player 1 strictly prefers A winning to B winning, and B winning to C winning.
+  Player 2 strictly prefers C winning to B winning, and B winning to A winning.
+additional_data: Total Order
+constraint_descriptions:
+additional_comments:
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

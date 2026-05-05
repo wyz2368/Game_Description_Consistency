@@ -1,0 +1,34 @@
+EFG 2 R "Monty Hall decision problem" { "Player" }
+""
+
+c "" 1 "" { "Door 1" 1/3 "Door 2" 1/3 "Door 3" 1/3 } 0
+p "" 1 1 "" { "Pick door 1" "Pick door 2" "Pick door 3" } 0
+p "" 1 2 "" { "Stay" "Switch" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+p "" 1 3 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 4 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Pick door 1" "Pick door 2" "Pick door 3" } 0
+p "" 1 2 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 3 "" { "Stay" "Switch" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+p "" 1 4 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Pick door 1" "Pick door 2" "Pick door 3" } 0
+p "" 1 2 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 3 "" { "Stay" "Switch" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 4 "" { "Stay" "Switch" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }

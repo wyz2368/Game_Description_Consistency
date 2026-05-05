@@ -1,4 +1,6 @@
 numpy
 openai
+pygambit
 PyYAML
 sympy
+mcp

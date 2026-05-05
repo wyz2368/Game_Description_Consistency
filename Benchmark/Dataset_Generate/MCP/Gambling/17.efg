@@ -1,0 +1,12 @@
+EFG 2 R "Gambler and Matching Pennies" { "Gambler" "Dealer" }
+""
+
+p "" 1 1 "" { "Enter" "Stay out" } 0
+p "" 1 2 "" { "Heads" "Tails" } 0
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 2 "g_h_h" { 1, -1 }
+t "" 3 "g_h_t" { -1, 1 }
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 4 "g_t_h" { -1, 1 }
+t "" 5 "g_t_t" { 1, -1 }
+t "" 1 "stay_out" { 0, 0 }

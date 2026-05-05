@@ -11,6 +11,22 @@ class NodeType(Enum):
     PLAYER = 'p'
     TERMINAL = 't'
 
+
+def check_duplicate_actions(actions: List[str], node_desc: str):
+    seen = set()
+    duplicates = set()
+
+    for action in actions:
+        if action in seen:
+            duplicates.add(action)
+        seen.add(action)
+
+    if duplicates:
+        raise ValueError(
+            f"Duplicate action labels are not allowed at {node_desc}: "
+            f"{sorted(duplicates)}"
+        )
+
 @dataclass
 class Node:
     node_type: NodeType
@@ -179,14 +195,26 @@ class EFGParser:
             raw_actions = []
             outcomes_dict = {}
 
+            # for action, prob_str in re.findall(outcome_pattern, outcomes):
+            #     raw_actions.append(action)
+
+            #     prob = Fraction(prob_str)
+            #     if action in outcomes_dict:
+            #         outcomes_dict[action] += prob
+            #     else:
+            #         outcomes_dict[action] = prob
+
+
             for action, prob_str in re.findall(outcome_pattern, outcomes):
                 raw_actions.append(action)
 
                 prob = Fraction(prob_str)
-                if action in outcomes_dict:
-                    outcomes_dict[action] += prob
-                else:
-                    outcomes_dict[action] = prob
+                outcomes_dict[action] = prob
+                        
+            check_duplicate_actions(
+                raw_actions,
+                node_desc=f'chance node "{label}", information set {information_set}'
+            )
 
             outcomes_dict = {
                 action: str(prob)
@@ -220,6 +248,11 @@ class EFGParser:
             actions_str = match.group(5)
             actions = re.findall(r'"([^"]+)"', actions_str)
             # actions = match.group(5).strip().replace('"', '').split()
+
+            check_duplicate_actions(
+                actions,
+                node_desc=f'player node "{label}", player {player}, information set {information_set}'
+            )
 
             return Node(
                 node_type=node_type,

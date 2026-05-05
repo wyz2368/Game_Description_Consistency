@@ -1,0 +1,130 @@
+EFG 2 R "Six-move alternating X/Y game (A moves 1,3,5; B moves 2,4,6)" { "A" "B" }
+""
+
+p "" 1 1 "" { "X" "Y" } 0
+p "" 2 1 "" { "X" "Y" } 0
+p "" 1 2 "" { "X" "Y" } 0
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 1 "Matches=3 history=XXXXXX" { 3, 3 }
+t "" 2 "Matches=2 history=XXXXXY" { 2, 2 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 3 "Matches=2 history=XXXXYX" { 2, 2 }
+t "" 4 "Matches=3 history=XXXXYY" { 3, 3 }
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 5 "Matches=2 history=XXXYXX" { 2, 2 }
+t "" 6 "Matches=1 history=XXXYXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 7 "Matches=1 history=XXXYYX" { 1, 1 }
+t "" 8 "Matches=2 history=XXXYYY" { 2, 2 }
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 9 "Matches=2 history=XXYXXX" { 2, 2 }
+t "" 10 "Matches=1 history=XXYXXY" { 1, 1 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 11 "Matches=1 history=XXYXYX" { 1, 1 }
+t "" 12 "Matches=2 history=XXYXYY" { 2, 2 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 13 "Matches=3 history=XXYYXX" { 3, 3 }
+t "" 14 "Matches=2 history=XXYYXY" { 2, 2 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 15 "Matches=2 history=XXYYYX" { 2, 2 }
+t "" 16 "Matches=3 history=XXYYYY" { 3, 3 }
+p "" 1 2 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 17 "Matches=2 history=XYXXXX" { 2, 2 }
+t "" 18 "Matches=1 history=XYXXXY" { 1, 1 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 19 "Matches=1 history=XYXXYX" { 1, 1 }
+t "" 20 "Matches=2 history=XYXXYY" { 2, 2 }
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 21 "Matches=1 history=XYXYXX" { 1, 1 }
+t "" 22 "Matches=0 history=XYXYXY" { 0, 0 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 23 "Matches=0 history=XYXYYX" { 0, 0 }
+t "" 24 "Matches=1 history=XYXYYY" { 1, 1 }
+p "" 2 5 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 25 "Matches=1 history=XYYXXX" { 1, 1 }
+t "" 26 "Matches=0 history=XYYXXY" { 0, 0 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 27 "Matches=0 history=XYYXYX" { 0, 0 }
+t "" 28 "Matches=1 history=XYYXYY" { 1, 1 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 29 "Matches=2 history=XYYYXX" { 2, 2 }
+t "" 30 "Matches=1 history=XYYYXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 31 "Matches=1 history=XYYYYX" { 1, 1 }
+t "" 32 "Matches=2 history=XYYYYY" { 2, 2 }
+p "" 2 1 "" { "X" "Y" } 0
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 33 "Matches=2 history=YXXXXX" { 2, 2 }
+t "" 34 "Matches=1 history=YXXXXY" { 1, 1 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 35 "Matches=1 history=YXXXYX" { 1, 1 }
+t "" 36 "Matches=2 history=YXXXYY" { 2, 2 }
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 37 "Matches=1 history=YXXYXX" { 1, 1 }
+t "" 38 "Matches=0 history=YXXYXY" { 0, 0 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 39 "Matches=0 history=YXXYYX" { 0, 0 }
+t "" 40 "Matches=1 history=YXXYYY" { 1, 1 }
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 41 "Matches=1 history=YXYXXX" { 1, 1 }
+t "" 42 "Matches=0 history=YXYXXY" { 0, 0 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 43 "Matches=0 history=YXYXYX" { 0, 0 }
+t "" 44 "Matches=1 history=YXYXYY" { 1, 1 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 45 "Matches=2 history=YXYYXX" { 2, 2 }
+t "" 46 "Matches=1 history=YXYYXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 47 "Matches=1 history=YXYYYX" { 1, 1 }
+t "" 48 "Matches=2 history=YXYYYY" { 2, 2 }
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 49 "Matches=3 history=YYXXXX" { 3, 3 }
+t "" 50 "Matches=2 history=YYXXXY" { 2, 2 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 51 "Matches=2 history=YYXXYX" { 2, 2 }
+t "" 52 "Matches=3 history=YYXXYY" { 3, 3 }
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 53 "Matches=2 history=YYXYXX" { 2, 2 }
+t "" 54 "Matches=1 history=YYXYXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 55 "Matches=1 history=YYXYYX" { 1, 1 }
+t "" 56 "Matches=2 history=YYXYYY" { 2, 2 }
+p "" 2 5 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+t "" 57 "Matches=2 history=YYYXXX" { 2, 2 }
+t "" 58 "Matches=1 history=YYYXXY" { 1, 1 }
+p "" 2 3 "" { "X" "Y" } 0
+t "" 59 "Matches=1 history=YYYXYX" { 1, 1 }
+t "" 60 "Matches=2 history=YYYXYY" { 2, 2 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 61 "Matches=3 history=YYYYXX" { 3, 3 }
+t "" 62 "Matches=2 history=YYYYXY" { 2, 2 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 63 "Matches=2 history=YYYYYX" { 2, 2 }
+t "" 64 "Matches=3 history=YYYYYY" { 3, 3 }

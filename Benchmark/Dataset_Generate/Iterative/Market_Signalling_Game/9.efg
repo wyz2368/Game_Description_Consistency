@@ -1,0 +1,18 @@
+EFG 2 R "Entry signaling game (Strong/Weak entrant)" { "New" "Existing" }
+""
+
+c "" 1 "" { "Strong" 2/3 "Weak" 1/3 } 0
+p "" 1 1 "" { "Signal Strong" "Signal Weak" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 1 "Strong true, Signal Strong, Fight" { 1, 0 }
+t "" 2 "Strong true, Signal Strong, Accommodate" { 3, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 3 "Strong true, Signal Weak, Fight" { 0, 0 }
+t "" 4 "Strong true, Signal Weak, Accommodate" { 2, 1 }
+p "" 1 2 "" { "Signal Strong" "Signal Weak" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 5 "Weak true, Signal Strong, Fight" { 0, 2 }
+t "" 6 "Weak true, Signal Strong, Accommodate" { 2, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 7 "Weak true, Signal Weak, Fight" { 1, 2 }
+t "" 8 "Weak true, Signal Weak, Accommodate" { 3, 1 }

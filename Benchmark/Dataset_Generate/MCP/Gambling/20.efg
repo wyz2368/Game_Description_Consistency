@@ -1,0 +1,12 @@
+EFG 2 R "Gambler Matching Pennies vs Casino" { "Gambler" "Dealer" }
+""
+
+p "" 1 1 "" { "Enter" "Stay out" } 0
+p "" 1 2 "" { "Heads" "Tails" } 0
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 2 "enter_g_heads_d_heads" { 1, -1 }
+t "" 3 "enter_g_heads_d_tails" { -1, 1 }
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 4 "enter_g_tails_d_heads" { -1, 1 }
+t "" 5 "enter_g_tails_d_tails" { 1, -1 }
+t "" 1 "stay_out" { 0, 0 }

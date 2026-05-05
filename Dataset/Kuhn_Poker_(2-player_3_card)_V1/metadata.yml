@@ -12,16 +12,14 @@ description: |-
   If Player One checks, Player Two chooses either to check or to bet; if Player Two bets, Player One then chooses either to fold or to call.
 
   The game ends in one of three ways.
-  If both players check, the player with the higher-ranked card wins.
-  If one player bets and the other folds, the betting player wins.
-  If one player bets and the other calls, the player with the higher-ranked card wins.
-  A player who wins after both players check gets 1; the loser gets -1.
-  A player whose opponent folds gets 1; the folding player gets -1.
-  A player who wins after a bet is called gets 2; the loser gets -2.
-strategic_equivalence_notion: Strong VNM Equivalence
+  If both players check, the player with the higher-ranked card receives 1 and the other receives -1.
+  If one player bets and the other folds, the betting player receives 1 and the folding player receives -1.
+  If one player bets and the other calls, the player with the higher-ranked card receives 2 and the other receives -2.
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
-additional_comments: The description of how the game proceeds is taken from wikipedia (https://en.wikipedia.org/wiki/Kuhn_poker) [accessed April 14, 2026]. We remove any reference to Kuhn Poker in the description and refer to it only as a two-player card game, in order to reduce potential memorization issues for LLMs. This version of Kuhn Poker uses a single chance move at the root to deal both players' cards simultaneously.
+additional_comments:
+  The action structure of Kuhn poker follows the Wikipedia article on Kuhn poker (https://en.wikipedia.org/wiki/Kuhn_poker, accessed April 14, 2026).
+  In this variant, a single chance move at the root simultaneously deals cards to both players.
 related games: []
 assets:
   description: description.txt

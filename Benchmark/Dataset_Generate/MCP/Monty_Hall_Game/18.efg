@@ -1,0 +1,61 @@
+EFG 2 R "Adversarial Monty Hall" { "Player" "Host" }
+""
+
+p "" 2 1 "" { "Hide1" "Hide2" "Hide3" } 0
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+p "" 2 2 "" { "Keep" "Open2" "Open3" } 0
+t "" 1 "keep_h1_p1" { 1, -1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 10 "h1_p1_o2_stick" { 1, -1 }
+t "" 11 "h1_p1_o2_switch" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 14 "h1_p1_o3_stick" { 1, -1 }
+t "" 15 "h1_p1_o3_switch" { -1, 1 }
+p "" 2 3 "" { "Keep" "Open3" } 0
+t "" 2 "keep_h1_p2" { -1, 1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 24 "h1_p2_o3_stick" { -1, 1 }
+t "" 25 "h1_p2_o3_switch" { 1, -1 }
+p "" 2 4 "" { "Keep" "Open2" } 0
+t "" 3 "keep_h1_p3" { -1, 1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 32 "h1_p3_o2_stick" { -1, 1 }
+t "" 33 "h1_p3_o2_switch" { 1, -1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+p "" 2 5 "" { "Keep" "Open3" } 0
+t "" 4 "keep_h2_p1" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 16 "h2_p1_o3_stick" { -1, 1 }
+t "" 17 "h2_p1_o3_switch" { 1, -1 }
+p "" 2 6 "" { "Keep" "Open1" "Open3" } 0
+t "" 5 "keep_h2_p2" { 1, -1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 18 "h2_p2_o1_stick" { 1, -1 }
+t "" 19 "h2_p2_o1_switch" { -1, 1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 22 "h2_p2_o3_stick" { 1, -1 }
+t "" 23 "h2_p2_o3_switch" { -1, 1 }
+p "" 2 7 "" { "Keep" "Open1" } 0
+t "" 6 "keep_h2_p3" { -1, 1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 28 "h2_p3_o1_stick" { -1, 1 }
+t "" 29 "h2_p3_o1_switch" { 1, -1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+p "" 2 8 "" { "Keep" "Open2" } 0
+t "" 7 "keep_h3_p1" { -1, 1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 12 "h3_p1_o2_stick" { -1, 1 }
+t "" 13 "h3_p1_o2_switch" { 1, -1 }
+p "" 2 9 "" { "Keep" "Open1" } 0
+t "" 8 "keep_h3_p2" { -1, 1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 20 "h3_p2_o1_stick" { -1, 1 }
+t "" 21 "h3_p2_o1_switch" { 1, -1 }
+p "" 2 10 "" { "Keep" "Open1" "Open2" } 0
+t "" 9 "keep_h3_p3" { 1, -1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 26 "h3_p3_o1_stick" { 1, -1 }
+t "" 27 "h3_p3_o1_switch" { -1, 1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 30 "h3_p3_o2_stick" { 1, -1 }
+t "" 31 "h3_p3_o2_switch" { -1, 1 }

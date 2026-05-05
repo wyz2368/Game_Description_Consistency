@@ -1,0 +1,52 @@
+EFG 2 R "Two-player Russian Roulette" { "P1" "P2" }
+""
+
+c "" 1 "" { "1" 1/6 "2" 1/6 "3" 1/6 "4" 1/6 "5" 1/6 "6" 1/6 } 0
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "p1_quit_t1_b1" { 0, 1 }
+t "" 7 "p1_pull_t1_b1_dead" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 2 "p1_quit_t1_b2" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 8 "p2_quit_t2_b2" { 1, 0 }
+t "" 13 "p2_pull_t2_b2_dead" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 3 "p1_quit_t1_b3" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 9 "p2_quit_t2_b3" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 14 "p1_quit_t3_b3" { 0, 1 }
+t "" 18 "p1_pull_t3_b3_dead" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 4 "p1_quit_t1_b4" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 10 "p2_quit_t2_b4" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 15 "p1_quit_t3_b4" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 19 "p2_quit_t4_b4" { 1, 0 }
+t "" 22 "p2_pull_t4_b4_dead" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 5 "p1_quit_t1_b5" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 11 "p2_quit_t2_b5" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 16 "p1_quit_t3_b5" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 20 "p2_quit_t4_b5" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 23 "p1_quit_t5_b5" { 0, 1 }
+t "" 25 "p1_pull_t5_b5_dead" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 6 "p1_quit_t1_b6" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 12 "p2_quit_t2_b6" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 17 "p1_quit_t3_b6" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 21 "p2_quit_t4_b6" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 24 "p1_quit_t5_b6" { 0, 1 }
+p "" 2 3 "" { "Quit" "Pull" } 0
+t "" 26 "p2_quit_t6_b6" { 1, 0 }
+t "" 27 "p2_pull_t6_b6_dead" { 1, -1 }

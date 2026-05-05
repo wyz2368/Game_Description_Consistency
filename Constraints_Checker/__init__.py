@@ -1,2 +1,1 @@
 from .check_one_payoff import check_efg_json
-from .check_relationship import check_payoff_relation

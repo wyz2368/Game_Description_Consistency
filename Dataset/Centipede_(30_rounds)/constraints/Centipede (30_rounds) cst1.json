@@ -1,8 +1,0 @@
-{
-    "Cst Type":1,
-    "Path":{
-        "1":{"type":"Decision","player":"Alice","action":"Take larger pile"}
-    },
-    "Payoffs":{"Alice":4, "Bob":1},
-    "Comments":"Type 1 is payoff seeding."
-}

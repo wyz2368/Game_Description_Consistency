@@ -1,0 +1,46 @@
+EFG 2 R "Two-player Borda Voting (Simultaneous Rankings)" { "Player 1" "Player 2" }
+""
+
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "ABC_vs_ABC" { 2, 0 }
+t "" 2 "ABC_vs_ACB" { 2, 0 }
+t "" 3 "ABC_vs_BAC" { 1, 1 }
+t "" 4 "ABC_vs_BCA" { 1, 1 }
+t "" 5 "ABC_vs_CAB" { 2, 0 }
+t "" 6 "ABC_vs_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 7 "ACB_vs_ABC" { 2, 0 }
+t "" 8 "ACB_vs_ACB" { 2, 0 }
+t "" 9 "ACB_vs_BAC" { 2, 0 }
+t "" 10 "ACB_vs_BCA" { 0, 2 }
+t "" 11 "ACB_vs_CAB" { 0, 2 }
+t "" 12 "ACB_vs_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 13 "BAC_vs_ABC" { 1, 1 }
+t "" 14 "BAC_vs_ACB" { 2, 0 }
+t "" 15 "BAC_vs_BAC" { 1, 1 }
+t "" 16 "BAC_vs_BCA" { 1, 1 }
+t "" 17 "BAC_vs_CAB" { 0, 2 }
+t "" 18 "BAC_vs_CBA" { 1, 1 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 19 "BCA_vs_ABC" { 1, 1 }
+t "" 20 "BCA_vs_ACB" { 0, 2 }
+t "" 21 "BCA_vs_BAC" { 1, 1 }
+t "" 22 "BCA_vs_BCA" { 1, 1 }
+t "" 23 "BCA_vs_CAB" { 0, 2 }
+t "" 24 "BCA_vs_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 25 "CAB_vs_ABC" { 2, 0 }
+t "" 26 "CAB_vs_ACB" { 0, 2 }
+t "" 27 "CAB_vs_BAC" { 0, 2 }
+t "" 28 "CAB_vs_BCA" { 0, 2 }
+t "" 29 "CAB_vs_CAB" { 0, 2 }
+t "" 30 "CAB_vs_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 31 "CBA_vs_ABC" { 0, 2 }
+t "" 32 "CBA_vs_ACB" { 0, 2 }
+t "" 33 "CBA_vs_BAC" { 1, 1 }
+t "" 34 "CBA_vs_BCA" { 0, 2 }
+t "" 35 "CBA_vs_CAB" { 0, 2 }
+t "" 36 "CBA_vs_CBA" { 0, 2 }

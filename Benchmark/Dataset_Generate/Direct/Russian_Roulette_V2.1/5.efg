@@ -1,0 +1,50 @@
+EFG 2 R "Russian roulette, alternating (6-chamber)" { "Player1" "Player2" }
+c "" 1 "" { "load1" 1/6 "load2" 1/6 "load3" 1/6 "load4" 1/6 "load5" 1/6 "load6" 1/6 } 0
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+t "" 2 "" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+t "" 4 "" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+t "" 2 "" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+t "" 4 "" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+t "" 2 "" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 1 "" { 0, 1 }
+p "" 2 3 "" { "Quit" "Pull" } 0
+t "" 3 "" { 1, 0 }
+t "" 4 "" { 1, -1 }

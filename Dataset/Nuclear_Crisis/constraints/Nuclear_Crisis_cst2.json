@@ -1,9 +1,0 @@
-{
-    "Cst Type":3,
-    "P2 Payoff":{
-        "1":{"type":"Decision","player":"Country A","action":"Ignore"},
-        "Player order":"2"},
-    "Threshold":"0",
-    "Relationship":">",
-    "Comments":"Type 3 is for payoff comparison."
-}

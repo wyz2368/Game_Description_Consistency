@@ -1,0 +1,18 @@
+EFG 2 R "Market Entry Signaling Game" { "New Manufacturer" "Existing Manufacturer" }
+""
+
+c "" 1 "" { "S" 2/3 "W" 1/3 } 0
+p "" 1 1 "" { "S" "W" } 0
+p "" 2 1 "" { "F" "A" } 0
+t "" 1 "S_strong_signal_fight" { 1, 0 }
+t "" 2 "S_strong_signal_accommodate" { 3, 1 }
+p "" 2 2 "" { "F" "A" } 0
+t "" 3 "S_weak_signal_fight" { 0, 0 }
+t "" 4 "S_weak_signal_accommodate" { 2, 1 }
+p "" 1 2 "" { "S" "W" } 0
+p "" 2 1 "" { "F" "A" } 0
+t "" 5 "W_strong_signal_fight" { 0, 2 }
+t "" 6 "W_strong_signal_accommodate" { 2, 1 }
+p "" 2 2 "" { "F" "A" } 0
+t "" 7 "W_weak_signal_fight" { 1, 2 }
+t "" 8 "W_weak_signal_accommodate" { 3, 1 }

@@ -1,0 +1,61 @@
+EFG 2 R "Adversarial Monty Hall (zero-sum)" { "Player" "Host" }
+""
+
+p "" 2 1 "" { "Hide0" "Hide1" "Hide2" } 0
+p "" 1 1 "" { "Pick0" "Pick1" "Pick2" } 0
+p "" 2 2 "" { "Keep" "Open1" "Open2" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 2 3 "" { "Keep" "Open2" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 4 "" { "Keep" "Open1" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 1 "" { "Pick0" "Pick1" "Pick2" } 0
+p "" 2 5 "" { "Keep" "Open2" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 4 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 6 "" { "Keep" "Open0" "Open2" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 2 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 2 7 "" { "Keep" "Open0" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 1 "" { "Pick0" "Pick1" "Pick2" } 0
+p "" 2 8 "" { "Keep" "Open1" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 6 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 9 "" { "Keep" "Open0" } 0
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 7 "" { "Stick" "Switch" } 0
+t "" 2 "Player loses" { -1, 1 }
+t "" 1 "Player wins" { 1, -1 }
+p "" 2 10 "" { "Keep" "Open0" "Open1" } 0
+t "" 1 "Player wins" { 1, -1 }
+p "" 1 5 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }
+p "" 1 3 "" { "Stick" "Switch" } 0
+t "" 1 "Player wins" { 1, -1 }
+t "" 2 "Player loses" { -1, 1 }

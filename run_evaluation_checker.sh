@@ -1,8 +1,14 @@
-METHOD=${1:-Direct}
-NUM_GENERATIONS=${2:-5}
-MODEL=${3:-gpt-5-mini}
+#!/usr/bin/env bash
+set -euo pipefail
 
-python match_and_check_all.py \
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "${SCRIPT_DIR}"
+
+METHOD="${1:-Direct}"
+NUM_GENERATIONS="${2:-20}"
+MODEL="${3:-gpt-5-mini}"
+
+python process_evaluation.py \
   --dataset_root Dataset \
   --generated_root "Benchmark/Dataset_Generate/${METHOD}" \
   --output_root "Results/${METHOD}/Output" \

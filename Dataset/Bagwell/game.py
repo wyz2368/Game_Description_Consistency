@@ -1,71 +1,58 @@
 import pygambit as gbt
 
-# Create a new extensive-form game with two players: Player 1 (Leader) and Player 2 (Follower)
-g = gbt.Game.new_tree(players=["Player 1", "Player 2"], title="Imperfect Information Game")
+# Parameters
+epsilon = gbt.Rational(1, 100)  # 0.01
 
-# Step 1: Player 1 makes a choice between "S" and "C".
-g.append_move(g.root, "Player 1", ["S", "C"])
+# Create game with Player 1 first, Player 2 second
+g = gbt.Game.new_tree(players=["Player 1", "Player 2"],
+                      title="Noisy leader game")
 
-# Step 2: Player 2 perceives Player 1's choice, but there is a chance of misinterpretation.
-# We model this as a chance node for Player 2's perception.
-# If Player 1 chooses "S", Player 2 perceives "S" with 99% probability and "C" with 1% probability.
-# If Player 1 chooses "C", Player 2 perceives "C" with 99% probability and "S" with 1% probability.
+# Player 1 chooses C or S at the root
+g.append_move(g.root, "Player 1", ["C", "S"])
 
-# Append chance moves for Player 2's perception after Player 1 chooses "S"
-g.append_move(g.root.children[0], g.players.chance, ["Perceive S", "Perceive C"])
-g.set_chance_probs(g.root.children[0].infoset, [gbt.Rational(99, 100), gbt.Rational(1, 100)])
+# Define outcomes (payoff vectors are [Player 1, Player 2])
+out_C_C = g.add_outcome([1, 3], label="(C,C)")
+out_C_S = g.add_outcome([3, 2], label="(C,S)")
+out_S_S = g.add_outcome([2, 1], label="(S,S)")
+out_S_C = g.add_outcome([0, 0], label="(S,C)")
 
-# Append chance moves for Player 2's perception after Player 1 chooses "C"
-g.append_move(g.root.children[1], g.players.chance, ["Perceive S", "Perceive C"])
-g.set_chance_probs(g.root.children[1].infoset, [gbt.Rational(1, 100), gbt.Rational(99, 100)])
+# For each Player 1 action node, append a chance node (signal),
+# set its probabilities, then append Player 2's decision and set outcomes.
+for i, p1_node in enumerate(g.root.children):
+    # Append chance (nature) producing the observed signal
+    g.append_move(p1_node, g.players.chance, ["Signal C", "Signal S"])
 
-# Step 3: Player 2 makes a decision based on their perception of Player 1's choice.
-# Player 2 chooses between "S" and "C" based on their perception.
+    # Set chance probabilities depending on which action Player 1 chose
+    # If Player 1 chose "C" (i == 0): Prob(signal=C)=1-epsilon, signal=S=epsilon
+    # If Player 1 chose "S" (i == 1): Prob(signal=C)=epsilon,    signal=S=1-epsilon
+    if i == 0:  # Player 1 played C
+        probs = [gbt.Rational(1, 1) - epsilon, epsilon]
+    else:       # Player 1 played S
+        probs = [epsilon, gbt.Rational(1, 1) - epsilon]
+    # Set probabilities on the chance infoset (the infoset is on p1_node)
+    g.set_chance_probs(p1_node.infoset, probs)
 
-# Player 2's decision after perceiving "S" (after Player 1 chose "S")
-g.append_move(g.root.children[0].children[0], "Player 2", ["S", "C"])
+    # For each chance outcome node (signal C and signal S), append Player 2's move
+    for signal_child in p1_node.children:
+        g.append_move(signal_child, "Player 2", ["C", "S"])
 
-# Player 2's decision after perceiving "C" (after Player 1 chose "S")
-g.append_move(g.root.children[0].children[1], "Player 2", ["S", "C"])
+        # Set outcomes for Player 2 actions; payoffs depend only on actual actions:
+        # Determine which Player 1 action we are under (C if i==0 else S)
+        if i == 0:  # Player 1 played C
+            # Player 2 chooses C -> (C, C)
+            g.set_outcome(signal_child.children[0], out_C_C)
+            # Player 2 chooses S -> (C, S)
+            g.set_outcome(signal_child.children[1], out_C_S)
+        else:       # Player 1 played S
+            # Player 2 chooses C -> (S, C)
+            g.set_outcome(signal_child.children[0], out_S_C)
+            # Player 2 chooses S -> (S, S)
+            g.set_outcome(signal_child.children[1], out_S_S)
 
-# Player 2's decision after perceiving "S" (after Player 1 chose "C")
-g.append_move(g.root.children[1].children[0], "Player 2", ["S", "C"])
-
-# Player 2's decision after perceiving "C" (after Player 1 chose "C")
-g.append_move(g.root.children[1].children[1], "Player 2", ["S", "C"])
-
-# Group Player 2's decision nodes into the same information set due to the misinterpretation probability.
-g.set_infoset(g.root.children[0].children[0], g.root.children[1].children[0].infoset)
-g.set_infoset(g.root.children[0].children[1], g.root.children[1].children[1].infoset)
-
-# Define the payoffs based on the actual choices of Player 1 and Player 2
-# Payoff rankings: E > A > F > W > B > D
-E, A, F, W, B, D = 6, 5, 4, 3, 2, 1
-
-# Set outcomes for each terminal node
-# Player 1 chooses "S", Player 2 perceives "S", Player 2 chooses "S"
-g.set_outcome(g.root.children[0].children[0].children[0], g.add_outcome([A, B], label="Both S"))
-
-# Player 1 chooses "S", Player 2 perceives "S", Player 2 chooses "C"
-g.set_outcome(g.root.children[0].children[0].children[1], g.add_outcome([W, D], label="P1 S, P2 C"))
-
-# Player 1 chooses "S", Player 2 perceives "C", Player 2 chooses "S"
-g.set_outcome(g.root.children[0].children[1].children[0], g.add_outcome([A, B], label="Both S"))
-
-# Player 1 chooses "S", Player 2 perceives "C", Player 2 chooses "C"
-g.set_outcome(g.root.children[0].children[1].children[1], g.add_outcome([W, D], label="P1 S, P2 C"))
-
-# Player 1 chooses "C", Player 2 perceives "S", Player 2 chooses "S"
-g.set_outcome(g.root.children[1].children[0].children[0], g.add_outcome([E, W], label="P1 C, P2 S"))
-
-# Player 1 chooses "C", Player 2 perceives "S", Player 2 chooses "C"
-g.set_outcome(g.root.children[1].children[0].children[1], g.add_outcome([F, F], label="Both C"))
-
-# Player 1 chooses "C", Player 2 perceives "C", Player 2 chooses "S"
-g.set_outcome(g.root.children[1].children[1].children[0], g.add_outcome([E, W], label="P1 C, P2 S"))
-
-# Player 1 chooses "C", Player 2 perceives "C", Player 2 chooses "C"
-g.set_outcome(g.root.children[1].children[1].children[1], g.add_outcome([F, F], label="Both C"))
+def replay_infosets(g):
+    """Replays g.set_infoset(...) calls."""
+    g.set_infoset(g.root.children['S'].children['Signal C'], g.root.children['C'].children['Signal C'].infoset)
+    g.set_infoset(g.root.children['S'].children['Signal S'], g.root.children['C'].children['Signal S'].infoset)
 
 # Save the EFG
-efg = g.to_efg("game.efg")
+g.to_efg("noisy_leader.efg")

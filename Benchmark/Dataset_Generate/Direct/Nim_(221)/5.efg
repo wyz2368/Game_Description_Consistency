@@ -1,0 +1,90 @@
+EFG 2 R "Take-away game (2,2,1)" { "Alice" "Bob" }
+p "" 1 1 "" { "Take1P1" "Take2P1" "Take1P2" "Take2P2" "Take1P3" } 0
+p "" 2 2 "" { "Take1P1" "Take1P2" "Take2P2" "Take1P3" } 0
+p "" 1 3 "" { "Take1P2" "Take2P2" "Take1P3" } 0
+p "" 2 4 "" { "Take1P2" "Take1P3" } 0
+p "" 1 5 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 6 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 7 "" { "Take1P3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 8 "" { "Take1P2" "Take2P2" } 0
+p "" 1 9 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 10 "" { "Take1P1" "Take1P2" "Take1P3" } 0
+p "" 2 11 "" { "Take1P2" "Take1P3" } 0
+p "" 1 12 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 13 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 14 "" { "Take1P1" "Take1P3" } 0
+p "" 1 15 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 16 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 17 "" { "Take1P1" "Take1P2" } 0
+p "" 1 18 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 19 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 20 "" { "Take1P2" "Take2P2" "Take1P3" } 0
+p "" 1 21 "" { "Take1P2" "Take1P3" } 0
+p "" 2 22 "" { "Take1P3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 23 "" { "Take1P2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 1 24 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 25 "" { "Take1P2" "Take2P2" } 0
+p "" 2 26 "" { "Take1P2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 27 "" { "Take1P1" "Take2P1" "Take1P2" "Take1P3" } 0
+p "" 1 28 "" { "Take1P1" "Take1P2" "Take1P3" } 0
+p "" 2 29 "" { "Take1P2" "Take1P3" } 0
+p "" 1 30 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 31 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 32 "" { "Take1P1" "Take1P3" } 0
+p "" 1 33 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 34 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 35 "" { "Take1P1" "Take1P2" } 0
+p "" 1 36 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 37 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 38 "" { "Take1P1" "Take2P1" "Take1P3" } 0
+p "" 2 39 "" { "Take1P1" "Take1P3" } 0
+p "" 1 40 "" { "Take1P3" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 41 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 42 "" { "Take1P3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 44 "" { "Take1P1" "Take2P1" } 0
+p "" 1 45 "" { "Take1P1" "Take2P1" "Take1P2" } 0
+p "" 2 46 "" { "Take1P1" "Take1P2" } 0
+p "" 1 47 "" { "Take1P2" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 1 48 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+p "" 2 49 "" { "Take1P2" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 50 "" { "Take1P1" "Take2P1" } 0
+p "" 1 51 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 52 "" { "Take1P1" "Take2P1" "Take1P3" } 0
+p "" 1 53 "" { "Take1P1" "Take1P3" } 0
+p "" 2 54 "" { "Take1P3" } 0
+t "" 2 "Bob wins" { -1, 1 }
+p "" 2 55 "" { "Take1P1" "Take2P1" } 0
+p "" 1 56 "" { "Take1P1" "Take2P1" } 0
+p "" 2 57 "" { "Take1P1" } 0
+t "" 1 "Alice wins" { 1, -1 }
+t "" 2 "Bob wins" { -1, 1 }

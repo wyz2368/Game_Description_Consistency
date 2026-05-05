@@ -1,0 +1,46 @@
+EFG 2 R "Two-Player Borda Ballot Game" { "Player 1" "Player 2" }
+""
+
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins_1" { 2, 0 }
+t "" 2 "A_wins_2" { 2, 0 }
+t "" 3 "A_wins_3" { 2, 0 }
+t "" 4 "B_wins_4" { 1, 1 }
+t "" 5 "A_wins_5" { 2, 0 }
+t "" 6 "A_wins_6" { 2, 0 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "A_wins_7" { 2, 0 }
+t "" 8 "A_wins_8" { 2, 0 }
+t "" 9 "A_wins_9" { 2, 0 }
+t "" 10 "A_wins_10" { 2, 0 }
+t "" 11 "A_wins_11" { 2, 0 }
+t "" 12 "C_wins_12" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "A_wins_13" { 2, 0 }
+t "" 14 "A_wins_14" { 2, 0 }
+t "" 15 "B_wins_15" { 1, 1 }
+t "" 16 "B_wins_16" { 1, 1 }
+t "" 17 "A_wins_17" { 2, 0 }
+t "" 18 "B_wins_18" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "B_wins_19" { 1, 1 }
+t "" 20 "A_wins_20" { 2, 0 }
+t "" 21 "B_wins_21" { 1, 1 }
+t "" 22 "B_wins_22" { 1, 1 }
+t "" 23 "C_wins_23" { 0, 2 }
+t "" 24 "B_wins_24" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "A_wins_25" { 2, 0 }
+t "" 26 "A_wins_26" { 2, 0 }
+t "" 27 "A_wins_27" { 2, 0 }
+t "" 28 "C_wins_28" { 0, 2 }
+t "" 29 "C_wins_29" { 0, 2 }
+t "" 30 "C_wins_30" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "A_wins_31" { 2, 0 }
+t "" 32 "C_wins_32" { 0, 2 }
+t "" 33 "B_wins_33" { 1, 1 }
+t "" 34 "B_wins_34" { 1, 1 }
+t "" 35 "C_wins_35" { 0, 2 }
+t "" 36 "C_wins_36" { 0, 2 }

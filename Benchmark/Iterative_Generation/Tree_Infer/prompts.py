@@ -1,6 +1,6 @@
 def code_generation_prompt():
     instructions = """
-Here are two examples of how to use pygambit library:
+Here are two examples of how to use pygambit library to build a perfect information game tree:
 
 Example 1:
 Game description:

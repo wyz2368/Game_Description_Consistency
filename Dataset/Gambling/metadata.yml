@@ -7,9 +7,8 @@ description: |-
   If the gambler enters, they play a coin toss game against the dealer: both players simultaneously choose either Heads or Tails.
 
   If the choices match, the gambler receives 1 and the dealer receives -1; otherwise, the dealer receives 1 and the gambler receives -1.
-strategic_equivalence_notion: Strong VNM Equivalence
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 - TSM constraint.
 additional_comments:
 related games: []

@@ -1,0 +1,106 @@
+EFG 2 R "Alice-Bob Pile Game 30 Rounds (60 moves)" { "Alice" "Bob" }
+""
+
+p "" 1 1 "" { "Take" "Push" } 0
+t "" 1 "take_at_depth_0_Alice" { 4, 1 }
+p "" 2 1 "" { "Take" "Push" } 0
+t "" 2 "take_at_depth_1_Bob" { 2, 8 }
+p "" 1 2 "" { "Take" "Push" } 0
+t "" 3 "take_at_depth_2_Alice" { 16, 4 }
+p "" 2 2 "" { "Take" "Push" } 0
+t "" 4 "take_at_depth_3_Bob" { 8, 32 }
+p "" 1 3 "" { "Take" "Push" } 0
+t "" 5 "take_at_depth_4_Alice" { 64, 16 }
+p "" 2 3 "" { "Take" "Push" } 0
+t "" 6 "take_at_depth_5_Bob" { 32, 128 }
+p "" 1 4 "" { "Take" "Push" } 0
+t "" 7 "take_at_depth_6_Alice" { 256, 64 }
+p "" 2 4 "" { "Take" "Push" } 0
+t "" 8 "take_at_depth_7_Bob" { 128, 512 }
+p "" 1 5 "" { "Take" "Push" } 0
+t "" 9 "take_at_depth_8_Alice" { 1024, 256 }
+p "" 2 5 "" { "Take" "Push" } 0
+t "" 10 "take_at_depth_9_Bob" { 512, 2048 }
+p "" 1 6 "" { "Take" "Push" } 0
+t "" 11 "take_at_depth_10_Alice" { 4096, 1024 }
+p "" 2 6 "" { "Take" "Push" } 0
+t "" 12 "take_at_depth_11_Bob" { 2048, 8192 }
+p "" 1 7 "" { "Take" "Push" } 0
+t "" 13 "take_at_depth_12_Alice" { 32768, 8192 }
+p "" 2 7 "" { "Take" "Push" } 0
+t "" 14 "take_at_depth_13_Bob" { 16384, 65536 }
+p "" 1 8 "" { "Take" "Push" } 0
+t "" 15 "take_at_depth_14_Alice" { 131072, 32768 }
+p "" 2 8 "" { "Take" "Push" } 0
+t "" 16 "take_at_depth_15_Bob" { 65536, 262144 }
+p "" 1 9 "" { "Take" "Push" } 0
+t "" 17 "take_at_depth_16_Alice" { 524288, 131072 }
+p "" 2 9 "" { "Take" "Push" } 0
+t "" 18 "take_at_depth_17_Bob" { 262144, 1048576 }
+p "" 1 10 "" { "Take" "Push" } 0
+t "" 19 "take_at_depth_18_Alice" { 2097152, 524288 }
+p "" 2 10 "" { "Take" "Push" } 0
+t "" 20 "take_at_depth_19_Bob" { 1048576, 4194304 }
+p "" 1 11 "" { "Take" "Push" } 0
+t "" 21 "take_at_depth_20_Alice" { 8388608, 2097152 }
+p "" 2 11 "" { "Take" "Push" } 0
+t "" 22 "take_at_depth_21_Bob" { 4194304, 16777216 }
+p "" 1 12 "" { "Take" "Push" } 0
+t "" 23 "take_at_depth_22_Alice" { 33554432, 8388608 }
+p "" 2 12 "" { "Take" "Push" } 0
+t "" 24 "take_at_depth_23_Bob" { 16777216, 67108864 }
+p "" 1 13 "" { "Take" "Push" } 0
+t "" 25 "take_at_depth_24_Alice" { 134217728, 33554432 }
+p "" 2 13 "" { "Take" "Push" } 0
+t "" 26 "take_at_depth_25_Bob" { 67108864, 268435456 }
+p "" 1 14 "" { "Take" "Push" } 0
+t "" 27 "take_at_depth_26_Alice" { 536870912, 134217728 }
+p "" 2 14 "" { "Take" "Push" } 0
+t "" 28 "take_at_depth_27_Bob" { 268435456, 1073741824 }
+p "" 1 15 "" { "Take" "Push" } 0
+t "" 29 "take_at_depth_28_Alice" { 2147483648, 536870912 }
+p "" 2 15 "" { "Take" "Push" } 0
+t "" 30 "take_at_depth_29_Bob" { 1073741824, 4294967296 }
+p "" 1 16 "" { "Take" "Push" } 0
+t "" 31 "take_at_depth_30_Alice" { 8589934592, 2147483648 }
+p "" 2 16 "" { "Take" "Push" } 0
+t "" 32 "take_at_depth_31_Bob" { 4294967296, 17179869184 }
+p "" 1 17 "" { "Take" "Push" } 0
+t "" 33 "take_at_depth_32_Alice" { 34359738368, 8589934592 }
+p "" 2 17 "" { "Take" "Push" } 0
+t "" 34 "take_at_depth_33_Bob" { 17179869184, 68719476736 }
+p "" 1 18 "" { "Take" "Push" } 0
+t "" 36 "take_at_depth_35_Bob" { 68719476736, 274877906944 }
+p "" 2 18 "" { "Take" "Push" } 0
+t "" 0
+p "" 1 19 "" { "Take" "Push" } 0
+t "" 37 "take_at_depth_36_Alice" { 274877906944, 68719476736 }
+p "" 2 19 "" { "Take" "Push" } 0
+t "" 38 "take_at_depth_37_Bob" { 137438953472, 549755813888 }
+p "" 1 20 "" { "Take" "Push" } 0
+t "" 39 "take_at_depth_38_Alice" { 549755813888, 137438953472 }
+p "" 2 20 "" { "Take" "Push" } 0
+t "" 40 "take_at_depth_39_Bob" { 274877906944, 1099511627776 }
+p "" 1 21 "" { "Take" "Push" } 0
+t "" 41 "take_at_depth_40_Alice" { 1099511627776, 274877906944 }
+p "" 2 21 "" { "Take" "Push" } 0
+t "" 42 "take_at_depth_41_Bob" { 549755813888, 2199023255552 }
+p "" 1 22 "" { "Take" "Push" } 0
+t "" 43 "take_at_depth_42_Alice" { 2199023255552, 549755813888 }
+p "" 2 22 "" { "Take" "Push" } 0
+t "" 44 "take_at_depth_43_Bob" { 1099511627776, 4398046511104 }
+p "" 1 23 "" { "Take" "Push" } 0
+t "" 45 "take_at_depth_44_Alice" { 4398046511104, 1099511627776 }
+p "" 2 23 "" { "Take" "Push" } 0
+t "" 46 "take_at_depth_45_Bob" { 2199023255552, 8796093022208 }
+p "" 1 24 "" { "Take" "Push" } 0
+t "" 47 "take_at_depth_46_Alice" { 8796093022208, 2199023255552 }
+p "" 2 24 "" { "Take" "Push" } 0
+t "" 48 "take_at_depth_47_Bob" { 4398046511104, 17592186044416 }
+p "" 1 25 "" { "Take" "Push" } 0
+t "" 50 "take_at_depth_49_Bob" { 8796093022208, 35184372088832 }
+p "" 2 25 "" { "Take" "Push" } 0
+t "" 51 "take_at_depth_50_Alice" { 35184372088832, 8796093022208 }
+p "" 1 26 "" { "Take" "Push" } 0
+t "" 0
+t "" 0

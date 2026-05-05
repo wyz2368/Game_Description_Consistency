@@ -1,0 +1,58 @@
+EFG 2 R "Three-card sequential betting game (K>Q>J)" { "Player One" "Player Two" }
+""
+
+c "" 1 "" { "Deal K to Player One, Q to Player Two" 1/6 "Deal K to Player One, J to Player Two" 1/6 "Deal Q to Player One, K to Player Two" 1/6 "Deal Q to Player One, J to Player Two" 1/6 "Deal J to Player One, K to Player Two" 1/6 "Deal J to Player One, Q to Player Two" 1/6 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 2 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 2 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 2 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 4 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 1 4 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 6 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 4 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 4 "" { "Call" "Fold" } 0
+t "" 2 "Big showdown: P1 wins on call" { 2, -2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 1 6 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 6 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 1 6 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 3 "Small showdown: P2 wins or bettor wins by fold" { -1, 1 }
+p "" 2 2 "" { "Call" "Fold" } 0
+t "" 4 "Big showdown: P2 wins on call" { -2, 2 }
+t "" 1 "Small showdown: P1 wins or bettor wins by fold" { 1, -1 }

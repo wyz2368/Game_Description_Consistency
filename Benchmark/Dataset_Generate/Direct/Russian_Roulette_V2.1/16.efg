@@ -1,0 +1,50 @@
+EFG 2 R "Alternating six-chamber Russian roulette" { "Player1" "Player2" }
+c "" 1 "" { "L1" 1/6 "L2" 1/6 "L3" 1/6 "L4" 1/6 "L5" 1/6 "L6" 1/6 } 0
+p "" 1 1 "" { "Pull" "Quit" } 0
+t "" 1 "P1 dies (L=1, Pull)" { -1, 1 }
+t "" 2 "P1 quits (L=1, Quit)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+t "" 3 "P2 dies (L=2, Pull)" { 1, -1 }
+t "" 4 "P2 quits (L=2, Quit)" { 1, 0 }
+t "" 5 "P1 quits (L=2, Quit at k1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+t "" 6 "P1 dies (L=3, Pull at k3)" { -1, 1 }
+t "" 7 "P1 quits (L=3, Quit at k3)" { 0, 1 }
+t "" 8 "P2 quits (L=3, Quit at k2)" { 1, 0 }
+t "" 9 "P1 quits (L=3, Quit at k1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+t "" 10 "P2 dies (L=4, Pull at k4)" { 1, -1 }
+t "" 11 "P2 quits (L=4, Quit at k4)" { 1, 0 }
+t "" 12 "P1 quits (L=4, Quit at k3)" { 0, 1 }
+t "" 13 "P2 quits (L=4, Quit at k2)" { 1, 0 }
+t "" 14 "P1 quits (L=4, Quit at k1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+t "" 15 "P1 dies (L=5, Pull at k5)" { -1, 1 }
+t "" 16 "P1 quits (L=5, Quit at k5)" { 0, 1 }
+t "" 17 "P2 quits (L=5, Quit at k4)" { 1, 0 }
+t "" 18 "P1 quits (L=5, Quit at k3)" { 0, 1 }
+t "" 19 "P2 quits (L=5, Quit at k2)" { 1, 0 }
+t "" 20 "P1 quits (L=5, Quit at k1)" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+p "" 2 3 "" { "Pull" "Quit" } 0
+t "" 21 "P2 dies (L=6, Pull at k6)" { 1, -1 }
+t "" 22 "P2 quits (L=6, Quit at k6)" { 1, 0 }
+t "" 23 "P1 quits (L=6, Quit at k5)" { 0, 1 }
+t "" 24 "P2 quits (L=6, Quit at k4)" { 1, 0 }
+t "" 25 "P1 quits (L=6, Quit at k3)" { 0, 1 }
+t "" 26 "P2 quits (L=6, Quit at k2)" { 1, 0 }
+t "" 27 "P1 quits (L=6, Quit at k1)" { 0, 1 }

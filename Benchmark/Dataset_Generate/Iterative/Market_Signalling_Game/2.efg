@@ -1,0 +1,18 @@
+EFG 2 R "Entry signalling game: new vs existing manufacturer" { "New manufacturer" "Existing manufacturer" }
+""
+
+c "" 1 "" { "Strong" 2/3 "Weak" 1/3 } 0
+p "" 1 1 "" { "Signal S" "Signal W" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 1 "True S, Signal S, Fight" { 1, 0 }
+t "" 2 "True S, Signal S, Accommodate" { 3, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 3 "True S, Signal W, Fight" { 0, 0 }
+t "" 4 "True S, Signal W, Accommodate" { 2, 1 }
+p "" 1 2 "" { "Signal S" "Signal W" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 5 "True W, Signal S, Fight" { 0, 2 }
+t "" 6 "True W, Signal S, Accommodate" { 2, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 7 "True W, Signal W, Fight" { 1, 2 }
+t "" 8 "True W, Signal W, Accommodate" { 3, 1 }

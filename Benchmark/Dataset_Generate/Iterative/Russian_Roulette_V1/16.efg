@@ -1,0 +1,52 @@
+EFG 2 R "Six-chamber Russian Roulette" { "Player 1" "Player 2" }
+""
+
+c "" 1 "" { "Bullet at chamber 1" 1/6 "Bullet at chamber 2" 1/6 "Bullet at chamber 3" 1/6 "Bullet at chamber 4" 1/6 "Bullet at chamber 5" 1/6 "Bullet at chamber 6" 1/6 } 0
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+t "" 2 "Player1 dies (-1), Player2 wins (1)" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+t "" 4 "Player2 dies (-1), Player1 wins (1)" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+t "" 2 "Player1 dies (-1), Player2 wins (1)" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+t "" 4 "Player2 dies (-1), Player1 wins (1)" { 1, -1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+t "" 2 "Player1 dies (-1), Player2 wins (1)" { -1, 1 }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 1 "Player1 quits (0), Player2 wins (1)" { 0, 1 }
+p "" 2 3 "" { "Quit" "Pull" } 0
+t "" 3 "Player2 quits (0), Player1 wins (1)" { 1, 0 }
+t "" 4 "Player2 dies (-1), Player1 wins (1)" { 1, -1 }

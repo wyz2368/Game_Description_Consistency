@@ -2,21 +2,17 @@ game_id: Market_Signalling_Game
 source: Shilong Deng, Yongzhao Wang, and Rahul Savani. 2025. From Natural Language to Extensive-Form Game Representations. In 34th International Conference on Autonomous Agents and Multi-Agent Systems (AAMAS).
 extraction_methodology: Manual
 description: |-
-  A new manufacturer plans to enter the market, and its strength, determined by chance, can be either strong (S) with probability 2/3 or weak (W) with probability 1/3.
-  The new manufacturer will then send a signal, either strong (S) or weak (W).
+  A new manufacturer plans to enter the market. Chance determines its type: strong with probability 2/3 and weak with probability 1/3.
+  The new manufacturer observes its own type and then chooses a signal, either strong or weak, to send to the current manufacturer.
+  The current manufacturer observes the signal but not the new manufacturer's actual type, and chooses either to fight or to accommodate.
+  The payoffs to the new and current manufacturers respectively are as follows.
 
-  The current manufacturer does not know the new manufacturer's actual strength but observes the signal, which could indicate either strong (S) or weak (W).
-
-  Based on this signal, the current manufacturer decides to either fight (F) or accommodate the new competitor (A).
-
-  The payoffs for each scenario are as follows:
-  - If the new manufacturer is strong and sends a strong signal, and the existing manufacturer chooses to fight, the payoffs are (1, 0) for the new and existing manufacturers, respectively. If the existing manufacturer adapts, the payoffs are (3, 1).
-  - If the new manufacturer is strong and sends a weak signal, and the existing manufacturer chooses to fight, the payoff is (0, 0). If the existing manufacturer adapts, the payoff is (2, 1).
-  - If the new manufacturer is weak and sends a strong signal, and the existing manufacturer chooses to fight, the payoff is (0, 2). If the existing manufacturer adapts, the payoff is (2, 1).
-  - If the new manufacturer is weak and sends a weak signal, and the existing manufacturer chooses to fight, the payoff is (1, 2). If the existing manufacturer adapts, the payoff is (3, 1).
-strategic_equivalence_notion: Strong VNM Equivalence
+  If the new manufacturer is strong and signals strong: fight yields (1, 0), accommodate yields (3, 1).
+  If the new manufacturer is strong and signals weak: fight yields (0, 0), accommodate yields (2, 1).
+  If the new manufacturer is weak and signals strong: fight yields (0, 2), accommodate yields (2, 1).
+  If the new manufacturer is weak and signals weak: fight yields (1, 2), accommodate yields (3, 1).
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 additional_comments: null
 related games: []
 assets:

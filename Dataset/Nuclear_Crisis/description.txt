@@ -1,13 +1,21 @@
-Consider a multi-stage game played between two players, Country A and Country B.
+Consider a multi-stage game played between Country A and Country B.
 
-Country A moves first, choosing whether to escalate (E) or ignore the provocation (I).
-If Country A chooses I, the game ends, and both countries receive a small positive payoff.
-If Country A chooses E, Country B observes this action and chooses whether to back down (B) or escalate (E).
-If Country B chooses B, the game ends: Country A receives an average positive payoff, and Country B loses face and receives a small negative payoff.
-If Country B chooses E, the game enters a nuclear crisis, which is played as a simultaneous-move subgame.
-Both countries simultaneously choose to either retreat (R) or detonate (D).
+Country A moves first, choosing whether to issue a threat or to ignore the provocation.
+If Country A ignores, the game ends.
+If Country A issues a threat, Country B observes this and chooses whether to back down or to issue a counter-threat.
+If Country B backs down, the game ends.
+If Country B counter-threatens, the game enters a crisis stage in which both countries simultaneously choose to retreat or to detonate, ending the game.
 
-The payoffs for this simultaneous subgame are determined as follows:
-- If one country chooses D and the other chooses R, the detonating country receives a big positive payoff, and the retreating country receives a big negative payoff.
-- If both countries choose R, both lose credibility and receive a small negative payoff.
-- If both countries choose D, both suffer a catastrophically big negative payoff.
+The terminal outcomes of the game are:
+- "ignore": Country A ignores the provocation;
+- "B backs down": Country A threatens and Country B backs down;
+- "A wins crisis": in the crisis, Country A detonates and Country B retreats;
+- "B wins crisis": in the crisis, Country B detonates and Country A retreats;
+- "mutual retreat": in the crisis, both countries retreat;
+- "mutual detonation": in the crisis, both countries detonate.
+
+Country A's preferences, from most to least preferred, are:
+"A wins crisis", "B backs down", "ignore", "mutual retreat", "B wins crisis", "mutual detonation".
+
+Country B's preferences, from most to least preferred, are:
+"B wins crisis", "ignore", then "B backs down" and "mutual retreat" tied, then "A wins crisis", then "mutual detonation".

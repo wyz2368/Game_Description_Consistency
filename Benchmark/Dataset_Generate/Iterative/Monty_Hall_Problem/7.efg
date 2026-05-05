@@ -1,0 +1,43 @@
+EFG 2 R "Monty Hall decision problem" { "Player" }
+""
+
+c "" 1 "" { "Car at 1" 1/3 "Car at 2" 1/3 "Car at 3" 1/3 } 0
+p "" 1 1 "" { "Choose 1" "Choose 2" "Choose 3" } 0
+c "" 2 "" { "Reveal 2" 1 } 0
+p "" 1 2 "" { "Choose original" "Choose other" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+c "" 3 "" { "Reveal 3" 1 } 0
+p "" 1 3 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 4 "" { "Reveal 2" 1 } 0
+p "" 1 4 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose 1" "Choose 2" "Choose 3" } 0
+c "" 5 "" { "Reveal 3" 1 } 0
+p "" 1 5 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 6 "" { "Reveal 1" 1 } 0
+p "" 1 6 "" { "Choose original" "Choose other" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+c "" 7 "" { "Reveal 1" 1 } 0
+p "" 1 7 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose 1" "Choose 2" "Choose 3" } 0
+c "" 8 "" { "Reveal 2" 1 } 0
+p "" 1 2 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 9 "" { "Reveal 1" 1 } 0
+p "" 1 6 "" { "Choose original" "Choose other" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+c "" 10 "" { "Reveal 1" 1 } 0
+p "" 1 7 "" { "Choose original" "Choose other" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }

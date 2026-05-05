@@ -1,0 +1,104 @@
+EFG 2 R "Coin Doubling Take-or-Push Game (30 rounds)" { "Alice" "Bob" }
+""
+
+p "" 1 1 "" { "Take" "Push" } 0
+t "" 1 "take_k0_alice" { 4, 1 }
+p "" 2 1 "" { "Take" "Push" } 0
+t "" 2 "take_k1_bob" { 2, 8 }
+p "" 1 2 "" { "Take" "Push" } 0
+t "" 3 "take_k2_alice" { 16, 4 }
+p "" 2 2 "" { "Take" "Push" } 0
+t "" 4 "take_k3_bob" { 8, 32 }
+p "" 1 3 "" { "Take" "Push" } 0
+t "" 5 "take_k4_alice" { 64, 16 }
+p "" 2 3 "" { "Take" "Push" } 0
+t "" 6 "take_k5_bob" { 32, 128 }
+p "" 1 4 "" { "Take" "Push" } 0
+t "" 7 "take_k6_alice" { 256, 64 }
+p "" 2 4 "" { "Take" "Push" } 0
+t "" 8 "take_k7_bob" { 128, 512 }
+p "" 1 5 "" { "Take" "Push" } 0
+t "" 9 "take_k8_alice" { 1024, 256 }
+p "" 2 5 "" { "Take" "Push" } 0
+t "" 10 "take_k9_bob" { 512, 2048 }
+p "" 1 6 "" { "Take" "Push" } 0
+t "" 11 "take_k10_alice" { 4096, 1024 }
+p "" 2 6 "" { "Take" "Push" } 0
+t "" 12 "take_k11_bob" { 2048, 8192 }
+p "" 1 7 "" { "Take" "Push" } 0
+t "" 13 "take_k12_alice" { 16384, 4096 }
+p "" 2 7 "" { "Take" "Push" } 0
+t "" 14 "take_k13_bob" { 8192, 32768 }
+p "" 1 8 "" { "Take" "Push" } 0
+t "" 15 "take_k14_alice" { 65536, 16384 }
+p "" 2 8 "" { "Take" "Push" } 0
+t "" 16 "take_k15_bob" { 32768, 131072 }
+p "" 1 9 "" { "Take" "Push" } 0
+t "" 17 "take_k16_alice" { 262144, 65536 }
+p "" 2 9 "" { "Take" "Push" } 0
+t "" 18 "take_k17_bob" { 131072, 524288 }
+p "" 1 10 "" { "Take" "Push" } 0
+t "" 19 "take_k18_alice" { 1048576, 262144 }
+p "" 2 10 "" { "Take" "Push" } 0
+t "" 20 "take_k19_bob" { 524288, 2097152 }
+p "" 1 11 "" { "Take" "Push" } 0
+t "" 21 "take_k20_alice" { 4194304, 1048576 }
+p "" 2 11 "" { "Take" "Push" } 0
+t "" 22 "take_k21_bob" { 2097152, 8388608 }
+p "" 1 12 "" { "Take" "Push" } 0
+t "" 23 "take_k22_alice" { 16777216, 4194304 }
+p "" 2 12 "" { "Take" "Push" } 0
+t "" 24 "take_k23_bob" { 8388608, 33554432 }
+p "" 1 13 "" { "Take" "Push" } 0
+t "" 25 "take_k24_alice" { 67108864, 16777216 }
+p "" 2 13 "" { "Take" "Push" } 0
+t "" 26 "take_k25_bob" { 33554432, 134217728 }
+p "" 1 14 "" { "Take" "Push" } 0
+t "" 27 "take_k26_alice" { 268435456, 67108864 }
+p "" 2 14 "" { "Take" "Push" } 0
+t "" 28 "take_k27_bob" { 134217728, 536870912 }
+p "" 1 15 "" { "Take" "Push" } 0
+t "" 29 "take_k28_alice" { 1073741824, 268435456 }
+p "" 2 15 "" { "Take" "Push" } 0
+t "" 30 "take_k29_bob" { 536870912, 2147483648 }
+p "" 1 16 "" { "Take" "Push" } 0
+t "" 31 "take_k30_alice" { 4294967296, 1073741824 }
+p "" 2 16 "" { "Take" "Push" } 0
+t "" 32 "take_k31_bob" { 2147483648, 8589934592 }
+p "" 1 17 "" { "Take" "Push" } 0
+t "" 33 "take_k32_alice" { 17179869184, 4294967296 }
+p "" 2 17 "" { "Take" "Push" } 0
+t "" 34 "take_k33_bob" { 8589934592, 34359738368 }
+p "" 1 18 "" { "Take" "Push" } 0
+t "" 35 "take_k34_alice" { 68719476736, 17179869184 }
+p "" 2 18 "" { "Take" "Push" } 0
+t "" 36 "take_k35_bob" { 34359738368, 137438953472 }
+p "" 1 19 "" { "Take" "Push" } 0
+t "" 37 "take_k36_alice" { 274877906944, 68719476736 }
+p "" 2 19 "" { "Take" "Push" } 0
+t "" 38 "take_k37_bob" { 137438953472, 549755813888 }
+p "" 1 20 "" { "Take" "Push" } 0
+t "" 39 "take_k38_alice" { 1099511627776, 274877906944 }
+p "" 2 20 "" { "Take" "Push" } 0
+t "" 40 "take_k39_bob" { 549755813888, 2199023255552 }
+p "" 1 21 "" { "Take" "Push" } 0
+t "" 41 "take_k40_alice" { 4398046511104, 1099511627776 }
+p "" 2 21 "" { "Take" "Push" } 0
+t "" 42 "take_k41_bob" { 2199023255552, 8796093022208 }
+p "" 1 22 "" { "Take" "Push" } 0
+t "" 43 "take_k42_alice" { 17592186044416, 4398046511104 }
+p "" 2 22 "" { "Take" "Push" } 0
+t "" 44 "take_k43_bob" { 8796093022208, 35184372088832 }
+p "" 1 23 "" { "Take" "Push" } 0
+t "" 45 "take_k44_alice" { 70368744177664, 17592186044416 }
+p "" 2 23 "" { "Take" "Push" } 0
+t "" 46 "take_k45_bob" { 35184372088832, 140737488355328 }
+p "" 1 24 "" { "Take" "Push" } 0
+t "" 47 "take_k46_alice" { 281474976710656, 70368744177664 }
+p "" 2 24 "" { "Take" "Push" } 0
+t "" 48 "take_k47_bob" { 140737488355328, 562949953421312 }
+p "" 1 25 "" { "Take" "Push" } 0
+t "" 50 "take_k49_bob" { 2251799813685248, 9007199254740992 }
+p "" 2 25 "" { "Take" "Push" } 0
+t "" 51 "take_k50_alice" { 4503599627370496, 1125899906842624 }
+t "" 52 "take_k51_bob" { 2251799813685248, 9007199254740992 }

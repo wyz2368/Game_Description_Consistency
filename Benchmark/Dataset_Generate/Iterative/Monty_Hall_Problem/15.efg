@@ -1,0 +1,34 @@
+EFG 2 R "Monty Hall (single-player decision problem)" { "Player" }
+""
+
+c "" 1 "" { "Car behind 1" 1/3 "Car behind 2" 1/3 "Car behind 3" 1/3 } 0
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 1 2 "" { "Open initial door" "Open other door" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+p "" 1 3 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 4 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 1 2 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 3 "" { "Open initial door" "Open other door" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }
+p "" 1 4 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 1 "" { "Choose door 1" "Choose door 2" "Choose door 3" } 0
+p "" 1 2 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 3 "" { "Open initial door" "Open other door" } 0
+t "" 2 "Lose" { 0 }
+t "" 1 "Win" { 1 }
+p "" 1 4 "" { "Open initial door" "Open other door" } 0
+t "" 1 "Win" { 1 }
+t "" 2 "Lose" { 0 }

@@ -1,0 +1,52 @@
+EFG 2 R "Two-player Sequential Russian Roulette (6 chambers)" { "Player 1" "Player 2" }
+""
+
+c "" 1 "" { "1" 1/6 "2" 1/6 "3" 1/6 "4" 1/6 "5" 1/6 "6" 1/6 } 0
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "L1_Quit" { 0, 1 }
+t "" 2 "L1_Pull_death" { -1, 1 }
+p "" 1 2 "" { "Quit" "Pull" } 0
+t "" 3 "L2_Quit_at_start" { 0, 1 }
+p "" 2 1 "" { "Quit" "Pull" } 0
+t "" 4 "L2_Quit_after1pull" { 1, 0 }
+t "" 5 "L2_P2_Pull_death" { 1, -1 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 6 "L3_Quit_at_start" { 0, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 7 "L3_Quit_after1pull" { 1, 0 }
+p "" 1 4 "" { "Quit" "Pull" } 0
+t "" 8 "L3_Quit_after2pulls" { 0, 1 }
+t "" 9 "L3_P1_Pull_death" { -1, 1 }
+p "" 1 5 "" { "Quit" "Pull" } 0
+t "" 10 "L4_Quit_at_start" { 0, 1 }
+p "" 2 3 "" { "Quit" "Pull" } 0
+t "" 11 "L4_Quit_after1pull" { 1, 0 }
+p "" 1 6 "" { "Quit" "Pull" } 0
+t "" 12 "L4_Quit_after2pulls" { 0, 1 }
+p "" 2 4 "" { "Quit" "Pull" } 0
+t "" 13 "L4_Quit_after3pulls" { 1, 0 }
+t "" 14 "L4_P2_Pull_death" { 1, -1 }
+p "" 1 7 "" { "Quit" "Pull" } 0
+t "" 15 "L5_Quit_at_start" { 0, 1 }
+p "" 2 5 "" { "Quit" "Pull" } 0
+t "" 16 "L5_Quit_after1pull" { 1, 0 }
+p "" 1 8 "" { "Quit" "Pull" } 0
+t "" 17 "L5_Quit_after2pulls" { 0, 1 }
+p "" 2 6 "" { "Quit" "Pull" } 0
+t "" 18 "L5_Quit_after3pulls" { 1, 0 }
+p "" 1 9 "" { "Quit" "Pull" } 0
+t "" 19 "L5_Quit_after4pulls" { 0, 1 }
+t "" 20 "L5_P1_Pull_death" { 1, -1 }
+p "" 1 10 "" { "Quit" "Pull" } 0
+t "" 21 "L6_Quit_at_start" { 0, 1 }
+p "" 2 7 "" { "Quit" "Pull" } 0
+t "" 22 "L6_Quit_after1pull" { 1, 0 }
+p "" 1 11 "" { "Quit" "Pull" } 0
+t "" 23 "L6_Quit_after2pulls" { 0, 1 }
+p "" 2 8 "" { "Quit" "Pull" } 0
+t "" 24 "L6_Quit_after3pulls" { 1, 0 }
+p "" 1 12 "" { "Quit" "Pull" } 0
+t "" 25 "L6_Quit_after4pulls" { 0, 1 }
+p "" 2 9 "" { "Quit" "Pull" } 0
+t "" 26 "L6_Quit_after5pulls" { 1, 0 }
+t "" 27 "L6_P2_Pull_death" { 1, -1 }

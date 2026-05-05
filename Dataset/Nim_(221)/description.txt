@@ -1,7 +1,7 @@
 Consider a game played between two players, Alice and Bob, that begins with three piles containing 2, 2, and 1 stones, respectively.
-Alice makes the first move, and the players alternate turns.
+Alice moves first, and the players alternate turns. Each player observes all previous moves.
 
-On their turn, the acting player removes either one or two stones from a single pile.
+On their turn, the acting player chooses a non-empty pile and removes either one stone, or two stones if the pile contains at least two.
 
-The player who removes the final stone from the board wins the game.
-The winner receives a payoff of 1, and the loser receives a payoff of -1.
+The game ends when all piles are empty.
+The player who removes the final stone wins, receiving a payoff of 1; the other player receives -1.

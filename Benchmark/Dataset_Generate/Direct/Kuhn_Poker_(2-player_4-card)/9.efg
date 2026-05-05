@@ -1,0 +1,110 @@
+EFG 2 R "Four-card two-player betting game" { "Player One" "Player Two" }
+c "" 1 "" { "A,K" 1/12 "A,Q" 1/12 "A,J" 1/12 "K,A" 1/12 "K,Q" 1/12 "K,J" 1/12 "Q,A" 1/12 "Q,K" 1/12 "Q,J" 1/12 "J,A" 1/12 "J,K" 1/12 "J,Q" 1/12 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 9 "" { "Check" "Bet" } 0
+t "" 1 "Showdown" { 1, -1 }
+p "" 1 13 "" { "Fold" "Call" } 0
+t "" 2 "Fold" { -1, 1 }
+t "" 3 "Called showdown" { 2, -2 }
+p "" 2 5 "" { "Fold" "Call" } 0
+t "" 4 "Fold to bet" { 1, -1 }
+t "" 5 "Called showdown" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 9 "" { "Check" "Bet" } 0
+t "" 6 "Showdown" { 1, -1 }
+p "" 1 13 "" { "Fold" "Call" } 0
+t "" 7 "Fold" { -1, 1 }
+t "" 8 "Called showdown" { 2, -2 }
+p "" 2 5 "" { "Fold" "Call" } 0
+t "" 9 "Fold to bet" { 1, -1 }
+t "" 10 "Called showdown" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 9 "" { "Check" "Bet" } 0
+t "" 11 "Showdown" { 1, -1 }
+p "" 1 13 "" { "Fold" "Call" } 0
+t "" 12 "Fold" { -1, 1 }
+t "" 13 "Called showdown" { 2, -2 }
+p "" 2 5 "" { "Fold" "Call" } 0
+t "" 14 "Fold to bet" { 1, -1 }
+t "" 15 "Called showdown" { 2, -2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 12 "" { "Check" "Bet" } 0
+t "" 16 "Showdown" { -1, 1 }
+p "" 1 14 "" { "Fold" "Call" } 0
+t "" 17 "Fold" { 1, -1 }
+t "" 18 "Called showdown" { -2, 2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 19 "Fold to bet" { -1, 1 }
+t "" 20 "Called showdown" { -2, 2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 12 "" { "Check" "Bet" } 0
+t "" 21 "Showdown" { 1, -1 }
+p "" 1 14 "" { "Fold" "Call" } 0
+t "" 22 "Fold" { -1, 1 }
+t "" 23 "Called showdown" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 24 "Fold to bet" { 1, -1 }
+t "" 25 "Called showdown" { 2, -2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 12 "" { "Check" "Bet" } 0
+t "" 26 "Showdown" { 1, -1 }
+p "" 1 14 "" { "Fold" "Call" } 0
+t "" 27 "Fold" { -1, 1 }
+t "" 28 "Called showdown" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 29 "Fold to bet" { 1, -1 }
+t "" 30 "Called showdown" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 11 "" { "Check" "Bet" } 0
+t "" 31 "Showdown" { -1, 1 }
+p "" 1 15 "" { "Fold" "Call" } 0
+t "" 32 "Fold" { 1, -1 }
+t "" 33 "Called showdown" { -2, 2 }
+p "" 2 7 "" { "Fold" "Call" } 0
+t "" 34 "Fold to bet" { -1, 1 }
+t "" 35 "Called showdown" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 11 "" { "Check" "Bet" } 0
+t "" 36 "Showdown" { -1, 1 }
+p "" 1 15 "" { "Fold" "Call" } 0
+t "" 37 "Fold" { 1, -1 }
+t "" 38 "Called showdown" { -2, 2 }
+p "" 2 7 "" { "Fold" "Call" } 0
+t "" 39 "Fold to bet" { -1, 1 }
+t "" 40 "Called showdown" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 11 "" { "Check" "Bet" } 0
+t "" 41 "Showdown" { 1, -1 }
+p "" 1 15 "" { "Fold" "Call" } 0
+t "" 42 "Fold" { -1, 1 }
+t "" 43 "Called showdown" { 2, -2 }
+p "" 2 7 "" { "Fold" "Call" } 0
+t "" 44 "Fold to bet" { 1, -1 }
+t "" 45 "Called showdown" { 2, -2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 10 "" { "Check" "Bet" } 0
+t "" 46 "Showdown" { -1, 1 }
+p "" 1 16 "" { "Fold" "Call" } 0
+t "" 47 "Fold" { 1, -1 }
+t "" 48 "Called showdown" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 49 "Fold to bet" { -1, 1 }
+t "" 50 "Called showdown" { -2, 2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 10 "" { "Check" "Bet" } 0
+t "" 51 "Showdown" { -1, 1 }
+p "" 1 16 "" { "Fold" "Call" } 0
+t "" 52 "Fold" { 1, -1 }
+t "" 53 "Called showdown" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 54 "Fold to bet" { -1, 1 }
+t "" 55 "Called showdown" { -2, 2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 10 "" { "Check" "Bet" } 0
+t "" 56 "Showdown" { -1, 1 }
+p "" 1 16 "" { "Fold" "Call" } 0
+t "" 57 "Fold" { 1, -1 }
+t "" 58 "Called showdown" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 59 "Fold to bet" { -1, 1 }
+t "" 60 "Called showdown" { -2, 2 }

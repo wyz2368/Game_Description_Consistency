@@ -1,0 +1,61 @@
+EFG 2 R "Three-card Kuhn Poker" { "Player One" "Player Two" }
+""
+
+c "" 1 "" { "K" 1/3 "Q" 1/3 "J" 1/3 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+c "" 5 "" { "Q" 1/2 "J" 1/2 } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 13 "k_check_q_check" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 19 "k_check_q_bet_fold" { -1, 1 }
+t "" 20 "k_check_q_bet_call" { 2, -2 }
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 14 "k_check_j_check" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 21 "k_check_j_bet_fold" { -1, 1 }
+t "" 22 "k_check_j_bet_call" { 2, -2 }
+c "" 2 "" { "Q" 1/2 "J" 1/2 } 0
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 1 "k_bet_q_fold" { 1, -1 }
+t "" 2 "k_bet_q_call" { 2, -2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 3 "k_bet_j_fold" { 1, -1 }
+t "" 4 "k_bet_j_call" { 2, -2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+c "" 6 "" { "K" 1/2 "J" 1/2 } 0
+p "" 2 4 "" { "Check" "Bet" } 0
+t "" 15 "q_check_k_check" { -1, 1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 23 "q_check_k_bet_fold" { -1, 1 }
+t "" 24 "q_check_k_bet_call" { -2, 2 }
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 16 "q_check_j_check" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 25 "q_check_j_bet_fold" { -1, 1 }
+t "" 26 "q_check_j_bet_call" { 2, -2 }
+c "" 3 "" { "K" 1/2 "J" 1/2 } 0
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 5 "q_bet_k_fold" { 1, -1 }
+t "" 6 "q_bet_k_call" { -2, 2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 7 "q_bet_j_fold" { 1, -1 }
+t "" 8 "q_bet_j_call" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+c "" 7 "" { "K" 1/2 "Q" 1/2 } 0
+p "" 2 4 "" { "Check" "Bet" } 0
+t "" 17 "j_check_k_check" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 27 "j_check_k_bet_fold" { -1, 1 }
+t "" 28 "j_check_k_bet_call" { -2, 2 }
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 18 "j_check_q_check" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 29 "j_check_q_bet_fold" { -1, 1 }
+t "" 30 "j_check_q_bet_call" { -2, 2 }
+c "" 4 "" { "K" 1/2 "Q" 1/2 } 0
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 9 "j_bet_k_fold" { 1, -1 }
+t "" 10 "j_bet_k_call" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 11 "j_bet_q_fold" { 1, -1 }
+t "" 12 "j_bet_q_call" { -2, 2 }

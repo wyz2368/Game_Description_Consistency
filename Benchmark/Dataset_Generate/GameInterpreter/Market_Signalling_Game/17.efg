@@ -1,0 +1,18 @@
+EFG 2 R "Entry signalling game: strength (S/W) and signal (S/W)" { "Entrant" "Incumbent" }
+""
+
+c "" 1 "" { "Strong" 2/3 "Weak" 1/3 } 0
+p "" 1 1 "" { "S" "W" } 0
+p "" 2 1 "" { "F" "A" } 0
+t "" 1 "TrueS_signalS_Fight" { 1, 0 }
+t "" 2 "Accommodate_high" { 3, 1 }
+p "" 2 2 "" { "F" "A" } 0
+t "" 3 "TrueS_signalW_Fight" { 0, 0 }
+t "" 4 "Accommodate_mid" { 2, 1 }
+p "" 1 2 "" { "S" "W" } 0
+p "" 2 1 "" { "F" "A" } 0
+t "" 5 "TrueW_signalS_Fight" { 0, 2 }
+t "" 4 "Accommodate_mid" { 2, 1 }
+p "" 2 2 "" { "F" "A" } 0
+t "" 6 "TrueW_signalW_Fight" { 1, 2 }
+t "" 2 "Accommodate_high" { 3, 1 }

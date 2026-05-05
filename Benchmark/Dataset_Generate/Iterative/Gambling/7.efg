@@ -1,0 +1,12 @@
+EFG 2 R "Gambler decides whether to enter then play Matching Pennies" { "Gambler" "Dealer" }
+""
+
+p "" 1 1 "" { "Stay out" "Enter" } 0
+t "" 1 "Stay out / No play" { 0, 0 }
+p "" 1 2 "" { "Heads" "Tails" } 0
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 2 "Match: Gambler wins" { 1, -1 }
+t "" 3 "Mismatch: Gambler loses" { -1, 1 }
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 3 "Mismatch: Gambler loses" { -1, 1 }
+t "" 2 "Match: Gambler wins" { 1, -1 }

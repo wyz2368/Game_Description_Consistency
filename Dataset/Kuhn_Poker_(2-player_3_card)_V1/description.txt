@@ -8,9 +8,6 @@ If Player One bets, Player Two then chooses either to fold or to call.
 If Player One checks, Player Two chooses either to check or to bet; if Player Two bets, Player One then chooses either to fold or to call.
 
 The game ends in one of three ways.
-If both players check, the player with the higher-ranked card wins.
-If one player bets and the other folds, the betting player wins.
-If one player bets and the other calls, the player with the higher-ranked card wins.
-A player who wins after both players check gets 1; the loser gets -1.
-A player whose opponent folds gets 1; the folding player gets -1.
-A player who wins after a bet is called gets 2; the loser gets -2.
+If both players check, the player with the higher-ranked card receives 1 and the other receives -1.
+If one player bets and the other folds, the betting player receives 1 and the folding player receives -1.
+If one player bets and the other calls, the player with the higher-ranked card receives 2 and the other receives -2.

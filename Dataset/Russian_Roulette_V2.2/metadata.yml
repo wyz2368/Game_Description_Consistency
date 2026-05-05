@@ -13,9 +13,8 @@ description: |-
   If shooting himself, a player gets -1.
   If quitting, a player gets 0.
   If winning, a player gets 1.
-strategic_equivalence_notion: Strong VNM Equivalence
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 additional_comments:
 - This version of Russian Roulette models chance as occurring after each observed trigger pull.
 - This version states explicitly that there are 5 chance nodes (and not 6 as in RR-V2.1)

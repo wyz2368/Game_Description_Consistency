@@ -1,0 +1,112 @@
+EFG 2 R "Four-card sequential bet game (ordered deal to P1,P2)" { "Player One" "Player Two" }
+""
+
+c "" 1 "" { "P1:Ace P2:King" 1/12 "P1:Ace P2:Queen" 1/12 "P1:Ace P2:Jack" 1/12 "P1:King P2:Ace" 1/12 "P1:King P2:Queen" 1/12 "P1:King P2:Jack" 1/12 "P1:Queen P2:Ace" 1/12 "P1:Queen P2:King" 1/12 "P1:Queen P2:Jack" 1/12 "P1:Jack P2:Ace" 1/12 "P1:Jack P2:King" 1/12 "P1:Jack P2:Queen" 1/12 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 3 "P1 big win (bet called)" { 2, -2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 2 "P2 small win (check or opponent folds)" { -1, 1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 1 "P1 small win (check or opponent folds)" { 1, -1 }
+t "" 4 "P2 big win (bet called)" { -2, 2 }

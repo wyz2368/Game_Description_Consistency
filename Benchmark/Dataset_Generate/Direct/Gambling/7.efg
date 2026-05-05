@@ -1,0 +1,10 @@
+EFG 2 R "Gambler entering casino" { "Gambler" "Dealer" }
+p "" 1 1 "" { "Stay out" "Enter" } 0
+t "" 1 "Stay out" { 0, 0 }
+p "" 1 2 "" { "Heads" "Tails" } 0
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 2 "Gambler HH" { 1, -1 }
+t "" 3 "Gambler HT" { -1, 1 }
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 4 "Gambler TH" { -1, 1 }
+t "" 5 "Gambler TT" { 1, -1 }

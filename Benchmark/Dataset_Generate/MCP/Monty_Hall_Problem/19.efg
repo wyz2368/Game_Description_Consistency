@@ -1,0 +1,43 @@
+EFG 2 R "Monty Hall Problem" { "Player" }
+""
+
+c "" 1 "" { "Car1" 1/3 "Car2" 1/3 "Car3" 1/3 } 0
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 2 "" { "Open2" 1 } 0
+p "" 1 2 "" { "Original" "Other" } 0
+t "" 1 "car1_pick1_open2_original" { 1 }
+t "" 2 "car1_pick1_open2_other" { 0 }
+c "" 3 "" { "Open3" 1 } 0
+p "" 1 5 "" { "Original" "Other" } 0
+t "" 7 "car1_pick2_open3_original" { 0 }
+t "" 8 "car1_pick2_open3_other" { 1 }
+c "" 4 "" { "Open2" 1 } 0
+p "" 1 7 "" { "Original" "Other" } 0
+t "" 17 "car1_pick3_open2_original" { 0 }
+t "" 18 "car1_pick3_open2_other" { 1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 5 "" { "Open3" 1 } 0
+p "" 1 3 "" { "Original" "Other" } 0
+t "" 5 "car2_pick1_open3_original" { 0 }
+t "" 6 "car2_pick1_open3_other" { 1 }
+c "" 6 "" { "Open1" 1 } 0
+p "" 1 4 "" { "Original" "Other" } 0
+t "" 9 "car2_pick2_open1_original" { 1 }
+t "" 10 "car2_pick2_open1_other" { 0 }
+c "" 7 "" { "Open1" 1 } 0
+p "" 1 6 "" { "Original" "Other" } 0
+t "" 13 "car2_pick3_open1_original" { 0 }
+t "" 14 "car2_pick3_open1_other" { 1 }
+p "" 1 1 "" { "Pick1" "Pick2" "Pick3" } 0
+c "" 8 "" { "Open2" 1 } 0
+p "" 1 2 "" { "Original" "Other" } 0
+t "" 3 "car3_pick1_open2_original" { 0 }
+t "" 4 "car3_pick1_open2_other" { 1 }
+c "" 9 "" { "Open1" 1 } 0
+p "" 1 4 "" { "Original" "Other" } 0
+t "" 11 "car3_pick2_open1_original" { 0 }
+t "" 12 "car3_pick2_open1_other" { 1 }
+c "" 10 "" { "Open1" 1 } 0
+p "" 1 6 "" { "Original" "Other" } 0
+t "" 15 "car3_pick3_open1_original" { 1 }
+t "" 16 "car3_pick3_open1_other" { 0 }

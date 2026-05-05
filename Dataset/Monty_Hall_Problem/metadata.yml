@@ -9,16 +9,12 @@ description: |-
   Without observing nature's choice, the player then chooses one of the three doors.
 
   After the player's first choice, the lowest-numbered unchosen door that hides a goat is opened to reveal the goat.
-  The player observes which door was opened.
-  So now there is one chosen door, one opened door, and a final remaining unopened door.
+  The player observes which door was opened. So now there is one chosen door, one opened door, and a final remaining unopened door.
+  Then, remembering their own first choice, the player chooses between the originally chosen door and the remaining unopened door.
 
-  The player then makes their final choice of which door to open to decide if they win a prize or not,
-  their originally chosen door, or the remaining unopened door.
-
-  If the car is behind the player's finally chosen door, the player receives 1, otherwise, it hides the goat and they receive 0.
-strategic_equivalence_notion: Strong VNM Equivalence
+  If the car is behind the player's final choice, the player receives 1; otherwise, the player receives 0.
+additional_data: Identical Payoffs
 constraint_descriptions:
-- Payoffs are stated explicitly, strong VNM is used and one payoff constraint is needed for seeding non-zero payoff for each player.
 additional_comments:
 related games: []
 assets:
