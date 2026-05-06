@@ -1,8 +1,0 @@
-{
-    "Cst Type": 2,
-    "Path":{
-        "1":{"type":"Decision","player":"Country A","action":"Issue threat"},
-        "2":{"type":"Decision","player":"Country B","action":"Counter-threat"},
-        "3":{"type":"Decision","player":"Country A"}},
-    "Comments":"Type 2 is TSM constraint."
-}

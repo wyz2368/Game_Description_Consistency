@@ -1,0 +1,681 @@
+=== Final Combined Summary ===
+Requested generations per game: 20
+Total games evaluated: 25
+Total samples evaluated: 497
+Total passed samples: 354
+Total failed samples: 143
+Sample pass rate: 0.7123
+
+=== Per-Game Summary ===
+bagwell_a
+  Total samples: 20
+  Passed samples: 18
+  Failed samples: 2
+  Sample pass rate: 0.9000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: FAIL | error: Reduced strategy sets don't match.
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: ERROR | error: ValueError: Generated game chance nodes/probabilities do not match reference game.
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+bagwell_b
+  Total samples: 20
+  Passed samples: 17
+  Failed samples: 3
+  Sample pass rate: 0.8500
+  Samples:
+    - 1.efg: ERROR | error: ValueError: Generated game chance nodes/probabilities do not match reference game.
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: ERROR | error: ValueError: Generated game chance nodes/probabilities do not match reference game.
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: FAIL | error: Reduced strategy sets don't match.
+    - 20.efg: PASS
+
+bagwell_c
+  Total samples: 20
+  Passed samples: 14
+  Failed samples: 6
+  Sample pass rate: 0.7000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: FAIL | error: JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst1.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False; JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst2.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: FAIL | error: JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst1.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False; JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst2.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: ERROR | error: ValueError: Generated game chance nodes/probabilities do not match reference game.
+    - 14.efg: FAIL | error: Reduced strategy sets don't match.
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: ERROR | error: ValueError: Generated game chance nodes/probabilities do not match reference game.
+    - 18.efg: FAIL | error: JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst1.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False; JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst2.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+centipede_30_rounds
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 20.efg: PASS
+
+gambling
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+kuhn_poker_(2-player_3_card)_a
+  Total samples: 20
+  Passed samples: 15
+  Failed samples: 5
+  Sample pass rate: 0.7500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: FAIL | error: Reduced strategy sets don't match.
+    - 11.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: FAIL | error: Identical payoffs to reference game check failed.
+
+kuhn_poker_(2-player_3_card)_b
+  Total samples: 20
+  Passed samples: 9
+  Failed samples: 11
+  Sample pass rate: 0.4500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 5.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 10.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 11.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 12.efg: PASS
+    - 13.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 14.efg: FAIL | error: Reduced strategy sets don't match.
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 18.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 19.efg: ERROR | error: ValueError: The actions in the generated game do not match the actions in the reference game.
+    - 20.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+
+kuhn_poker_(2-player_3_card)_c
+  Total samples: 20
+  Passed samples: 15
+  Failed samples: 5
+  Sample pass rate: 0.7500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 9.efg: FAIL | error: Reduced strategy sets don't match.
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 19.efg: PASS
+    - 20.efg: FAIL | error: Identical payoffs to reference game check failed.
+
+kuhn_poker_(2-player_4-card)
+  Total samples: 20
+  Passed samples: 18
+  Failed samples: 2
+  Sample pass rate: 0.9000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: FAIL | error: Reduced strategy sets don't match.
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 20.efg: PASS
+
+market_signalling_game
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+memory_one_game
+  Total samples: 20
+  Passed samples: 5
+  Failed samples: 15
+  Sample pass rate: 0.2500
+  Samples:
+    - 1.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 2.efg: FAIL | error: Reduced strategy sets don't match.; Identical payoffs to reference game check failed.
+    - 3.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 4.efg: PASS
+    - 5.efg: FAIL | error: Reduced strategy sets don't match.
+    - 6.efg: FAIL | error: Reduced strategy sets don't match.
+    - 7.efg: FAIL | error: Reduced strategy sets don't match.
+    - 8.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 9.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 13.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 14.efg: FAIL | error: Reduced strategy sets don't match.
+    - 15.efg: FAIL | error: Reduced strategy sets don't match.
+    - 16.efg: PASS
+    - 17.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 18.efg: PASS
+    - 19.efg: FAIL | error: Reduced strategy sets don't match.
+    - 20.efg: FAIL | error: Reduced strategy sets don't match.; Identical payoffs to reference game check failed.
+
+monty_hall_problem
+  Total samples: 18
+  Passed samples: 0
+  Failed samples: 18
+  Sample pass rate: 0.0000
+  Samples:
+    - 1.efg: ERROR | error: ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated list contains the three explicit initial choices ("Choose door 1/2/3") which correspond to the reference's "Pick door 1/2/3". However the generated list's remaining actions are concrete second-stage door picks ("Pick 1/2/3") rather than the abstract second-stage options in the reference ("Stick" or "Switch"). Thus the second-stage action sets do not match: one labels final actions by absolute door number, the other by stick/switch choices conditional on the first pick.
+    - 2.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 3.efg: FAIL | error: Reduced strategy sets don't match.
+    - 4.efg: FAIL | error: Reduced strategy sets don't match.
+    - 5.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 6.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 7.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 8.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 9.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 10.efg: FAIL | error: Reduced strategy sets don't match.
+    - 11.efg: FAIL | error: Reduced strategy sets don't match.
+    - 12.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 13.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 14.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 15.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 16.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 17.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 18.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+
+nim(2,2,1)
+  Total samples: 20
+  Passed samples: 4
+  Failed samples: 16
+  Sample pass rate: 0.2000
+  Samples:
+    - 1.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 2.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 3.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 4.efg: FAIL | error: Reduced strategy sets don't match.; Identical payoffs to reference game check failed.
+    - 5.efg: PASS
+    - 6.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 7.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 8.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 9.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 10.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 11.efg: PASS
+    - 12.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 13.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 17.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 18.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 19.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 20.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+
+nuclear_crisis_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nuclear_crisis_b
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nuclear_crisis_c
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+russian_roulette_a
+  Total samples: 20
+  Passed samples: 16
+  Failed samples: 4
+  Sample pass rate: 0.8000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: FAIL | error: Reduced strategy sets don't match.
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+russian_roulette_b
+  Total samples: 20
+  Passed samples: 1
+  Failed samples: 19
+  Sample pass rate: 0.0500
+  Samples:
+    - 1.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 2.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 3.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 4.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 5.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 6.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 7.efg: PASS
+    - 8.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 9.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 10.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 11.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 12.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 13.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 14.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 15.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 16.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 17.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 18.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 19.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 20.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+
+russian_roulette_c
+  Total samples: 20
+  Passed samples: 13
+  Failed samples: 7
+  Sample pass rate: 0.6500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 4.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 8.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 16.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+
+tic-tac-toe_endgame
+  Total samples: 20
+  Passed samples: 11
+  Failed samples: 9
+  Sample pass rate: 0.5500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 3.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 7.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 8.efg: FAIL | error: Identical payoffs to reference game check failed.
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 12.efg: PASS
+    - 13.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 14.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_a
+  Total samples: 19
+  Passed samples: 17
+  Failed samples: 2
+  Sample pass rate: 0.8947
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: FAIL | error: Total order check failed.
+    - 17.efg: FAIL | error: Total order check failed.
+    - 18.efg: PASS
+    - 19.efg: PASS
+
+voting_game_b
+  Total samples: 20
+  Passed samples: 16
+  Failed samples: 4
+  Sample pass rate: 0.7500
+  Samples:
+    - 1.efg: FAIL | error: Total order check failed.
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: FAIL | error: Total order check failed.
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: FAIL | error: Total order check failed.
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: FAIL | error: Total order check failed.
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_c
+  Total samples: 20
+  Passed samples: 15
+  Failed samples: 5
+  Sample pass rate: 0.7500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: FAIL | error: Total order check failed.; JSON constraint failed: Dataset/voting_game_c/constraints/voting_game_c_cst2.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 5.efg: PASS
+    - 6.efg: FAIL | error: Total order check failed.
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: FAIL | error: Total order check failed.; JSON constraint failed: Dataset/voting_game_c/constraints/voting_game_c_cst4.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: FAIL | error: Total order check failed.; JSON constraint failed: Dataset/voting_game_c/constraints/voting_game_c_cst3.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: FAIL | error: Total order check failed.; JSON constraint failed: Dataset/voting_game_c/constraints/voting_game_c_cst3.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+
+voting_game_d
+  Total samples: 20
+  Passed samples: 17
+  Failed samples: 3
+  Sample pass rate: 0.8500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: FAIL | error: Total order check failed.
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: FAIL | error: Total order check failed.
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: FAIL | error: Total order check failed.
+
+voting_game_e
+  Total samples: 20
+  Passed samples: 14
+  Failed samples: 6
+  Sample pass rate: 0.7000
+  Samples:
+    - 1.efg: FAIL | error: Total order check failed.
+    - 2.efg: FAIL | error: Total order check failed.
+    - 3.efg: FAIL | error: Total order check failed.
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: FAIL | error: Total order check failed.
+    - 12.efg: FAIL | error: Total order check failed.
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: FAIL | error: Total order check failed.
+    - 20.efg: PASS
+

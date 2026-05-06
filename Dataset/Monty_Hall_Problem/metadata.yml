@@ -13,8 +13,7 @@ description: |-
   Then, remembering their own first choice, the player chooses between the originally chosen door and the remaining unopened door.
 
   If the car is behind the player's final choice, the player receives 1; otherwise, the player receives 0.
-additional_data: Identical Payoffs
-constraint_descriptions:
+additional_data: Identical payoffs to reference game
 additional_comments:
 related games: []
 assets:

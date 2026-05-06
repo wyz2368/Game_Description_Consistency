@@ -1,0 +1,50 @@
+EFG 2 R "Six-chamber alternating Russian roulette" { "Player 1" "Player 2" }
+c "" 1 "" { "Chamber 1" 1/6 "Chamber 2" 1/6 "Chamber 3" 1/6 "Chamber 4" 1/6 "Chamber 5" 1/6 "Chamber 6" 1/6 } 0
+p "" 1 1 "" { "Pull" "Quit" } 0
+t "" 1 "Death: P1 shot -> P2 wins" { -1, 1 }
+t "" 2 "Quit: P1 quits -> P2 wins" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+t "" 3 "Death: P2 shot -> P1 wins" { 1, -1 }
+t "" 4 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 5 "Quit: P1 quits -> P2 wins" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+t "" 6 "Death: P1 shot -> P2 wins" { -1, 1 }
+t "" 7 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 8 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 9 "Quit: P1 quits -> P2 wins" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+t "" 10 "Death: P2 shot -> P1 wins" { 1, -1 }
+t "" 11 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 12 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 13 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 14 "Quit: P1 quits -> P2 wins" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+t "" 15 "Death: P1 shot -> P2 wins" { -1, 1 }
+t "" 16 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 17 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 18 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 19 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 20 "Quit: P1 quits -> P2 wins" { 0, 1 }
+p "" 1 1 "" { "Pull" "Quit" } 0
+p "" 2 1 "" { "Pull" "Quit" } 0
+p "" 1 2 "" { "Pull" "Quit" } 0
+p "" 2 2 "" { "Pull" "Quit" } 0
+p "" 1 3 "" { "Pull" "Quit" } 0
+p "" 2 3 "" { "Pull" "Quit" } 0
+t "" 21 "Death: P2 shot -> P1 wins" { 1, -1 }
+t "" 22 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 23 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 24 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 25 "Quit: P1 quits -> P2 wins" { 0, 1 }
+t "" 26 "Quit: P2 quits -> P1 wins" { 1, 0 }
+t "" 27 "Quit: P1 quits -> P2 wins" { 0, 1 }

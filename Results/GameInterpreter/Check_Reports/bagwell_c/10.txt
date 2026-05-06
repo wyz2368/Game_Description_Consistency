@@ -1,0 +1,38 @@
+Game: bagwell_c
+Generated file: 10.efg
+Reference path: Dataset/bagwell_c/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/bagwell_c/10.efg
+Matched path: Results/GameInterpreter/Output/bagwell_c/10.efg
+Status: FAIL
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/bagwell_c/constraints/Bagwell_V2_cst1.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: False
+Raw result: False
+
+Constraint file: Dataset/bagwell_c/constraints/Bagwell_V2_cst2.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: False
+Raw result: False
+
+=== Errors ===
+- JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst1.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+- JSON constraint failed: Dataset/bagwell_c/constraints/Bagwell_V2_cst2.json | Cst Type=Explicit Payoff(s) for a Certain Outcome | False
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: False
+All checks passed: False

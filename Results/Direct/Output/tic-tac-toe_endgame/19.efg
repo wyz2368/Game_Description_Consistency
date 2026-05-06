@@ -1,0 +1,35 @@
+EFG 2 R "Tic-tac-toe from partial state" { "X" "O" }
+p "" 2 1 "" { "Place at (0,0)" "Place at (0,2)" "Place at (1,1)" "Place at (2,1)" } 0
+p "" 1 2 "" { "Place at (0,2)" "Place at (1,1)" "Place at (2,1)" } 0
+p "" 2 3 "" { "Place at (1,1)" "Place at (2,1)" } 0
+t "" 2 "O wins" { -1, 1 }
+p "" 1 4 "" { "Place at (1,1)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 5 "" { "Place at (0,2)" "Place at (2,1)" } 0
+t "" 2 "O wins" { -1, 1 }
+p "" 1 6 "" { "Place at (0,2)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 7 "" { "Place at (0,2)" "Place at (1,1)" } 0
+t "" 2 "O wins" { -1, 1 }
+t "" 2 "O wins" { -1, 1 }
+t "" 2 "O wins" { -1, 1 }
+p "" 1 8 "" { "Place at (0,0)" "Place at (0,2)" "Place at (2,1)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 9 "" { "Place at (0,0)" "Place at (2,1)" } 0
+t "" 2 "O wins" { -1, 1 }
+p "" 1 10 "" { "Place at (0,0)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 11 "" { "Place at (0,0)" "Place at (0,2)" } 0
+t "" 2 "O wins" { -1, 1 }
+t "" 2 "O wins" { -1, 1 }
+p "" 1 12 "" { "Place at (0,0)" "Place at (0,2)" "Place at (1,1)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 13 "" { "Place at (0,0)" "Place at (1,1)" } 0
+p "" 1 14 "" { "Place at (1,1)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 1 15 "" { "Place at (0,0)" } 0
+t "" 1 "X wins" { 1, -1 }
+p "" 2 16 "" { "Place at (0,0)" "Place at (0,2)" } 0
+p "" 1 17 "" { "Place at (0,2)" } 0
+t "" 1 "X wins" { 1, -1 }
+t "" 2 "O wins" { -1, 1 }

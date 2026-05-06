@@ -1,0 +1,24 @@
+Game: kuhn_poker_(2-player_3_card)_c
+Generated file: 17.efg
+Reference path: Dataset/kuhn_poker_(2-player_3_card)_c/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/kuhn_poker_(2-player_3_card)_c/17.efg
+Matched path: Results/MCP/Output/kuhn_poker_(2-player_3_card)_c/17.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: The labels 'K' and 'J' are abbreviations for 'King' and 'Jack', so those two map directly to the corresponding reference actions. However, the reference list also includes 'Queen', which is missing from the generated actions, so the sets are not identical.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 463, in filter_simultaneous_moves
+    key_map = match_all_actions_llm(g_node.actions, ref_actions, model, game_description)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The labels 'K' and 'J' are abbreviations for 'King' and 'Jack', so those two map directly to the corresponding reference actions. However, the reference list also includes 'Queen', which is missing from the generated actions, so the sets are not identical.

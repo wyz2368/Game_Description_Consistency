@@ -1,0 +1,22 @@
+Game: nim(2,2,1)
+Generated file: 6.efg
+Reference path: Dataset/nim(2,2,1)/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/nim(2,2,1)/6.efg
+Matched path: Results/Direct/Output/nim(2,2,1)/6.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: The generated labels 'Take1' and 'Take2' only specify how many stones to remove, not which pile to act on. The reference actions distinguish both the pile (three different piles) and the quantity (five specific actions: remove 1 from piles 1–3 and remove 2 from piles 1–2). Because the generated set omits the required choice of pile, it does not match the reference action set.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 366, in match_one_generated_efg
+    mappings = build_global_action_mappings(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 201, in build_global_action_mappings
+    mappings[k] = match_all_actions_llm(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated labels 'Take1' and 'Take2' only specify how many stones to remove, not which pile to act on. The reference actions distinguish both the pile (three different piles) and the quantity (five specific actions: remove 1 from piles 1–3 and remove 2 from piles 1–2). Because the generated set omits the required choice of pile, it does not match the reference action set.

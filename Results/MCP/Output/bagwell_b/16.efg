@@ -1,0 +1,16 @@
+EFG 2 R "Noisy-Leader Game" { "Player 1" "Player 2" }
+p "" 1 1 "" { "C" "S" } 0
+c "" 1 "" { "Signal C" 99/100 "Signal S" 1/100 } 0
+p "" 2 1 "" { "C" "S" } 0
+t "" 1 "(C,C) from CphiC" { 4, 4 }
+t "" 2 "(C,S) from CphiC" { 6, 3 }
+p "" 2 2 "" { "C" "S" } 0
+t "" 3 "(C,C) from CphiS" { 4, 4 }
+t "" 4 "(C,S) from CphiS" { 6, 3 }
+c "" 2 "" { "Signal C" 1/100 "Signal S" 99/100 } 0
+p "" 2 1 "" { "C" "S" } 0
+t "" 8 "(S,C) from SphiC" { 3, 1 }
+t "" 7 "(S,S) from SphiC" { 5, 2 }
+p "" 2 2 "" { "C" "S" } 0
+t "" 6 "(S,C) from SphiS" { 3, 1 }
+t "" 5 "(S,S) from SphiS" { 5, 2 }

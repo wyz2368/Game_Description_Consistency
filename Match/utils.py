@@ -46,12 +46,12 @@ def load_constraints_from_json_files(
 
     Supports either:
     1. one JSON object per file:
-        {"Cst Type": 2, "Path": {...}}
+        {"Cst Type": Temporally-Simultaneous Move, "Path": {...}}
 
     2. a list of JSON objects per file:
         [
-            {"Cst Type": 2, "Path": {...}},
-            {"Cst Type": 2, "Path": {...}}
+            {"Cst Type": Temporally-Simultaneous Move, "Path": {...}},
+            {"Cst Type": Temporally-Simultaneous Move, "Path": {...}}
         ]
     """
     if not constraint_paths:
@@ -98,11 +98,11 @@ def extract_type2_tsm_path_from_constraint(
     is not included, because it identifies the node reached after the
     previous history, rather than an action taken to reach that node.
     """
-    if constraint.get("Cst Type") != 2:
-        raise ValueError("This function only accepts Type-2 constraints.")
+    if constraint.get("Cst Type") != "Temporally-Simultaneous Move":
+        raise ValueError("This function only accepts Temporally-Simultaneous Move constraints.")
 
     if "Path" not in constraint:
-        raise ValueError("Type-2 constraint is missing 'Path'.")
+        raise ValueError("Temporally-Simultaneous Move constraint is missing 'Path'.")
 
     path_dict = constraint["Path"]
 
@@ -116,12 +116,12 @@ def extract_type2_tsm_path_from_constraint(
         step_type = step.get("type")
         if step_type != "Decision":
             raise ValueError(
-                f"Unsupported Type-2 path step type: {step_type}"
+                f"Unsupported Temporally-Simultaneous Move path step type: {step_type}"
             )
 
         player = step.get("player")
         if player is None:
-            raise ValueError(f"Missing player in Type-2 path step {key}.")
+            raise ValueError(f"Missing player in Temporally-Simultaneous Move path step {key}.")
 
         # Only include steps that actually have an action.
         if "action" in step:
@@ -135,7 +135,7 @@ def extract_type2_tsm_paths_from_json_files(
     constraint_paths: Optional[List[Union[str, Path]]],
 ) -> List[List[Tuple[str, str]]]:
     """
-    Loads many JSON constraint files and extracts all Type-2 TSM start paths.
+    Loads many JSON constraint files and extracts all TSM start paths.
 
     Returns:
         [
@@ -149,7 +149,7 @@ def extract_type2_tsm_paths_from_json_files(
     type2_paths = []
 
     for constraint in constraints:
-        if constraint.get("Cst Type") == 2:
+        if constraint.get("Cst Type") == "Temporally-Simultaneous Move":
             path = extract_type2_tsm_path_from_constraint(constraint)
             type2_paths.append(path)
 

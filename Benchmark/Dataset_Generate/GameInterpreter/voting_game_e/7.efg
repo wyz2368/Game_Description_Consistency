@@ -1,0 +1,46 @@
+EFG 2 R "Two-player Borda voting (Player 2 moves first; Player 1 has imperfect info)" { "Player 1" "Player 2" }
+""
+
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 2 "B wins" { 1, 1 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 3 "C wins" { 0, 2 }
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 2 "B wins" { 1, 1 }
+t "" 2 "B wins" { 1, 1 }
+t "" 1 "A wins" { 2, 0 }
+t "" 2 "B wins" { 1, 1 }
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 2 "B wins" { 1, 1 }
+t "" 1 "A wins" { 2, 0 }
+t "" 2 "B wins" { 1, 1 }
+t "" 2 "B wins" { 1, 1 }
+t "" 3 "C wins" { 0, 2 }
+t "" 2 "B wins" { 1, 1 }
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 1 "A wins" { 2, 0 }
+t "" 3 "C wins" { 0, 2 }
+t "" 3 "C wins" { 0, 2 }
+t "" 3 "C wins" { 0, 2 }
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "A wins" { 2, 0 }
+t "" 3 "C wins" { 0, 2 }
+t "" 2 "B wins" { 1, 1 }
+t "" 2 "B wins" { 1, 1 }
+t "" 3 "C wins" { 0, 2 }
+t "" 3 "C wins" { 0, 2 }

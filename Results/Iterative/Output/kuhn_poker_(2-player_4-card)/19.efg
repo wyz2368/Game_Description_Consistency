@@ -1,0 +1,110 @@
+EFG 2 R "Four-card two-player betting game (ordered deal)" { "Player_One" "Player_Two" }
+c "" 1 "" { "AJ" 1/12 "AK" 1/12 "AQ" 1/12 "JA" 1/12 "JK" 1/12 "JQ" 1/12 "KA" 1/12 "KJ" 1/12 "KQ" 1/12 "QA" 1/12 "QJ" 1/12 "QK" 1/12 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 11 "P1 wins showdown (Ace vs Jack)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 12 "P2 wins by fold (P2 bet) (Ace,Jack)" { -1, 1 }
+t "" 13 "P1 wins showdown (Ace vs Jack)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 14 "P1 wins by fold (P1 bet) (Ace,Jack)" { 1, -1 }
+t "" 15 "P1 wins showdown (Ace vs Jack)" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 1 "P1 wins showdown (Ace vs King)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 2 "P2 wins by fold (P2 bet) (Ace,King)" { -1, 1 }
+t "" 3 "P1 wins showdown (Ace vs King)" { 2, -2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 4 "P1 wins by fold (P1 bet) (Ace,King)" { 1, -1 }
+t "" 5 "P1 wins showdown (Ace vs King)" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 6 "P1 wins showdown (Ace vs Queen)" { 1, -1 }
+p "" 1 2 "" { "Fold" "Call" } 0
+t "" 7 "P2 wins by fold (P2 bet) (Ace,Queen)" { -1, 1 }
+t "" 8 "P1 wins showdown (Ace vs Queen)" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 9 "P1 wins by fold (P1 bet) (Ace,Queen)" { 1, -1 }
+t "" 10 "P1 wins showdown (Ace vs Queen)" { 2, -2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 46 "P2 wins showdown (Jack vs Ace)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 47 "P2 wins by fold (P2 bet) (Jack,Ace)" { -1, 1 }
+t "" 48 "P2 wins showdown (Jack vs Ace)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 49 "P1 wins by fold (P1 bet) (Jack,Ace)" { 1, -1 }
+t "" 50 "P2 wins showdown (Jack vs Ace)" { -2, 2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 51 "P2 wins showdown (Jack vs King)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 52 "P2 wins by fold (P2 bet) (Jack,King)" { -1, 1 }
+t "" 53 "P2 wins showdown (Jack vs King)" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 54 "P1 wins by fold (P1 bet) (Jack,King)" { 1, -1 }
+t "" 55 "P2 wins showdown (Jack vs King)" { -2, 2 }
+p "" 1 7 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 56 "P2 wins showdown (Jack vs Queen)" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 57 "P2 wins by fold (P2 bet) (Jack,Queen)" { -1, 1 }
+t "" 58 "P2 wins showdown (Jack vs Queen)" { -2, 2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 59 "P1 wins by fold (P1 bet) (Jack,Queen)" { 1, -1 }
+t "" 60 "P2 wins showdown (Jack vs Queen)" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 16 "P2 wins showdown (King vs Ace)" { -1, 1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 17 "P2 wins by fold (P2 bet) (King,Ace)" { -1, 1 }
+t "" 18 "P2 wins showdown (King vs Ace)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 19 "P1 wins by fold (P1 bet) (King,Ace)" { 1, -1 }
+t "" 20 "P2 wins showdown (King vs Ace)" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 26 "P1 wins showdown (King vs Jack)" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 27 "P2 wins by fold (P2 bet) (King,Jack)" { -1, 1 }
+t "" 28 "P1 wins showdown (King vs Jack)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 29 "P1 wins by fold (P1 bet) (King,Jack)" { 1, -1 }
+t "" 30 "P1 wins showdown (King vs Jack)" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 3 "" { "Check" "Bet" } 0
+t "" 21 "P1 wins showdown (King vs Queen)" { 1, -1 }
+p "" 1 4 "" { "Fold" "Call" } 0
+t "" 22 "P2 wins by fold (P2 bet) (King,Queen)" { -1, 1 }
+t "" 23 "P1 wins showdown (King vs Queen)" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 24 "P1 wins by fold (P1 bet) (King,Queen)" { 1, -1 }
+t "" 25 "P1 wins showdown (King vs Queen)" { 2, -2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 31 "P2 wins showdown (Queen vs Ace)" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 32 "P2 wins by fold (P2 bet) (Queen,Ace)" { -1, 1 }
+t "" 33 "P2 wins showdown (Queen vs Ace)" { -2, 2 }
+p "" 2 8 "" { "Fold" "Call" } 0
+t "" 34 "P1 wins by fold (P1 bet) (Queen,Ace)" { 1, -1 }
+t "" 35 "P2 wins showdown (Queen vs Ace)" { -2, 2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 41 "P1 wins showdown (Queen vs Jack)" { 1, -1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 42 "P2 wins by fold (P2 bet) (Queen,Jack)" { -1, 1 }
+t "" 43 "P1 wins showdown (Queen vs Jack)" { 2, -2 }
+p "" 2 6 "" { "Fold" "Call" } 0
+t "" 44 "P1 wins by fold (P1 bet) (Queen,Jack)" { 1, -1 }
+t "" 45 "P1 wins showdown (Queen vs Jack)" { 2, -2 }
+p "" 1 5 "" { "Check" "Bet" } 0
+p "" 2 1 "" { "Check" "Bet" } 0
+t "" 36 "P2 wins showdown (Queen vs King)" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 37 "P2 wins by fold (P2 bet) (Queen,King)" { -1, 1 }
+t "" 38 "P2 wins showdown (Queen vs King)" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 39 "P1 wins by fold (P1 bet) (Queen,King)" { 1, -1 }
+t "" 40 "P2 wins showdown (Queen vs King)" { -2, 2 }

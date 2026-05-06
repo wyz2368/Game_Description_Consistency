@@ -1,0 +1,31 @@
+Game: bagwell_a
+Generated file: 17.efg
+Reference path: Dataset/bagwell_a/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/bagwell_a/17.efg
+Matched path: Results/Iterative/Output/bagwell_a/17.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

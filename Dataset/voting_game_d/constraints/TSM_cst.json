@@ -1,0 +1,5 @@
+{
+    "Cst Type":"Temporally-Simultaneous Move",
+    "Path":{},
+    "Comments":"Temporally-Simultaneous Move constraint: the path identifies the location of the TSM via a sequence of actions of all players."
+}

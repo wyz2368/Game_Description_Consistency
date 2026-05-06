@@ -1,0 +1,128 @@
+EFG 2 R "A vs B six-move imperfect-recall memory-1" { "A" "B" }
+p "" 1 1 "" { "X" "Y" } 0
+p "" 2 1 "" { "X" "Y" } 0
+p "" 1 2 "" { "X" "Y" } 0
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 1 "out_XXXXXX" { 3, 3 }
+t "" 2 "out_XXXXX Y" { 2, 2 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 3 "out_XXXXYX" { 2, 2 }
+t "" 4 "out_XXXXYY" { 1, 1 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 5 "out_XXXYXX" { 2, 2 }
+t "" 6 "out_XXXXY Y" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 7 "out_XXXYYX" { 1, 1 }
+t "" 8 "out_XXXYYY" { 0, 0 }
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 9 "out_XXYXXX" { 2, 2 }
+t "" 10 "out_XXYXXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 11 "out_XXYXYX" { 1, 1 }
+t "" 12 "out_XXYXYY" { 0, 0 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 13 "out_XXYYXX" { 1, 1 }
+t "" 14 "out_XXYYXY" { 0, 0 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 15 "out_XXYYYX" { 0, 0 }
+t "" 16 "out_XXYYYY" { 1, 1 }
+p "" 1 2 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 17 "out_XYXXXX" { 2, 2 }
+t "" 18 "out_XYXXX Y" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 19 "out_XYXXYX" { 1, 1 }
+t "" 20 "out_XYXXYY" { 0, 0 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 21 "out_XYXYXX" { 1, 1 }
+t "" 22 "out_XYXYXY" { 0, 0 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 23 "out_XYXYYX" { 0, 0 }
+t "" 24 "out_XYXYYY" { 1, 1 }
+p "" 2 3 "" { "X" "Y" } 0
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 25 "out_XYYXXX" { 1, 1 }
+t "" 26 "out_XYYXXY" { 0, 0 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 27 "out_XYYXYX" { 0, 0 }
+t "" 28 "out_XYYXYY" { 1, 1 }
+p "" 1 4 "" { "X" "Y" } 0
+p "" 2 4 "" { "X" "Y" } 0
+t "" 29 "out_XYYYXX" { 0, 0 }
+t "" 30 "out_XYYYXY" { 1, 1 }
+p "" 2 4 "" { "X" "Y" } 0
+t "" 31 "out_XYYYYX" { 1, 1 }
+t "" 32 "out_XYYYYY" { 2, 2 }
+p "" 2 1 "" { "X" "Y" } 0
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 33 "out_YXXXX X" { 2, 2 }
+t "" 34 "out_YXXXXY" { 1, 1 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 35 "out_YXXXYX" { 1, 1 }
+t "" 36 "out_YXXXYY" { 0, 0 }
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 37 "out_YXXYXX" { 1, 1 }
+t "" 38 "out_YXXXY Y" { 0, 0 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 39 "out_YXXYYX" { 0, 0 }
+t "" 40 "out_YXXYYY" { 1, 1 }
+p "" 2 2 "" { "X" "Y" } 0
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 41 "out_YXYXXX" { 1, 1 }
+t "" 42 "out_YXYXXY" { 0, 0 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 43 "out_YXYXYX" { 0, 0 }
+t "" 44 "out_YXYXYY" { 1, 1 }
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 45 "out_YXYYXX" { 0, 0 }
+t "" 46 "out_YXYYXY" { 1, 1 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 47 "out_YXYYYX" { 1, 1 }
+t "" 48 "out_YXYYYY" { 2, 2 }
+p "" 1 3 "" { "X" "Y" } 0
+p "" 2 3 "" { "X" "Y" } 0
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 49 "out_YYXXXX" { 1, 1 }
+t "" 50 "out_YYXXX Y" { 0, 0 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 51 "out_YYXXYX" { 0, 0 }
+t "" 52 "out_YYXXYY" { 1, 1 }
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 53 "out_YYXYXX" { 0, 0 }
+t "" 54 "out_YYXYXY" { 1, 1 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 55 "out_YYXYYX" { 1, 1 }
+t "" 56 "out_YYXYYY" { 2, 2 }
+p "" 2 3 "" { "X" "Y" } 0
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 57 "out_YYYXXX" { 0, 0 }
+t "" 58 "out_YYYXXY" { 1, 1 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 59 "out_YYYXYX" { 1, 1 }
+t "" 60 "out_YYYXYY" { 2, 2 }
+p "" 1 5 "" { "X" "Y" } 0
+p "" 2 5 "" { "X" "Y" } 0
+t "" 61 "out_YYYYXX" { 1, 1 }
+t "" 62 "out_YYYYXY" { 2, 2 }
+p "" 2 5 "" { "X" "Y" } 0
+t "" 63 "out_YYYYYX" { 2, 2 }
+t "" 64 "out_YYYYYY" { 3, 3 }

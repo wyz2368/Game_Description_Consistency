@@ -1,0 +1,32 @@
+Game: nim(2,2,1)
+Generated file: 3.efg
+Reference path: Dataset/nim(2,2,1)/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/nim(2,2,1)/3.efg
+Matched path: Results/MCP/Output/nim(2,2,1)/3.efg
+Status: FAIL
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: False
+Raw result: False
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: False
+Raw result: False
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+- Reduced strategy sets don't match.
+- Identical payoffs to reference game check failed.
+
+=== Final Result ===
+Checker results passed: False
+Constraint checks passed: True
+All checks passed: False

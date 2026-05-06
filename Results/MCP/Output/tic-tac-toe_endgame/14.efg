@@ -1,0 +1,35 @@
+EFG 2 R "Tic-Tac-Toe from partial board (O to move)" { "X" "O" }
+p "" 2 1 "" { "Place at (0,0)" "Place at (0,2)" "Place at (1,1)" "Place at (2,1)" } 0
+p "" 1 1 "" { "Place at (0,2)" "Place at (1,1)" "Place at (2,1)" } 0
+p "" 2 2 "" { "Place at (1,1)" "Place at (2,1)" } 0
+t "" 2 "O_wins_diag_after_O00_X02_O11" { -1, 1 }
+p "" 1 2 "" { "Place at (1,1)" } 0
+t "" 3 "X_wins_anti_diag_after_O00_X02_O21_X11" { 1, -1 }
+p "" 2 3 "" { "Place at (0,2)" "Place at (2,1)" } 0
+t "" 4 "O_wins_col2_after_O00_X11_O02" { -1, 1 }
+p "" 1 3 "" { "Place at (0,2)" } 0
+t "" 5 "X_wins_anti_diag_after_O00_X11_O21_X02" { 1, -1 }
+p "" 2 4 "" { "Place at (0,2)" "Place at (1,1)" } 0
+t "" 6 "O_wins_col2_after_O00_X21_O02" { -1, 1 }
+t "" 7 "O_wins_diag_after_O00_X21_O11" { -1, 1 }
+t "" 1 "O_wins_via_col2_initial" { -1, 1 }
+p "" 1 4 "" { "Place at (0,0)" "Place at (0,2)" "Place at (2,1)" } 0
+t "" 8 "X_wins_col0_after_O11_X00" { 1, -1 }
+p "" 2 5 "" { "Place at (0,0)" "Place at (2,1)" } 0
+t "" 9 "O_wins_diag_after_O11_X02_O00" { -1, 1 }
+p "" 1 5 "" { "Place at (0,0)" } 0
+t "" 10 "X_wins_col0_after_O11_X02_O21_X00" { 1, -1 }
+p "" 2 6 "" { "Place at (0,0)" "Place at (0,2)" } 0
+t "" 11 "O_wins_diag_after_O11_X21_O00" { -1, 1 }
+t "" 12 "O_wins_col2_after_O11_X21_O02" { -1, 1 }
+p "" 1 6 "" { "Place at (0,0)" "Place at (0,2)" "Place at (1,1)" } 0
+t "" 13 "X_wins_col0_after_O21_X00" { 1, -1 }
+p "" 2 7 "" { "Place at (0,0)" "Place at (1,1)" } 0
+p "" 1 7 "" { "Place at (1,1)" } 0
+t "" 14 "X_wins_anti_diag_after_O21_X02_O00_X11" { 1, -1 }
+p "" 1 8 "" { "Place at (0,0)" } 0
+t "" 15 "X_wins_col0_after_O21_X02_O11_X00" { 1, -1 }
+p "" 2 8 "" { "Place at (0,0)" "Place at (0,2)" } 0
+p "" 1 9 "" { "Place at (0,2)" } 0
+t "" 16 "X_wins_anti_diag_after_O21_X11_O00_X02" { 1, -1 }
+t "" 17 "O_wins_col2_after_O21_X11_O02" { -1, 1 }

@@ -1,0 +1,31 @@
+Game: russian_roulette_b
+Generated file: 9.efg
+Reference path: Dataset/russian_roulette_b/game.efg
+Original generated path: Check_Single_Data/russian_roulette_b/9.efg
+Matched path: Results_single/Output/russian_roulette_b/9.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

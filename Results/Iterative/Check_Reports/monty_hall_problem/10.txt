@@ -1,0 +1,22 @@
+Game: monty_hall_problem
+Generated file: 10.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/monty_hall_problem/10.efg
+Matched path: Results/Iterative/Output/monty_hall_problem/10.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The players in the generated game do not match the players in the reference game.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 361, in match_one_generated_efg
+    match_player(gen_game, ref_game, model)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/player_match.py", line 86, in match_player
+    match_palyer_name_llm(gen_game, ref_game, model)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/player_match.py", line 60, in match_palyer_name_llm
+    raise ValueError("The players in the generated game do not match the players in the reference game.")
+ValueError: The players in the generated game do not match the players in the reference game.

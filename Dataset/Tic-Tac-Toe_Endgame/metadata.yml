@@ -16,8 +16,7 @@ description: |-
   2 | x | e | o |
 
   Player O is the next to move.
-additional_data: Identical Payoffs
-constraint_descriptions:
+additional_data: Identical payoffs to reference game
 additional_comments: The game description is taken from Wikipedia, as cited in the source. We add an initial board state from the middle of the game to keep the game size suitable for expression in EFG. Moreover, since the description there does not include payoff information, we manually add explicit payoff values to ensure that the description is complete. There is also a simpler version of Tic-Tac-Toe in our dataset with fewer empty spaces on the board.
 assets:
   description: description.txt

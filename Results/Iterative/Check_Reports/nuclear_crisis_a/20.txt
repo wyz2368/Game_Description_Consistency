@@ -1,0 +1,31 @@
+Game: nuclear_crisis_a
+Generated file: 20.efg
+Reference path: Dataset/nuclear_crisis_a/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/nuclear_crisis_a/20.efg
+Matched path: Results/Iterative/Output/nuclear_crisis_a/20.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/nuclear_crisis_a/constraints/Nuclear_Crisis_cst1.json
+Cst Type: Temporally-Simultaneous Move
+Skipped: True
+Passed: True
+Raw result: 'Skipped unsupported Cst Type at final stage: Temporally-Simultaneous Move'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

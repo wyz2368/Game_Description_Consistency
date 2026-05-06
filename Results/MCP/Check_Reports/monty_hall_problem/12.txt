@@ -1,0 +1,24 @@
+Game: monty_hall_problem
+Generated file: 12.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/monty_hall_problem/12.efg
+Matched path: Results/MCP/Output/monty_hall_problem/12.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: The generated actions label choosing door 1/2/3 (the player's initial choice), while the reference actions label the car's location (nature's outcome: car in door 1/2/3). Those are different underlying alternatives (player choices vs. states/chance outcomes), so they do not correspond to the same set of actions.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 463, in filter_simultaneous_moves
+    key_map = match_all_actions_llm(g_node.actions, ref_actions, model, game_description)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated actions label choosing door 1/2/3 (the player's initial choice), while the reference actions label the car's location (nature's outcome: car in door 1/2/3). Those are different underlying alternatives (player choices vs. states/chance outcomes), so they do not correspond to the same set of actions.

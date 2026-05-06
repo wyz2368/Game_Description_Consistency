@@ -1,0 +1,122 @@
+EFG 2 R "Take-or-Push game (30 rounds)" { "Alice" "Bob" }
+p "" 1 1 "" { "Take larger pile" "Push piles" } 0
+t "" 1 "Alice takes R1" { 4, 1 }
+p "" 2 1 "" { "Take larger pile" "Push piles" } 0
+t "" 31 "Bob takes R1" { 2, 8 }
+p "" 1 2 "" { "Take larger pile" "Push piles" } 0
+t "" 2 "Alice takes R2" { 16, 4 }
+p "" 2 2 "" { "Take larger pile" "Push piles" } 0
+t "" 32 "Bob takes R2" { 8, 32 }
+p "" 1 3 "" { "Take larger pile" "Push piles" } 0
+t "" 3 "Alice takes R3" { 64, 16 }
+p "" 2 3 "" { "Take larger pile" "Push piles" } 0
+t "" 33 "Bob takes R3" { 32, 128 }
+p "" 1 4 "" { "Take larger pile" "Push piles" } 0
+t "" 4 "Alice takes R4" { 256, 64 }
+p "" 2 4 "" { "Take larger pile" "Push piles" } 0
+t "" 34 "Bob takes R4" { 128, 512 }
+p "" 1 5 "" { "Take larger pile" "Push piles" } 0
+t "" 5 "Alice takes R5" { 1024, 256 }
+p "" 2 5 "" { "Take larger pile" "Push piles" } 0
+t "" 35 "Bob takes R5" { 512, 2048 }
+p "" 1 6 "" { "Take larger pile" "Push piles" } 0
+t "" 6 "Alice takes R6" { 4096, 1024 }
+p "" 2 6 "" { "Take larger pile" "Push piles" } 0
+t "" 36 "Bob takes R6" { 2048, 8192 }
+p "" 1 7 "" { "Take larger pile" "Push piles" } 0
+t "" 7 "Alice takes R7" { 16384, 4096 }
+p "" 2 7 "" { "Take larger pile" "Push piles" } 0
+t "" 37 "Bob takes R7" { 8192, 32768 }
+p "" 1 8 "" { "Take larger pile" "Push piles" } 0
+t "" 8 "Alice takes R8" { 65536, 16384 }
+p "" 2 8 "" { "Take larger pile" "Push piles" } 0
+t "" 38 "Bob takes R8" { 32768, 131072 }
+p "" 1 9 "" { "Take larger pile" "Push piles" } 0
+t "" 9 "Alice takes R9" { 262144, 65536 }
+p "" 2 9 "" { "Take larger pile" "Push piles" } 0
+t "" 39 "Bob takes R9" { 131072, 524288 }
+p "" 1 10 "" { "Take larger pile" "Push piles" } 0
+t "" 10 "Alice takes R10" { 1048576, 262144 }
+p "" 2 10 "" { "Take larger pile" "Push piles" } 0
+t "" 40 "Bob takes R10" { 524288, 2097152 }
+p "" 1 11 "" { "Take larger pile" "Push piles" } 0
+t "" 11 "Alice takes R11" { 4194304, 1048576 }
+p "" 2 11 "" { "Take larger pile" "Push piles" } 0
+t "" 41 "Bob takes R11" { 2097152, 8388608 }
+p "" 1 12 "" { "Take larger pile" "Push piles" } 0
+t "" 12 "Alice takes R12" { 16777216, 4194304 }
+p "" 2 12 "" { "Take larger pile" "Push piles" } 0
+t "" 42 "Bob takes R12" { 8388608, 33554432 }
+p "" 1 13 "" { "Take larger pile" "Push piles" } 0
+t "" 13 "Alice takes R13" { 67108864, 16777216 }
+p "" 2 13 "" { "Take larger pile" "Push piles" } 0
+t "" 43 "Bob takes R13" { 33554432, 134217728 }
+p "" 1 14 "" { "Take larger pile" "Push piles" } 0
+t "" 14 "Alice takes R14" { 268435456, 67108864 }
+p "" 2 14 "" { "Take larger pile" "Push piles" } 0
+t "" 44 "Bob takes R14" { 134217728, 536870912 }
+p "" 1 15 "" { "Take larger pile" "Push piles" } 0
+t "" 15 "Alice takes R15" { 1073741824, 268435456 }
+p "" 2 15 "" { "Take larger pile" "Push piles" } 0
+t "" 45 "Bob takes R15" { 536870912, 2147483648 }
+p "" 1 16 "" { "Take larger pile" "Push piles" } 0
+t "" 16 "Alice takes R16" { 4294967296, 1073741824 }
+p "" 2 16 "" { "Take larger pile" "Push piles" } 0
+t "" 46 "Bob takes R16" { 2147483648, 8589934592 }
+p "" 1 17 "" { "Take larger pile" "Push piles" } 0
+t "" 17 "Alice takes R17" { 17179869184, 4294967296 }
+p "" 2 17 "" { "Take larger pile" "Push piles" } 0
+t "" 47 "Bob takes R17" { 8589934592, 34359738368 }
+p "" 1 18 "" { "Take larger pile" "Push piles" } 0
+t "" 18 "Alice takes R18" { 68719476736, 17179869184 }
+p "" 2 18 "" { "Take larger pile" "Push piles" } 0
+t "" 48 "Bob takes R18" { 34359738368, 137438953472 }
+p "" 1 19 "" { "Take larger pile" "Push piles" } 0
+t "" 19 "Alice takes R19" { 274877906944, 68719476736 }
+p "" 2 19 "" { "Take larger pile" "Push piles" } 0
+t "" 49 "Bob takes R19" { 137438953472, 549755813888 }
+p "" 1 20 "" { "Take larger pile" "Push piles" } 0
+t "" 20 "Alice takes R20" { 1099511627776, 274877906944 }
+p "" 2 20 "" { "Take larger pile" "Push piles" } 0
+t "" 50 "Bob takes R20" { 549755813888, 2199023255552 }
+p "" 1 21 "" { "Take larger pile" "Push piles" } 0
+t "" 21 "Alice takes R21" { 4398046511104, 1099511627776 }
+p "" 2 21 "" { "Take larger pile" "Push piles" } 0
+t "" 51 "Bob takes R21" { 2199023255552, 8796093022208 }
+p "" 1 22 "" { "Take larger pile" "Push piles" } 0
+t "" 22 "Alice takes R22" { 17592186044416, 4398046511104 }
+p "" 2 22 "" { "Take larger pile" "Push piles" } 0
+t "" 52 "Bob takes R22" { 8796093022208, 35184372088832 }
+p "" 1 23 "" { "Take larger pile" "Push piles" } 0
+t "" 23 "Alice takes R23" { 70368744177664, 17592186044416 }
+p "" 2 23 "" { "Take larger pile" "Push piles" } 0
+t "" 53 "Bob takes R23" { 35184372088832, 140737488355328 }
+p "" 1 24 "" { "Take larger pile" "Push piles" } 0
+t "" 24 "Alice takes R24" { 281474976710656, 70368744177664 }
+p "" 2 24 "" { "Take larger pile" "Push piles" } 0
+t "" 54 "Bob takes R24" { 140737488355328, 562949953421312 }
+p "" 1 25 "" { "Take larger pile" "Push piles" } 0
+t "" 25 "Alice takes R25" { 1125899906842624, 281474976710656 }
+p "" 2 25 "" { "Take larger pile" "Push piles" } 0
+t "" 55 "Bob takes R25" { 562949953421312, 2251799813685248 }
+p "" 1 26 "" { "Take larger pile" "Push piles" } 0
+t "" 26 "Alice takes R26" { 4503599627370496, 1125899906842624 }
+p "" 2 26 "" { "Take larger pile" "Push piles" } 0
+t "" 56 "Bob takes R26" { 2251799813685248, 9007199254740992 }
+p "" 1 27 "" { "Take larger pile" "Push piles" } 0
+t "" 27 "Alice takes R27" { 18014398509481984, 4503599627370496 }
+p "" 2 27 "" { "Take larger pile" "Push piles" } 0
+t "" 57 "Bob takes R27" { 9007199254740992, 36028797018963968 }
+p "" 1 28 "" { "Take larger pile" "Push piles" } 0
+t "" 28 "Alice takes R28" { 72057594037927936, 18014398509481984 }
+p "" 2 28 "" { "Take larger pile" "Push piles" } 0
+t "" 58 "Bob takes R28" { 36028797018963968, 144115188075855872 }
+p "" 1 29 "" { "Take larger pile" "Push piles" } 0
+t "" 29 "Alice takes R29" { 288230376151711744, 72057594037927936 }
+p "" 2 29 "" { "Take larger pile" "Push piles" } 0
+t "" 59 "Bob takes R29" { 144115188075855872, 576460752303423488 }
+p "" 1 30 "" { "Take larger pile" "Push piles" } 0
+t "" 30 "Alice takes R30" { 1152921504606846976, 288230376151711744 }
+p "" 2 30 "" { "Take larger pile" "Push piles" } 0
+t "" 60 "Bob takes R30" { 576460752303423488, 2305843009213693952 }
+t "" 61 "No one takes (all pushes)" { 4611686018427387904, 1152921504606846976 }

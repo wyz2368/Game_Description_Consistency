@@ -15,8 +15,7 @@ description: |-
     If both players check, the player with the higher-ranked card receives 1 and the other receives -1.
     If one player bets and the other folds, the betting player receives 1 and the folding player receives -1.
     If one player bets and the other calls, the player with the higher-ranked card receives 2 and the other receives -2.
-additional_data: Identical Payoffs
-constraint_descriptions:
+additional_data: Identical payoffs to reference game
 additional_comments:
     The action structure of Kuhn poker follows the Wikipedia article on Kuhn poker (https://en.wikipedia.org/wiki/Kuhn_poker, accessed April 14, 2026).
     This variant is a generalisation of Kuhn_Poker_(2-player_3-cards) modified to a four-cards deck to make the game larger and more challenging to translate.

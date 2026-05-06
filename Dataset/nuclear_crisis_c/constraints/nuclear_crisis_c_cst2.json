@@ -1,0 +1,11 @@
+{
+    "Cst Type": "Explicit Payoff(s) for a Certain Outcome",
+    "Path":{
+        "1":{"type":"Decision","player":"Country A","action":"Issue threat"},
+        "2":{"type":"Decision","player":"Country B","action":"Counter-threat"},
+        "3":{"type":"Decision","player":"Country A","action":"Detonate"},
+        "4":{"type":"Decision","player":"Country B","action":"Retreat"}
+    },
+    "Payoffs":{"Country A": 10},
+    "Comments": "Explicit Payoff(s) for a Certain Outcome: identifies the outcome via a history of players' actions and specifies the payoff(s) at that outcome."
+}

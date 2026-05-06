@@ -1,0 +1,31 @@
+Game: monty_hall_problem
+Generated file: 3.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/monty_hall_problem/3.efg
+Matched path: Results/GameInterpreter/Output/monty_hall_problem/3.efg
+Status: FAIL
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: False
+Raw result: False
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+- Reduced strategy sets don't match.
+
+=== Final Result ===
+Checker results passed: False
+Constraint checks passed: True
+All checks passed: False

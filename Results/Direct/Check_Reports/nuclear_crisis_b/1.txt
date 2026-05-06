@@ -1,0 +1,24 @@
+Game: nuclear_crisis_b
+Generated file: 1.efg
+Reference path: Dataset/nuclear_crisis_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/nuclear_crisis_b/1.efg
+Matched path: Results/Direct/Output/nuclear_crisis_b/1.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Player 1 missing in TSM.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 405, in filter_simultaneous_moves
+    new_gen = reorder_generated_game(matched_ref_node, g_node) # Get a list of reordered nodes like [(['A', 'B'], 1, 0, 1), (['C', 'D', 'E'], 2, 1, 1), (['C', 'D', 'E'], 2, 1, 1)]
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 144, in reorder_generated_game
+    raise ValueError(f"Player {ref_player} missing in TSM.")
+ValueError: Player 1 missing in TSM.

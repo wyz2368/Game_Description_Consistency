@@ -1,0 +1,26 @@
+Game: tic-tac-toe_endgame
+Generated file: 3.efg
+Reference path: Dataset/tic-tac-toe_endgame/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/tic-tac-toe_endgame/3.efg
+Matched path: Results/GameInterpreter/Output/tic-tac-toe_endgame/3.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Invalid EFG. The line should match terminal. Got: t "" 0
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 358, in match_one_generated_efg
+    gen_game = parser_gen.parse_file(gen_efg_path)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 313, in parse_file
+    self.build_tree(self.game.root, level=0)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 289, in build_tree
+    self.build_tree(child, level + 1)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 281, in build_tree
+    child = self.parse_node(self.lines[self.current_line])
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 154, in parse_node
+    raise ValueError(f"Invalid EFG. The line should match terminal. Got: {line}")
+ValueError: Invalid EFG. The line should match terminal. Got: t "" 0

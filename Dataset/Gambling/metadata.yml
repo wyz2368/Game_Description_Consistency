@@ -2,14 +2,13 @@ game_id: Gambling
 source:
 extraction_methodology: Manual
 description: |-
-  A gambler decides whether to enter a casino. If the gambler stays out, both the gambler and the dealer receive a payoff of 0.
+  A gambler decides whether to enter a casino.
 
+  If the gambler stays out, the dealer takes no action and both receive 0.
   If the gambler enters, they play a coin toss game against the dealer: both players simultaneously choose either Heads or Tails.
 
   If the choices match, the gambler receives 1 and the dealer receives -1; otherwise, the dealer receives 1 and the gambler receives -1.
-additional_data: Identical Payoffs
-constraint_descriptions:
-- TSM constraint.
+additional_data: Identical payoffs to reference game
 additional_comments:
 related games: []
 assets:

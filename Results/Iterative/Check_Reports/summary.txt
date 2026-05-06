@@ -1,0 +1,683 @@
+=== Final Combined Summary ===
+Requested generations per game: 20
+Total games evaluated: 25
+Total samples evaluated: 499
+Total passed samples: 483
+Total failed samples: 16
+Sample pass rate: 0.9679
+
+=== Per-Game Summary ===
+bagwell_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+bagwell_b
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+bagwell_c
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+
+centipede_30_rounds
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: FAIL | error: Identical payoffs to reference game check failed.
+
+gambling
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+kuhn_poker_(2-player_3_card)_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+kuhn_poker_(2-player_3_card)_b
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: ERROR | error: ValueError: The actions in the generated game do not match the actions in the reference game.
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+kuhn_poker_(2-player_3_card)_c
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+kuhn_poker_(2-player_4-card)
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+market_signalling_game
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+memory_one_game
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: FAIL | error: Reduced strategy sets don't match.
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+monty_hall_problem
+  Total samples: 19
+  Passed samples: 9
+  Failed samples: 10
+  Sample pass rate: 0.4737
+  Samples:
+    - 2.efg: PASS
+    - 3.efg: ERROR | error: ValueError: The actions in the generated game do not match the actions in the reference game. Reason: "Door 1/2/3" names the player's choice of which door to pick, while "Car in door 1/2/3" denotes the chance outcome of where the car is located. Although both lists refer to the same door indices, they represent different underlying alternatives (player choices vs. nature's states) and therefore do not match.
+    - 4.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 5.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 6.efg: FAIL | error: Reduced strategy sets don't match.
+    - 7.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 8.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 9.efg: PASS
+    - 10.efg: ERROR | error: ValueError: The players in the generated game do not match the players in the reference game.
+    - 11.efg: PASS
+    - 12.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 17.efg: ERROR | error: ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated actions map directly to the reference's initial choice options: "Choose door 1/2/3" = "Pick door 1/2/3". However, the reference also includes the second-stage options "Stick" and "Switch" (choosing the original door vs. the remaining unopened door), which are not present in the generated list. Therefore the two lists do not represent the same set of underlying game actions.
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nim(2,2,1)
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nuclear_crisis_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nuclear_crisis_b
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+nuclear_crisis_c
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+russian_roulette_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+russian_roulette_b
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: ERROR | error: ValueError: Wrong Generated Tree Structure. Number of children do not match
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+russian_roulette_c
+  Total samples: 20
+  Passed samples: 19
+  Failed samples: 1
+  Sample pass rate: 0.9500
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: ERROR | error: ValueError: Invalid EFG. The line should match terminal. Got: t "" 0
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+tic-tac-toe_endgame
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_a
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_b
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_c
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_d
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+
+voting_game_e
+  Total samples: 20
+  Passed samples: 20
+  Failed samples: 0
+  Sample pass rate: 1.0000
+  Samples:
+    - 1.efg: PASS
+    - 2.efg: PASS
+    - 3.efg: PASS
+    - 4.efg: PASS
+    - 5.efg: PASS
+    - 6.efg: PASS
+    - 7.efg: PASS
+    - 8.efg: PASS
+    - 9.efg: PASS
+    - 10.efg: PASS
+    - 11.efg: PASS
+    - 12.efg: PASS
+    - 13.efg: PASS
+    - 14.efg: PASS
+    - 15.efg: PASS
+    - 16.efg: PASS
+    - 17.efg: PASS
+    - 18.efg: PASS
+    - 19.efg: PASS
+    - 20.efg: PASS
+

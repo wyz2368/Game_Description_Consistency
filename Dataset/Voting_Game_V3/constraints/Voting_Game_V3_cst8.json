@@ -1,9 +1,0 @@
-{
-    "Cst Type": 1,
-    "Path":{
-        "1":{"type":"Decision","player":"Player 1","action":"C>B>A"},
-        "2":{"type":"Decision","player":"Player 2","action":"C>B>A"}
-    },
-    "Payoffs":{"Player 1": 0, "Player 2": null},
-    "Comments": "Type 1 constraint is used when the game is a combination of a total order (with ties) with some payoffs given explicitly."
-}

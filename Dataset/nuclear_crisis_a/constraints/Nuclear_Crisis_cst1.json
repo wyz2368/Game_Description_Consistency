@@ -1,0 +1,7 @@
+{
+    "Cst Type":"Temporally-Simultaneous Move",
+    "Path":{
+        "1":{"type":"Decision","player":"Country A","action":"Issue threat"},
+        "2":{"type":"Decision","player":"Country B","action":"Counter-threat"}},
+    "Comments":"Temporally-Simultaneous Move constraint: the path identifies the location of the TSM via a sequence of actions of all players."
+}

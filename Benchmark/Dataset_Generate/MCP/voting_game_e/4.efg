@@ -1,0 +1,46 @@
+EFG 2 R "Borda Voting: Two-player Borda Count with Sequential Ballots" { "Player 1" "Player 2" }
+""
+
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "winA" { 2, 0 }
+t "" 2 "winA" { 2, 0 }
+t "" 3 "winA" { 2, 0 }
+t "" 4 "winB" { 1, 1 }
+t "" 5 "winA" { 2, 0 }
+t "" 6 "winA" { 2, 0 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "winA" { 2, 0 }
+t "" 8 "winA" { 2, 0 }
+t "" 9 "winA" { 2, 0 }
+t "" 10 "winA" { 2, 0 }
+t "" 11 "winA" { 2, 0 }
+t "" 12 "winC" { 0, 2 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "winA" { 2, 0 }
+t "" 14 "winA" { 2, 0 }
+t "" 15 "winB" { 1, 1 }
+t "" 16 "winB" { 1, 1 }
+t "" 17 "winA" { 2, 0 }
+t "" 18 "winB" { 1, 1 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "winB" { 1, 1 }
+t "" 20 "winA" { 2, 0 }
+t "" 21 "winB" { 1, 1 }
+t "" 22 "winB" { 1, 1 }
+t "" 23 "winC" { 0, 2 }
+t "" 24 "winB" { 1, 1 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "winA" { 2, 0 }
+t "" 26 "winA" { 2, 0 }
+t "" 27 "winA" { 2, 0 }
+t "" 28 "winC" { 0, 2 }
+t "" 29 "winC" { 0, 2 }
+t "" 30 "winC" { 0, 2 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "winA" { 2, 0 }
+t "" 32 "winC" { 0, 2 }
+t "" 33 "winB" { 1, 1 }
+t "" 34 "winB" { 1, 1 }
+t "" 35 "winC" { 0, 2 }
+t "" 36 "winC" { 0, 2 }

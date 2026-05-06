@@ -1,0 +1,110 @@
+EFG 2 R "Four-Card Betting Game (Ace>King>Queen>Jack)" { "Player_One" "Player_Two" }
+c "" 1 "" { "AJ" 1/12 "AK" 1/12 "AQ" 1/12 "JA" 1/12 "JK" 1/12 "JQ" 1/12 "KA" 1/12 "KJ" 1/12 "KQ" 1/12 "QA" 1/12 "QJ" 1/12 "QK" 1/12 } 0
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 8 "" { "Check" "Bet" } 0
+t "" 11 "A_J_check_check" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 14 "A_J_check_bet_fold" { -1, 1 }
+t "" 15 "A_J_check_bet_call" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 12 "A_J_bet_fold" { 1, -1 }
+t "" 13 "A_J_bet_call" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 1 "A_K_check_check" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 4 "A_K_check_bet_fold" { -1, 1 }
+t "" 5 "A_K_check_bet_call" { 2, -2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 2 "A_K_bet_fold" { 1, -1 }
+t "" 3 "A_K_bet_call" { 2, -2 }
+p "" 1 1 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 6 "A_Q_check_check" { 1, -1 }
+p "" 1 5 "" { "Fold" "Call" } 0
+t "" 9 "A_Q_check_bet_fold" { -1, 1 }
+t "" 10 "A_Q_check_bet_call" { 2, -2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 7 "A_Q_bet_fold" { 1, -1 }
+t "" 8 "A_Q_bet_call" { 2, -2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 46 "J_A_check_check" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 49 "J_A_check_bet_fold" { -1, 1 }
+t "" 50 "J_A_check_bet_call" { -2, 2 }
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 47 "J_A_bet_fold" { 1, -1 }
+t "" 48 "J_A_bet_call" { -2, 2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 51 "J_K_check_check" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 54 "J_K_check_bet_fold" { -1, 1 }
+t "" 55 "J_K_check_bet_call" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 52 "J_K_bet_fold" { 1, -1 }
+t "" 53 "J_K_bet_call" { -2, 2 }
+p "" 1 4 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 56 "J_Q_check_check" { -1, 1 }
+p "" 1 8 "" { "Fold" "Call" } 0
+t "" 59 "J_Q_check_bet_fold" { -1, 1 }
+t "" 60 "J_Q_check_bet_call" { -2, 2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 57 "J_Q_bet_fold" { 1, -1 }
+t "" 58 "J_Q_bet_call" { -2, 2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 16 "K_A_check_check" { -1, 1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 19 "K_A_check_bet_fold" { -1, 1 }
+t "" 20 "K_A_check_bet_call" { -2, 2 }
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 17 "K_A_bet_fold" { 1, -1 }
+t "" 18 "K_A_bet_call" { -2, 2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 8 "" { "Check" "Bet" } 0
+t "" 26 "K_J_check_check" { 1, -1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 29 "K_J_check_bet_fold" { -1, 1 }
+t "" 30 "K_J_check_bet_call" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 27 "K_J_bet_fold" { 1, -1 }
+t "" 28 "K_J_bet_call" { 2, -2 }
+p "" 1 2 "" { "Check" "Bet" } 0
+p "" 2 7 "" { "Check" "Bet" } 0
+t "" 21 "K_Q_check_check" { 1, -1 }
+p "" 1 6 "" { "Fold" "Call" } 0
+t "" 24 "K_Q_check_bet_fold" { -1, 1 }
+t "" 25 "K_Q_check_bet_call" { 2, -2 }
+p "" 2 3 "" { "Fold" "Call" } 0
+t "" 22 "K_Q_bet_fold" { 1, -1 }
+t "" 23 "K_Q_bet_call" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 5 "" { "Check" "Bet" } 0
+t "" 31 "Q_A_check_check" { -1, 1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 34 "Q_A_check_bet_fold" { -1, 1 }
+t "" 35 "Q_A_check_bet_call" { -2, 2 }
+p "" 2 1 "" { "Fold" "Call" } 0
+t "" 32 "Q_A_bet_fold" { 1, -1 }
+t "" 33 "Q_A_bet_call" { -2, 2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 8 "" { "Check" "Bet" } 0
+t "" 41 "Q_J_check_check" { 1, -1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 44 "Q_J_check_bet_fold" { -1, 1 }
+t "" 45 "Q_J_check_bet_call" { 2, -2 }
+p "" 2 4 "" { "Fold" "Call" } 0
+t "" 42 "Q_J_bet_fold" { 1, -1 }
+t "" 43 "Q_J_bet_call" { 2, -2 }
+p "" 1 3 "" { "Check" "Bet" } 0
+p "" 2 6 "" { "Check" "Bet" } 0
+t "" 36 "Q_K_check_check" { -1, 1 }
+p "" 1 7 "" { "Fold" "Call" } 0
+t "" 39 "Q_K_check_bet_fold" { -1, 1 }
+t "" 40 "Q_K_check_bet_call" { -2, 2 }
+p "" 2 2 "" { "Fold" "Call" } 0
+t "" 37 "Q_K_bet_fold" { 1, -1 }
+t "" 38 "Q_K_bet_call" { -2, 2 }

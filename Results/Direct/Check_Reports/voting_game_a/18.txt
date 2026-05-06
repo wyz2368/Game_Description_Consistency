@@ -1,0 +1,22 @@
+Game: voting_game_a
+Generated file: 18.efg
+Reference path: Dataset/voting_game_a/game.efg
+Original generated path: Dataset_voting/Direct/voting_game_a/18.efg
+Matched path: Results_voting/Direct/Output/voting_game_a/18.efg
+Status: ERROR
+
+=== Match Error ===
+Type: KeyError
+Message: 'C>B>A'
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 399, in filter_simultaneous_moves
+    child = g_node.children[action]
+KeyError: 'C>B>A'

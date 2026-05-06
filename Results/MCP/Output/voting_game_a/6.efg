@@ -1,0 +1,44 @@
+EFG 2 R "Two-player Borda Voting Game" { "Player 1" "Player 2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 3 "C_wins" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 2 "B_wins" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 2 "B_wins" { 1, 1 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 3 "C_wins" { 0, 2 }
+t "" 2 "B_wins" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 1 "A_wins" { 2, 0 }
+t "" 3 "C_wins" { 0, 2 }
+t "" 3 "C_wins" { 0, 2 }
+t "" 3 "C_wins" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 3 "C_wins" { 0, 2 }
+t "" 3 "C_wins" { 0, 2 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 2 "B_wins" { 1, 1 }
+t "" 3 "C_wins" { 0, 2 }
+t "" 3 "C_wins" { 0, 2 }

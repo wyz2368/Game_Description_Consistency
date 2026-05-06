@@ -1,0 +1,31 @@
+Game: tic-tac-toe_endgame
+Generated file: 9.efg
+Reference path: Dataset/tic-tac-toe_endgame/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/tic-tac-toe_endgame/9.efg
+Matched path: Results/MCP/Output/tic-tac-toe_endgame/9.efg
+Status: FAIL
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: False
+Raw result: False
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+- Identical payoffs to reference game check failed.
+
+=== Final Result ===
+Checker results passed: False
+Constraint checks passed: True
+All checks passed: False

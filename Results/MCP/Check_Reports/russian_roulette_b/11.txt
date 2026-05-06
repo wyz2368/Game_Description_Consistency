@@ -1,0 +1,22 @@
+Game: russian_roulette_b
+Generated file: 11.efg
+Reference path: Dataset/russian_roulette_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/russian_roulette_b/11.efg
+Matched path: Results/MCP/Output/russian_roulette_b/11.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Wrong Generated Tree Structure. Number of children do not match
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 450, in filter_simultaneous_moves
+    raise ValueError(f"Wrong Generated Tree Structure. Number of children do not match")
+ValueError: Wrong Generated Tree Structure. Number of children do not match

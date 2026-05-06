@@ -43,7 +43,7 @@ Run direct generation with GPT:
 python Benchmark/benchmark_runner.py \
   --method direct \
   --model gpt-5-mini \
-  --runs 5 \
+  --runs 20 \
   --dataset-dir ../Dataset
 ```
 
@@ -53,7 +53,7 @@ Run MCP with GPT:
 python Benchmark/benchmark_runner.py \
   --method mcp \
   --model gpt-5-mini \
-  --runs 5 \
+  --runs 20 \
   --dataset-dir ../Dataset
 ```
 
@@ -63,7 +63,7 @@ Run GameInterpreter with GPT:
 python Benchmark/benchmark_runner.py \
   --method gameinterpreter \
   --model gpt-5-mini \
-  --runs 5 \
+  --runs 20 \
   --dataset-dir ../Dataset
 ```
 
@@ -73,7 +73,7 @@ Run iterative generation with GPT:
 python Benchmark/benchmark_runner.py \
   --method iterative \
   --model gpt-5-mini \
-  --runs 5 \
+  --runs 20 \
   --dataset-dir ../Dataset
 ```
 
@@ -88,8 +88,6 @@ Benchmark/Dataset_Generate/
 ```
 
 ### Evaluation
-
-Export your OpenAI API key before running the Evaluation.
 
 Then run the evaluation checker:
 
@@ -116,3 +114,37 @@ Arguments:
 - `--report_root`: folder where per-sample reports and `summary.txt` are saved.
 - `--num_generations`, `-n`: required number of generated samples per game.
 - `--model`, `-m`: OpenAI model used for matching. The default is `gpt-5-mini`.
+
+## Results Folder Format
+
+Evaluation outputs are saved under `Results/{Method}/`.
+Check our generated samples in `Benchmark/Dataset_Generate/{Method}/`.
+Check our evaluation results in `Results/{Method}/`.
+
+```text
+Results/
+├── Direct/
+│   ├── Output/
+│   │   └── {Game_Name}/
+│   │       ├── 1.efg
+│   │       ├── 2.efg
+│   │       └── ...
+│   └── Check_Reports/
+│       ├── summary.txt
+│       └── {Game_Name}/
+│           ├── 1.txt
+│           ├── 2.txt
+│           └── ...
+├── GameInterpreter/
+│   ├── Output/
+│   └── Check_Reports/
+├── Iterative/
+│   ├── Output/
+│   └── Check_Reports/
+└── MCP/
+    ├── Output/
+    └── Check_Reports/
+```
+
+- `Output/`: matched and reordered `.efg` files produced during evaluation.
+- `Check_Reports/`: per-generation evaluation reports and the final `summary.txt`.

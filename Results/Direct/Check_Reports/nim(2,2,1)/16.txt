@@ -1,0 +1,22 @@
+Game: nim(2,2,1)
+Generated file: 16.efg
+Reference path: Dataset/nim(2,2,1)/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/nim(2,2,1)/16.efg
+Matched path: Results/Direct/Output/nim(2,2,1)/16.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: Interpreting R{i}_{j} as “remove j stones from pile i”, the generated labels map to Remove 1 from pile 1 (R1_1), Remove 2 from pile 1 (R1_2), and Remove 2 from pile 2 (R2_2). The generated list omits Remove 1 from pile 2 and Remove 1 from pile 3 that appear in the reference list, so the sets of underlying actions differ.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 366, in match_one_generated_efg
+    mappings = build_global_action_mappings(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 201, in build_global_action_mappings
+    mappings[k] = match_all_actions_llm(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: Interpreting R{i}_{j} as “remove j stones from pile i”, the generated labels map to Remove 1 from pile 1 (R1_1), Remove 2 from pile 1 (R1_2), and Remove 2 from pile 2 (R2_2). The generated list omits Remove 1 from pile 2 and Remove 1 from pile 3 that appear in the reference list, so the sets of underlying actions differ.

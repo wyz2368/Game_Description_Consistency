@@ -1,0 +1,22 @@
+Game: bagwell_c
+Generated file: 7.efg
+Reference path: Dataset/bagwell_c/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/bagwell_c/7.efg
+Matched path: Results/Direct/Output/bagwell_c/7.efg
+Status: ERROR
+
+=== Constraint Check Error ===
+Type: ValueError
+Message: Parse error in game file: line 9:3: Outcome label does not match previous definition (outcome 1)
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 888, in main
+    result = check_one_matched_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 438, in check_one_matched_efg
+    raw_reduced_result = same_reduced_strategies(matched_path, ref_path)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Checkers/check_reduced_strategies.py", line 5, in same_reduced_strategies
+    candidate_efg = gbt.read_efg(candidate_path)
+  File "src/pygambit/game.pxi", line 116, in pygambit.gambit.read_efg
+  File "src/pygambit/game.pxi", line 53, in pygambit.gambit.read_game
+ValueError: Parse error in game file: line 9:3: Outcome label does not match previous definition (outcome 1)

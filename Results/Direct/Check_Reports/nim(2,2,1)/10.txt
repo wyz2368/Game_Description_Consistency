@@ -1,0 +1,26 @@
+Game: nim(2,2,1)
+Generated file: 10.efg
+Reference path: Dataset/nim(2,2,1)/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/nim(2,2,1)/10.efg
+Matched path: Results/Direct/Output/nim(2,2,1)/10.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Mapped actions do not match reference actions.
+Modified: ['Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2', 'Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2']
+Reference: ['Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2']
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 366, in match_one_generated_efg
+    mappings = build_global_action_mappings(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 201, in build_global_action_mappings
+    mappings[k] = match_all_actions_llm(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 131, in match_all_actions_llm
+    raise ValueError(
+ValueError: Mapped actions do not match reference actions.
+Modified: ['Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2', 'Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2']
+Reference: ['Remove 1 from pile 1', 'Remove 1 from pile 2', 'Remove 1 from pile 3', 'Remove 2 from pile 1', 'Remove 2 from pile 2']

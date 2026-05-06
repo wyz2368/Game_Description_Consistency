@@ -1,0 +1,24 @@
+Game: voting_game_d
+Generated file: 11.efg
+Reference path: Dataset/voting_game_d/game.efg
+Original generated path: Dataset_voting/Direct/voting_game_d/11.efg
+Matched path: Results_voting/Direct/Output/voting_game_d/11.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Invalid EFG. The line should match player.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 358, in match_one_generated_efg
+    gen_game = parser_gen.parse_file(gen_efg_path)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 313, in parse_file
+    self.build_tree(self.game.root, level=0)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 281, in build_tree
+    child = self.parse_node(self.lines[self.current_line])
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Tree/tree.py", line 241, in parse_node
+    raise ValueError("Invalid EFG. The line should match player.")
+ValueError: Invalid EFG. The line should match player.

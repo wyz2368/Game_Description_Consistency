@@ -1,0 +1,9 @@
+{
+    "Cst Type": "Explicit Payoff(s) for a Certain Outcome",
+    "Path":{
+        "1":{"type":"Decision","player":"Player 1","action":"S"},
+        "2":{"type":"Chance","player":"Chance","action":"Signal S"},
+        "3":{"type":"Decision","player":"Player 2","action":"C"}},
+    "Payoffs":{"Player 1": 3},
+    "Comments": "Explicit Payoff(s) for a Certain Outcome: identifies the outcome via a history of players' actions and specifies the payoff(s) at that outcome."
+}

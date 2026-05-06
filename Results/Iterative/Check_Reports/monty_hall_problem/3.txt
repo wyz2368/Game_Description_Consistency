@@ -1,0 +1,24 @@
+Game: monty_hall_problem
+Generated file: 3.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/monty_hall_problem/3.efg
+Matched path: Results/Iterative/Output/monty_hall_problem/3.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: "Door 1/2/3" names the player's choice of which door to pick, while "Car in door 1/2/3" denotes the chance outcome of where the car is located. Although both lists refer to the same door indices, they represent different underlying alternatives (player choices vs. nature's states) and therefore do not match.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 463, in filter_simultaneous_moves
+    key_map = match_all_actions_llm(g_node.actions, ref_actions, model, game_description)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: "Door 1/2/3" names the player's choice of which door to pick, while "Car in door 1/2/3" denotes the chance outcome of where the car is located. Although both lists refer to the same door indices, they represent different underlying alternatives (player choices vs. nature's states) and therefore do not match.

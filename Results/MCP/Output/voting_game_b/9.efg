@@ -1,0 +1,44 @@
+EFG 2 R "Two-player Borda Voting with Tie-breaking" { "Player1" "Player2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "win_A_p1_A>B>C_p2_A>B>C" { 2, 0 }
+t "" 2 "win_A_p1_A>B>C_p2_A>C>B" { 2, 0 }
+t "" 3 "win_B_p1_A>B>C_p2_B>A>C" { 1, 1 }
+t "" 4 "win_B_p1_A>B>C_p2_B>C>A" { 1, 1 }
+t "" 5 "win_A_p1_A>B>C_p2_C>A>B" { 2, 0 }
+t "" 6 "win_C_p1_A>B>C_p2_C>B>A" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "win_A_p1_A>C>B_p2_A>B>C" { 2, 0 }
+t "" 8 "win_A_p1_A>C>B_p2_A>C>B" { 2, 0 }
+t "" 9 "win_A_p1_A>C>B_p2_B>A>C" { 2, 0 }
+t "" 10 "win_C_p1_A>C>B_p2_B>C>A" { 0, 2 }
+t "" 11 "win_C_p1_A>C>B_p2_C>A>B" { 0, 2 }
+t "" 12 "win_C_p1_A>C>B_p2_C>B>A" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "win_B_p1_B>A>C_p2_A>B>C" { 1, 1 }
+t "" 14 "win_A_p1_B>A>C_p2_A>C>B" { 2, 0 }
+t "" 15 "win_B_p1_B>A>C_p2_B>A>C" { 1, 1 }
+t "" 16 "win_B_p1_B>A>C_p2_B>C>A" { 1, 1 }
+t "" 17 "win_C_p1_B>A>C_p2_C>A>B" { 0, 2 }
+t "" 18 "win_C_p1_B>A>C_p2_C>B>A" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "win_B_p1_B>C>A_p2_A>B>C" { 1, 1 }
+t "" 20 "win_C_p1_B>C>A_p2_A>C>B" { 0, 2 }
+t "" 21 "win_B_p1_B>C>A_p2_B>A>C" { 1, 1 }
+t "" 22 "win_B_p1_B>C>A_p2_B>C>A" { 1, 1 }
+t "" 23 "win_C_p1_B>C>A_p2_C>A>B" { 0, 2 }
+t "" 24 "win_C_p1_B>C>A_p2_C>B>A" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "win_A_p1_C>A>B_p2_A>B>C" { 2, 0 }
+t "" 26 "win_C_p1_C>A>B_p2_A>C>B" { 0, 2 }
+t "" 27 "win_C_p1_C>A>B_p2_B>A>C" { 0, 2 }
+t "" 28 "win_C_p1_C>A>B_p2_B>C>A" { 0, 2 }
+t "" 29 "win_C_p1_C>A>B_p2_C>A>B" { 0, 2 }
+t "" 30 "win_C_p1_C>A>B_p2_C>B>A" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "win_C_p1_C>B>A_p2_A>B>C" { 0, 2 }
+t "" 32 "win_C_p1_C>B>A_p2_A>C>B" { 0, 2 }
+t "" 33 "win_C_p1_C>B>A_p2_B>A>C" { 0, 2 }
+t "" 34 "win_C_p1_C>B>A_p2_B>C>A" { 0, 2 }
+t "" 35 "win_C_p1_C>B>A_p2_C>A>B" { 0, 2 }
+t "" 36 "win_C_p1_C>B>A_p2_C>B>A" { 0, 2 }

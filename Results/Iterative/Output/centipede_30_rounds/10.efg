@@ -1,0 +1,122 @@
+EFG 2 R "Take-or-Push doubling piles (30 rounds)" { "Alice" "Bob" }
+p "" 1 1 "" { "Take larger pile" "Push piles" } 0
+t "" 1 "Alice 4, Bob 1" { 4, 1 }
+p "" 2 1 "" { "Take larger pile" "Push piles" } 0
+t "" 2 "Alice 2, Bob 8" { 2, 8 }
+p "" 1 2 "" { "Take larger pile" "Push piles" } 0
+t "" 3 "Alice 16, Bob 4" { 16, 4 }
+p "" 2 2 "" { "Take larger pile" "Push piles" } 0
+t "" 4 "Alice 8, Bob 32" { 8, 32 }
+p "" 1 3 "" { "Take larger pile" "Push piles" } 0
+t "" 5 "Alice 64, Bob 16" { 64, 16 }
+p "" 2 3 "" { "Take larger pile" "Push piles" } 0
+t "" 6 "Alice 32, Bob 128" { 32, 128 }
+p "" 1 4 "" { "Take larger pile" "Push piles" } 0
+t "" 7 "Alice 256, Bob 64" { 256, 64 }
+p "" 2 4 "" { "Take larger pile" "Push piles" } 0
+t "" 8 "Alice 128, Bob 512" { 128, 512 }
+p "" 1 5 "" { "Take larger pile" "Push piles" } 0
+t "" 9 "Alice 1024, Bob 256" { 1024, 256 }
+p "" 2 5 "" { "Take larger pile" "Push piles" } 0
+t "" 10 "Alice 512, Bob 2048" { 512, 2048 }
+p "" 1 6 "" { "Take larger pile" "Push piles" } 0
+t "" 11 "Alice 4096, Bob 1024" { 4096, 1024 }
+p "" 2 6 "" { "Take larger pile" "Push piles" } 0
+t "" 12 "Alice 2048, Bob 8192" { 2048, 8192 }
+p "" 1 7 "" { "Take larger pile" "Push piles" } 0
+t "" 13 "Alice 16384, Bob 4096" { 16384, 4096 }
+p "" 2 7 "" { "Take larger pile" "Push piles" } 0
+t "" 14 "Alice 8192, Bob 32768" { 8192, 32768 }
+p "" 1 8 "" { "Take larger pile" "Push piles" } 0
+t "" 15 "Alice 65536, Bob 16384" { 65536, 16384 }
+p "" 2 8 "" { "Take larger pile" "Push piles" } 0
+t "" 16 "Alice 32768, Bob 131072" { 32768, 131072 }
+p "" 1 9 "" { "Take larger pile" "Push piles" } 0
+t "" 17 "Alice 262144, Bob 65536" { 262144, 65536 }
+p "" 2 9 "" { "Take larger pile" "Push piles" } 0
+t "" 18 "Alice 131072, Bob 524288" { 131072, 524288 }
+p "" 1 10 "" { "Take larger pile" "Push piles" } 0
+t "" 19 "Alice 1048576, Bob 262144" { 1048576, 262144 }
+p "" 2 10 "" { "Take larger pile" "Push piles" } 0
+t "" 20 "Alice 524288, Bob 2097152" { 524288, 2097152 }
+p "" 1 11 "" { "Take larger pile" "Push piles" } 0
+t "" 21 "Alice 4194304, Bob 1048576" { 4194304, 1048576 }
+p "" 2 11 "" { "Take larger pile" "Push piles" } 0
+t "" 22 "Alice 2097152, Bob 8388608" { 2097152, 8388608 }
+p "" 1 12 "" { "Take larger pile" "Push piles" } 0
+t "" 23 "Alice 16777216, Bob 4194304" { 16777216, 4194304 }
+p "" 2 12 "" { "Take larger pile" "Push piles" } 0
+t "" 24 "Alice 8388608, Bob 33554432" { 8388608, 33554432 }
+p "" 1 13 "" { "Take larger pile" "Push piles" } 0
+t "" 25 "Alice 67108864, Bob 16777216" { 67108864, 16777216 }
+p "" 2 13 "" { "Take larger pile" "Push piles" } 0
+t "" 26 "Alice 33554432, Bob 134217728" { 33554432, 134217728 }
+p "" 1 14 "" { "Take larger pile" "Push piles" } 0
+t "" 27 "Alice 268435456, Bob 67108864" { 268435456, 67108864 }
+p "" 2 14 "" { "Take larger pile" "Push piles" } 0
+t "" 28 "Alice 134217728, Bob 536870912" { 134217728, 536870912 }
+p "" 1 15 "" { "Take larger pile" "Push piles" } 0
+t "" 29 "Alice 1073741824, Bob 268435456" { 1073741824, 268435456 }
+p "" 2 15 "" { "Take larger pile" "Push piles" } 0
+t "" 30 "Alice 536870912, Bob 2147483648" { 536870912, 2147483648 }
+p "" 1 16 "" { "Take larger pile" "Push piles" } 0
+t "" 31 "Alice 4294967296, Bob 1073741824" { 4294967296, 1073741824 }
+p "" 2 16 "" { "Take larger pile" "Push piles" } 0
+t "" 32 "Alice 2147483648, Bob 8589934592" { 2147483648, 8589934592 }
+p "" 1 17 "" { "Take larger pile" "Push piles" } 0
+t "" 33 "Alice 17179869184, Bob 4294967296" { 17179869184, 4294967296 }
+p "" 2 17 "" { "Take larger pile" "Push piles" } 0
+t "" 34 "Alice 8589934592, Bob 34359738368" { 8589934592, 34359738368 }
+p "" 1 18 "" { "Take larger pile" "Push piles" } 0
+t "" 35 "Alice 68719476736, Bob 17179869184" { 68719476736, 17179869184 }
+p "" 2 18 "" { "Take larger pile" "Push piles" } 0
+t "" 36 "Alice 34359738368, Bob 137438953472" { 34359738368, 137438953472 }
+p "" 1 19 "" { "Take larger pile" "Push piles" } 0
+t "" 37 "Alice 274877906944, Bob 68719476736" { 274877906944, 68719476736 }
+p "" 2 19 "" { "Take larger pile" "Push piles" } 0
+t "" 38 "Alice 137438953472, Bob 549755813888" { 137438953472, 549755813888 }
+p "" 1 20 "" { "Take larger pile" "Push piles" } 0
+t "" 39 "Alice 1099511627776, Bob 274877906944" { 1099511627776, 274877906944 }
+p "" 2 20 "" { "Take larger pile" "Push piles" } 0
+t "" 40 "Alice 549755813888, Bob 2199023255552" { 549755813888, 2199023255552 }
+p "" 1 21 "" { "Take larger pile" "Push piles" } 0
+t "" 41 "Alice 4398046511104, Bob 1099511627776" { 4398046511104, 1099511627776 }
+p "" 2 21 "" { "Take larger pile" "Push piles" } 0
+t "" 42 "Alice 2199023255552, Bob 8796093022208" { 2199023255552, 8796093022208 }
+p "" 1 22 "" { "Take larger pile" "Push piles" } 0
+t "" 43 "Alice 17592186044416, Bob 4398046511104" { 17592186044416, 4398046511104 }
+p "" 2 22 "" { "Take larger pile" "Push piles" } 0
+t "" 44 "Alice 8796093022208, Bob 35184372088832" { 8796093022208, 35184372088832 }
+p "" 1 23 "" { "Take larger pile" "Push piles" } 0
+t "" 45 "Alice 70368744177664, Bob 17592186044416" { 70368744177664, 17592186044416 }
+p "" 2 23 "" { "Take larger pile" "Push piles" } 0
+t "" 46 "Alice 35184372088832, Bob 140737488355328" { 35184372088832, 140737488355328 }
+p "" 1 24 "" { "Take larger pile" "Push piles" } 0
+t "" 47 "Alice 281474976710656, Bob 70368744177664" { 281474976710656, 70368744177664 }
+p "" 2 24 "" { "Take larger pile" "Push piles" } 0
+t "" 48 "Alice 140737488355328, Bob 562949953421312" { 140737488355328, 562949953421312 }
+p "" 1 25 "" { "Take larger pile" "Push piles" } 0
+t "" 49 "Alice 1125899906842624, Bob 281474976710656" { 1125899906842624, 281474976710656 }
+p "" 2 25 "" { "Take larger pile" "Push piles" } 0
+t "" 50 "Alice 562949953421312, Bob 2251799813685248" { 562949953421312, 2251799813685248 }
+p "" 1 26 "" { "Take larger pile" "Push piles" } 0
+t "" 51 "Alice 4503599627370496, Bob 1125899906842624" { 4503599627370496, 1125899906842624 }
+p "" 2 26 "" { "Take larger pile" "Push piles" } 0
+t "" 52 "Alice 2251799813685248, Bob 9007199254740992" { 2251799813685248, 9007199254740992 }
+p "" 1 27 "" { "Take larger pile" "Push piles" } 0
+t "" 53 "Alice 18014398509481984, Bob 4503599627370496" { 18014398509481984, 4503599627370496 }
+p "" 2 27 "" { "Take larger pile" "Push piles" } 0
+t "" 54 "Alice 9007199254740992, Bob 36028797018963968" { 9007199254740992, 36028797018963968 }
+p "" 1 28 "" { "Take larger pile" "Push piles" } 0
+t "" 55 "Alice 72057594037927936, Bob 18014398509481984" { 72057594037927936, 18014398509481984 }
+p "" 2 28 "" { "Take larger pile" "Push piles" } 0
+t "" 56 "Alice 36028797018963968, Bob 144115188075855872" { 36028797018963968, 144115188075855872 }
+p "" 1 29 "" { "Take larger pile" "Push piles" } 0
+t "" 57 "Alice 288230376151711744, Bob 72057594037927936" { 288230376151711744, 72057594037927936 }
+p "" 2 29 "" { "Take larger pile" "Push piles" } 0
+t "" 58 "Alice 144115188075855872, Bob 576460752303423488" { 144115188075855872, 576460752303423488 }
+p "" 1 30 "" { "Take larger pile" "Push piles" } 0
+t "" 59 "Alice 1152921504606846976, Bob 288230376151711744" { 1152921504606846976, 288230376151711744 }
+p "" 2 30 "" { "Take larger pile" "Push piles" } 0
+t "" 60 "Alice 576460752303423488, Bob 2305843009213693952" { 576460752303423488, 2305843009213693952 }
+t "" 61 "Alice 4611686018427387904, Bob 1152921504606846976" { 4611686018427387904, 1152921504606846976 }

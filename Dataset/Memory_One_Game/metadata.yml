@@ -12,8 +12,7 @@ description: |-
   At the end of stage 6, payoffs are determined round by round.
   In each round, if both players selected the same action that round, each receives 1 point for that round; if their actions differed, each receives 0.
   A player's final payoff is the sum of points across the three rounds.
-additional_data: Identical Payoffs
-constraint_descriptions:
+additional_data: Identical payoffs to reference game
 additional_comments: This game description is designed to include a complex imperfect recall scenario in which the player forgets their own previous actions.
 related games: []
 assets:

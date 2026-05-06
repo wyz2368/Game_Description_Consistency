@@ -1,0 +1,22 @@
+Game: gambling
+Generated file: 15.efg
+Reference path: Dataset/gambling/game.efg
+Original generated path: Benchmark/Dataset_Generate/MCP/gambling/15.efg
+Matched path: Results/MCP/Output/gambling/15.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The number of players in the generated game does not match the number of players in the reference game.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 361, in match_one_generated_efg
+    match_player(gen_game, ref_game, model)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/player_match.py", line 86, in match_player
+    match_palyer_name_llm(gen_game, ref_game, model)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/player_match.py", line 48, in match_palyer_name_llm
+    raise ValueError("The number of players in the generated game does not match the number of players in the reference game.")
+ValueError: The number of players in the generated game does not match the number of players in the reference game.

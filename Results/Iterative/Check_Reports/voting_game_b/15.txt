@@ -1,0 +1,31 @@
+Game: voting_game_b
+Generated file: 15.efg
+Reference path: Dataset/voting_game_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/voting_game_b/15.efg
+Matched path: Results/Iterative/Output/voting_game_b/15.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

@@ -11,8 +11,7 @@ description: |-
   If the new manufacturer is strong and signals weak: fight yields (0, 0), accommodate yields (2, 1).
   If the new manufacturer is weak and signals strong: fight yields (0, 2), accommodate yields (2, 1).
   If the new manufacturer is weak and signals weak: fight yields (1, 2), accommodate yields (3, 1).
-additional_data: Identical Payoffs
-constraint_descriptions:
+additional_data: Identical payoffs to reference game
 additional_comments: null
 related games: []
 assets:

@@ -1,0 +1,31 @@
+Game: memory_one_game
+Generated file: 8.efg
+Reference path: Dataset/memory_one_game/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/memory_one_game/8.efg
+Matched path: Results/Iterative/Output/memory_one_game/8.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

@@ -141,7 +141,7 @@ def reorder_generated_game(reference_node, generated_node):
 
     for level, ref_player in ref_order.items():
         if ref_player not in level_nodes:
-            raise ValueError(f"Player {ref_player} missing in generated nodes.")
+            raise ValueError(f"Player {ref_player} missing in TSM.")
         # Find the node in the generated list that matches the reference player
         
         actions, _, info_set = level_nodes[ref_player][0]
@@ -311,7 +311,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                         match = True
                         break
                 if not match:
-                    raise ValueError(f"No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
+                    raise ValueError(f"Wrong Generated Tree Structure. No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
                 continue
 
             # Step 2: Check whether the current node is explicitly marked as the start
@@ -346,7 +346,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
                         rmn = r_node
                         break
                 if not match:
-                    raise ValueError(f"No matching reference node found for g_node with parent action")
+                    raise ValueError(f"Wrong Generated Tree Structure. No matching reference node found for g_node with parent action")
 
                 continue  # Skip the g_node if it doesn't satisfy the condition
           
@@ -364,7 +364,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
 
             # Raise an error if no matching r_node is found
             if not matched_ref_node:
-                raise ValueError(f"No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
+                raise ValueError(f"Wrong Generated Tree Structure. No matching reference node found for g_node: {g_node} with parent action {g_node.parent_action}")
 
             print(f"Matched ref_node, Parent Action: {matched_ref_node.parent_action}")
             
@@ -447,7 +447,7 @@ def filter_simultaneous_moves(ref_node: Node, gen_node: Node, model: str, mappin
         for g_node, r_node in zip(gen_nodes_list, ref_nodes_list_temp):
 
             if len(r_node.children.values()) != len(g_node.children.values()):
-                raise ValueError(f"Number of children do not match")
+                raise ValueError(f"Wrong Generated Tree Structure. Number of children do not match")
             
             if r_node.node_type != g_node.node_type:
                 raise ValueError(f"Node types do not match")

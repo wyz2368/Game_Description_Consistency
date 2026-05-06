@@ -1,0 +1,44 @@
+EFG 2 R "Two-player Borda voting with tie-break" { "Player1" "Player2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_wins_AvA" { 2, 0 }
+t "" 2 "A_wins_AvAc" { 2, 0 }
+t "" 3 "B_wins_AvB" { 1, 1 }
+t "" 4 "B_wins_AvBc" { 1, 1 }
+t "" 5 "A_wins_AvCa" { 2, 0 }
+t "" 6 "C_wins_AvCb" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "A_wins_AcvA" { 2, 0 }
+t "" 8 "A_wins_AcvAc" { 2, 0 }
+t "" 9 "A_wins_AcvB" { 2, 0 }
+t "" 10 "C_wins_AcvBc" { 0, 2 }
+t "" 11 "C_wins_AcvCa" { 0, 2 }
+t "" 12 "C_wins_AcvCb" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "B_wins_BvA" { 1, 1 }
+t "" 14 "A_wins_BvAc" { 2, 0 }
+t "" 15 "B_wins_BvB" { 1, 1 }
+t "" 16 "B_wins_BvBc" { 1, 1 }
+t "" 17 "C_wins_BvCa" { 0, 2 }
+t "" 18 "B_wins_BvCb" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "B_wins_BcvA" { 1, 1 }
+t "" 20 "C_wins_BcvAc" { 0, 2 }
+t "" 21 "B_wins_BcvB" { 1, 1 }
+t "" 22 "B_wins_BcvBc" { 1, 1 }
+t "" 23 "C_wins_BcvCa" { 0, 2 }
+t "" 24 "C_wins_BcvCb" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "C_wins_CvA" { 0, 2 }
+t "" 26 "C_wins_CvAc" { 0, 2 }
+t "" 27 "C_wins_CvB" { 0, 2 }
+t "" 28 "C_wins_CvBc" { 0, 2 }
+t "" 29 "C_wins_CvCa" { 0, 2 }
+t "" 30 "C_wins_CvCb" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "C_wins_CbvA" { 0, 2 }
+t "" 32 "C_wins_CbvAc" { 0, 2 }
+t "" 33 "B_wins_CbvB" { 1, 1 }
+t "" 34 "C_wins_CbvBc" { 0, 2 }
+t "" 35 "C_wins_CbvCa" { 0, 2 }
+t "" 36 "C_wins_CbvCb" { 0, 2 }

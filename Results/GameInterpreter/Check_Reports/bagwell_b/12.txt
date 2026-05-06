@@ -1,0 +1,20 @@
+Game: bagwell_b
+Generated file: 12.efg
+Reference path: Dataset/bagwell_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/bagwell_b/12.efg
+Matched path: Results/GameInterpreter/Output/bagwell_b/12.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: Generated game chance nodes/probabilities do not match reference game.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 622, in switch_order
+    raise ValueError(
+ValueError: Generated game chance nodes/probabilities do not match reference game.

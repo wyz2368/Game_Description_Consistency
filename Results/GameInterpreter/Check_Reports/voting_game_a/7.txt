@@ -1,0 +1,31 @@
+Game: voting_game_a
+Generated file: 7.efg
+Reference path: Dataset/voting_game_a/game.efg
+Original generated path: Dataset_voting/GamInterpreter/voting_game_a/7.efg
+Matched path: Results_voting/GamInterpreter/Output/voting_game_a/7.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/voting_game_a/constraints/TSM_cst.json
+Cst Type: Temporally-Simultaneous Move
+Skipped: True
+Passed: True
+Raw result: 'Skipped unsupported Cst Type at final stage: Temporally-Simultaneous Move'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

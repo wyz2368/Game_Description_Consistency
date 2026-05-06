@@ -1,0 +1,29 @@
+game_id: Bagwell
+source: Bagwell, K., 1995. Commitment and observability in games. Games and Economic Behavior, 8(2), pp.271-280.
+extraction_methodology: Manual
+description: |-
+  Consider next the noisy-leader game.
+  In this game, a pure strategy for Player 1 is simply an action, a1 in {C, S}.
+
+  Let the signal received by Player 2 be denoted by phi, and assume for simplicity that phi either takes value C or S.
+  The signal technology works as follows:
+  Prob(phi = S | S) = 1 - epsilon = Prob(phi = C | C)
+  In other words, when Player 1 chooses a particular action, the probability that Player 2 will observe a signal specifying that same action is 1 - epsilon.
+  Take epsilon = 0.01.
+  Player 2 observes a signal, either C or S, and then chooses an action from {C, S}.
+
+  Each player's payoff is determined by the realised action profile and does not depend on which signal Player 2 observed.
+
+  Player 1's best outcome is when they play C while Player 2 plays S.
+  Their second-best outcome is when both play S, followed by both playing C.
+  Player 1's worst outcome is when they play S while Player 2 plays C.
+
+  Player 2's best outcome is when both play C, followed by when Player 1 plays C while Player 2 plays S.
+  The outcome where both play S is third, and Player 2's worst outcome is when they play C while Player 1 plays S.
+additional_data: Total order with ties over player outcomes
+additional_comments: We assign a specific value to the probability that Player 2 receives an incorrect signal, so that the chance node is fixed during translation rather than represented by an unknown parameter. This paper gives the payoff matrix with explicit values. We modify these into payoff relationships to make the translation more challenging.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

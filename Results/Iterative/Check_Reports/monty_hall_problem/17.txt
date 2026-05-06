@@ -1,0 +1,22 @@
+Game: monty_hall_problem
+Generated file: 17.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/monty_hall_problem/17.efg
+Matched path: Results/Iterative/Output/monty_hall_problem/17.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: The generated actions map directly to the reference's initial choice options: "Choose door 1/2/3" = "Pick door 1/2/3". However, the reference also includes the second-stage options "Stick" and "Switch" (choosing the original door vs. the remaining unopened door), which are not present in the generated list. Therefore the two lists do not represent the same set of underlying game actions.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 366, in match_one_generated_efg
+    mappings = build_global_action_mappings(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 201, in build_global_action_mappings
+    mappings[k] = match_all_actions_llm(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated actions map directly to the reference's initial choice options: "Choose door 1/2/3" = "Pick door 1/2/3". However, the reference also includes the second-stage options "Stick" and "Switch" (choosing the original door vs. the remaining unopened door), which are not present in the generated list. Therefore the two lists do not represent the same set of underlying game actions.

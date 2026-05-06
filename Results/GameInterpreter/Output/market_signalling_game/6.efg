@@ -1,0 +1,16 @@
+EFG 2 R "Entry game with signaling (strength drawn by chance)" { "New Manufacturer" "Existing Manufacturer" }
+c "" 1 "" { "Strong" 2/3 "Weak" 1/3 } 0
+p "" 1 1 "" { "Strong Signal" "Weak Signal" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 1 "S_type,S_sig,F" { 1, 0 }
+t "" 2 "S_type,S_sig,A" { 3, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 3 "S_type,W_sig,F" { 0, 0 }
+t "" 4 "S_type,W_sig,A" { 2, 1 }
+p "" 1 2 "" { "Strong Signal" "Weak Signal" } 0
+p "" 2 1 "" { "Fight" "Accommodate" } 0
+t "" 5 "W_type,S_sig,F" { 0, 2 }
+t "" 6 "W_type,S_sig,A" { 2, 1 }
+p "" 2 2 "" { "Fight" "Accommodate" } 0
+t "" 7 "W_type,W_sig,F" { 1, 2 }
+t "" 8 "W_type,W_sig,A" { 3, 1 }

@@ -1,0 +1,44 @@
+EFG 2 R "Two-player Borda Voting (3 candidates)" { "Player 1" "Player 2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "p1_A>B>C_p2_A>B>C_winner_A" { 2, 0 }
+t "" 2 "p1_A>B>C_p2_A>C>B_winner_A" { 2, 0 }
+t "" 3 "p1_A>B>C_p2_B>A>C_winner_A" { 2, 0 }
+t "" 4 "p1_A>B>C_p2_B>C>A_winner_B" { 1, 1 }
+t "" 5 "p1_A>B>C_p2_C>A>B_winner_A" { 2, 0 }
+t "" 6 "p1_A>B>C_p2_C>B>A_winner_A" { 2, 0 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "p1_A>C>B_p2_A>B>C_winner_A" { 2, 0 }
+t "" 8 "p1_A>C>B_p2_A>C>B_winner_A" { 2, 0 }
+t "" 9 "p1_A>C>B_p2_B>A>C_winner_A" { 2, 0 }
+t "" 10 "p1_A>C>B_p2_B>C>A_winner_A" { 2, 0 }
+t "" 11 "p1_A>C>B_p2_C>A>B_winner_A" { 2, 0 }
+t "" 12 "p1_A>C>B_p2_C>B>A_winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "p1_B>A>C_p2_A>B>C_winner_A" { 2, 0 }
+t "" 14 "p1_B>A>C_p2_A>C>B_winner_A" { 2, 0 }
+t "" 15 "p1_B>A>C_p2_B>A>C_winner_B" { 1, 1 }
+t "" 16 "p1_B>A>C_p2_B>C>A_winner_B" { 1, 1 }
+t "" 17 "p1_B>A>C_p2_C>A>B_winner_A" { 2, 0 }
+t "" 18 "p1_B>A>C_p2_C>B>A_winner_B" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "p1_B>C>A_p2_A>B>C_winner_B" { 1, 1 }
+t "" 20 "p1_B>C>A_p2_A>C>B_winner_A" { 2, 0 }
+t "" 21 "p1_B>C>A_p2_B>A>C_winner_B" { 1, 1 }
+t "" 22 "p1_B>C>A_p2_B>C>A_winner_B" { 1, 1 }
+t "" 23 "p1_B>C>A_p2_C>A>B_winner_C" { 0, 2 }
+t "" 24 "p1_B>C>A_p2_C>B>A_winner_B" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "p1_C>A>B_p2_A>B>C_winner_A" { 2, 0 }
+t "" 26 "p1_C>A>B_p2_A>C>B_winner_A" { 2, 0 }
+t "" 27 "p1_C>A>B_p2_B>A>C_winner_A" { 2, 0 }
+t "" 28 "p1_C>A>B_p2_B>C>A_winner_C" { 0, 2 }
+t "" 29 "p1_C>A>B_p2_C>A>B_winner_C" { 0, 2 }
+t "" 30 "p1_C>A>B_p2_C>B>A_winner_C" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "p1_C>B>A_p2_A>B>C_winner_A" { 2, 0 }
+t "" 32 "p1_C>B>A_p2_A>C>B_winner_C" { 0, 2 }
+t "" 33 "p1_C>B>A_p2_B>A>C_winner_B" { 1, 1 }
+t "" 34 "p1_C>B>A_p2_B>C>A_winner_B" { 1, 1 }
+t "" 35 "p1_C>B>A_p2_C>A>B_winner_C" { 0, 2 }
+t "" 36 "p1_C>B>A_p2_C>B>A_winner_C" { 0, 2 }

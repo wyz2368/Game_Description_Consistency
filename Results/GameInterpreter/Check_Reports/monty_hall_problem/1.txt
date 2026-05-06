@@ -1,0 +1,22 @@
+Game: monty_hall_problem
+Generated file: 1.efg
+Reference path: Dataset/monty_hall_problem/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/monty_hall_problem/1.efg
+Matched path: Results/GameInterpreter/Output/monty_hall_problem/1.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game. Reason: The generated list contains the three explicit initial choices ("Choose door 1/2/3") which correspond to the reference's "Pick door 1/2/3". However the generated list's remaining actions are concrete second-stage door picks ("Pick 1/2/3") rather than the abstract second-stage options in the reference ("Stick" or "Switch"). Thus the second-stage action sets do not match: one labels final actions by absolute door number, the other by stick/switch choices conditional on the first pick.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 366, in match_one_generated_efg
+    mappings = build_global_action_mappings(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 201, in build_global_action_mappings
+    mappings[k] = match_all_actions_llm(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/action_match.py", line 100, in match_all_actions_llm
+    raise ValueError(
+ValueError: The actions in the generated game do not match the actions in the reference game. Reason: The generated list contains the three explicit initial choices ("Choose door 1/2/3") which correspond to the reference's "Pick door 1/2/3". However the generated list's remaining actions are concrete second-stage door picks ("Pick 1/2/3") rather than the abstract second-stage options in the reference ("Stick" or "Switch"). Thus the second-stage action sets do not match: one labels final actions by absolute door number, the other by stick/switch choices conditional on the first pick.

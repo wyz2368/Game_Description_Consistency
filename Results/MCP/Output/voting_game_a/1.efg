@@ -1,0 +1,44 @@
+EFG 2 R "Two-Player Borda Voting Game" { "Player 1" "Player 2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_ABC_ABC" { 2, 0 }
+t "" 2 "A_ABC_ACB" { 2, 0 }
+t "" 3 "A_ABC_BAC" { 2, 0 }
+t "" 4 "B_ABC_BCA" { 1, 1 }
+t "" 5 "A_ABC_CAB" { 2, 0 }
+t "" 6 "A_ABC_CBA" { 2, 0 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "A_ACB_ABC" { 2, 0 }
+t "" 8 "A_ACB_ACB" { 2, 0 }
+t "" 9 "A_ACB_BAC" { 2, 0 }
+t "" 10 "A_ACB_BCA" { 2, 0 }
+t "" 11 "A_ACB_CAB" { 2, 0 }
+t "" 12 "C_ACB_CBA" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "A_BAC_ABC" { 2, 0 }
+t "" 14 "A_BAC_ACB" { 2, 0 }
+t "" 15 "B_BAC_BAC" { 1, 1 }
+t "" 16 "B_BAC_BCA" { 1, 1 }
+t "" 17 "A_BAC_CAB" { 2, 0 }
+t "" 18 "B_BAC_CBA" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "B_BCA_ABC" { 1, 1 }
+t "" 20 "A_BCA_ACB" { 2, 0 }
+t "" 21 "B_BCA_BAC" { 1, 1 }
+t "" 22 "B_BCA_BCA" { 1, 1 }
+t "" 23 "C_BCA_CAB" { 0, 2 }
+t "" 24 "B_BCA_CBA" { 1, 1 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "A_CAB_ABC" { 2, 0 }
+t "" 26 "A_CAB_ACB" { 2, 0 }
+t "" 27 "A_CAB_BAC" { 2, 0 }
+t "" 28 "C_CAB_BCA" { 0, 2 }
+t "" 29 "C_CAB_CAB" { 0, 2 }
+t "" 30 "C_CAB_CBA" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "A_CBA_ABC" { 2, 0 }
+t "" 32 "C_CBA_ACB" { 0, 2 }
+t "" 33 "B_CBA_BAC" { 1, 1 }
+t "" 34 "B_CBA_BCA" { 1, 1 }
+t "" 35 "C_CBA_CAB" { 0, 2 }
+t "" 36 "C_CBA_CBA" { 0, 2 }

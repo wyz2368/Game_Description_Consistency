@@ -1,0 +1,31 @@
+Game: gambling
+Generated file: 1.efg
+Reference path: Dataset/gambling/game.efg
+Original generated path: Benchmark/Dataset_Generate/GameInterpreter/gambling/1.efg
+Matched path: Results/GameInterpreter/Output/gambling/1.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/gambling/constraints/TSM_cst.json
+Cst Type: Temporally-Simultaneous Move
+Skipped: True
+Passed: True
+Raw result: 'Skipped unsupported Cst Type at final stage: Temporally-Simultaneous Move'
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

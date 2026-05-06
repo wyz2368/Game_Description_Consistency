@@ -151,7 +151,7 @@ class EFGParser:
             pattern = r'^t\s+"([^"]*)"\s+(\d+)\s+"([^"]*)"\s+\{\s*([^}]*)\s*\}\s*$'
             m = re.search(pattern, line)
             if not m:
-                raise ValueError(f"The line should match terminal. Got: {line}")
+                raise ValueError(f"Invalid EFG. The line should match terminal. Got: {line}")
 
             label = m.group(1)
             outcome_number = int(m.group(2))
@@ -183,7 +183,7 @@ class EFGParser:
             match = re.search(pattern, line)
 
             if not match:
-                raise ValueError(f"The line should match chance. Got: {line}")
+                raise ValueError(f"Invalid EFG. The line should match chance. Got: {line}")
 
             label = match.group(1)
             information_set = int(match.group(2))
@@ -238,7 +238,7 @@ class EFGParser:
 
 
             if not match:
-                raise ValueError("The line should match player.")
+                raise ValueError("Invalid EFG. The line should match player.")
 
 
             label = match.group(1)

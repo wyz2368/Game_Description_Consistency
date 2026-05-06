@@ -1,0 +1,31 @@
+Game: kuhn_poker_(2-player_4-card)
+Generated file: 17.efg
+Reference path: Dataset/kuhn_poker_(2-player_4-card)/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/kuhn_poker_(2-player_4-card)/17.efg
+Matched path: Results/Direct/Output/kuhn_poker_(2-player_4-card)/17.efg
+Status: FAIL
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_payoffs
+Additional data: Identical payoffs to reference game
+Passed: False
+Raw result: False
+
+=== Constraint Checks ===
+Constraint file: None
+Cst Type: None
+Skipped: True
+Passed: True
+Raw result: 'No constraint folder or no JSON constraint files found.'
+
+=== Errors ===
+- Identical payoffs to reference game check failed.
+
+=== Final Result ===
+Checker results passed: False
+Constraint checks passed: True
+All checks passed: False

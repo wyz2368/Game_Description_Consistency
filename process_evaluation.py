@@ -2,9 +2,14 @@ import argparse
 import json
 import os
 import re
-import time
 import traceback
 from typing import Any, Dict, List, Optional
+
+
+EXPLICIT_PAYOFF_CONSTRAINT_TYPE = "Explicit Payoff(s) for a Certain Outcome"
+
+ADDITIONAL_DATA_TOTAL_ORDER = "Total order with ties over player outcomes"
+ADDITIONAL_DATA_IDENTICAL_PAYOFFS = "Identical payoffs to reference game"
 
 
 def normalize_game_name(name: str) -> str:
@@ -71,8 +76,8 @@ def load_metadata_additional_data(metadata_path: str) -> Optional[str]:
     Read metadata.yml and return the additional_data entry.
 
     Expected values:
-    - Total Order
-    - Identical Payoffs
+    - Total order with ties over player outcomes
+    - Identical payoffs to reference game
     """
     if not os.path.exists(metadata_path):
         return None
@@ -92,7 +97,7 @@ def load_metadata_additional_data(metadata_path: str) -> Optional[str]:
 
     except ImportError:
         # Fallback for simple metadata.yml files like:
-        # additional_data: Total Order
+        # additional_data: Total order with ties over player outcomes
         with open(metadata_path, "r", encoding="utf-8") as file:
             for line in file:
                 stripped = line.strip()
@@ -185,14 +190,14 @@ def run_constraint_check(
     Run one final JSON constraint check.
 
     Current behavior:
-    - Only Cst Type == 1 is checked at this final stage.
-    - Uses Constraints_Checker.check_efg_json(candidate_efg, json_file).
+    - Only Cst Type == "Explicit Payoff(s) for a Certain Outcome" is checked.
+    - Uses Checkers.check_efg_json(candidate_efg, json_file).
     """
-    from Constraints_Checker import check_efg_json
+    from Checkers import check_efg_json
 
     cst_type = load_constraint_type(json_path)
 
-    if cst_type == 1:
+    if cst_type == EXPLICIT_PAYOFF_CONSTRAINT_TYPE:
         return check_efg_json(input_efg_path, json_path)
 
     return {
@@ -212,10 +217,10 @@ def format_exception(exc: Exception) -> Dict[str, str]:
 def summarize_check_failure(result: Dict[str, Any]) -> List[str]:
     errors = []
 
-    for item in result.get("algorithm_results", []):
+    for item in result.get("checker_results", []):
         if not item.get("passed", False):
             errors.append(
-                "Algorithm check failed: "
+                "Checker failed: "
                 f"{item.get('check_name')} | "
                 f"{repr(item.get('raw_result'))}"
             )
@@ -250,21 +255,6 @@ def write_sample_report(report_path: str, result: Dict[str, Any]):
         file.write(f"Status: {result.get('status')}\n")
         file.write("\n")
 
-        file.write("=== Timing ===\n")
-        file.write(
-            f"Matching time seconds: "
-            f"{result.get('matching_time_seconds', 0.0):.6f}\n"
-        )
-        file.write(
-            f"Constraint check time seconds: "
-            f"{result.get('constraint_time_seconds', 0.0):.6f}\n"
-        )
-        file.write(
-            f"Total sample time seconds: "
-            f"{result.get('total_time_seconds', 0.0):.6f}\n"
-        )
-        file.write("\n")
-
         if result.get("stage") == "match":
             file.write("=== Match Error ===\n")
             error = result.get("error", {})
@@ -283,13 +273,13 @@ def write_sample_report(report_path: str, result: Dict[str, Any]):
             file.write(error.get("traceback", ""))
             return
 
-        file.write("=== Algorithm Checks ===\n")
-        algorithm_results = result.get("algorithm_results", [])
+        file.write("=== Checker Results ===\n")
+        checker_results = result.get("checker_results", [])
 
-        if len(algorithm_results) == 0:
-            file.write("No algorithm checks recorded.\n")
+        if len(checker_results) == 0:
+            file.write("No checker results recorded.\n")
         else:
-            for item in algorithm_results:
+            for item in checker_results:
                 file.write(f"Check name: {item.get('check_name')}\n")
 
                 if "additional_data" in item:
@@ -322,7 +312,7 @@ def write_sample_report(report_path: str, result: Dict[str, Any]):
             file.write("None\n")
 
         file.write("\n=== Final Result ===\n")
-        file.write(f"Algorithm checks passed: {result.get('algorithms_passed')}\n")
+        file.write(f"Checker results passed: {result.get('checkers_passed')}\n")
         file.write(f"Constraint checks passed: {result.get('constraints_passed')}\n")
         file.write(f"All checks passed: {result.get('all_passed')}\n")
 
@@ -354,8 +344,7 @@ def match_one_generated_efg(
 
     # This may be [] if there is no constraints folder.
     # That is valid.
-    # If constraints exist, pass all JSON files to switch_order,
-    # including type 2 constraints.
+    # If constraints exist, pass all JSON files to switch_order.
     constraints = get_constraint_json_files(constraints_dir)
 
     if len(constraints) == 0:
@@ -413,18 +402,21 @@ def check_one_matched_efg(
     Stages:
     1. same_reduced_strategies(candidate_path, ref_path)
     2. metadata.yml additional_data:
-       - Total Order -> check_total_order_matching(reference_efg, candidate_efg)
-       - Identical Payoffs -> check_payoffs(reference_efg, input_efg)
+       - Total order with ties over player outcomes
+         -> check_total_order_matching(reference_efg, candidate_efg)
+       - Identical payoffs to reference game
+         -> check_payoffs(reference_efg, input_efg)
     3. Final constraint checker:
-       - only JSON files with "Cst Type": 1
+       - only JSON files with:
+         "Cst Type": "Explicit Payoff(s) for a Certain Outcome"
        - check_efg_json(matched_efg, json_file)
     """
-    from Algorithms import (
+    from Checkers import (
         same_reduced_strategies,
         check_payoffs,
         check_total_order_matching,
+        check_efg_json,
     )
-    from Constraints_Checker import check_efg_json
 
     ref_path = os.path.join(dataset_game_path, "game.efg")
     metadata_path = os.path.join(dataset_game_path, "metadata.yml")
@@ -436,7 +428,7 @@ def check_one_matched_efg(
     if not os.path.exists(matched_path):
         raise FileNotFoundError(f"Matched EFG not found: {matched_path}")
 
-    algorithm_results = []
+    checker_results = []
     constraint_results = []
     errors = []
 
@@ -446,7 +438,7 @@ def check_one_matched_efg(
     raw_reduced_result = same_reduced_strategies(matched_path, ref_path)
     reduced_passed = normalize_result(raw_reduced_result)
 
-    algorithm_results.append(
+    checker_results.append(
         {
             "check_name": "same_reduced_strategies",
             "passed": reduced_passed,
@@ -458,12 +450,12 @@ def check_one_matched_efg(
         errors.append("Reduced strategy sets don't match.")
 
     # ------------------------------------------------------------
-    # Stage 2: metadata-driven algorithm check
+    # Stage 2: metadata-driven checker
     # ------------------------------------------------------------
     additional_data = load_metadata_additional_data(metadata_path)
 
     if additional_data is None:
-        algorithm_results.append(
+        checker_results.append(
             {
                 "check_name": "metadata_additional_data",
                 "passed": False,
@@ -472,14 +464,14 @@ def check_one_matched_efg(
         )
         errors.append("metadata.yml missing or additional_data not found.")
 
-    elif additional_data == "Total Order":
+    elif additional_data == ADDITIONAL_DATA_TOTAL_ORDER:
         raw_total_order_result = check_total_order_matching(
             ref_path,
             matched_path,
         )
         total_order_passed = normalize_result(raw_total_order_result)
 
-        algorithm_results.append(
+        checker_results.append(
             {
                 "check_name": "check_total_order_matching",
                 "additional_data": additional_data,
@@ -489,16 +481,16 @@ def check_one_matched_efg(
         )
 
         if not total_order_passed:
-            errors.append("Total order matching failed.")
+            errors.append("Total order check failed.")
 
-    elif additional_data == "Identical Payoffs":
+    elif additional_data == ADDITIONAL_DATA_IDENTICAL_PAYOFFS:
         raw_payoff_result = check_payoffs(
             ref_path,
             matched_path,
         )
         payoff_passed = normalize_result(raw_payoff_result)
 
-        algorithm_results.append(
+        checker_results.append(
             {
                 "check_name": "check_payoffs",
                 "additional_data": additional_data,
@@ -508,10 +500,10 @@ def check_one_matched_efg(
         )
 
         if not payoff_passed:
-            errors.append("Identical payoffs check failed.")
+            errors.append("Identical payoffs to reference game check failed.")
 
     else:
-        algorithm_results.append(
+        checker_results.append(
             {
                 "check_name": "metadata_additional_data",
                 "passed": False,
@@ -523,7 +515,7 @@ def check_one_matched_efg(
     # ------------------------------------------------------------
     # Stage 3: final JSON constraint checker
     # Missing constraint folder is valid.
-    # Only Cst Type == 1 is checked here.
+    # Only explicit payoff constraints are checked here.
     # ------------------------------------------------------------
     json_files = get_constraint_json_files(constraints_dir)
 
@@ -541,14 +533,17 @@ def check_one_matched_efg(
     for json_path in json_files:
         cst_type = load_constraint_type(json_path)
 
-        if cst_type != 1:
+        if cst_type != EXPLICIT_PAYOFF_CONSTRAINT_TYPE:
             constraint_results.append(
                 {
                     "constraint_file": json_path,
                     "cst_type": cst_type,
                     "skipped": True,
                     "passed": True,
-                    "raw_result": f"Skipped unsupported Cst Type at final stage: {cst_type}",
+                    "raw_result": (
+                        "Skipped unsupported Cst Type at final stage: "
+                        f"{cst_type}"
+                    ),
                 }
             )
             continue
@@ -575,9 +570,9 @@ def check_one_matched_efg(
                 f"{json_path} | Cst Type={cst_type} | {repr(raw_result)}"
             )
 
-    algorithms_passed = all(item["passed"] for item in algorithm_results)
+    checkers_passed = all(item["passed"] for item in checker_results)
     constraints_passed = all(item["passed"] for item in constraint_results)
-    all_passed = algorithms_passed and constraints_passed
+    all_passed = checkers_passed and constraints_passed
 
     result = {
         "game_name": game_name,
@@ -586,9 +581,9 @@ def check_one_matched_efg(
         "ref_path": ref_path,
         "stage": "final_check",
         "status": "PASS" if all_passed else "FAIL",
-        "algorithm_results": algorithm_results,
+        "checker_results": checker_results,
         "constraint_results": constraint_results,
-        "algorithms_passed": algorithms_passed,
+        "checkers_passed": checkers_passed,
         "constraints_passed": constraints_passed,
         "all_passed": all_passed,
         "errors": errors,
@@ -608,11 +603,7 @@ def build_error_result(
     generated_path: Optional[str] = None,
     matched_path: Optional[str] = None,
     ref_path: Optional[str] = None,
-    matching_time_seconds: float = 0.0,
-    constraint_time_seconds: float = 0.0,
 ) -> Dict[str, Any]:
-    total_time_seconds = matching_time_seconds + constraint_time_seconds
-
     return {
         "game_name": game_name,
         "generated_filename": generated_filename,
@@ -622,11 +613,8 @@ def build_error_result(
         "stage": stage,
         "status": "ERROR",
         "all_passed": False,
-        "algorithms_passed": False,
+        "checkers_passed": False,
         "constraints_passed": False,
-        "matching_time_seconds": matching_time_seconds,
-        "constraint_time_seconds": constraint_time_seconds,
-        "total_time_seconds": total_time_seconds,
         "error": format_exception(exc),
         "errors": [f"{type(exc).__name__}: {exc}"],
     }
@@ -641,9 +629,6 @@ def update_stats(per_game_stats: Dict[str, Dict[str, Any]], result: Dict[str, An
             "total": 0,
             "passed": 0,
             "failed": 0,
-            "matching_time_seconds": 0.0,
-            "constraint_time_seconds": 0.0,
-            "total_time_seconds": 0.0,
             "samples": [],
         },
     )
@@ -656,10 +641,6 @@ def update_stats(per_game_stats: Dict[str, Dict[str, Any]], result: Dict[str, An
     else:
         stats["failed"] += 1
 
-    stats["matching_time_seconds"] += result.get("matching_time_seconds", 0.0)
-    stats["constraint_time_seconds"] += result.get("constraint_time_seconds", 0.0)
-    stats["total_time_seconds"] += result.get("total_time_seconds", 0.0)
-
 
 def write_final_summary(
     summary_path: str,
@@ -670,16 +651,6 @@ def write_final_summary(
     total_passed = sum(stats["passed"] for stats in per_game_stats.values())
     total_failed = sum(stats["failed"] for stats in per_game_stats.values())
     total_games = len(per_game_stats)
-
-    total_matching_time = sum(
-        stats["matching_time_seconds"] for stats in per_game_stats.values()
-    )
-    total_constraint_time = sum(
-        stats["constraint_time_seconds"] for stats in per_game_stats.values()
-    )
-    total_eval_time = sum(
-        stats["total_time_seconds"] for stats in per_game_stats.values()
-    )
 
     ensure_parent_dir(summary_path)
 
@@ -695,25 +666,6 @@ def write_final_summary(
             file.write(f"Sample pass rate: {total_passed / total_samples:.4f}\n")
         else:
             file.write("Sample pass rate: N/A\n")
-
-        file.write("\n=== Timing Summary ===\n")
-        file.write(f"Total matching time seconds: {total_matching_time:.6f}\n")
-        file.write(f"Total constraint check time seconds: {total_constraint_time:.6f}\n")
-        file.write(f"Total evaluation time seconds: {total_eval_time:.6f}\n")
-
-        if total_samples > 0:
-            file.write(
-                f"Average matching time per sample seconds: "
-                f"{total_matching_time / total_samples:.6f}\n"
-            )
-            file.write(
-                f"Average constraint check time per sample seconds: "
-                f"{total_constraint_time / total_samples:.6f}\n"
-            )
-            file.write(
-                f"Average total time per sample seconds: "
-                f"{total_eval_time / total_samples:.6f}\n"
-            )
 
         file.write("\n=== Per-Game Summary ===\n")
 
@@ -734,33 +686,6 @@ def write_final_summary(
                 "  Sample pass rate: N/A\n"
             )
 
-            file.write(
-                f"  Total matching time seconds: "
-                f"{stats['matching_time_seconds']:.6f}\n"
-            )
-            file.write(
-                f"  Total constraint check time seconds: "
-                f"{stats['constraint_time_seconds']:.6f}\n"
-            )
-            file.write(
-                f"  Total game time seconds: "
-                f"{stats['total_time_seconds']:.6f}\n"
-            )
-
-            if game_total > 0:
-                file.write(
-                    f"  Average matching time per sample seconds: "
-                    f"{stats['matching_time_seconds'] / game_total:.6f}\n"
-                )
-                file.write(
-                    f"  Average constraint check time per sample seconds: "
-                    f"{stats['constraint_time_seconds'] / game_total:.6f}\n"
-                )
-                file.write(
-                    f"  Average total time per sample seconds: "
-                    f"{stats['total_time_seconds'] / game_total:.6f}\n"
-                )
-
             file.write("  Samples:\n")
 
             for sample in sorted(
@@ -771,18 +696,9 @@ def write_final_summary(
                     f"    - {sample['generated_filename']}: "
                     f"{sample.get('status')}"
                 )
-                file.write(
-                    f" | matching={sample.get('matching_time_seconds', 0.0):.6f}s"
-                )
-                file.write(
-                    f" | constraints={sample.get('constraint_time_seconds', 0.0):.6f}s"
-                )
-                file.write(
-                    f" | total={sample.get('total_time_seconds', 0.0):.6f}s"
-                )
 
                 if sample.get("all_passed"):
-                    file.write(" | passed\n")
+                    file.write("\n")
                     continue
 
                 errors = sample.get("errors") or []
@@ -808,16 +724,6 @@ def print_final_summary(
     total_passed = sum(stats["passed"] for stats in per_game_stats.values())
     total_games = len(per_game_stats)
 
-    total_matching_time = sum(
-        stats["matching_time_seconds"] for stats in per_game_stats.values()
-    )
-    total_constraint_time = sum(
-        stats["constraint_time_seconds"] for stats in per_game_stats.values()
-    )
-    total_eval_time = sum(
-        stats["total_time_seconds"] for stats in per_game_stats.values()
-    )
-
     print("\n=== Final Combined Summary ===")
     print(f"Requested generations per game: {num_generations or 'all'}")
     print(f"Total games evaluated: {total_games}")
@@ -830,35 +736,13 @@ def print_final_summary(
     else:
         print("Sample pass rate: N/A")
 
-    print("\n=== Timing Summary ===")
-    print(f"Total matching time seconds: {total_matching_time:.6f}")
-    print(f"Total constraint check time seconds: {total_constraint_time:.6f}")
-    print(f"Total evaluation time seconds: {total_eval_time:.6f}")
-
-    if total_samples > 0:
-        print(
-            f"Average matching time per sample seconds: "
-            f"{total_matching_time / total_samples:.6f}"
-        )
-        print(
-            f"Average constraint check time per sample seconds: "
-            f"{total_constraint_time / total_samples:.6f}"
-        )
-        print(
-            f"Average total time per sample seconds: "
-            f"{total_eval_time / total_samples:.6f}"
-        )
-
     print("\n=== Per-Game Summary ===")
 
     for game_name in sorted(per_game_stats.keys(), key=natural_sort_key):
         stats = per_game_stats[game_name]
         print(
             f"{game_name}: "
-            f"{stats['passed']}/{stats['total']} samples passed | "
-            f"matching={stats['matching_time_seconds']:.6f}s | "
-            f"constraints={stats['constraint_time_seconds']:.6f}s | "
-            f"total={stats['total_time_seconds']:.6f}s"
+            f"{stats['passed']}/{stats['total']} samples passed"
         )
 
     print(f"\nSummary saved to: {summary_path}")
@@ -971,11 +855,6 @@ def main():
 
             print(f"Processing: {generated_game_name}/{filename}")
 
-            matching_time_seconds = 0.0
-            constraint_time_seconds = 0.0
-
-            match_start = time.perf_counter()
-
             try:
                 match_result = match_one_generated_efg(
                     game_name=dataset_game_name,
@@ -986,8 +865,6 @@ def main():
                     model=args.model,
                 )
             except Exception as exc:
-                matching_time_seconds = time.perf_counter() - match_start
-
                 result = build_error_result(
                     game_name=dataset_game_name,
                     generated_filename=filename,
@@ -996,8 +873,6 @@ def main():
                     generated_path=generated_path,
                     matched_path=matched_path,
                     ref_path=ref_path,
-                    matching_time_seconds=matching_time_seconds,
-                    constraint_time_seconds=0.0,
                 )
 
                 write_sample_report(report_path, result)
@@ -1005,14 +880,9 @@ def main():
 
                 print(
                     f"[MATCH ERROR] {dataset_game_name}/{filename}: "
-                    f"{type(exc).__name__}: {exc} | "
-                    f"matching_time={matching_time_seconds:.6f}s"
+                    f"{type(exc).__name__}: {exc}"
                 )
                 continue
-
-            matching_time_seconds = time.perf_counter() - match_start
-
-            constraint_start = time.perf_counter()
 
             try:
                 result = check_one_matched_efg(
@@ -1021,18 +891,10 @@ def main():
                     dataset_game_path=dataset_game_path,
                     matched_path=match_result["matched_path"],
                 )
-                constraint_time_seconds = time.perf_counter() - constraint_start
 
                 result["generated_path"] = match_result["generated_path"]
-                result["matching_time_seconds"] = matching_time_seconds
-                result["constraint_time_seconds"] = constraint_time_seconds
-                result["total_time_seconds"] = (
-                    matching_time_seconds + constraint_time_seconds
-                )
 
             except Exception as exc:
-                constraint_time_seconds = time.perf_counter() - constraint_start
-
                 result = build_error_result(
                     game_name=dataset_game_name,
                     generated_filename=filename,
@@ -1041,31 +903,17 @@ def main():
                     generated_path=generated_path,
                     matched_path=matched_path,
                     ref_path=ref_path,
-                    matching_time_seconds=matching_time_seconds,
-                    constraint_time_seconds=constraint_time_seconds,
                 )
 
                 print(
                     f"[CONSTRAINT ERROR] {dataset_game_name}/{filename}: "
-                    f"{type(exc).__name__}: {exc} | "
-                    f"matching_time={matching_time_seconds:.6f}s | "
-                    f"constraint_time={constraint_time_seconds:.6f}s"
+                    f"{type(exc).__name__}: {exc}"
                 )
             else:
                 if result["all_passed"]:
-                    print(
-                        f"[PASS] {dataset_game_name}/{filename} | "
-                        f"matching_time={matching_time_seconds:.6f}s | "
-                        f"constraint_time={constraint_time_seconds:.6f}s | "
-                        f"total_time={result['total_time_seconds']:.6f}s"
-                    )
+                    print(f"[PASS] {dataset_game_name}/{filename}")
                 else:
-                    print(
-                        f"[FAIL] {dataset_game_name}/{filename} | "
-                        f"matching_time={matching_time_seconds:.6f}s | "
-                        f"constraint_time={constraint_time_seconds:.6f}s | "
-                        f"total_time={result['total_time_seconds']:.6f}s"
-                    )
+                    print(f"[FAIL] {dataset_game_name}/{filename}")
 
             write_sample_report(report_path, result)
             update_stats(per_game_stats, result)

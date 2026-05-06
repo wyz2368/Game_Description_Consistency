@@ -1,0 +1,44 @@
+EFG 2 R "Two-player Borda Voting (Simultaneous Rankings)" { "Player 1" "Player 2" }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "A_Both_A" { 2, 0 }
+t "" 2 "A_Both_A_alt" { 2, 0 }
+t "" 3 "A_over_B_tie_resolved_A" { 2, 1 }
+t "" 4 "B_wins" { 0, 2 }
+t "" 5 "A_wins_2" { 2, 0 }
+t "" 6 "A_wins_tie_all" { 2, 0 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "A_symm_1" { 2, 0 }
+t "" 8 "A_both_A_alt2" { 2, 0 }
+t "" 9 "A_wins_again" { 2, 1 }
+t "" 10 "A_all_tie" { 2, 1 }
+t "" 11 "A_vs_C_tie_resolved_A" { 2, 0 }
+t "" 12 "C_wins_again" { 1, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "A_tie_resolved" { 2, 0 }
+t "" 14 "A_wins_case2" { 2, 0 }
+t "" 15 "B_both_B" { 0, 2 }
+t "" 16 "B_wins_case" { 0, 2 }
+t "" 17 "three_way_tie_case" { 2, 0 }
+t "" 18 "B_wins_case2" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "B_over_A" { 0, 2 }
+t "" 20 "tie_all_A" { 2, 1 }
+t "" 21 "B_strong" { 0, 2 }
+t "" 22 "B_both_B2" { 0, 2 }
+t "" 23 "C_wins_case" { 1, 1 }
+t "" 24 "B_tie_BC" { 0, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "A_wins_case3" { 2, 0 }
+t "" 26 "A_C_tie_A" { 2, 0 }
+t "" 27 "three_way_tie_resolved" { 2, 1 }
+t "" 28 "C_wins_case2" { 1, 2 }
+t "" 29 "C_both_C" { 1, 2 }
+t "" 30 "C_wins_case3" { 1, 2 }
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "tie_all_case2" { 2, 0 }
+t "" 32 "C_wins_case4" { 1, 2 }
+t "" 33 "B_wins_case3" { 0, 2 }
+t "" 34 "B_wins_case4" { 0, 2 }
+t "" 35 "C_wins_case5" { 1, 2 }
+t "" 36 "C_both_C2" { 1, 2 }

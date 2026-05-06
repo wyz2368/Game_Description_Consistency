@@ -1,0 +1,22 @@
+Game: kuhn_poker_(2-player_3_card)_b
+Generated file: 9.efg
+Reference path: Dataset/kuhn_poker_(2-player_3_card)_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/Direct/kuhn_poker_(2-player_3_card)_b/9.efg
+Matched path: Results/Direct/Output/kuhn_poker_(2-player_3_card)_b/9.efg
+Status: ERROR
+
+=== Constraint Check Error ===
+Type: ValueError
+Message: Parse error in game file: line 22:32: Infoset action labels do not match previous definition (player 0, infoset 2)
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 888, in main
+    result = check_one_matched_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 438, in check_one_matched_efg
+    raw_reduced_result = same_reduced_strategies(matched_path, ref_path)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Checkers/check_reduced_strategies.py", line 5, in same_reduced_strategies
+    candidate_efg = gbt.read_efg(candidate_path)
+  File "src/pygambit/game.pxi", line 116, in pygambit.gambit.read_efg
+  File "src/pygambit/game.pxi", line 53, in pygambit.gambit.read_game
+ValueError: Parse error in game file: line 22:32: Infoset action labels do not match previous definition (player 0, infoset 2)

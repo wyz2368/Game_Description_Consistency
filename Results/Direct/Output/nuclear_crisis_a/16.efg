@@ -1,0 +1,12 @@
+EFG 2 R "Threat and crisis game" { "Country A" "Country B" }
+p "" 1 1 "" { "Issue threat" "Ignore" } 0
+p "" 2 1 "" { "Back down" "Counter-threat" } 0
+t "" 2 "B backs down" { 4, 3 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 4 "mutual retreat" { 2, 3 }
+t "" 5 "B wins crisis" { 1, 5 }
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 1 "A wins crisis" { 5, 2 }
+t "" 6 "mutual detonation" { 0, 0 }
+t "" 3 "ignore" { 3, 4 }

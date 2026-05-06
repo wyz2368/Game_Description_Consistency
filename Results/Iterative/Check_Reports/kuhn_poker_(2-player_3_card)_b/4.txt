@@ -1,0 +1,22 @@
+Game: kuhn_poker_(2-player_3_card)_b
+Generated file: 4.efg
+Reference path: Dataset/kuhn_poker_(2-player_3_card)_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/kuhn_poker_(2-player_3_card)_b/4.efg
+Matched path: Results/Iterative/Output/kuhn_poker_(2-player_3_card)_b/4.efg
+Status: ERROR
+
+=== Match Error ===
+Type: ValueError
+Message: The actions in the generated game do not match the actions in the reference game.
+
+Traceback:
+Traceback (most recent call last):
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 859, in main
+    match_result = match_one_generated_efg(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/process_evaluation.py", line 373, in match_one_generated_efg
+    switch_order(
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 608, in switch_order
+    filter_simultaneous_moves(ref_node, gen_node, model, mappings, game_description, gen_game.players, path_to_tsm)
+  File "/Users/samuel/Desktop/Game_Description_Consistency/Match/order_match.py", line 487, in filter_simultaneous_moves
+    raise ValueError("The actions in the generated game do not match the actions in the reference game.")
+ValueError: The actions in the generated game do not match the actions in the reference game.

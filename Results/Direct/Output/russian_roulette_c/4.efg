@@ -1,0 +1,24 @@
+EFG 2 R "Russian roulette, six-chamber alternating" { "Player 1" "Player 2" }
+p "" 1 1 "" { "Quit" "Pull" } 0
+t "" 1 "P1 quits" { 0, 1 }
+c "" 1 "" { "Fire" 1/6 "Survive" 5/6 } 0
+t "" 2 "P1 shot" { -1, 1 }
+p "" 2 2 "" { "Quit" "Pull" } 0
+t "" 3 "P2 quits" { 1, 0 }
+c "" 2 "" { "Fire" 1/5 "Survive" 4/5 } 0
+t "" 4 "P2 shot" { 1, -1 }
+p "" 1 3 "" { "Quit" "Pull" } 0
+t "" 5 "P1 quits" { 0, 1 }
+c "" 3 "" { "Fire" 1/4 "Survive" 3/4 } 0
+t "" 6 "P1 shot" { -1, 1 }
+p "" 2 4 "" { "Quit" "Pull" } 0
+t "" 7 "P2 quits" { 1, 0 }
+c "" 4 "" { "Fire" 1/3 "Survive" 2/3 } 0
+t "" 8 "P2 shot" { 1, -1 }
+p "" 1 5 "" { "Quit" "Pull" } 0
+t "" 9 "P1 quits" { 0, 1 }
+c "" 5 "" { "Fire" 1/2 "Survive" 1/2 } 0
+t "" 10 "P1 shot" { -1, 1 }
+p "" 2 6 "" { "Quit" "Pull" } 0
+t "" 11 "P2 quits" { 1, 0 }
+t "" 12 "P2 shot" { 1, -1 }

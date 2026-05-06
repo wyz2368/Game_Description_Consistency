@@ -1,0 +1,79 @@
+Game: voting_game_c
+Generated file: 2.efg
+Reference path: Dataset/voting_game_c/game.efg
+Original generated path: Dataset_voting/MCP/voting_game_c/2.efg
+Matched path: Results_voting/MCP/Output/voting_game_c/2.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/voting_game_c/constraints/TSM_cst.json
+Cst Type: Temporally-Simultaneous Move
+Skipped: True
+Passed: True
+Raw result: 'Skipped unsupported Cst Type at final stage: Temporally-Simultaneous Move'
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst1.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst2.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst3.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst4.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst5.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst6.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst7.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/voting_game_c/constraints/voting_game_c_cst8.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

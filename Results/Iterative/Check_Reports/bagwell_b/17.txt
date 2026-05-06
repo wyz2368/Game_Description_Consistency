@@ -1,0 +1,37 @@
+Game: bagwell_b
+Generated file: 17.efg
+Reference path: Dataset/bagwell_b/game.efg
+Original generated path: Benchmark/Dataset_Generate/Iterative/bagwell_b/17.efg
+Matched path: Results/Iterative/Output/bagwell_b/17.efg
+Status: PASS
+
+=== Checker Results ===
+Check name: same_reduced_strategies
+Passed: True
+Raw result: True
+
+Check name: check_total_order_matching
+Additional data: Total order with ties over player outcomes
+Passed: True
+Raw result: True
+
+=== Constraint Checks ===
+Constraint file: Dataset/bagwell_b/constraints/Bagwell_V2_cst1.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+Constraint file: Dataset/bagwell_b/constraints/Bagwell_V2_cst2.json
+Cst Type: Explicit Payoff(s) for a Certain Outcome
+Skipped: False
+Passed: True
+Raw result: True
+
+=== Errors ===
+None
+
+=== Final Result ===
+Checker results passed: True
+Constraint checks passed: True
+All checks passed: True

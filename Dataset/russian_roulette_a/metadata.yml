@@ -1,0 +1,22 @@
+game_id: Russian Roulette V1
+source: Binmore, K. G., 1992. Fun and games, A text on game theory. Page 101, Figure 3.3
+extraction_methodology: Manual
+description: |-
+  Two players alternate turns with a six-chamber revolver.
+  Before any player acts, chance first determines which one of the six chambers contains the bullet, each with probability 1/6.
+  This chamber remains fixed for the entire game, but neither player observes which chamber was selected.
+
+  On each turn, a player chooses either to quit, and live on for sure, or to pull the trigger, and potentially kill himself.
+  If he quits, he withdraws and the other player wins.
+  If he pulls the trigger and the current chamber is the loaded one, he shoots himself and the other player wins; otherwise, play passes to the other player.
+
+  If shooting himself, a player gets -1.
+  If quitting, a player gets 0.
+  If winning, a player gets 1.
+additional_data: Identical payoffs to reference game
+additional_comments: This is a version of Russian Roulette in which chance is at the start as a hidden state, with the loaded chamber fixed but unobserved by the players.
+related games: []
+assets:
+  description: description.txt
+  script: game.py
+  game_file: game.efg

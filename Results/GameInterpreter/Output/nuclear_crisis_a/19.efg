@@ -1,0 +1,12 @@
+EFG 2 R "Threat -> Counter-threat -> Simultaneous crisis (modeled as imperfect information)" { "Country A" "Country B" }
+p "" 1 1 "" { "Issue threat" "Ignore" } 0
+p "" 2 1 "" { "Back down" "Counter-threat" } 0
+t "" 2 "B backs down" { 5, 3 }
+p "" 1 2 "" { "Retreat" "Detonate" } 0
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 5 "mutual retreat" { 3, 3 }
+t "" 4 "B wins crisis" { 2, 6 }
+p "" 2 2 "" { "Retreat" "Detonate" } 0
+t "" 3 "A wins crisis" { 6, 1 }
+t "" 6 "mutual detonation" { 0, 0 }
+t "" 1 "ignore" { 4, 4 }

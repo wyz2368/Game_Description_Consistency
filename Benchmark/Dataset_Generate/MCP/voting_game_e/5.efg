@@ -1,0 +1,46 @@
+EFG 2 R "Sequential Borda Voting: P2 first, P1 second (imperfect information)" { "Player 2" "Player 1" }
+""
+
+p "" 1 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 1 "out_ABC_ABC" { 2, 0 }
+t "" 2 "out_ABC_ACB" { 2, 0 }
+t "" 3 "out_ABC_BAC" { 2, 0 }
+t "" 4 "out_ABC_BCA" { 1, 1 }
+t "" 5 "out_ABC_CAB" { 2, 0 }
+t "" 6 "out_ABC_CBA" { 2, 0 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 7 "out_ACB_ABC" { 2, 0 }
+t "" 8 "out_ACB_ACB" { 2, 0 }
+t "" 9 "out_ACB_BAC" { 2, 0 }
+t "" 10 "out_ACB_BCA" { 2, 0 }
+t "" 11 "out_ACB_CAB" { 2, 0 }
+t "" 12 "out_ACB_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 13 "out_BAC_ABC" { 2, 0 }
+t "" 14 "out_BAC_ACB" { 2, 0 }
+t "" 15 "out_BAC_BAC" { 1, 1 }
+t "" 16 "out_BAC_BCA" { 1, 1 }
+t "" 17 "out_BAC_CAB" { 2, 0 }
+t "" 18 "out_BAC_CBA" { 1, 1 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 19 "out_BCA_ABC" { 1, 1 }
+t "" 20 "out_BCA_ACB" { 2, 0 }
+t "" 21 "out_BCA_BAC" { 1, 1 }
+t "" 22 "out_BCA_BCA" { 1, 1 }
+t "" 23 "out_BCA_CAB" { 0, 2 }
+t "" 24 "out_BCA_CBA" { 1, 1 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 25 "out_CAB_ABC" { 2, 0 }
+t "" 26 "out_CAB_ACB" { 2, 0 }
+t "" 27 "out_CAB_BAC" { 2, 0 }
+t "" 28 "out_CAB_BCA" { 0, 2 }
+t "" 29 "out_CAB_CAB" { 0, 2 }
+t "" 30 "out_CAB_CBA" { 0, 2 }
+p "" 2 1 "" { "ABC" "ACB" "BAC" "BCA" "CAB" "CBA" } 0
+t "" 31 "out_CBA_ABC" { 2, 0 }
+t "" 32 "out_CBA_ACB" { 0, 2 }
+t "" 33 "out_CBA_BAC" { 1, 1 }
+t "" 34 "out_CBA_BCA" { 1, 1 }
+t "" 35 "out_CBA_CAB" { 0, 2 }
+t "" 36 "out_CBA_CBA" { 0, 2 }

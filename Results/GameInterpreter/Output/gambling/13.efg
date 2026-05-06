@@ -1,0 +1,10 @@
+EFG 2 R "Gambler decides to enter casino and play matching pennies" { "Gambler" "Dealer" }
+p "" 1 1 "" { "Enter" "Stay out" } 0
+p "" 1 2 "" { "Heads" "Tails" } 0
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 1 "Gambler wins" { 1, -1 }
+t "" 2 "Dealer wins" { -1, 1 }
+p "" 2 1 "" { "Heads" "Tails" } 0
+t "" 2 "Dealer wins" { -1, 1 }
+t "" 1 "Gambler wins" { 1, -1 }
+t "" 3 "Stay out" { 0, 0 }

@@ -1,0 +1,46 @@
+EFG 2 R "Two-player Borda voting (Player 2 first, Player 1 second with imperfect information)" { "Player 1" "Player 2" }
+""
+
+p "" 2 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 1 "p2=A>B>C|p1=A>B>C|winner=A" { 2, 0 }
+t "" 2 "p2=A>B>C|p1=A>C>B|winner=A" { 2, 0 }
+t "" 3 "p2=A>B>C|p1=B>A>C|winner=A" { 2, 0 }
+t "" 4 "p2=A>B>C|p1=B>C>A|winner=B" { 1, 1 }
+t "" 5 "p2=A>B>C|p1=C>A>B|winner=A" { 2, 0 }
+t "" 6 "p2=A>B>C|p1=C>B>A|winner=A" { 2, 0 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 7 "p2=A>C>B|p1=A>B>C|winner=A" { 2, 0 }
+t "" 8 "p2=A>C>B|p1=A>C>B|winner=A" { 2, 0 }
+t "" 9 "p2=A>C>B|p1=B>A>C|winner=A" { 2, 0 }
+t "" 10 "p2=A>C>B|p1=B>C>A|winner=A" { 2, 0 }
+t "" 11 "p2=A>C>B|p1=C>A>B|winner=A" { 2, 0 }
+t "" 12 "p2=A>C>B|p1=C>B>A|winner=C" { 0, 2 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 13 "p2=B>A>C|p1=A>B>C|winner=A" { 2, 0 }
+t "" 14 "p2=B>A>C|p1=A>C>B|winner=A" { 2, 0 }
+t "" 15 "p2=B>A>C|p1=B>A>C|winner=B" { 1, 1 }
+t "" 16 "p2=B>A>C|p1=B>C>A|winner=B" { 1, 1 }
+t "" 17 "p2=B>A>C|p1=C>A>B|winner=A" { 2, 0 }
+t "" 18 "p2=B>A>C|p1=C>B>A|winner=B" { 1, 1 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 19 "p2=B>C>A|p1=A>B>C|winner=B" { 1, 1 }
+t "" 20 "p2=B>C>A|p1=A>C>B|winner=A" { 2, 0 }
+t "" 21 "p2=B>C>A|p1=B>A>C|winner=B" { 1, 1 }
+t "" 22 "p2=B>C>A|p1=B>C>A|winner=B" { 1, 1 }
+t "" 23 "p2=B>C>A|p1=C>A>B|winner=C" { 0, 2 }
+t "" 24 "p2=B>C>A|p1=C>B>A|winner=B" { 1, 1 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 25 "p2=C>A>B|p1=A>B>C|winner=A" { 2, 0 }
+t "" 26 "p2=C>A>B|p1=A>C>B|winner=A" { 2, 0 }
+t "" 27 "p2=C>A>B|p1=B>A>C|winner=A" { 2, 0 }
+t "" 28 "p2=C>A>B|p1=B>C>A|winner=C" { 0, 2 }
+t "" 29 "p2=C>A>B|p1=C>A>B|winner=C" { 0, 2 }
+t "" 30 "p2=C>A>B|p1=C>B>A|winner=C" { 0, 2 }
+p "" 1 1 "" { "A>B>C" "A>C>B" "B>A>C" "B>C>A" "C>A>B" "C>B>A" } 0
+t "" 31 "p2=C>B>A|p1=A>B>C|winner=A" { 2, 0 }
+t "" 32 "p2=C>B>A|p1=A>C>B|winner=C" { 0, 2 }
+t "" 33 "p2=C>B>A|p1=B>A>C|winner=B" { 1, 1 }
+t "" 34 "p2=C>B>A|p1=B>C>A|winner=B" { 1, 1 }
+t "" 35 "p2=C>B>A|p1=C>A>B|winner=C" { 0, 2 }
+t "" 36 "p2=C>B>A|p1=C>B>A|winner=C" { 0, 2 }
